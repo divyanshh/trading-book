@@ -31,6 +31,12 @@ OVERRIDES = ROOT / "overrides"
 the dyno's copy — the dyno renders the scan, but analysis written by hand
 (the 23 Sep IPO review, for one) lives only in the file, and a refresh run
 silently threw it away once. Anything under here wins, always."""
+ANALYSIS = ROOT / "analysis"
+"""Standing analyses — the six-month retrospective and its successors. Not a
+day's page: they are written once, listed separately on the index, and
+re-skinned with the rest whenever the renderer's theme moves. ``_bridge.css``
+beside them maps their own class names onto that theme."""
+
 EXTRAS = ROOT / "extras"
 """Standalone pages, `YYYY-MM-DD_<slug>.html`, published under reports/ and
 linked from the index row of their day."""
@@ -73,6 +79,32 @@ def newest_style(rows: list[dict]) -> str:
     return ""
 
 
+def restyle_analysis(style: str) -> int:
+    """The standing analyses, on the same stylesheet plus their bridge."""
+    bridge = ANALYSIS / "_bridge.css"
+    if not style or not bridge.exists():
+        return 0
+    merged = style[: -len("</style>")] + bridge.read_text(encoding="utf-8") + "</style>"
+    n = 0
+    for page in ANALYSIS.glob("*.html"):
+        text = page.read_text(encoding="utf-8")
+        if STYLE.search(text) and merged not in text:
+            page.write_text(STYLE.sub(lambda _m: merged, text, count=1), encoding="utf-8")
+            n += 1
+    return n
+
+
+def analyses() -> list[tuple[str, str, int]]:
+    """(file, title, bytes) for every standing analysis, newest first."""
+    out = []
+    for page in sorted(ANALYSIS.glob("*.html"), reverse=True):
+        text = page.read_text(encoding="utf-8")
+        found = re.search(r"<title>(.*?)</title>", text, re.S)
+        out.append((page.name, html.unescape(found.group(1)).strip() if found else page.stem,
+                    len(text)))
+    return out
+
+
 def restyle(style: str) -> int:
     """Swap every archived page's stylesheet for the newest one.
 
@@ -105,6 +137,20 @@ def build_index(rows: list[dict]) -> None:
             for r in sorted(by_month[month], key=lambda r: r["as_of"], reverse=True)
         )
         parts.append(f'<h2>{label}</h2><div class="scroll"><table><thead><tr><th class="l">day</th><th class="l">gate</th><th class="l">summary</th><th>size</th></tr></thead><tbody>{items}</tbody></table></div>')
+    found = analyses()
+    if found:
+        items = "".join(
+            f'<tr><td class="l"><a href="analysis/{name}">{html.escape(title)}</a></td>'
+            f'<td class="l"><span class="badge">analysis</span></td>'
+            f'<td class="l">{html.escape(name[:10])}</td><td>{size // 1024} KB</td></tr>'
+            for name, title, size in found
+        )
+        parts.insert(
+            0,
+            '<h2>Analysis</h2><div class="scroll"><table><thead><tr>'
+            '<th class="l">document</th><th class="l">kind</th><th class="l">as of</th>'
+            "<th>size</th></tr></thead><tbody>" + items + "</tbody></table></div>",
+        )
     newest = rows[0]["as_of"] if rows else ""
     page = TEMPLATE.format(style=newest_style(rows) or STYLE_FALLBACK, body="".join(parts), newest=newest, count=len(rows))
     (ROOT / "index.html").write_text(page, encoding="utf-8")
@@ -149,7 +195,7 @@ def main() -> int:
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
     for page in EXTRAS.glob("20*.html"):
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
-    restyled = restyle(style)
+    restyled = restyle(style) + restyle_analysis(style)
     build_index(rows)
     print(f"{len(rows)} reports indexed, {fetched} fetched, "
           f"{len(list(OVERRIDES.glob('20*.html')))} overridden, {len(list(EXTRAS.glob('20*.html')))} extras, {restyled} restyled")
