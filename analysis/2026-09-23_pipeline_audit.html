@@ -1,0 +1,312 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Four jobs that ran and did nothing</title><style>/* Morning Book — light fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+   Light only, on purpose: the pages are read beside Trendlyne / Screener / Kite, all of which are light. */
+:root{
+  --canvas:#f4f6fa;--card:#ffffff;--line:#e5e9f0;--line-strong:#cfd6e0;
+  --ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;
+  --blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;
+  --green:#15803d;--green-50:#f0fdf4;--green-100:#dcfce7;
+  --red:#b91c1c;--red-50:#fef2f2;--red-100:#fee2e2;
+  --amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.04);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,rgba(244,246,250,0))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:#bbf7d0}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:#fecaca}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:#fde68a}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:#bbf7d0}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:#fecaca}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:#fde68a}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:#f1f5f9;color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:#bbf7d0}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:#fecaca}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:#fde68a}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:#eef2f7;border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+/* Bridge: the six-month retrospective's own class names, expressed in the
+   Morning Book's tokens. Appended after theme.css, never instead of it.
+
+   The document was written before this theme with its own palette
+   (--paper/--ink/--gain/--loss/--accent) and its charts read those variables
+   at runtime through getComputedStyle — so the tokens are redefined here
+   rather than the markup rewritten, and the SVG repaints itself in the new
+   colours for free. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:rgba(21,128,61,.12);
+  --loss:var(--red);--loss-fill:rgba(185,28,28,.12);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:#f8fafc;border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<header class="top"><div class="rule-top"></div>
+<div class="eyebrow">Equity book &middot; pipeline audit &middot; 23 September 2026</div>
+<h1>Four Jobs That Ran and Did Nothing</h1>
+<p class="lede">Every one of these was green. A scheduled job that fires, completes and records a
+success is indistinguishable from a job that works — and four of them were firing into an empty
+room. <strong>None of this showed up as a failure anywhere.</strong> The heartbeats were fine, the
+report rendered, the tests passed.</p>
+<div class="meta"><span>8 mail arrivals measured</span><span>5 sessions of empty gap reports</span>
+<span>2 scanners never scanned</span><span>0 orders affected</span></div></header>
+
+<div class="stats">
+<div class="stat"><div class="k">gap reports that saw their own mail</div><div class="v">0</div><div class="s">of 5 sessions since it was scheduled</div></div>
+<div class="stat"><div class="k">earliest mail arrival</div><div class="v">08:39</div><div class="s">the job ran 08:35</div></div>
+<div class="stat"><div class="k">scanners run nightly</div><div class="v">6</div><div class="s">was 4; two were hand-run only</div></div>
+<div class="stat"><div class="k">pyramid adds ever placed</div><div class="v">0</div><div class="s">rule shipped 16 Sep, nothing ran it</div></div>
+</div>
+
+<section><div class="sec-head"><span class="eyebrow">One</span>
+<h2>Both pre-market jobs ran before the mail they read</h2></div>
+<div class="prose"><p>The regime read was scheduled 08:30 and the gap check 08:35, on the
+assumption that MarketSmith's pre-open note is written "around 08:00–08:15". It is
+<em>written</em> then. It <em>arrives</em> later. Eight arrivals out of the message store:</p></div>
+<svg viewBox="0 0 1040 258" width="100%" height="258"><line x1="154" y1="28" x2="154" y2="216" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4 3"/><text x="154" y="234" text-anchor="middle" font-size="10.5" fill="#b91c1c">regime 08:30</text><line x1="237" y1="28" x2="237" y2="216" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4 3"/><text x="237" y="247" text-anchor="middle" font-size="10.5" fill="#b91c1c">gap 08:35</text><line x1="739" y1="28" x2="739" y2="216" stroke="#15803d" stroke-width="1.5" stroke-dasharray="4 3"/><text x="739" y="234" text-anchor="middle" font-size="10.5" fill="#15803d">regime 09:05</text><line x1="789" y1="28" x2="789" y2="216" stroke="#15803d" stroke-width="1.5" stroke-dasharray="4 3"/><text x="789" y="247" text-anchor="middle" font-size="10.5" fill="#15803d">gap 09:08</text><line x1="906" y1="28" x2="906" y2="216" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3"/><text x="906" y="234" text-anchor="middle" font-size="10.5" fill="#64748b">bell</text><rect x="304" y="40" width="9" height="9" fill="#2563eb" rx="2"/><text x="320" y="49" font-size="11" fill="#334155">08:39</text><text x="14" y="49" font-size="11" fill="#94a3b8">16 Sep</text><rect x="354" y="62" width="9" height="9" fill="#2563eb" rx="2"/><text x="370" y="71" font-size="11" fill="#334155">08:42</text><text x="14" y="71" font-size="11" fill="#94a3b8">17 Sep</text><rect x="405" y="84" width="9" height="9" fill="#2563eb" rx="2"/><text x="421" y="93" font-size="11" fill="#334155">08:45</text><text x="14" y="93" font-size="11" fill="#94a3b8">18 Sep</text><rect x="471" y="106" width="9" height="9" fill="#2563eb" rx="2"/><text x="487" y="115" font-size="11" fill="#334155">08:49</text><text x="14" y="115" font-size="11" fill="#94a3b8">19 Sep</text><rect x="538" y="128" width="9" height="9" fill="#2563eb" rx="2"/><text x="554" y="137" font-size="11" fill="#334155">08:53</text><text x="14" y="137" font-size="11" fill="#94a3b8">22 Sep</text><rect x="572" y="150" width="9" height="9" fill="#2563eb" rx="2"/><text x="588" y="159" font-size="11" fill="#334155">08:55</text><text x="14" y="159" font-size="11" fill="#94a3b8">22 Sep</text><rect x="589" y="172" width="9" height="9" fill="#2563eb" rx="2"/><text x="605" y="181" font-size="11" fill="#334155">08:56</text><text x="14" y="181" font-size="11" fill="#94a3b8">23 Sep</text><rect x="706" y="194" width="9" height="9" fill="#2563eb" rx="2"/><text x="722" y="203" font-size="11" fill="#334155">09:03</text><text x="14" y="203" font-size="11" fill="#94a3b8">23 Sep</text></svg>
+<div class="cap" style="margin-top:10px"><b>When the pre-open mail actually landed.</b> Median
+08:53, and drifting later. The two red lines are where the jobs used to fire; the green lines are
+where they fire now.</div>
+<div class="prose"><p>So the 08:30 regime read never once saw the day's own mail — it re-read the
+previous evening's note, which is the only reason a second regime job exists at all. And the gap
+check, which correctly refuses a quote that is not today's, <strong>reported nothing every single
+session</strong> while its heartbeat stayed green. The job ran. It had nothing to read.</p>
+<p>Regime now fires at <strong>09:05</strong>, after the latest observed arrival and before the
+09:15 jobs that act on the snapshot. The gap check fires at <strong>09:08</strong>, three minutes
+after the job that stores what it parses. Seven minutes before the bell to act by hand is thin. It
+is what the arrival times allow, and the alternative was the forty minutes the old schedule claimed
+and a report built on nothing.</p></div></section>
+
+<section><div class="sec-head"><span class="eyebrow">Two</span>
+<h2>Two scanners were never in the nightly scan</h2></div>
+<div class="prose"><p>STRIKE and REVERSAL were left out of the scheduled scan on the grounds that
+neither may be placed unattended: STRIKE is the intraday scanner and everything here is CNC, so its
+stop would be squared off the day it was placed; REVERSAL enters at the market rather than on a
+resting trigger. That reasoning is <em>correct about placing orders</em> and was applied to
+<em>scanning</em>.</p>
+<p>Leaving them unscheduled stopped nobody taking an intraday product. What it did was leave the
+morning report's STRIKE and REVERSAL tables built from whatever hand-run happened last: real
+entries, real stops, arithmetically correct, priced off a close that could be several sessions
+old — and formatted identically to rows scanned that evening.</p></div>
+<div class="tbl-scroll"><table><thead><tr><th class="l">list</th><th>holds</th>
+<th class="l">what it decides</th></tr></thead><tbody>
+<tr><td class="l mono">SCHEDULED_STRATEGIES</td><td>6</td><td class="l">what the nightly scan runs</td></tr>
+<tr><td class="l mono">TRADED_STRATEGIES</td><td>4</td><td class="l">what may reach the placement path</td></tr>
+</tbody></table></div>
+<div class="cap" style="margin-top:10px">One list was doing two jobs, which made "we do not place
+STRIKE" and "we do not scan STRIKE" the same statement. Only the first is a rule. Nothing changed on
+the wire: the agent is still served the same four names.</div></section>
+
+<section><div class="sec-head"><span class="eyebrow">Three</span>
+<h2>The page never said which session it scanned</h2></div>
+<div class="prose"><p>Stale rows are the failure that does not look like one. The numbers are
+right; the session is wrong; nothing about the row says so. The run timestamp <em>was</em> on the
+page, inside a sentence at the top of the section, which is not where anyone looks before reading a
+stop level.</p>
+<p>Each table now carries a chip when its run is behind the newest scan on the page, saying how many
+days and what to do about it. The yardstick is the page rather than the clock, because the clock is
+wrong on exactly the mornings that matter: read on a Saturday it would call Friday's scan stale, and
+generated before an evening scan it would flag every table on the page.</p></div>
+<div class="dots"><span class="dot warn">STRIKE rows are 3 days old</span>
+<span class="dot pass">SWING &mdash; scanned this evening</span></div></section>
+
+<section><div class="sec-head"><span class="eyebrow">Four</span>
+<h2>The pyramid rule was live for a week and never ran</h2></div>
+<div class="prose"><p>Adding to winners was measured, written up and implemented on 16 September:
+add at +1R once the stop has reached breakeven, same rupee risk as the base, the add carrying its
+own stop, refused past +2R. It was a management command nobody invoked, so it fired zero times.</p>
+<p>It is now scheduled every thirty minutes from 10:00 to 14:30 on weekdays and it is
+<strong>deliberately unarmed</strong> — it computes what has earned an add and places nothing.
+Arming it is a one-line change. The point of scheduling it unarmed first is to see it produce a
+correct list on live positions before it is allowed to act on one.</p></div></section>
+
+<section><div class="sec-head"><span class="eyebrow">What this pattern is</span>
+<h2>A green heartbeat means dispatched, not "found something"</h2></div>
+<div class="prose"><p>Three of these four were invisible for the same reason: the monitoring proves
+a job <em>ran</em>, and every one of them ran. Nothing anywhere asserts that a job that runs every
+weekday has ever produced a non-empty result. That is the check worth adding, and it is the same
+shape as the rule that produced zero setups for twenty sessions in September — a mechanism
+verified, an outcome never measured.</p></div></section>
+
+<p class="stamp" style="margin-top:32px"><a href="../index.html">&larr; Trading book</a> &middot;
+equity-service v157&ndash;v160 &middot; 23 September 2026</p>
+</div></body></html>
