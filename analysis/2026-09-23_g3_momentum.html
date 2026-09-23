@@ -1,0 +1,305 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Does G3 earn what it throws away?</title><style>/* Morning Book — light fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+   Light only, on purpose: the pages are read beside Trendlyne / Screener / Kite, all of which are light. */
+:root{
+  --canvas:#f4f6fa;--card:#ffffff;--line:#e5e9f0;--line-strong:#cfd6e0;
+  --ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;
+  --blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;
+  --green:#15803d;--green-50:#f0fdf4;--green-100:#dcfce7;
+  --red:#b91c1c;--red-50:#fef2f2;--red-100:#fee2e2;
+  --amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.04);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,rgba(244,246,250,0))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:#bbf7d0}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:#fecaca}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:#fde68a}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:#bbf7d0}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:#fecaca}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:#fde68a}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:#f1f5f9;color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:#bbf7d0}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:#fecaca}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:#fde68a}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:#eef2f7;border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+/* Bridge: the six-month retrospective's own class names, expressed in the
+   Morning Book's tokens. Appended after theme.css, never instead of it.
+
+   The document was written before this theme with its own palette
+   (--paper/--ink/--gain/--loss/--accent) and its charts read those variables
+   at runtime through getComputedStyle — so the tokens are redefined here
+   rather than the markup rewritten, and the SVG repaints itself in the new
+   colours for free. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:rgba(21,128,61,.12);
+  --loss:var(--red);--loss-fill:rgba(185,28,28,.12);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:#f8fafc;border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<header class="top"><div class="rule-top"></div>
+<div class="eyebrow">Equity book &middot; gate study &middot; 16 Mar &ndash; 31 Aug 2026</div>
+<h1>Does G3 Earn What It Throws Away?</h1>
+<p class="lede">G3 requires <strong>30-day momentum of at least 25%</strong>. It is the only one of the
+eight gates never measured on anything but the trades it already let through, and it refuses
+<strong>96% of everything that clears G1, G2 and G4</strong>. The threshold is a round number.
+This asks what the round number buys. <strong>The answer is nothing measurable, and the honest
+response is to leave it alone anyway.</strong></p>
+<div class="meta"><span>46,404 setups, no momentum cut</span><span>32,007 after G4</span>
+<span>4 thresholds x 2 breadth arms</span><span>within-period split + permutation</span></div></header>
+
+<div class="stats">
+<div class="stat"><div class="k">population admitted by G3</div><div class="v">4%</div><div class="s">1,399 of 32,007</div></div>
+<div class="stat"><div class="k">what that buys</div><div class="v">+0.34pp</div><div class="s">kept minus refused, mean return</div></div>
+<div class="stat"><div class="k">is it chance</div><div class="v">p=0.43</div><div class="s">20,000 permutations</div></div>
+<div class="stat"><div class="k">rank correlation</div><div class="v">&minus;0.079</div><div class="s">a ranking gate needs this positive</div></div>
+</div>
+
+<section><div class="sec-head"><span class="eyebrow">The shape</span>
+<h2>Momentum does not rank returns. The curve is a U.</h2></div>
+<div class="prose"><p>Mean return by 30-day momentum at entry, across every setup that cleared G1, G2
+and the 5% stop cap. No relative strength filter and no earnings filter, so there is no look-ahead
+in this chart at all.</p></div>
+<svg viewBox="0 0 1040 300" width="100%" height="300"><line x1="70" y1="240" x2="1020" y2="240" stroke="#cfd6e0"/><text x="60" y="244" text-anchor="end" font-size="11" fill="#94a3b8">0%</text><text x="60" y="69" text-anchor="end" font-size="11" fill="#94a3b8">5%</text><line x1="613" y1="24" x2="613" y2="240" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4 3"/><text x="621" y="34" font-size="11" font-weight="700" fill="#b91c1c">G3 cuts here — everything left of this line is refused</text><rect x="112" y="89" width="52" height="151" fill="#2563eb" rx="3"/><text x="138" y="82" text-anchor="middle" font-size="11.5" font-weight="700" fill="#2563eb">4.32</text><text x="138" y="258" text-anchor="middle" font-size="11" fill="#64748b">under 0</text><text x="138" y="274" text-anchor="middle" font-size="10.5" fill="#94a3b8">n=13,452</text><rect x="248" y="115" width="52" height="125" fill="#2563eb" rx="3"/><text x="274" y="108" text-anchor="middle" font-size="11.5" font-weight="700" fill="#2563eb">3.56</text><text x="274" y="258" text-anchor="middle" font-size="11" fill="#64748b">0 to 10</text><text x="274" y="274" text-anchor="middle" font-size="10.5" fill="#94a3b8">n=10,944</text><rect x="383" y="130" width="52" height="110" fill="#2563eb" rx="3"/><text x="409" y="123" text-anchor="middle" font-size="11.5" font-weight="700" fill="#2563eb">3.15</text><text x="409" y="258" text-anchor="middle" font-size="11" fill="#64748b">10 to 15</text><text x="409" y="274" text-anchor="middle" font-size="10.5" fill="#94a3b8">n=3,234</text><rect x="519" y="145" width="52" height="95" fill="#b45309" rx="3"/><text x="545" y="138" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">2.72</text><text x="545" y="258" text-anchor="middle" font-size="11" fill="#64748b">15 to 20</text><text x="545" y="274" text-anchor="middle" font-size="10.5" fill="#94a3b8">n=1,965</text><rect x="655" y="171" width="52" height="69" fill="#b45309" rx="3"/><text x="681" y="164" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">1.98</text><text x="681" y="258" text-anchor="middle" font-size="11" fill="#64748b">20 to 25</text><text x="681" y="274" text-anchor="middle" font-size="10.5" fill="#94a3b8">n=1,013</text><rect x="790" y="148" width="52" height="92" fill="#b45309" rx="3"/><text x="816" y="141" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b45309">2.64</text><text x="816" y="258" text-anchor="middle" font-size="11" fill="#64748b">25 to 30</text><text x="816" y="274" text-anchor="middle" font-size="10.5" fill="#94a3b8">n=565</text><rect x="926" y="63" width="52" height="177" fill="#2563eb" rx="3"/><text x="952" y="56" text-anchor="middle" font-size="11.5" font-weight="700" fill="#2563eb">5.07</text><text x="952" y="258" text-anchor="middle" font-size="11" fill="#64748b">30+</text><text x="952" y="274" text-anchor="middle" font-size="10.5" fill="#94a3b8">n=834</text></svg>
+<div class="cap" style="margin-top:10px"><b>The band G3 admits is the flat part of the curve.</b>
+The worst returns in the whole population sit between 15% and 30% momentum &mdash; precisely where
+the gate draws its line. Only the 30%+ band stands out, and the strongest band of all is the one
+with <em>negative</em> momentum, which the gate refuses outright.</div>
+<div class="tbl-scroll"><table><thead><tr><th class="l">momentum band</th><th>n</th>
+<th>mean</th><th>median</th><th>win rate</th></tr></thead><tbody><tr><td class="l mono">under 0</td><td>13,452</td><td class="gain">+4.32%</td><td class="loss">-1.73%</td><td>40%</td></tr><tr><td class="l mono">0 to 10</td><td>10,944</td><td class="gain">+3.56%</td><td class="loss">-1.92%</td><td>38%</td></tr><tr><td class="l mono">10 to 15</td><td>3,234</td><td class="gain">+3.15%</td><td class="loss">-2.79%</td><td>34%</td></tr><tr><td class="l mono">15 to 20</td><td>1,965</td><td class="gain">+2.72%</td><td class="loss">-3.19%</td><td>32%</td></tr><tr><td class="l mono">20 to 25</td><td>1,013</td><td class="gain">+1.98%</td><td class="loss">-3.17%</td><td>30%</td></tr><tr><td class="l mono">25 to 30</td><td>565</td><td class="gain">+2.64%</td><td class="loss">-3.23%</td><td>30%</td></tr><tr><td class="l mono">30+</td><td>834</td><td class="gain">+5.07%</td><td class="loss">-2.84%</td><td>34%</td></tr></tbody></table></div>
+<div class="cap" style="margin-top:10px">Every median is negative and no win rate reaches 41%. This
+is a population of mostly-losers with a fat right tail, which is what a breakout book looks like
+before the eight gates and twelve slots are applied to it. Means are driven by the tail.</div></section>
+
+<section><div class="sec-head"><span class="eyebrow">The test</span>
+<h2>It does not survive the within-period split</h2></div>
+<div class="prose"><p>A cross-section is not evidence until it survives one. Split the same
+population by period and the difference the gate makes <strong>changes sign</strong>:</p></div>
+<div class="tbl-scroll"><table><thead><tr><th class="l">period</th><th>setups</th>
+<th>kept minus refused</th><th>p</th><th class="l">reads as</th></tr></thead><tbody>
+<tr><td class="l mono">Mar&ndash;May</td><td>11,095</td><td class="gain">+2.21 pp</td><td>0.006</td><td class="l">the gate helps</td></tr>
+<tr><td class="l mono">Jun&ndash;Jul</td><td>14,045</td><td class="loss">&minus;2.76 pp</td><td>0.0002</td><td class="l">the gate hurts, and by more</td></tr>
+<tr><td class="l mono">Aug</td><td>6,867</td><td class="gain">+0.40 pp</td><td>0.59</td><td class="l">nothing</td></tr>
+<tr><td class="l"><b>all three</b></td><td><b>32,007</b></td><td><b>+0.34 pp</b></td><td><b>0.43</b></td><td class="l"><b>nothing</b></td></tr>
+</tbody></table></div>
+<div class="cap" style="margin-top:10px">Two significant results pointing opposite ways is not two
+findings. It is one non-finding, and the pooled number is the average of a coin landing on each
+side. This is the fifth proposal in two weeks to die here.</div></section>
+
+<section><div class="sec-head"><span class="eyebrow">The tempting mistake</span>
+<h2>Loosening the threshold is measurably worse</h2></div>
+<div class="prose"><p>The obvious move from "the gate costs 96% of admissions and buys nothing" is
+to lower it. The data refuses that too, and more clearly than it refuses the gate:</p></div>
+<div class="tbl-scroll"><table><thead><tr><th class="l">G3 threshold</th><th>admits</th>
+<th>kept minus refused</th><th>p</th></tr></thead><tbody>
+<tr><td class="l mono">&ge; 25 (shipped)</td><td>4%</td><td>+0.34 pp</td><td>0.43</td></tr>
+<tr><td class="l mono">&ge; 20</td><td>8%</td><td class="loss">&minus;0.60 pp</td><td>0.07</td></tr>
+<tr><td class="l mono">&ge; 15</td><td>14%</td><td class="loss">&minus;0.89 pp</td><td>0.0005</td></tr>
+</tbody></table></div>
+<div class="cap" style="margin-top:10px">Lowering the bar walks the gate <em>into</em> the worst part
+of the curve. A single threshold cannot express a U-shaped relationship, and every threshold
+available makes the gate worse than leaving it where it is.</div></section>
+
+<section><div class="sec-head"><span class="eyebrow">Verdict</span>
+<h2>No change. Record it and leave the gate alone.</h2></div>
+<div class="prose">
+<p><strong>G3 at 25 is not earning its exclusions</strong> &mdash; it admits four percent of the
+population for a difference indistinguishable from zero. That is a real finding and it is not a
+licence to act. The effect flips sign between periods, which means the pooled estimate is an
+artefact, and every alternative threshold tested is worse than the one shipped.</p>
+<p>The gate stays. What changes is that it is now <em>measured</em> rather than inherited, and it
+joins the list of rules whose cost is known and whose benefit is not. If admissions remain the
+binding constraint on the book after the v156 stop change, G3 is the first place to look &mdash;
+but it needs a rule shaped like the curve, not a lower line through the middle of it.</p>
+<p class="muted">Caveats, stated rather than buried: the window is five and a half months of one
+market. The secondary arms in the script apply today's RS and EPS to March setups and are
+therefore optimistic by roughly five times at the level &mdash; they are reported because the
+<em>ordering</em> across momentum bands is identical in both, which is the only thing this study
+rests on.</p></div></section>
+
+<p class="stamp" style="margin-top:32px"><a href="../index.html">&larr; Trading book</a> &middot;
+<span class="mono">2026-09-23_g3_momentum.py</span> &middot; 23 September 2026</p>
+</div></body></html>
