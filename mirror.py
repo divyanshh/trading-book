@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -28,7 +29,14 @@ REPORTS = ROOT / "reports"
 
 def dyno(*args: str) -> str:
     cmd = ["heroku", "run", "--no-tty", "--exit-code", "--app", APP, "--", "python", "manage.py", *args]
-    out = subprocess.run(cmd, check=True, capture_output=True, text=True).stdout
+    if not os.environ.get("HEROKU_API_KEY"):
+        sys.exit("HEROKU_API_KEY is not set — add it under Settings > Secrets and variables > Actions")
+    done = subprocess.run(cmd, capture_output=True, text=True)
+    if done.returncode != 0:
+        # heroku's own message (bad token, app not found, dyno failure) is on stderr;
+        # without it the Actions log shows only a CalledProcessError.
+        sys.exit(f"heroku run failed ({done.returncode}):\n{done.stderr.strip()[-2000:]}")
+    out = done.stdout
     # `heroku run` prefixes its own progress lines; the payload starts at the doctype or the JSON.
     for marker in ("<!doctype html>", "<!DOCTYPE html>", "[", "{"):
         i = out.find(marker)
