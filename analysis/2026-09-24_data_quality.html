@@ -234,7 +234,7 @@ real. None of them is a cause. This resolves each into one.</p>
 <div class="stat"><div class="k">of the &#8377;61,475 gap</div><div class="v">97%</div><div class="s">is two symbols</div></div>
 <div class="stat"><div class="k">entry prices that are a date error</div><div class="v">5 of 8</div><div class="s">the price exists one session away</div></div>
 <div class="stat"><div class="k">unadjusted splits in the panel</div><div class="v">58</div><div class="s">18 invisible to the existing guard</div></div>
-<div class="stat"><div class="k">published setups affected</div><div class="v">0</div><div class="s">checked, not assumed</div></div>
+<div class="stat"><div class="k">actions now adjusted</div><div class="v">58</div><div class="s">0 residual, verified</div></div>
 </div>
 
 <section><div class="sec-head"><span class="eyebrow">One</span>
@@ -295,15 +295,42 @@ the G3 population (46,404 setups) and the stop-rules population (2,876), the num
 position across one of the eighteen missed actions is <strong>zero</strong>. A different window
 would not have been so lucky.</p></div></section>
 
+<section><div class="sec-head"><span class="eyebrow">Fixed</span>
+<h2>The panel is adjusted, and the G3 verdict survives it</h2></div>
+<div class="prose"><p>All 58 actions are now back-adjusted: every bar before an action is divided
+by its factor, open, high, low and close together so ranges stay internally consistent. Volume is
+left alone, because multiplying it would invent liquidity that did not exist. Re-running the
+detector on the adjusted panel finds <strong>zero</strong> remaining discontinuities, and the
+script refuses to write the file if any survive.</p>
+<p>Adjusting the panel is not a free change: forty symbols the move guard used to discard for
+having had a split now stay in, so the population grows. The test that matters is whether the
+published conclusion moves with them.</p></div>
+<div class="tbl-scroll"><table><thead><tr><th class="l">G3 measurement</th><th>raw panel (published)</th>
+<th>adjusted panel</th></tr></thead><tbody>
+<tr><td class="l">setups after G1, G2 and G4</td><td>32,007</td><td>32,706</td></tr>
+<tr><td class="l">Spearman, momentum vs return</td><td>&minus;0.079</td><td>&minus;0.078</td></tr>
+<tr><td class="l">G3 at 25, kept minus refused</td><td>+0.34pp (p=0.43)</td><td>+0.37pp (p=0.38)</td></tr>
+<tr><td class="l">Mar&ndash;May / Jun&ndash;Jul</td><td>+2.21 / &minus;2.76</td><td>+2.15 / &minus;2.64</td></tr>
+<tr><td class="l">threshold 15</td><td>&minus;0.89pp (p=0.0005)</td><td>&minus;0.91pp (p=0.0003)</td></tr>
+</tbody></table></div>
+<div class="cap" style="margin-top:10px">Seven hundred more setups and nothing moves: the gate
+still admits about 4% of the population for a difference indistinguishable from zero, the
+relationship is still a U, and the effect still flips sign between periods. <b>A finding that
+survives a correction to its own inputs is worth more than it was before the correction.</b></div></section>
+
 <section><div class="sec-head"><span class="eyebrow">What follows</span>
 <h2>Three fixes, in the order they matter</h2></div>
 <div class="prose">
 <p><strong>Adjust the panel for corporate actions, or detect them.</strong> Fifty-eight known
 events and a guard that sees forty of them by accident. A ratio near a simple fraction on a single
 session is a reliable signature — this page found all 58 with six lines of arithmetic.</p>
-<p><strong>Record the fill, not the booking.</strong> An immutable entry price, the actual fill
-time and the broker order id, written once and never updated. Five of eight anomalies are a
-timestamp that means something other than what the research read it as.</p>
+<p><strong>Record the fill, not the booking.</strong> <span class="badge pass">done</span>
+Reconciliation stamps <span class="mono">entry_time</span> with the moment it noticed a holding,
+because the broker exposes no purchase date. It now also sets
+<span class="mono">entry_time_estimated</span> &mdash; the counterpart of the
+<span class="mono">exit_price_estimated</span> flag this model already carried &mdash; so research
+can tell an observed fill from an adopted one. Not set on the parking sweep, which really does buy
+in that moment.</p>
 <p><strong>Repair the two broken records rather than excluding them.</strong> The AVALON round trip
 marked cancelled and the missing JUNIORBEES history are 97% of the reconciliation gap, and both
 are recoverable from broker data. Exclusion moves the modeled total by about &#8377;24,000 and
