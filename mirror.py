@@ -58,6 +58,37 @@ def verdict(summary: str) -> str:
     return first[0] if first else "—"
 
 
+STYLE = re.compile(r"<style>.*?</style>", re.S)
+
+
+def newest_style(rows: list[dict]) -> str:
+    """The `<style>` block of the newest report — the one stylesheet every page gets."""
+    for r in rows:
+        page = REPORTS / f"{r['as_of']}.html"
+        if page.exists():
+            m = STYLE.search(page.read_text(encoding="utf-8"))
+            if m:
+                return m.group(0)
+    return ""
+
+
+def restyle(style: str) -> int:
+    """Swap every archived page's stylesheet for the newest one.
+
+    The renderer only ever changes CSS against stable class names, so a page
+    stored under an older theme re-skins cleanly. Without this the archive
+    would be a museum of every theme the report has had."""
+    if not style:
+        return 0
+    n = 0
+    for page in REPORTS.glob("20*.html"):
+        text = page.read_text(encoding="utf-8")
+        if STYLE.search(text) and style not in text:
+            page.write_text(STYLE.sub(lambda _m: style, text, count=1), encoding="utf-8")
+            n += 1
+    return n
+
+
 def build_index(rows: list[dict]) -> None:
     by_month: dict[str, list[dict]] = defaultdict(list)
     for r in rows:
@@ -72,9 +103,9 @@ def build_index(rows: list[dict]) -> None:
             f'<td>{r["bytes"]//1024} KB</td></tr>'
             for r in sorted(by_month[month], key=lambda r: r["as_of"], reverse=True)
         )
-        parts.append(f"<h2>{label}</h2><div class=\"scroll\"><table><thead><tr><th class=\"l\">day</th><th class=\"l\">gate</th><th class=\"l\">summary</th><th>size</th></tr></thead><tbody>{items}</tbody></table></div>")
+        parts.append(f'<h2>{label}</h2><div class="scroll"><table><thead><tr><th class="l">day</th><th class="l">gate</th><th class="l">summary</th><th>size</th></tr></thead><tbody>{items}</tbody></table></div>')
     newest = rows[0]["as_of"] if rows else ""
-    page = TEMPLATE.format(body="".join(parts), newest=newest, count=len(rows))
+    page = TEMPLATE.format(style=newest_style(rows), body="".join(parts), newest=newest, count=len(rows))
     (ROOT / "index.html").write_text(page, encoding="utf-8")
     (ROOT / "latest.html").write_text(
         f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=reports/{newest}.html">'
@@ -85,16 +116,11 @@ def build_index(rows: list[dict]) -> None:
 
 
 TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Morning Book</title><style>
-:root{{--bg:#faf8f5;--ink:#1c1b19;--muted:#6b6862;--line:#e6e2db;--pass-bg:#e3f4e8;--fail-bg:#fbe3e0}}
-body{{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,Segoe UI,Inter,sans-serif}}
-.wrap{{max-width:900px;margin:0 auto;padding:36px 20px 80px}}h1{{font-size:28px;margin:0 0 4px}}h2{{font-size:19px;margin:34px 0 10px}}
-.sub{{color:var(--muted);margin:0 0 18px}}table{{border-collapse:collapse;width:100%}}th,td{{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}}
-th.l,td.l{{text-align:left}}td.l span{{padding:2px 8px;border-radius:100px;font-size:12.5px;font-weight:600}}td.pass span{{background:var(--pass-bg)}}td.fail span{{background:var(--fail-bg)}}
-a{{color:inherit}}.scroll{{overflow-x:auto}}
-</style></head><body><div class="wrap">
-<h1>Morning Book</h1><p class="sub">equity-service daily report, mirrored every evening. {count} days. <a href="latest.html">Open the latest ({newest})</a>.</p>
+<title>Morning Book</title>{style}<style>.wrap{{max-width:1100px}}</style></head><body><div class="wrap">
+<p class="eyebrow">equity-service · daily report archive</p><h1>Morning Book</h1>
+<p class="stamp">{count} trading days, mirrored every evening at 19:00 IST. <a href="latest.html">Open the latest ({newest}) →</a></p>
 {body}
+<footer>Each page is the report as the service rendered it that evening; hand-written sections (IPO reviews) are added over it. Source: <a href="https://github.com/divyanshh/trading-book">divyanshh/trading-book</a>.</footer>
 </div></body></html>"""
 
 
@@ -117,9 +143,10 @@ def main() -> int:
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
     for page in EXTRAS.glob("20*.html"):
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
+    restyled = restyle(newest_style(rows))
     build_index(rows)
     print(f"{len(rows)} reports indexed, {fetched} fetched, "
-          f"{len(list(OVERRIDES.glob('20*.html')))} overridden, {len(list(EXTRAS.glob('20*.html')))} extras")
+          f"{len(list(OVERRIDES.glob('20*.html')))} overridden, {len(list(EXTRAS.glob('20*.html')))} extras, {restyled} restyled")
     return 0
 
 
