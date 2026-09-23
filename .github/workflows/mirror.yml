@@ -16,11 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install heroku cli
-        run: curl -fsSL https://cli-assets.heroku.com/install.sh | sh
       - name: mirror
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: python3 mirror.py ${{ inputs.refresh && '--refresh' || '' }}
       - name: commit
         run: |

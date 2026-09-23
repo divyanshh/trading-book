@@ -2,52 +2,39 @@
 """Mirror equity-service's stored daily reports into this repo, and index them.
 
 Runs in GitHub Actions every evening after the 18:00 IST build (and on demand).
-It asks the dyno for the report index (`show_report --index`), fetches every
+It reads the service's public report index (`/api/v1/reports/`), fetches every
 day this repo does not yet hold, writes `reports/YYYY-MM-DD.html`, then
 rebuilds `index.html` (by month, with each day's verdict) and `latest.html`
 (a redirect to the newest). Idempotent: a day already present is never
 re-fetched, so a rebuilt report replaces its file only if `--refresh` is given.
 
-Needs the Heroku CLI on PATH and HEROKU_API_KEY in the environment.
+Needs nothing but the network: the service serves the reports publicly.
 """
 from __future__ import annotations
 
 import html
 import json
-import os
 import re
-import subprocess
 import sys
+import urllib.request
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
-APP = "equity-service"
+BASE = "https://equity-service-fd1143ae8c7a.herokuapp.com/api/v1/reports/"
+"""The service serves its stored reports publicly — the owner publishes them
+here anyway, so the mirror needs no credential of any kind (2026-09-23)."""
 ROOT = Path(__file__).resolve().parent
 REPORTS = ROOT / "reports"
 
 
-def dyno(*args: str) -> str:
-    cmd = ["heroku", "run", "--no-tty", "--exit-code", "--app", APP, "--", "python", "manage.py", *args]
-    if not os.environ.get("HEROKU_API_KEY"):
-        sys.exit("HEROKU_API_KEY is not set — add it under Settings > Secrets and variables > Actions")
-    done = subprocess.run(cmd, capture_output=True, text=True)
-    if done.returncode != 0:
-        # heroku's own message (bad token, app not found, dyno failure) is on stderr;
-        # without it the Actions log shows only a CalledProcessError.
-        sys.exit(f"heroku run failed ({done.returncode}):\n{done.stderr.strip()[-2000:]}")
-    out = done.stdout
-    # `heroku run` prefixes its own progress lines; the payload starts at the doctype or the JSON.
-    for marker in ("<!doctype html>", "<!DOCTYPE html>", "[", "{"):
-        i = out.find(marker)
-        if i >= 0:
-            return out[i:]
-    return out
+def fetch(url: str) -> str:
+    with urllib.request.urlopen(url, timeout=120) as response:  # noqa: S310 — fixed https host
+        return response.read().decode("utf-8")
 
 
 def fetch_index() -> list[dict]:
-    raw = dyno("show_report", "--index")
-    return json.loads(raw[: raw.rfind("]") + 1])
+    return json.loads(fetch(BASE))
 
 
 def verdict(summary: str) -> str:
@@ -104,7 +91,7 @@ def main() -> int:
         target = REPORTS / f"{r['as_of']}.html"
         if target.exists() and not refresh:
             continue
-        page = dyno("show_report", "--date", r["as_of"])
+        page = fetch(BASE + f"{r['as_of']}.html")
         if not re.match(r"<!doctype html>", page, re.I):
             print(f"skip {r['as_of']}: not html", file=sys.stderr)
             continue
