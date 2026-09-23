@@ -358,6 +358,36 @@ three of them ran for two months or more — which is the six-month review's own
 (holding period explains the book) arriving again by a different route.</p></div>
 </section>
 
+<section><div class="sec-head"><span class="eyebrow">Correction &middot; 23 Sep, evening</span>
+<h2>A third of these trades have no recorded entry stop</h2></div>
+<div class="prose">
+<p>An independent audit of this work found an assumption this page never stated, and it is a
+material one. <strong>41 of the 134 closed trades carry no <code>initial_stop_price</code> at
+all</strong> &mdash; 39 of the 132 in the research sample. Checked directly against production:
+<code>count(*) filter (where initial_stop_price is null)</code> on <code>trading_trade</code>
+returns 41. Twenty-eight of those rows say explicitly that they were backfilled from broker fills,
+and the audit inspected five database backups from May to September without finding a single
+original entry stop.</p>
+<p>Every number on this page treats those trades as having a 5% stop, because that is the
+convention the reconstruction adopted. <strong>That was never disclosed here, and the result is
+sensitive to it.</strong> The audit&rsquo;s cash-constrained replay puts the range at:</p>
+<div class="tbl-scroll"><table><thead><tr><th class="l">how the 39 missing stops are handled</th>
+<th>modeled total</th></tr></thead><tbody>
+<tr><td class="l">assume 5% &mdash; what this page did, silently</td><td>&#8377;16.87L</td></tr>
+<tr><td class="l">use six provisional pre-entry scan stops, assume the rest</td><td>&#8377;17.16L</td></tr>
+<tr><td class="l"><b>reject every trade with a missing stop</b></td><td class="loss"><b>&#8377;8.88L</b></td></tr>
+</tbody></table></div>
+<p class="muted">The audit&rsquo;s primary figure of &#8377;16.87L sits inside the
+&#8377;13&ndash;17L range this page already published, which is the one thing here that holds up
+unchanged. What does not hold up is the silence: a result that halves under a different treatment
+of a third of its inputs needs that treatment on the page, not in a script. The missing stops
+should stay recorded as unknown rather than filled in.</p>
+<p class="muted">The audit also separates the effect of the new exits from the effect of sizing and
+selection, which this page does not: at equal sizing, limits and admission rules it puts the exit
+change at <strong>+&#8377;46,430</strong>, far below the headline improvement. Most of the gain
+here is sizing and selection, not the exit rule itself.</p>
+</div></section>
+
 <section><div class="sec-head"><span class="eyebrow">Reconciliation</span>
 <h2>Why this says &#8377;6.5L when yesterday said &#8377;21.9L</h2></div>
 <div class="note bad"><div class="eyebrow">Three numbers, three different questions</div>
