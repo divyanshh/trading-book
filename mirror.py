@@ -59,6 +59,7 @@ def verdict(summary: str) -> str:
 
 
 STYLE = re.compile(r"<style>.*?</style>", re.S)
+STYLE_FALLBACK = "<style>body{font:15px/1.5 system-ui,sans-serif;margin:2rem}</style>"
 
 
 def newest_style(rows: list[dict]) -> str:
@@ -81,7 +82,7 @@ def restyle(style: str) -> int:
     if not style:
         return 0
     n = 0
-    for page in REPORTS.glob("20*.html"):
+    for page in [*REPORTS.glob("20*.html"), *OVERRIDES.glob("20*.html"), *EXTRAS.glob("20*.html")]:
         text = page.read_text(encoding="utf-8")
         if STYLE.search(text) and style not in text:
             page.write_text(STYLE.sub(lambda _m: style, text, count=1), encoding="utf-8")
@@ -105,7 +106,7 @@ def build_index(rows: list[dict]) -> None:
         )
         parts.append(f'<h2>{label}</h2><div class="scroll"><table><thead><tr><th class="l">day</th><th class="l">gate</th><th class="l">summary</th><th>size</th></tr></thead><tbody>{items}</tbody></table></div>')
     newest = rows[0]["as_of"] if rows else ""
-    page = TEMPLATE.format(style=newest_style(rows), body="".join(parts), newest=newest, count=len(rows))
+    page = TEMPLATE.format(style=newest_style(rows) or STYLE_FALLBACK, body="".join(parts), newest=newest, count=len(rows))
     (ROOT / "index.html").write_text(page, encoding="utf-8")
     (ROOT / "latest.html").write_text(
         f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=reports/{newest}.html">'
@@ -139,11 +140,16 @@ def main() -> int:
             continue
         target.write_text(page, encoding="utf-8")
         fetched += 1
+    # The stylesheet is read from the dyno's newest page *before* overrides are
+    # laid over it — an override is finished by hand under whatever theme was
+    # current when it was written, and it is the archive that follows the
+    # renderer, not the other way round.
+    style = newest_style(rows)
     for page in OVERRIDES.glob("20*.html"):
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
     for page in EXTRAS.glob("20*.html"):
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
-    restyled = restyle(newest_style(rows))
+    restyled = restyle(style)
     build_index(rows)
     print(f"{len(rows)} reports indexed, {fetched} fetched, "
           f"{len(list(OVERRIDES.glob('20*.html')))} overridden, {len(list(EXTRAS.glob('20*.html')))} extras, {restyled} restyled")
