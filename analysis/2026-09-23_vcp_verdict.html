@@ -1,0 +1,342 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Should VCP be ported? A measured no</title><style>/* Morning Book — light fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+   Light only, on purpose: the pages are read beside Trendlyne / Screener / Kite, all of which are light. */
+:root{
+  --canvas:#f4f6fa;--card:#ffffff;--line:#e5e9f0;--line-strong:#cfd6e0;
+  --ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;
+  --blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;
+  --green:#15803d;--green-50:#f0fdf4;--green-100:#dcfce7;
+  --red:#b91c1c;--red-50:#fef2f2;--red-100:#fee2e2;
+  --amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.04);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,rgba(244,246,250,0))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:#bbf7d0}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:#fecaca}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:#fde68a}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:#bbf7d0}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:#fecaca}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:#fde68a}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:#f1f5f9;color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:#bbf7d0}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:#fecaca}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:#fde68a}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:#eef2f7;border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+/* Bridge: the six-month retrospective's own class names, expressed in the
+   Morning Book's tokens. Appended after theme.css, never instead of it.
+
+   The document was written before this theme with its own palette
+   (--paper/--ink/--gain/--loss/--accent) and its charts read those variables
+   at runtime through getComputedStyle — so the tokens are redefined here
+   rather than the markup rewritten, and the SVG repaints itself in the new
+   colours for free. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:rgba(21,128,61,.12);
+  --loss:var(--red);--loss-fill:rgba(185,28,28,.12);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:#f8fafc;border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<header class="top"><div class="rule-top"></div>
+<div class="eyebrow">Equity book &middot; scanner study &middot; 16 Mar – 31 Aug 2026</div>
+<h1>Should VCP Be Ported? A Measured No</h1>
+<p class="lede">Every scanner this service runs is one family — TIS and its weekly, ETF and STRIKE
+variants, plus REVERSAL. The replay showed the cost: about <strong>three admissions a month
+against twelve slots</strong>. The cheap fix is to loosen a gate. The better one is to add a
+different pattern, and the obvious candidate is the one the old system had and this one never
+ported: <strong>Minervini's volatility contraction</strong>, which fed 3 of our 132 trades for
+&#8377;51,524 — the best per-trade source in the book. So it was ported into the harness and
+measured before a line of scanner code was written.</p>
+<div class="meta"><span>2,591 VCP setups found</span><span>vs 149 TIS</span>
+<span>same bhavcopy, same exits, same sizing</span><span>verdict: do not port</span></div></header>
+
+<div class="stats">
+<div class="stat"><div class="k">VCP setups, 6 months</div><div class="v">2,591</div><div class="s">across 548 names — seventeen times the TIS count</div></div>
+<div class="stat"><div class="k">mean return</div><div class="v">+1.26%</div><div class="s">against +5.66% for TIS</div></div>
+<div class="stat"><div class="k">median return</div><div class="v">-1.92%</div><div class="s">against -1.27% for TIS</div></div>
+<div class="stat"><div class="k">losses beyond −8%</div><div class="v">459</div><div class="s">TIS had 3</div></div>
+<div class="stat"><div class="k">survive our 5% cap</div><div class="v">111</div><div class="s">of 2,591 — the stop is a median 10.1% away</div></div>
+<div class="stat"><div class="k">worse than TIS</div><div class="v">p=0.018</div><div class="s">sign-flip permutation on mean return</div></div>
+</div>
+
+<section><div class="sec-head"><span class="eyebrow">The finding</span>
+<h2>VCP's stop is incompatible with a 5% cap</h2></div>
+<div class="prose"><p>The pattern is not the problem — the <em>stop</em> is. VCP places it under the
+last contraction's low, which on these names sits a median <strong>10.1%</strong>
+below the pivot. Our book caps a stop at 5%. Only <strong>111 of 2,591</strong> setups
+fit inside that, and those that do are names so tight they do not move:
+109 of 111 never hit a stop at all and were closed at the
+sixty-session horizon, with an average win of +0.29% against an average loss of &minus;0.77%.</p>
+<p>Left at its own stop width, VCP takes the losses that width implies:
+<strong>459 losses beyond &minus;8%</strong> against 3 for TIS over the
+same window, and a worst trade of -25.0%.</p></div>
+<div class="tbl-scroll"><table><thead><tr><th class="l">population</th><th>setups</th><th>mean</th>
+<th>median</th><th>win</th><th>losses &lt;−8%</th></tr></thead><tbody>
+<tr><td class="sym">TIS, price gates only</td><td>149</td><td class="gain">+5.66%</td>
+<td>-1.27%</td><td>40%</td><td>3</td></tr>
+<tr><td class="sym">VCP, all</td><td>2,591</td><td>+1.26%</td>
+<td class="loss">-1.92%</td><td>37%</td>
+<td class="loss">459</td></tr>
+<tr><td class="sym">VCP, MarketSmith universe</td><td>1,649</td><td>+3.70%</td>
+<td class="loss">-0.86%</td><td>44%</td>
+<td class="loss">258</td></tr>
+<tr><td class="sym">VCP, inside our 5% cap</td><td>111</td><td>-0.03%</td>
+<td>+0.16%</td><td>70%</td><td>0</td></tr>
+</tbody></table></div>
+</section>
+
+<section><div class="sec-head"><span class="eyebrow">The score</span>
+<h2>The 14-point quality score does not order returns</h2></div>
+<svg viewBox="0 0 1040 250" width="100%" height="250"><line x1="52" y1="204.0" x2="1016" y2="204.0" stroke="#cfd6e0"/><rect x="90.6" y="82.5" width="115.7" height="121.5" fill="#15803d" rx="3"/><text x="148.4" y="75.5" text-anchor="middle" font-size="11" font-weight="600" fill="#15803d">+3.36%</text><text x="148.4" y="234" text-anchor="middle" font-size="10.5" fill="#64748b">score 8</text><rect x="283.4" y="67.3" width="115.7" height="136.7" fill="#15803d" rx="3"/><text x="341.2" y="60.3" text-anchor="middle" font-size="11" font-weight="600" fill="#15803d">+3.78%</text><text x="341.2" y="234" text-anchor="middle" font-size="10.5" fill="#64748b">score 9</text><rect x="476.2" y="38.0" width="115.7" height="166.0" fill="#15803d" rx="3"/><text x="534.0" y="31.0" text-anchor="middle" font-size="11" font-weight="600" fill="#15803d">+4.59%</text><text x="534.0" y="234" text-anchor="middle" font-size="10.5" fill="#64748b">score 10</text><rect x="669.0" y="151.5" width="115.7" height="52.5" fill="#15803d" rx="3"/><text x="726.8" y="144.5" text-anchor="middle" font-size="11" font-weight="600" fill="#15803d">+1.45%</text><text x="726.8" y="234" text-anchor="middle" font-size="10.5" fill="#64748b">score 11</text><rect x="861.8" y="123.4" width="115.7" height="80.6" fill="#15803d" rx="3"/><text x="919.6" y="116.4" text-anchor="middle" font-size="11" font-weight="600" fill="#15803d">+2.23%</text><text x="919.6" y="234" text-anchor="middle" font-size="10.5" fill="#64748b">score 12</text></svg>
+<div class="prose"><p>If the score measured setup quality, mean return would rise with it. It does
+not: 10 is the best bucket, 11 and 12 are the worst two. Score&nbsp;&ge;&nbsp;10 against 8–9 is
+<strong>+0.76 points, p=0.518</strong> — indistinguishable from chance. The sequenced
+&#8377;11.4L that slice appears to make is <strong>53% one trade</strong> (KABRAEXTRU, +170%) and
+99% three.</p></div>
+</section>
+
+<section><div class="sec-head"><span class="eyebrow">The synthesis</span>
+<h2>Even VCP's selection with our stop does not add</h2></div>
+<div class="prose"><p>The obvious repair is to keep VCP's <em>selection</em> — the trend template
+and the contraction sequence — and give it our stop, the last pivot low &times; 0.98. That produces
+a population of comparable size to TIS (144 setups inside the 5% cap against 149),
+which is exactly the admission rate we are short of. It still does not work.</p></div>
+<div class="tbl-scroll"><table><thead><tr><th class="l">VCP selection + TIS pivot stop, in universe, stop ≤5%</th>
+<th>n</th><th>mean</th><th>median</th><th>win</th></tr></thead><tbody>
+<tr><td class="sym">whole window</td><td>144</td><td>+2.62%</td>
+<td class="loss">-2.86%</td><td>32%</td></tr>
+<tr><td class="sym">first half</td><td>72</td><td class="gain">+5.13%</td>
+<td>-0.26%</td><td>46%</td></tr>
+<tr><td class="sym">second half</td><td>72</td>
+<td class="loss">+0.11%</td>
+<td class="loss">-4.12%</td>
+<td class="loss">18%</td></tr>
+<tr><td class="sym">TIS, same test</td><td>149</td><td class="gain">+5.66%</td>
+<td>-1.27%</td><td>40%</td></tr>
+</tbody></table></div>
+<div class="note bad"><div class="eyebrow">The split decides it</div>
+<p>First half <strong>+5.13%, 46% win</strong>. Second half <strong>+0.11%, 18% win</strong>. That
+is the same shape that killed the position-size finding, the ADR filter and the analyst-coverage
+signal — a period, not a rule. Against TIS over the whole window it is
+<strong>&minus;3.04 points (p=0.135)</strong>: no better, probably worse, certainly not additive.</p></div>
+</section>
+
+<section><div class="sec-head"><span class="eyebrow">What was and was not tested</span>
+<h2>The port, and one bias worth naming</h2></div>
+<div class="prose"><p>The detection is ported line for line from
+<code>stocks_signals/angelone/services/vcp_screener.py</code>: the eight-criterion trend template,
+swing-pivot contraction pairs with the equal-segment fallback, the pivot at the last contraction's
+high, the 14-point score, and the live gate that scanner used —
+<code>score &ge; 8 and in_buy_zone</code>. Entry is the pivot, filled next session where the high
+reaches it. Exits, sizing and sequencing are identical to the TIS replay, so only the pattern
+differs.</p>
+<div class="note bad"><div class="eyebrow">The bias not to fall for</div>
+<p>Filtering this population by <b>RS &ge; 90</b> produces a mean of <b>+17.5%</b> on 384 setups,
+which looks spectacular and means nothing: the RS is <em>today's</em> value, and the twelve months
+it measures contain the six being tested. Every figure on this page is therefore computed without
+an RS or EPS filter. The same trap sits under the TIS population and is why its own numbers are
+quoted on the price gates alone.</p></div></div>
+</section>
+
+<section><div class="sec-head"><span class="eyebrow">So what does fix the admission rate</span>
+<h2>Not this — and the constraint is now named</h2></div>
+<div class="actions">
+<div class="act"><h3>The binding constraint is G4</h3><p>Roughly one candidate in five has a pivot
+low within 5% of the close. That single gate, not the momentum or strength tests, is what holds
+admissions to three a month.</p></div>
+<div class="act"><h3>Worth testing next</h3><p>A <em>second</em> stop rule — take the contraction
+low when it is tighter than the pivot low — would admit more names without widening risk. It is a
+change to one function and can be measured the same way this was.</p></div>
+<div class="act"><h3>Or accept the rate</h3><p>Three admissions a month with twelve slots means the
+book is meant to be concentrated, not full. That is a decision, not a defect — but then the
+&#8377;60L deployment target should move, not the gates.</p></div>
+</div>
+</section>
+
+<footer>Run 23 September 2026 on the NSE bhavcopy, 1,716 names with two years of history,
+16 March – 31 August 2026. Scripts: <code>2026-09-23_vcp_population.py</code> (port and build),
+<code>2026-09-23_vcp_page.py</code> (this page). Populations:
+<code>2026-09-23_vcp_population.csv</code>, <code>2026-09-23_vcp_pivotstop.csv</code>.</footer>
+</div></body></html>
