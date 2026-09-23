@@ -26,6 +26,14 @@ BASE = "https://equity-service-fd1143ae8c7a.herokuapp.com/api/v1/reports/"
 here anyway, so the mirror needs no credential of any kind (2026-09-23)."""
 ROOT = Path(__file__).resolve().parent
 REPORTS = ROOT / "reports"
+OVERRIDES = ROOT / "overrides"
+"""Hand-finished pages, `YYYY-MM-DD.html`. A day here is published in place of
+the dyno's copy — the dyno renders the scan, but analysis written by hand
+(the 23 Sep IPO review, for one) lives only in the file, and a refresh run
+silently threw it away once. Anything under here wins, always."""
+EXTRAS = ROOT / "extras"
+"""Standalone pages, `YYYY-MM-DD_<slug>.html`, published under reports/ and
+linked from the index row of their day."""
 
 
 def fetch(url: str) -> str:
@@ -35,6 +43,14 @@ def fetch(url: str) -> str:
 
 def fetch_index() -> list[dict]:
     return json.loads(fetch(BASE))
+
+
+def extras_for(day: str) -> str:
+    links = []
+    for page in sorted(EXTRAS.glob(f"{day}_*.html")):
+        slug = page.stem[len(day) + 1 :].replace("_", " ")
+        links.append(f'<a href="reports/{page.name}">{html.escape(slug)}</a>')
+    return (" · " + " · ".join(links)) if links else ""
 
 
 def verdict(summary: str) -> str:
@@ -50,7 +66,7 @@ def build_index(rows: list[dict]) -> None:
     for month in sorted(by_month, reverse=True):
         label = date.fromisoformat(by_month[month][0]["as_of"]).strftime("%B %Y")
         items = "".join(
-            f'<tr><td class="l"><a href="reports/{r["as_of"]}.html">{r["as_of"]}</a></td>'
+            f'<tr><td class="l"><a href="reports/{r["as_of"]}.html">{r["as_of"]}</a>{extras_for(r["as_of"])}</td>'
             f'<td class="l {"fail" if "BLOCKED" in verdict(r["summary"]) else "pass"}"><span>{html.escape(verdict(r["summary"]))}</span></td>'
             f'<td class="l">{html.escape(" · ".join((r["summary"] or "").splitlines()[1:3]))}</td>'
             f'<td>{r["bytes"]//1024} KB</td></tr>'
@@ -97,8 +113,13 @@ def main() -> int:
             continue
         target.write_text(page, encoding="utf-8")
         fetched += 1
+    for page in OVERRIDES.glob("20*.html"):
+        (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
+    for page in EXTRAS.glob("20*.html"):
+        (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
     build_index(rows)
-    print(f"{len(rows)} reports indexed, {fetched} fetched")
+    print(f"{len(rows)} reports indexed, {fetched} fetched, "
+          f"{len(list(OVERRIDES.glob('20*.html')))} overridden, {len(list(EXTRAS.glob('20*.html')))} extras")
     return 0
 
 
