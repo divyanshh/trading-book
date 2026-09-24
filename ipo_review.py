@@ -401,18 +401,26 @@ IPOS_2026_09_24 = [
         dates="24–28 Sep (opened today)", band="₹34", size="—",
         split="—",
         gmp="₹14", gmp_pct=41.2, expected="~+39%",
-        apply_as="Retail 1 lot + sHNI ₹2L",
+        apply_as="HNI — applied 24 Sep",
         horizon="Sell 70% on listing; hold 30% only on clean Q2 credit costs",
         book="opened today · GMP up from ₹11 (+32.4%) to ₹14",
-        flags=(("best of the board", "pass"), ("GMP rising", "pass")),
+        flags=(("best of the board", "pass"), ("GMP rising", "pass"),
+               ("applied, HNI", "pass")),
         stats=(("GMP", "₹14"), ("was", "₹11 yesterday"), ("GMP %", "+41.2%"),
                ("expected", "~+39%"), ("status", "open today"), ("closes", "28 Sep")),
         note=(
-            "The strongest grey market on the board and it strengthened overnight, ₹11 to ₹14, "
-            "32.4% to 41.2%. Call and horizon both unchanged from yesterday. The hold condition "
-            "is still the credit-cost line in Q2 rather than the listing pop: a lender's "
-            "listing gain tells you nothing about its book. Watch the anchor list and the QIB "
-            "line, which is where Adroit is failing."
+            "<b>Applied 24 September, HNI.</b> The strongest grey market on the board and it "
+            "strengthened overnight, ₹11 to ₹14, 32.4% to 41.2% — the only issue here whose "
+            "expected listing clears +30% after the overstatement is taken off. Call and "
+            "horizon unchanged from yesterday. The hold condition is still the credit-cost "
+            "line in Q2 rather than the listing pop: a lender's listing gain tells you nothing "
+            "about its book, and 30% of the allotment is the most that should ride on a "
+            "quarter nobody has seen yet. "
+            "<b>What to watch before Monday's close, and it is the Adroit lesson:</b> the QIB "
+            "line. Adroit was applied for on the same reasoning and is closing at 0.05x QIB "
+            "against 7.24x retail. If Moneyview's book takes the same shape — retail far "
+            "ahead, institutions absent — the 30% hold comes off and the whole allotment is "
+            "sold at the open."
         ),
     ),
     IPO(
@@ -628,9 +636,9 @@ LEAD_24 = (
     "the exchange book on the four issues closing tomorrow, and the GMP on almost everything. "
     "<strong>Expected listing is the GMP percentage less 2.6 points</strong> — the "
     "overstatement <code>backtest_gmp</code> measured over 295 listings (r = 0.87); a zero GMP "
-    "has averaged −6.6% and listed positive 29% of the time. <em>Held: Adroit Industries, "
-    "sHNI ₹2L+, applied 23 Sep. NSE allotment, 120 shares at ₹1,785, listed today at ₹1,862 "
-    "and being held.</em>"
+    "has averaged −6.6% and listed positive 29% of the time. <em>Applied: Adroit Industries sHNI ₹2L+ on 23 Sep; "
+    "Moneyview HNI on 24 Sep. Held: NSE allotment, 120 shares at ₹1,785, listed today at "
+    "₹1,862 and being held.</em>"
 )
 
 FOOTNOTE_24 = (
