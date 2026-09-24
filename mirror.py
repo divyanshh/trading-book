@@ -147,11 +147,27 @@ def days_with_only_extras(rows: list[dict]) -> list[dict]:
     ]
 
 
+def primary_page(day: str) -> str | None:
+    """The page the day's own date should open.
+
+    The report when there is one, and otherwise the day's first hand-written
+    page. A date rendered as plain text reads as a dead row — every other date
+    in the index is a link — so the one page that day does have is what its
+    date points at.
+    """
+    if (REPORTS / f"{day}.html").exists():
+        return f"reports/{day}.html"
+    pages = sorted(EXTRAS.glob(f"{day}_*.html"))
+    return f"reports/{pages[0].name}" if pages else None
+
+
 def row_html(r: dict) -> str:
-    """One day in the index. A day with no book yet is not a broken link."""
+    """One day in the index. A day with no book yet is not a dead row."""
     if r.get("no_report"):
+        day, target = r["as_of"], primary_page(r["as_of"])
+        head = f'<a href="{target}">{day}</a>' if target else day
         return (
-            f'<tr><td class="l">{r["as_of"]}{extras_for(r["as_of"])}</td>'
+            f'<tr><td class="l">{head}{extras_for(r["as_of"])}</td>'
             '<td class="l warn"><span>no book yet</span></td>'
             '<td class="l">written before the 18:00 build</td>'
             f'<td>{r["bytes"] // 1024} KB</td></tr>'
