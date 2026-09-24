@@ -122,18 +122,59 @@ def restyle(style: str) -> int:
     return n
 
 
+def days_with_only_extras(rows: list[dict]) -> list[dict]:
+    """Days that have a hand-written page but no report yet.
+
+    The index is built from the service's report list, so a day with no report
+    had no row at all — and anything written for it was published and
+    unreachable. That is how the IPO review for 25 September came to sit at a
+    live URL that nothing linked to: it was written at 01:30, and the book for
+    that day does not exist until the 18:00 build.
+
+    These rows carry no link to ``reports/<day>.html``, because there is no
+    report there to link to. They say so instead.
+    """
+    known = {r["as_of"] for r in rows}
+    days = {p.stem[:10] for p in EXTRAS.glob("20*.html")} - known
+    return [
+        {
+            "as_of": day,
+            "summary": "",
+            "bytes": sum(p.stat().st_size for p in EXTRAS.glob(f"{day}_*.html")),
+            "no_report": True,
+        }
+        for day in sorted(days, reverse=True)
+    ]
+
+
+def row_html(r: dict) -> str:
+    """One day in the index. A day with no book yet is not a broken link."""
+    if r.get("no_report"):
+        return (
+            f'<tr><td class="l">{r["as_of"]}{extras_for(r["as_of"])}</td>'
+            '<td class="l warn"><span>no book yet</span></td>'
+            '<td class="l">written before the 18:00 build</td>'
+            f'<td>{r["bytes"] // 1024} KB</td></tr>'
+        )
+    gate = "fail" if "BLOCKED" in verdict(r["summary"]) else "pass"
+    return (
+        f'<tr><td class="l"><a href="reports/{r["as_of"]}.html">{r["as_of"]}</a>'
+        f'{extras_for(r["as_of"])}</td>'
+        f'<td class="l {gate}"><span>{html.escape(verdict(r["summary"]))}</span></td>'
+        f'<td class="l">{html.escape(" · ".join((r["summary"] or "").splitlines()[1:3]))}</td>'
+        f'<td>{r["bytes"] // 1024} KB</td></tr>'
+    )
+
+
 def build_index(rows: list[dict]) -> None:
     by_month: dict[str, list[dict]] = defaultdict(list)
-    for r in rows:
+    for r in (*rows, *days_with_only_extras(rows)):
         by_month[r["as_of"][:7]].append(r)
     parts = []
     for month in sorted(by_month, reverse=True):
         label = date.fromisoformat(by_month[month][0]["as_of"]).strftime("%B %Y")
         items = "".join(
-            f'<tr><td class="l"><a href="reports/{r["as_of"]}.html">{r["as_of"]}</a>{extras_for(r["as_of"])}</td>'
-            f'<td class="l {"fail" if "BLOCKED" in verdict(r["summary"]) else "pass"}"><span>{html.escape(verdict(r["summary"]))}</span></td>'
-            f'<td class="l">{html.escape(" · ".join((r["summary"] or "").splitlines()[1:3]))}</td>'
-            f'<td>{r["bytes"]//1024} KB</td></tr>'
+            row_html(r)
             for r in sorted(by_month[month], key=lambda r: r["as_of"], reverse=True)
         )
         parts.append(f'<h2>{label}</h2><div class="scroll"><table><thead><tr><th class="l">day</th><th class="l">gate</th><th class="l">summary</th><th>size</th></tr></thead><tbody>{items}</tbody></table></div>')
@@ -151,7 +192,7 @@ def build_index(rows: list[dict]) -> None:
             '<th class="l">document</th><th class="l">kind</th><th class="l">as of</th>'
             "<th>size</th></tr></thead><tbody>" + items + "</tbody></table></div>",
         )
-    newest = rows[0]["as_of"] if rows else ""
+    newest = rows[0]["as_of"] if rows else ""  # a real report, never an extras-only day
     page = TEMPLATE.format(style=newest_style(rows) or STYLE_FALLBACK, body="".join(parts), newest=newest, count=len(rows))
     (ROOT / "index.html").write_text(page, encoding="utf-8")
     (ROOT / "latest.html").write_text(
