@@ -372,6 +372,31 @@ three of them ran for two months or more — which is the six-month review's own
 (holding period explains the book) arriving again by a different route.</p></div>
 </section>
 
+<section><div class="sec-head"><span class="eyebrow">Correction &middot; 24 Sep</span>
+<h2>The &#8377;21.9L reproduces. It was the exit rule all along.</h2></div>
+<div class="prose">
+<p>This page says the &#8377;21.9L harness could not be reproduced and asks you to treat
+&#8377;13&ndash;17L as the finding. <strong>That was wrong.</strong> Replayed against the real bars
+of all 132 trades, the figure comes back at <strong>&#8377;21.16L</strong> — a 3.4% gap that is
+slippage and horizon assumptions, not a different result.</p>
+<p>What was never true is that it came from sizing, or from a different entry rule, or from a
+shortlist. The same 132 fills at &#8377;40,000 of risk and a &#8377;5,00,000 cap give:</p>
+<div class="tbl-scroll"><table><thead><tr><th class="l">same trades, same sizing</th>
+<th>total</th></tr></thead><tbody>
+<tr><td class="l">the exits actually taken</td><td>&#8377;10.91L</td></tr>
+<tr><td class="l"><b>close-based exits</b></td><td class="gain"><b>&#8377;21.16L</b></td></tr>
+<tr><td class="l">difference</td><td><b>&#8377;10.25L</b></td></tr>
+</tbody></table></div>
+<p>Every rupee of that gap is the exit rule: stop on a <em>close</em> below structure rather than
+a touch, sold at the next open, breakeven at +8%, a 20-day trail at 0.97, and the disaster line at
+stop &times; 0.95. <strong>It is the single largest measured effect in this system</strong>, and
+for a day it was being reported as an unexplained discrepancy between two harnesses.</p>
+<p class="muted">Both figures are now pinned in <span class="mono">tests/regressions/test_the_book.py</span>
+against the real fills and 10,705 real bars, so a change to sizing moves one number, a change to
+the exits moves the other, and neither can drift unnoticed again. The missing-stop caveat below
+still stands: 39 of the 132 have no recorded entry stop and both figures assume 5% for them.</p>
+</div></section>
+
 <section><div class="sec-head"><span class="eyebrow">Correction &middot; 23 Sep, evening</span>
 <h2>A third of these trades have no recorded entry stop</h2></div>
 <div class="prose">
