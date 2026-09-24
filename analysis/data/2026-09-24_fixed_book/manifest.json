@@ -1,0 +1,9 @@
+{
+  "service_commit": "1758ac66dbe3ff10c71b4984a1a1dbb341c414b1",
+  "cutoff": "2026-09-22",
+  "sha256": {
+    "inputs.csv": "ae2c01c8e698412a2ed3fdc95f2d7e1b64cd36bb16800abf423e564795670961",
+    "replay.py": "0da339ab2d0460996b6c9824801de6db3354b2f2b71e87b8a24b152b724f1be0",
+    "panel.pkl": "d7436a3952a9a7c1b108a72882f14c4a9112c2ef6f5c9285f06584867d72d51c"
+  }
+}

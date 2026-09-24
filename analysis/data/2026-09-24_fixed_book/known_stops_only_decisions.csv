@@ -1,0 +1,133 @@
+id,s,ed,src,decision,stop_basis,cash_before
+871,NIFTYBEES,2026-04-01,etf_tradebook,no usable initial stop,,
+872,NIFTYBEES,2026-04-02,etf_tradebook,no usable initial stop,,
+705,BUILDPRO,2026-04-15,tis,no usable initial stop,,
+740,BELRISE,2026-04-15,tis,no usable initial stop,,
+845,SMALLCAP,2026-04-15,etf_tis,no usable initial stop,,
+851,SILVERCASE,2026-04-15,etf_tis,no usable initial stop,,
+867,LENSKART,2026-04-15,tradebook,no usable initial stop,,
+878,RUBICON,2026-04-15,tradebook,no usable initial stop,,
+880,UTLSOLAR,2026-04-15,tradebook,no usable initial stop,,
+720,SYRMA,2026-04-16,tis,no usable initial stop,,
+862,GMDCLTD,2026-04-16,tradebook,no usable initial stop,,
+876,QPOWER,2026-04-16,tradebook,no usable initial stop,,
+714,RISHABH,2026-04-17,tis,no usable initial stop,,
+856,AEQUS,2026-04-17,tradebook,no usable initial stop,,
+873,PFOCUS,2026-04-17,tradebook,no usable initial stop,,
+879,SMSPHARMA,2026-04-17,tradebook,no usable initial stop,,
+874,PFOCUS,2026-04-22,tradebook,no usable initial stop,,
+865,KINGFA,2026-04-23,tradebook,no usable initial stop,,
+854,ABSLAMC,2026-04-24,tradebook,no usable initial stop,,
+857,AUBANK,2026-04-24,tradebook,no usable initial stop,,
+861,GLENMARK,2026-04-24,tradebook,no usable initial stop,,
+877,RHETAN,2026-04-24,tradebook,no usable initial stop,,
+882,RHETAN,2026-04-24,tradebook,no usable initial stop,,
+744,SUNFLAG,2026-05-04,tis,no usable initial stop,,
+859,BRITANNIA,2026-05-05,tradebook,no usable initial stop,,
+860,CPPLUS,2026-05-05,tradebook,no usable initial stop,,
+864,JUNIORBEES,2026-05-05,etf_tradebook,no usable initial stop,,
+881,APEX,2026-05-07,tradebook,no usable initial stop,,
+866,LAURUSLABS,2026-05-08,tradebook,no usable initial stop,,
+869,MACPOWER,2026-05-14,tradebook,no usable initial stop,,
+780,KIRLOSENG,2026-05-15,tis,no usable initial stop,,
+855,ADANIPOWER,2026-05-15,tradebook,no usable initial stop,,
+863,JAINREC,2026-05-18,tradebook,no usable initial stop,,
+858,BHEL,2026-05-21,tradebook,no usable initial stop,,
+785,ADANIENSOL,2026-06-05,tis,no usable initial stop,,
+853,AETHER,2026-08-06,tis,no usable initial stop,,
+875,PSUBNKBEES,2026-08-14,etf_tradebook,no usable initial stop,,
+870,MOREALTY,2026-08-20,etf_tradebook,no usable initial stop,,
+852,JUNIORBEES,2026-09-07,etf_tis,no usable initial stop,,
+709,FRACTAL,2026-04-15,canslim,taken,recorded initial stop,6000000.0
+715,RSL,2026-04-15,canslim,taken,recorded initial stop,5499207.3405
+719,STAR,2026-04-15,tis,taken,recorded initial stop,4998065.359875
+721,TDPOWERSYS,2026-04-15,tis,taken,recorded initial stop,4497391.436475
+729,GSPCROP,2026-04-15,tis,taken,recorded initial stop,3996220.7141750003
+706,CEINSYS,2026-04-16,canslim,taken,recorded initial stop,3495235.7451000004
+707,CLEANMAX,2026-04-16,canslim,taken,recorded initial stop,2994638.783625
+712,ICICIAMC,2026-04-16,tis,taken,recorded initial stop,2493413.65565
+708,EMMVEE,2026-04-17,tis,taken,recorded initial stop,1994675.4394500002
+710,GMDCLTD,2026-04-17,tis,taken,recorded initial stop,1493465.82015
+711,GVT&D,2026-04-17,canslim,taken,recorded initial stop,992822.9341500001
+713,NATCOPHARM,2026-04-17,tis,cash unavailable at entry including costs,recorded initial stop,495549.65115000017
+716,SAKAR,2026-04-17,tis,cash unavailable at entry including costs,recorded initial stop,495549.65115000017
+717,SHRIPISTON,2026-04-17,tis,cash unavailable at entry including costs,recorded initial stop,495549.65115000017
+722,TENNIND,2026-04-17,tis,cash unavailable at entry including costs,recorded initial stop,495549.65115000017
+733,NMDC,2026-04-22,tis,taken,recorded initial stop,947807.0011500001
+731,LAURUSLABS,2026-04-23,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+723,GPIL,2026-04-27,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+725,SARDAEN,2026-04-27,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+726,TATASTEEL,2026-04-27,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+727,ROSSTECH,2026-04-27,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+728,SENORES,2026-04-27,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+735,ATHERENERG,2026-04-27,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+736,KIRLOSENG,2026-04-27,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+730,IMFA,2026-04-28,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+732,NATIONALUM,2026-04-28,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+734,MCX,2026-04-28,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+737,SGMART,2026-04-28,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+738,STEELCAS,2026-04-28,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+704,BELRISE,2026-04-30,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+739,HFCL,2026-04-30,tis,cash unavailable at entry including costs,recorded initial stop,446619.95815000014
+741,ADANIPOWER,2026-05-04,tis,taken,recorded initial stop,955226.6456500001
+742,LINDEINDIA,2026-05-04,tis,cash unavailable at entry including costs,recorded initial stop,454124.49435000005
+743,MACPOWER,2026-05-04,tis,cash unavailable at entry including costs,recorded initial stop,454124.49435000005
+745,HONASA,2026-05-07,tis,taken,recorded initial stop,909904.84085
+754,APEX,2026-05-07,orphan_gtt,cash unavailable at entry including costs,recorded initial stop,408850.37847500003
+755,SANSERA,2026-05-07,orphan_gtt,cash unavailable at entry including costs,recorded initial stop,408850.37847500003
+756,JAINREC,2026-05-07,orphan_gtt,cash unavailable at entry including costs,recorded initial stop,408850.37847500003
+757,CGPOWER,2026-05-07,orphan_gtt,cash unavailable at entry including costs,recorded initial stop,408850.37847500003
+746,ARFIN,2026-05-08,tis,cash unavailable at entry including costs,recorded initial stop,408850.37847500003
+759,CHENNPETRO,2026-05-08,tis,cash unavailable at entry including costs,recorded initial stop,408850.37847500003
+750,BLISSGVS,2026-05-12,tis,cash unavailable at entry including costs,recorded initial stop,408850.37847500003
+766,KIRLOSENG,2026-05-13,manual,taken,recorded initial stop,1347939.3996675
+767,ADANIPOWER,2026-05-14,manual,taken,recorded initial stop,847628.9426675
+768,JAYNECOIND,2026-05-14,manual,cash unavailable at entry including costs,recorded initial stop,346555.53304249997
+769,LLOYDSME,2026-05-14,manual,cash unavailable at entry including costs,recorded initial stop,346555.53304249997
+770,GVT&D,2026-05-18,manual,same stock already held,recorded initial stop,346555.53304249997
+771,BAJAJCON,2026-05-20,manual,taken,recorded initial stop,883027.6930425
+773,WELCORP,2026-05-21,manual,cash unavailable at entry including costs,recorded initial stop,381867.55714249995
+774,APARINDS,2026-05-21,manual,cash unavailable at entry including costs,recorded initial stop,381867.55714249995
+775,WELCORP,2026-05-22,manual,cash unavailable at entry including costs,recorded initial stop,381867.55714249995
+776,LLOYDSME,2026-05-25,manual,taken,recorded initial stop,1475697.9221425
+777,POCL,2026-05-25,manual,taken,recorded initial stop,974472.4833925001
+778,VEDL,2026-05-26,manual,cash unavailable at entry including costs,recorded initial stop,473618.7114925001
+779,POCL,2026-05-26,manual,same stock already held,recorded initial stop,473618.7114925001
+772,BHEL,2026-05-29,manual,taken,recorded initial stop,921726.9114925
+783,VEDL,2026-06-01,tis,cash unavailable at entry including costs,recorded initial stop,420611.7477425
+787,PRECWIRE,2026-06-04,tis,taken,recorded initial stop,961611.1577424998
+790,SANDHAR,2026-06-19,tis,taken,recorded initial stop,3480532.7093924996
+793,TALBROAUTO,2026-06-23,tis,taken,recorded initial stop,2979874.8460425
+797,MARKSANS,2026-06-23,tis,taken,recorded initial stop,2478839.7820425
+799,SENORES,2026-06-24,tis,taken,recorded initial stop,1977728.5982175001
+800,GALAPREC,2026-07-02,sideways,taken,recorded initial stop,2945342.8489675
+809,AEQUS,2026-07-03,sideways,taken,recorded initial stop,2991263.5473175
+801,WELCORP,2026-07-07,orb,taken,recorded initial stop,2490176.1528175003
+802,AMAGI,2026-07-08,sideways,taken,recorded initial stop,1989738.1377175003
+803,RPTECH,2026-07-09,tis,taken,recorded initial stop,1488571.7462175004
+804,LAURUSLABS,2026-07-10,strike,taken,recorded initial stop,988059.8067675005
+805,RUBICON,2026-07-10,tis,cash unavailable at entry including costs,recorded initial stop,488165.68801750045
+806,PSPPROJECT,2026-07-14,strike,cash unavailable at entry including costs,recorded initial stop,488165.68801750045
+811,MARKSANS,2026-07-15,tis,same stock already held,recorded initial stop,1034998.7830175004
+813,INDSWFTLAB,2026-07-20,tis,taken,recorded initial stop,2690039.0676675
+817,CUPID,2026-07-24,tis,taken,recorded initial stop,3113321.6826675003
+818,RPTECH,2026-07-27,vcp,taken,recorded initial stop,3135366.4578675004
+819,RRKABEL,2026-07-27,vcp,taken,recorded initial stop,2634609.4472675
+823,NAVINFLUOR,2026-07-27,tis,taken,recorded initial stop,2133561.9121675002
+825,LAURUSLABS,2026-07-28,tis,same stock already held,recorded initial stop,1637004.5745675003
+828,VADILALIND,2026-07-28,tis,taken,recorded initial stop,1637004.5745675003
+814,AETHER,2026-07-30,tis,taken,recorded initial stop,2090725.0603675004
+824,KTKBANK,2026-07-30,tis,taken,recorded initial stop,1590127.2868675003
+829,ATHERENERG,2026-08-03,tis,taken,recorded initial stop,1088951.5019425002
+830,UNIPARTS,2026-08-04,tis,taken,recorded initial stop,588396.2344425002
+831,SHILPAMED,2026-08-05,vcp,12 occupied slots,recorded initial stop,87819.91444250016
+834,BHARATFORG,2026-08-07,weekly_tis,12 occupied slots,recorded initial stop,87819.91444250016
+838,AVALON,2026-08-07,tis,12 occupied slots,recorded initial stop,87819.91444250016
+841,AVALON,2026-08-07,unknown,12 occupied slots,recorded initial stop,87819.91444250016
+839,ITBEES,2026-08-14,etf_tis,12 occupied slots,recorded initial stop,87819.91444250016
+846,MOMENTUM50,2026-08-18,etf_tis,taken,recorded initial stop,631699.4514425003
+847,PHARMABEES,2026-08-26,etf_tis,taken,recorded initial stop,614979.3236225003
+844,NIFTYBEES,2026-09-07,etf_tis,taken,recorded initial stop,630540.6644225003
+842,MON100,2026-09-10,etf_tis,12 occupied slots,recorded initial stop,129424.39792250033
+843,GOLDBEES,2026-09-10,etf_tis,12 occupied slots,recorded initial stop,129424.39792250033
+848,GOLDBEES,2026-09-10,etf_tis,12 occupied slots,recorded initial stop,129424.39792250033

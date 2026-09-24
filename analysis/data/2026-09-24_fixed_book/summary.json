@@ -1,0 +1,268 @@
+{
+  "baseline": {
+    "scenario": "baseline_5pct",
+    "n": 48,
+    "total": 1236329.9523925001,
+    "closed": 560333.3930425002,
+    "open": 675996.55935,
+    "open_n": 4,
+    "closed_win_pct": 43.18181818181818,
+    "old_missing_taken": 8,
+    "reasons": {
+      "cash unavailable at entry including costs": 67,
+      "same stock already held": 9,
+      "12 occupied slots": 8
+    }
+  },
+  "assumption_results": [
+    {
+      "scenario": "baseline_5pct",
+      "n": 48,
+      "total": 1236329.9523925001,
+      "closed": 560333.3930425002,
+      "open": 675996.55935,
+      "open_n": 4,
+      "closed_win_pct": 43.18181818181818,
+      "old_missing_taken": 8,
+      "reasons": {
+        "cash unavailable at entry including costs": 67,
+        "same stock already held": 9,
+        "12 occupied slots": 8
+      }
+    },
+    {
+      "scenario": "missing_3pct",
+      "n": 43,
+      "total": 1798330.2896750004,
+      "closed": 754369.6348250002,
+      "open": 1043960.6548499999,
+      "open_n": 5,
+      "closed_win_pct": 47.368421052631575,
+      "old_missing_taken": 7,
+      "reasons": {
+        "cash unavailable at entry including costs": 71,
+        "12 occupied slots": 10,
+        "same stock already held": 8
+      }
+    },
+    {
+      "scenario": "missing_8pct",
+      "n": 40,
+      "total": 1291522.5214250004,
+      "closed": 536982.1298250004,
+      "open": 754540.3916,
+      "open_n": 4,
+      "closed_win_pct": 50.0,
+      "old_missing_taken": 6,
+      "reasons": {
+        "cash unavailable at entry including costs": 71,
+        "12 occupied slots": 13,
+        "same stock already held": 8
+      }
+    },
+    {
+      "scenario": "missing_10pct",
+      "n": 40,
+      "total": 1291522.5214250004,
+      "closed": 536982.1298250004,
+      "open": 754540.3916,
+      "open_n": 4,
+      "closed_win_pct": 50.0,
+      "old_missing_taken": 6,
+      "reasons": {
+        "cash unavailable at entry including costs": 71,
+        "12 occupied slots": 13,
+        "same stock already held": 8
+      }
+    },
+    {
+      "scenario": "missing_structural",
+      "n": 40,
+      "total": 1216465.9450000003,
+      "closed": 461925.55340000027,
+      "open": 754540.3916,
+      "open_n": 4,
+      "closed_win_pct": 47.22222222222222,
+      "old_missing_taken": 6,
+      "reasons": {
+        "cash unavailable at entry including costs": 72,
+        "12 occupied slots": 10,
+        "same stock already held": 7,
+        "no usable initial stop": 3
+      }
+    },
+    {
+      "scenario": "known_stops_only",
+      "n": 44,
+      "total": 1086718.1836175004,
+      "closed": 460047.0553675002,
+      "open": 626671.1282500001,
+      "open_n": 4,
+      "closed_win_pct": 47.5,
+      "old_missing_taken": 0,
+      "reasons": {
+        "no usable initial stop": 39,
+        "cash unavailable at entry including costs": 37,
+        "12 occupied slots": 8,
+        "same stock already held": 4
+      }
+    },
+    {
+      "scenario": "research_60session",
+      "n": 49,
+      "total": 898144.1801925001,
+      "closed": 727441.9965925004,
+      "open": 170702.1835999999,
+      "open_n": 3,
+      "closed_win_pct": 43.47826086956522,
+      "old_missing_taken": 9,
+      "reasons": {
+        "cash unavailable at entry including costs": 67,
+        "same stock already held": 9,
+        "12 occupied slots": 7
+      }
+    },
+    {
+      "scenario": "high_sampled",
+      "n": 52,
+      "total": 1099785.0135975003,
+      "closed": 345244.62199750036,
+      "open": 754540.3916,
+      "open_n": 4,
+      "closed_win_pct": 41.66666666666667,
+      "old_missing_taken": 10,
+      "reasons": {
+        "cash unavailable at entry including costs": 62,
+        "same stock already held": 10,
+        "12 occupied slots": 8
+      }
+    },
+    {
+      "scenario": "always_defensive",
+      "n": 60,
+      "total": 1317637.9010774998,
+      "closed": -296451.4483725003,
+      "open": 1614089.3494500003,
+      "open_n": 5,
+      "closed_win_pct": 45.45454545454545,
+      "old_missing_taken": 14,
+      "reasons": {
+        "cash unavailable at entry including costs": 48,
+        "12 occupied slots": 13,
+        "same stock already held": 11
+      }
+    },
+    {
+      "scenario": "adverse_entry_day",
+      "n": 48,
+      "total": 1236329.9523925001,
+      "closed": 560333.3930425002,
+      "open": 675996.55935,
+      "open_n": 4,
+      "closed_win_pct": 43.18181818181818,
+      "old_missing_taken": 8,
+      "reasons": {
+        "cash unavailable at entry including costs": 67,
+        "same stock already held": 9,
+        "12 occupied slots": 8
+      }
+    },
+    {
+      "scenario": "zero_costs",
+      "n": 41,
+      "total": 2203386.9650000003,
+      "closed": 1430002.105,
+      "open": 773384.8600000001,
+      "open_n": 4,
+      "closed_win_pct": 51.35135135135135,
+      "old_missing_taken": 7,
+      "reasons": {
+        "12 occupied slots": 51,
+        "cash unavailable at entry including costs": 31,
+        "same stock already held": 9
+      }
+    },
+    {
+      "scenario": "old_exit_control",
+      "n": 57,
+      "total": 1171945.7420249998,
+      "closed": 190071.91089999973,
+      "open": 981873.8311249999,
+      "open_n": 4,
+      "closed_win_pct": 33.9622641509434,
+      "old_missing_taken": 8,
+      "reasons": {
+        "cash unavailable at entry including costs": 65,
+        "same stock already held": 10
+      }
+    },
+    {
+      "scenario": "allow_separate_same_stock_lots",
+      "n": 44,
+      "total": 2162279.6080500004,
+      "closed": 603563.5605500003,
+      "open": 1558716.0475,
+      "open_n": 6,
+      "closed_win_pct": 44.73684210526316,
+      "old_missing_taken": 7,
+      "reasons": {
+        "cash unavailable at entry including costs": 75,
+        "12 occupied slots": 13
+      }
+    },
+    {
+      "scenario": "highest_entry_order",
+      "seed": 9,
+      "n": 42,
+      "total": 2149150.5062100007,
+      "closed": 1394610.1146100005,
+      "open": 754540.3916,
+      "open_n": 4,
+      "closed_win_pct": 52.63157894736842,
+      "old_missing_taken": 11,
+      "reasons": {
+        "cash unavailable at entry including costs": 69,
+        "12 occupied slots": 12,
+        "same stock already held": 9
+      }
+    },
+    {
+      "scenario": "median_example_entry_order",
+      "seed": 325,
+      "n": 46,
+      "total": 1799384.1458525,
+      "closed": 1251256.8498525003,
+      "open": 548127.2960000001,
+      "open_n": 4,
+      "closed_win_pct": 50.0,
+      "old_missing_taken": 10,
+      "reasons": {
+        "cash unavailable at entry including costs": 68,
+        "12 occupied slots": 10,
+        "same stock already held": 8
+      }
+    }
+  ],
+  "order_range": [
+    1075232.9397375002,
+    1799430.4574487503,
+    2149150.5062100007
+  ],
+  "orders_at_least_21L": 2,
+  "median_new_minus_old": 112637.41914000013,
+  "drawdown": -407166.4013499981,
+  "unfunded_total": 3655321.6439837497,
+  "contract": {
+    "capital": 6000000,
+    "per_trade_cap": 500000,
+    "slots": 12,
+    "opportunities": 132,
+    "new_entry_gates": false,
+    "historical_buy_dates_prices": true,
+    "source_strategy_preserved": true,
+    "horizon": "through 22 September cutoff, no artificial time exit",
+    "baseline_missing_stop": "5% only as explicit research assumption",
+    "fee": 0.0025,
+    "exit_slippage": 0.005
+  }
+}
