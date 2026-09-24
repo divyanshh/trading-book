@@ -1,5 +1,12 @@
 [
  {
+  "as_of": "2026-09-24",
+  "generated_at": "2026-09-24T05:01:07.780473+00:00",
+  "bytes": 168833,
+  "summary": "Entries BLOCKED\nstate CAUTION \u00b7 breadth 56.10% vs prior-5 mean 43.04% [breadth gate OPEN] \u00b7 follow-through gate SHUT \u2014 ours reads DOWNTREND: 9 distribution days and no follow-through day since \u00b7 Nifty -0.94% vs 20MA \u00b7 7 distribution days \u00b7 no follow-through day \u00b7 MarketSmith RALLY_ATTEMPT \u00b7 prices through 2026-09-23 \u2014 TODAY'S SESSION IS NOT IN THIS SCAN \u00b7 read at 2026-09-24 09:05 IST. A buy needs both gates open \u2014 breadth above its prior five-session mean, and a computed status that is not a correction \u2014 so nothing below may be placed however good it looks.\nTIS setups: SWING 18 shown, WEEKLY 2 shown, ETF 1 shown, ETF_WEEKLY 0 shown\nOther scanners: STRIKE 18 shown, REVERSAL 0 shown\nWhat ran: 115 names moved 3% or more; showing 15. 15 shown, Themes: sectors with two or more of the 115 movers. This is what the list is read for 27 shown\nNews: \nHow the market opened: \nMarketSmith: MarketSmith's Buy Watchlist. Our universe holds tickers and the mail publishes company names, so a blank 'in our universe' is an unmatched name, not an absent one 10 shown, Model portfolio moves 5 shown\nIPOs \u2014 mainboard: \nExchange filings: \nBroker coverage: ",
+  "path": "/api/v1/reports/2026-09-24.html"
+ },
+ {
   "as_of": "2026-09-23",
   "generated_at": "2026-09-23T12:30:42.962114+00:00",
   "bytes": 156041,
