@@ -117,36 +117,71 @@ def section(ipos: list[IPO], lead: str, footnote: str) -> str:
     )
 
 
-def write(day: str, markup: str) -> None:
-    standalone = ROOT / "extras" / f"{day}_ipo_review.html"
+def _style(day: str) -> str:
+    """The report's own stylesheet, so the standalone page is not a different site.
+
+    Taken from the day's override when the report has been mirrored, and from
+    the most recent earlier override when it has not — the theme does not
+    change between days, and the review is written before the 18:00 build far
+    more often than after it.
+    """
     override = ROOT / "overrides" / f"{day}.html"
-    page = override.read_text(encoding="utf-8") if override.exists() else ""
-    style = re.search(r"<style>.*?</style>", page, re.S)
-    if style:
-        standalone.write_text(
-            '<!doctype html><html lang="en"><head><meta charset="utf-8">'
-            '<meta name="viewport" content="width=device-width,initial-scale=1">'
-            f"<title>IPO review — {day}</title>{style.group(0)}</head><body>"
-            f'<div class="wrap"><p class="eyebrow">equity-service · cortex · {day}</p>'
-            f"{markup}"
-            "<footer>Hand-written under <code>cortex/checklists/ipo_checklist.md</code>. "
-            f'Also a section of <a href="{day}.html#ipo-review">the day\'s report</a>.'
-            "</footer></div></body></html>",
-            encoding="utf-8",
+    candidates = [override] if override.exists() else []
+    candidates += sorted(ROOT.glob("overrides/20*.html"), reverse=True)
+    for path in candidates:
+        found = re.search(r"<style>.*?</style>", path.read_text(encoding="utf-8"), re.S)
+        if found:
+            return found.group(0)
+    raise SystemExit(
+        "no stylesheet found in any override. The standalone page would be "
+        "unreadable, so nothing is written."
+    )
+
+
+def write(day: str, markup: str) -> None:
+    """The standalone page always; the report section only once there is a report.
+
+    **Both halves say what they did.** Until 2026-09-25 this wrote neither file
+    when the day's override was absent — which is every morning before the
+    18:00 build — and printed the same success line as a run that wrote both.
+    A review was composed, the command reported thirteen issues written, and
+    the directory was empty.
+    """
+    standalone = ROOT / "extras" / f"{day}_ipo_review.html"
+    standalone.write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        f"<title>IPO review — {day}</title>{_style(day)}</head><body>"
+        f'<div class="wrap"><p class="eyebrow">equity-service · cortex · {day}</p>'
+        f"{markup}"
+        "<footer>Hand-written under <code>cortex/checklists/ipo_checklist.md</code>. "
+        f'Also a section of <a href="{day}.html#ipo-review">the day\'s report</a>.'
+        "</footer></div></body></html>",
+        encoding="utf-8",
+    )
+    print(f"  wrote extras/{standalone.name}")
+
+    override = ROOT / "overrides" / f"{day}.html"
+    if not override.exists():
+        print(
+            f"  overrides/{day}.html does not exist yet — the report builds at 18:00 IST.\n"
+            f"  Re-run this after mirroring to splice the section into it."
         )
-    if page:
-        start = page.find('<h2 id="ipo-review">')
-        end = page.find('<h2 id="exchange-filings">')
-        if end < 0:
-            raise SystemExit("no exchange-filings anchor in the override")
-        page = (page[:start] if start >= 0 else page[:end]) + markup + page[end:]
-        if 'href="#ipo-review"' not in page:
-            page = page.replace(
-                '<a href="#ipos---mainboard">IPOs — mainboard</a>',
-                '<a href="#ipos---mainboard">IPOs — mainboard</a>'
-                '<a href="#ipo-review">IPO review</a>',
-            )
-        override.write_text(page, encoding="utf-8")
+        return
+    page = override.read_text(encoding="utf-8")
+    start = page.find('<h2 id="ipo-review">')
+    end = page.find('<h2 id="exchange-filings">')
+    if end < 0:
+        raise SystemExit("no exchange-filings anchor in the override")
+    page = (page[:start] if start >= 0 else page[:end]) + markup + page[end:]
+    if 'href="#ipo-review"' not in page:
+        page = page.replace(
+            '<a href="#ipos---mainboard">IPOs — mainboard</a>',
+            '<a href="#ipos---mainboard">IPOs — mainboard</a>'
+            '<a href="#ipo-review">IPO review</a>',
+        )
+    override.write_text(page, encoding="utf-8")
+    print(f"  spliced the section into overrides/{override.name}")
 
 
 # ── 23 September 2026 ───────────────────────────────────────────────────────
@@ -670,9 +705,300 @@ FOOTNOTE = (
 )
 
 
+
+LEAD_25 = (
+    "Thirteen mainboard issues, read at 01:30 IST on 25 September off the service's own "
+    "board — which is working again: ipowatch dropped a column from its table overnight, "
+    "every row stopped parsing, and <code>show_ipos</code> reported the board as "
+    "<em>missing</em> rather than broken. Six issues were open at the time. The parser was "
+    "fixed and deployed before this page was written; the subscription figures below are the "
+    "exchange's own, at each issue's most recent close, and they are labelled by which day "
+    "that was. Expected listing is the GMP percentage less 2.6 points — the overstatement "
+    "<code>backtest_gmp</code> measured over 295 listings (r = 0.87); a zero GMP has averaged "
+    "&minus;6.6% and listed positive 29% of the time. Applied: Adroit Industries sHNI on "
+    "23 Sep; Moneyview HNI on 24 Sep. Held: NSE, 120 shares at &#8377;1,785."
+)
+
+FOOTNOTE_25 = (
+    "<b>Three issues close today</b> (Adroit, Swastika, Elevate, ArMee) and four open "
+    "(Orient Cables, German Green Steel, Runwal, AceVector). The only decisions that need "
+    "making before the open are the four that open; everything closing is already applied "
+    "for or already refused. Subscription figures are each issue's latest exchange close, "
+    "not intraday — at 01:30 IST there is no day-3 book for anything."
+)
+
+IPOS_2026_09_25 = [
+    IPO(
+        name="Adroit Industries", call="APPLIED — SELL AT OPEN", tone="warn",
+        dates="23–25 Sep (closes today)", band="₹134", size="₹151 Cr",
+        split="88% fresh / 12% OFS",
+        gmp="₹34", gmp_pct=25.4, expected="~+23%",
+        apply_as="sHNI ₹2–10L (applied 23 Sep)",
+        horizon="Sell the whole allotment at the open",
+        book="day 2 close: 18.07x · retail 23.43x · HNI 27.21x · QIB 1.82x",
+        flags=(("yesterday's flip condition did NOT fire", "pass"),
+               ("QIB came in at day-2 close", "pass"),
+               ("27x HNI — expect a token allotment", "warn")),
+        stats=(("overall", "18.07x"), ("QIB", "1.82x"), ("HNI", "27.21x"),
+               ("retail", "23.43x"), ("GMP", "unchanged ₹34"), ("closes", "today")),
+        note=(
+            "<b>Yesterday's page was reading an intraday book and drew the wrong conclusion "
+            "from it.</b> It saw QIB at 0.05x at 10:30 on day 2, declared the weak-listing "
+            "pattern, and called for selling the whole allotment. By the day-2 close QIB was "
+            "<b>1.82x</b> — institutions bid late, which is the ordinary shape of a book and "
+            "not a surprise. The stated condition was <em>QIB under 1x at Friday's close with "
+            "retail above 5x</em>. QIB is already above 1x with a day still to run, so the "
+            "condition has not fired and will not unless bids are withdrawn. "
+            "<b>The call lands in the same place for a different reason.</b> The original note "
+            "said hold a tranche only if QIB clears 5x; at 1.82x it does not, so the whole "
+            "allotment is sold at the open. At 27x on the HNI book the allotment will be a "
+            "token in any case. What this costs if I am wrong: the upside beyond the first "
+            "print on a small position."
+        ),
+    ),
+    IPO(
+        name="Moneyview", call="APPLIED — HOLD THE APPLICATION", tone="pass",
+        dates="24–28 Sep", band="₹34", size="₹1,092 Cr",
+        split="₹750 Cr fresh / ₹342 Cr OFS",
+        gmp="₹14", gmp_pct=41.2, expected="~+39%",
+        apply_as="HNI — applied 24 Sep",
+        horizon="Sell 70% on listing; hold 30% only on clean Q2 credit costs",
+        book="day 1 close: 1.44x · retail 1.79x · HNI 2.43x · QIB 0.05x",
+        flags=(("best GMP on the board", "pass"), ("QIB 0.05x after day 1", "warn"),
+               ("three days still to run", "pass")),
+        stats=(("overall", "1.44x"), ("QIB", "0.05x"), ("HNI", "2.43x"),
+               ("retail", "1.79x"), ("GMP", "₹14, from ₹5 on 21 Sep"), ("closes", "Mon 28 Sep")),
+        note=(
+            "GMP has climbed ₹5 → ₹11 → ₹14 across three sessions and is the highest on the "
+            "board at +41.2%; the lens puts the listing near +39%. <b>QIB at 0.05x after day 1 "
+            "is not the warning it looks like</b> — Adroit's book above is the same story one "
+            "day further on, 0.05x intraday to 1.82x at the close. The number that matters is "
+            "QIB at Monday's close, not today's. "
+            "The application stands. The exit plan is unchanged: 70% at the listing print, and "
+            "the remaining 30% held only if Q2 credit costs come in clean — a lender's listing "
+            "premium is worth nothing if the book is deteriorating underneath it."
+        ),
+    ),
+    IPO(
+        name="Orient Cables", call="APPLY", tone="pass",
+        dates="25–29 Sep (opens today)", band="₹272", size="₹528 Cr", split="fresh + OFS",
+        gmp="₹60", gmp_pct=22.1, expected="~+19%",
+        apply_as="Retail 1 lot (₹14,960); sHNI ₹2–10L",
+        horizon="Sell half on listing, hold half",
+        book="opens today · anchor book taken 24 Sep",
+        flags=(("GMP up ₹45 → ₹60 overnight", "pass"), ("second-best on the board", "pass")),
+        stats=(("GMP yesterday", "₹45 (+16.5%)"), ("GMP today", "₹60 (+22.1%)"),
+               ("lot", "55 shares"), ("min retail", "₹14,960"),
+               ("listing", "5 Oct"), ("band", "₹258–272")),
+        note=(
+            "Two decades in networking cable and passive equipment, and the only issue on this "
+            "board whose grey market has <b>improved into its own opening</b> — ₹45 to ₹60, "
+            "+16.5% to +22.1%, while four of the six issues already open saw their GMP fall. "
+            "The call was APPLY yesterday on a weaker number and is unchanged, which is the "
+            "point: the case was made before the premium moved, so the move is confirmation "
+            "rather than the reason. "
+            "Retail one lot and sHNI as sized yesterday. Half sold at the listing print, half "
+            "held — the cable and wire sector has been the one place a listing premium has "
+            "extended rather than faded this quarter."
+        ),
+    ),
+    IPO(
+        name="German Green Steel", call="SKIP — watch after listing", tone="warn",
+        dates="25–29 Sep (opens today)", band="₹139", size="₹304 Cr",
+        split="₹290 Cr fresh / ₹14 Cr OFS",
+        gmp="₹28", gmp_pct=20.1, expected="~+17%",
+        apply_as="—",
+        horizon="Buy post-listing only at or below the issue price, if steel holds",
+        book="opens today · Systematix, IIFL, CLSA",
+        flags=(("GMP up ₹24 → ₹28", "pass"), ("commodity input risk", "warn"),
+               ("TMT bars — a price taker", "warn")),
+        stats=(("GMP yesterday", "₹24 (+17.3%)"), ("GMP today", "₹28 (+20.1%)"),
+               ("FY26 revenue", "+11%"), ("FY26 PAT", "+33%"),
+               ("lot", "107 shares"), ("min retail", "₹14,873")),
+        note=(
+            "The GMP improved and the call does not, which is the discipline this page is for. "
+            "<b>A grey-market quote is not a reason; it is a number the call has to survive.</b> "
+            "The refusal was never about the premium — it is a TMT-bar maker in Gujarat, a price "
+            "taker on iron ore and coal with FY26 revenue up 11% against PAT up 33%, which is "
+            "margin expansion on input costs rather than on volume, and input costs revert. "
+            "+20.1% would list well and might. Skipped anyway, and the condition for revisiting "
+            "is written down: at or below ₹139 after listing, with steel prices holding."
+        ),
+    ),
+    IPO(
+        name="Runwal Enterprises", call="SKIP", tone="warn",
+        dates="25–29 Sep (opens today)", band="₹305", size="₹500 Cr", split="100% fresh",
+        gmp="₹35", gmp_pct=11.5, expected="~+9%",
+        apply_as="—", horizon="—",
+        book="opens today · ICICI Sec + Jefferies",
+        flags=(("GMP doubled ₹18 → ₹35", "warn"), ("₹325 Cr of ₹500 Cr to debt", "fail")),
+        stats=(("GMP yesterday", "₹18 (+5.9%)"), ("GMP today", "₹35 (+11.5%)"),
+               ("to debt repayment", "₹325 Cr"), ("to growth", "₹175 Cr"),
+               ("lot", "49 shares"), ("listing", "5 Oct")),
+        note=(
+            "The premium doubled overnight and the case did not change with it. Mumbai real "
+            "estate, founded 1978, all-fresh issue — and <b>₹325 Cr of the ₹500 Cr goes to "
+            "repaying debt</b>, so under two fifths of what is raised reaches the business. "
+            "That is a balance-sheet repair priced as a growth issue. "
+            "A GMP that moves from +5.9% to +11.5% the night before an issue opens, with no "
+            "news between, is the part of the grey market the 2.6-point haircut exists for. "
+            "Skipped."
+        ),
+    ),
+    IPO(
+        name="AceVector (Snapdeal)", call="AVOID", tone="fail",
+        dates="25–29 Sep (opens today)", band="₹32", size="₹420 Cr",
+        split="₹287 Cr fresh / OFS 4.16 Cr shares",
+        gmp="₹1.5", gmp_pct=4.7, expected="~+2%",
+        apply_as="—", horizon="—",
+        book="opens today · SoftBank and Nexus selling",
+        flags=(("trackers disagree: ₹0 to ₹1.5", "fail"), ("negative EBITDA", "fail"),
+               ("negative RoNW", "fail")),
+        stats=(("GMP, our board", "₹1.5 (+4.7%)"), ("GMP, InvestorGain", "₹0 (0.0%)"),
+               ("EBITDA", "negative"), ("RoNW", "negative"),
+               ("lot", "468 shares"), ("band", "₹30–32")),
+        note=(
+            "<b>The two GMP boards disagree, and both readings are bad.</b> Ours has ₹1.5; "
+            "InvestorGain had ₹0 on 24 September. A zero GMP has averaged \u22126.6% at "
+            "listing across the 295 issues measured and listed positive 29% of the time, and "
+            "+4.7% is inside the 2.6-point overstatement — neither number is a case. "
+            "Losses are narrowing and revenue is growing, but EBITDA and RoNW are both still "
+            "negative and the selling shareholders are SoftBank and Nexus. An OFS by the "
+            "people who know the asset best, into a grey market that will not bid, is two "
+            "independent opinions pointing the same way. Avoided."
+        ),
+    ),
+    IPO(
+        name="A-One Steels", call="SKIP — downgraded from apply", tone="fail",
+        dates="24–28 Sep", band="₹405", size="₹650 Cr", split="fresh + OFS",
+        gmp="₹45", gmp_pct=11.1, expected="~+9%",
+        apply_as="— (was: retail 1 lot)", horizon="—",
+        book="day 1 close: 0.58x · retail 0.77x · HNI 0.77x · QIB 0.09x",
+        flags=(("GMP fell ₹55 → ₹45", "fail"), ("book under 1x after day 1", "fail"),
+               ("every category under 1x", "fail")),
+        stats=(("overall", "0.58x"), ("QIB", "0.09x"), ("HNI", "0.77x"),
+               ("retail", "0.77x"), ("GMP yesterday", "₹55 (+13.6%)"),
+               ("GMP today", "₹45 (+11.1%)")),
+        note=(
+            "<b>Downgraded.</b> Yesterday's call was apply, one retail lot, on a +13.6% "
+            "premium. Two things moved against it overnight and they point the same way: the "
+            "GMP fell to +11.1%, and the day-1 book closed at 0.58x with <em>no</em> category "
+            "above 1x — retail 0.77x, HNI 0.77x, QIB 0.09x. "
+            "An issue nobody has to compete for is an issue where the allotment is certain and "
+            "worth having for exactly that reason — which is the trap. Full allotment on a "
+            "book that will not fill, in the same steel complex as the issue skipped above, "
+            "against a premium that is falling rather than rising. There are two apply-worthy "
+            "issues on this board; this is not the third."
+        ),
+    ),
+    IPO(
+        name="ArMee Infotech", call="SKIP — GMP collapsed", tone="fail",
+        dates="23–25 Sep (closes today)", band="₹375", size="₹235 Cr", split="fresh + OFS",
+        gmp="₹20", gmp_pct=5.3, expected="~+3%",
+        apply_as="—", horizon="—",
+        book="day 2 close: 1.17x · retail 1.35x · HNI 0.86x · QIB 0.94x",
+        flags=(("GMP fell ₹55 → ₹20 in a day", "fail"), ("−64% on the premium", "fail")),
+        stats=(("GMP yesterday", "₹55 (+14.7%)"), ("GMP today", "₹20 (+5.3%)"),
+               ("overall", "1.17x"), ("QIB", "0.94x"), ("HNI", "0.86x"), ("retail", "1.35x")),
+        note=(
+            "Skipped yesterday at +14.7% and the grey market has since agreed, hard: ₹55 to "
+            "₹20, a 64% fall in the premium in a single session, with the book scraping past "
+            "1x only on retail. <b>This is what the skip was for.</b> Nothing to do — it is "
+            "recorded because a call that is later confirmed by the price is worth as much to "
+            "read back as one that is contradicted, and only one of the two gets written down "
+            "if the page is only updated when something is bought."
+        ),
+    ),
+    IPO(
+        name="Swastika Infra", call="SKIP", tone="warn",
+        dates="23–25 Sep (closes today)", band="₹185", size="₹98 Cr", split="fresh",
+        gmp="₹8", gmp_pct=4.3, expected="~+2%",
+        apply_as="—", horizon="Post-listing study if the order book converts",
+        book="day 2 close: 1.64x · retail 1.59x · HNI 2.58x · QIB 1.00x",
+        flags=(("book improved 0.96x → 1.64x", "pass"), ("GMP flat at ₹8", "warn")),
+        stats=(("overall", "1.64x"), ("QIB", "1.00x"), ("HNI", "2.58x"),
+               ("retail", "1.59x"), ("GMP", "unchanged ₹8"), ("closes", "today")),
+        note=(
+            "The book filled out on day 2 — 0.96x to 1.64x, with QIB reaching exactly 1x — and "
+            "the grey market did not move at all. +4.3% is +1.7% after the haircut, which is "
+            "inside the noise of a listing print. The skip stands on arithmetic rather than on "
+            "any view of the company: there is no premium here to sell into."
+        ),
+    ),
+    IPO(
+        name="Elevate Campuses", call="AVOID", tone="fail",
+        dates="23–25 Sep (closes today)", band="₹362", size="₹362 Cr", split="fresh + OFS",
+        gmp="₹3", gmp_pct=0.8, expected="~−2%",
+        apply_as="—", horizon="Revisit below ~₹270 with verified debt reduction",
+        book="day 2 close: 0.23x · retail 0.23x · HNI 0.33x · QIB 0.18x",
+        flags=(("0.23x on the final eve", "fail"), ("every category under 0.35x", "fail"),
+               ("expected listing negative", "fail")),
+        stats=(("overall", "0.23x"), ("QIB", "0.18x"), ("HNI", "0.33x"),
+               ("retail", "0.23x"), ("GMP", "₹3 (+0.8%)"), ("expected", "−1.8%")),
+        note=(
+            "Closing today with under a quarter of the book taken and a premium of +0.8%, "
+            "which the lens turns negative. An issue this far short of its own book normally "
+            "extends or withdraws; if it lists, it lists into no demand. Avoided at the IPO, "
+            "and the revisit condition is unchanged — below about ₹270, with debt reduction "
+            "that can be verified rather than promised."
+        ),
+    ),
+    IPO(
+        name="Varmora Granito", call="CLOSED — no action", tone="warn",
+        dates="22–24 Sep (closed)", band="₹148", size="₹300 Cr", split="fresh + OFS",
+        gmp="₹0", gmp_pct=0.0, expected="~−6.6%",
+        apply_as="—", horizon="—",
+        book="final: 1.58x · retail 1.00x · HNI 0.92x · QIB 3.16x",
+        flags=(("QIB carried the book", "warn"), ("zero GMP into listing", "fail")),
+        stats=(("overall", "1.58x"), ("QIB", "3.16x"), ("HNI", "0.92x"),
+               ("retail", "1.00x"), ("GMP", "₹0"), ("base rate at zero GMP", "−6.6%")),
+        note=(
+            "Closed yesterday and avoided. Worth one line for the record: the <b>final</b> book "
+            "was 1.58x on QIB at 3.16x, against the 0.27x this page quoted from an intraday "
+            "read on its last morning. Institutions bid at the close — the same lesson Adroit "
+            "taught at the top of this page, in the same week. An intraday subscription figure "
+            "is not a book. The GMP stayed at zero regardless, which is where the avoid came "
+            "from and where it stays: zero has averaged −6.6%."
+        ),
+    ),
+    IPO(
+        name="SRIT India", call="AVOID", tone="fail",
+        dates="28–30 Sep", band="₹130", size="₹135 Cr", split="fresh + OFS",
+        gmp="₹13", gmp_pct=10.0, expected="~+7%",
+        apply_as="—", horizon="Revisit only after the Blossom transaction is closed and disclosed",
+        book="anchor bidding 25 Sep · sole BRLM Choice Capital",
+        flags=(("sole book-runner", "warn"), ("undisclosed related transaction", "fail")),
+        stats=(("GMP yesterday", "₹12 (+9.2%)"), ("GMP today", "₹13 (+10.0%)"),
+               ("BRLM", "Choice Capital"), ("opens", "Mon 28 Sep")),
+        note=(
+            "Unchanged from yesterday and not decided today — it opens Monday. A sole "
+            "book-runner and a related transaction that is referenced without being closed or "
+            "disclosed; +10.0% does not pay for either. The revisit condition is the "
+            "transaction, not the premium."
+        ),
+    ),
+    IPO(
+        name="Shah Investor's Home", call="AVOID", tone="fail",
+        dates="28–30 Sep", band="₹167", size="₹120 Cr", split="fresh + OFS",
+        gmp="₹12", gmp_pct=7.2, expected="~+5%",
+        apply_as="—", horizon="Revisit only on two quarters of recovering revenue",
+        book="anchor 25–26 Sep · sole BRLM Beeline Capital",
+        flags=(("sole book-runner", "warn"), ("revenue declining", "fail")),
+        stats=(("GMP yesterday", "₹10 (+6.0%)"), ("GMP today", "₹12 (+7.2%)"),
+               ("BRLM", "Beeline Capital"), ("opens", "Mon 28 Sep")),
+        note=(
+            "Unchanged, and opens Monday. A broking house coming to market on declining "
+            "revenue with a sole book-runner; the premium has drifted up two rupees and "
+            "changes nothing. Revisit on two quarters of recovery, not on a grey-market quote."
+        ),
+    ),
+]
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
+    "2026-09-25": (IPOS_2026_09_25, LEAD_25, FOOTNOTE_25),
 }
 
 
@@ -682,8 +1008,8 @@ def main() -> int:
         print(f"no review written for {day}; known: {', '.join(sorted(BY_DAY))}")
         return 1
     issues, lead, footnote = BY_DAY[day]
+    print(f"{day}: {len(issues)} issues")
     write(day, section(issues, lead, footnote))
-    print(f"{day}: {len(issues)} issues written to extras/ and overrides/")
     return 0
 
 
