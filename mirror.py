@@ -69,13 +69,26 @@ STYLE_FALLBACK = "<style>body{font:15px/1.5 system-ui,sans-serif;margin:2rem}</s
 
 
 def newest_style(rows: list[dict]) -> str:
-    """The `<style>` block of the newest report — the one stylesheet every page gets."""
+    """The renderer's own stylesheet, taken from the service's newest page.
+
+    **Fetched, not read back off disk.** This used to read
+    ``reports/<newest>.html`` — a file the mirror itself writes, and which an
+    override replaces with a hand-finished page. So the archive took its theme
+    from its own previous output and then stamped that over every page,
+    including the fresh one: a stylesheet change could never reach the archive
+    at all.
+
+    It was found on 2026-09-25, when the first setup charts published
+    unstyled. The SVG was right, the CSS sizing it was three deploys old, and
+    every chart rendered at the browser's default 300x150 stretched across
+    whatever space it was given. A theme read from the archive describes the
+    archive; the theme has to come from the thing that renders.
+    """
     for r in rows:
-        page = REPORTS / f"{r['as_of']}.html"
-        if page.exists():
-            m = STYLE.search(page.read_text(encoding="utf-8"))
-            if m:
-                return m.group(0)
+        page = fetch(BASE + f"{r['as_of']}.html")
+        m = STYLE.search(page)
+        if m:
+            return m.group(0)
     return ""
 
 
@@ -243,10 +256,10 @@ def main() -> int:
             continue
         target.write_text(page, encoding="utf-8")
         fetched += 1
-    # The stylesheet is read from the dyno's newest page *before* overrides are
-    # laid over it — an override is finished by hand under whatever theme was
-    # current when it was written, and it is the archive that follows the
-    # renderer, not the other way round.
+    # The stylesheet comes from the service, not from this directory. An
+    # override is finished by hand under whatever theme was current when it was
+    # written, and it is the archive that follows the renderer — which only
+    # works if the theme is read from the renderer. See `newest_style`.
     style = newest_style(rows)
     for page in OVERRIDES.glob("20*.html"):
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
