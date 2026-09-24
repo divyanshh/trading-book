@@ -364,6 +364,284 @@ IPOS_2026_09_23 = [
     ),
 ]
 
+# ── 24 September ────────────────────────────────────────────────────────────
+# A refresh, not a rewrite. Eleven of thirteen were called yesterday; what
+# changed overnight is the exchange book on the four issues closing tomorrow
+# and the GMP on almost everything. Two names are new.
+
+IPOS_2026_09_24 = [
+    IPO(
+        name="Adroit Industries", call="APPLIED — SELL ALL", tone="warn",
+        dates="23–25 Sep (closes tomorrow)", band="₹134", size="₹151 Cr",
+        split="88% fresh / 12% OFS",
+        gmp="₹34", gmp_pct=25.4, expected="~+23%",
+        apply_as="sHNI ₹2–10L (applied 23 Sep)",
+        horizon="Sell the whole allotment at the open",
+        book="day 2: 5.18x · retail 7.24x · HNI 7.2x · QIB 0.05x",
+        flags=(("the flip condition fired", "fail"), ("QIB 0.05x on day 2", "fail"),
+               ("retail 7.24x", "warn")),
+        stats=(("QIB", "0.05x"), ("retail", "7.24x"), ("HNI", "7.2x"),
+               ("overall", "5.18x"), ("GMP", "unchanged ₹34"), ("closes", "tomorrow")),
+        note=(
+            "<b>Yesterday's page wrote the condition down and today it is firing.</b> The note "
+            "read: <em>QIB under 1x at Friday's close with retail above 5x is the weak-listing "
+            "pattern — sell the whole allotment at the open.</em> On day 2 QIB is "
+            "<b>0.05x</b> against retail <b>7.24x</b> and HNI <b>7.2x</b>. Institutions are "
+            "absent and the book is being filled entirely by individuals, which is the shape "
+            "that lists well and then fades. QIB lines do fill on the final day, so the "
+            "condition is not formally met until tomorrow's close — but 0.05x with one session "
+            "left is not a line that reaches 5x, and the horizon changes now rather than after "
+            "the fact. The business case is unchanged and still good: 27.7% EBITDA margin "
+            "against 11–16% for the peers, 88% fresh into capex. <b>This is a listing trade, "
+            "not a holding.</b> The tranche-hold is off."
+        ),
+    ),
+    IPO(
+        name="Moneyview", call="APPLY", tone="pass",
+        dates="24–28 Sep (opened today)", band="₹34", size="—",
+        split="—",
+        gmp="₹14", gmp_pct=41.2, expected="~+39%",
+        apply_as="Retail 1 lot + sHNI ₹2L",
+        horizon="Sell 70% on listing; hold 30% only on clean Q2 credit costs",
+        book="opened today · GMP up from ₹11 (+32.4%) to ₹14",
+        flags=(("best of the board", "pass"), ("GMP rising", "pass")),
+        stats=(("GMP", "₹14"), ("was", "₹11 yesterday"), ("GMP %", "+41.2%"),
+               ("expected", "~+39%"), ("status", "open today"), ("closes", "28 Sep")),
+        note=(
+            "The strongest grey market on the board and it strengthened overnight, ₹11 to ₹14, "
+            "32.4% to 41.2%. Call and horizon both unchanged from yesterday. The hold condition "
+            "is still the credit-cost line in Q2 rather than the listing pop: a lender's "
+            "listing gain tells you nothing about its book. Watch the anchor list and the QIB "
+            "line, which is where Adroit is failing."
+        ),
+    ),
+    IPO(
+        name="Orient Cables", call="APPLY", tone="pass",
+        dates="25–29 Sep", band="₹272", size="—", split="—",
+        gmp="₹45", gmp_pct=16.5, expected="~+14%",
+        apply_as="Retail 1 lot; sHNI — the ₹30 condition is met",
+        horizon="Sell half on listing, hold half",
+        book="anchor 24 Sep · retail ₹193 Cr · GMP up from ₹34",
+        flags=(("sHNI condition met", "pass"), ("GMP up 32%", "pass")),
+        stats=(("GMP", "₹45"), ("was", "₹34"), ("GMP %", "+16.5%"),
+               ("expected", "~+14%"), ("retail slice", "₹193 Cr"), ("opens", "tomorrow")),
+        note=(
+            "Yesterday's call carried a condition: <em>sHNI if GMP ≥ ₹30 on day 3</em>. It is "
+            "₹45, up from ₹34, so the condition is met before the issue has even opened. "
+            "Retail slice of ₹193 Cr is large enough that the odds do not collapse at a high "
+            "multiple, which is the reason this is a better sHNI candidate than a ₹150 Cr "
+            "issue at the same subscription."
+        ),
+    ),
+    IPO(
+        name="A-One Steels", call="APPLY, small", tone="pass",
+        dates="24–28 Sep (opened today)", band="₹405", size="—", split="—",
+        gmp="₹55", gmp_pct=13.6, expected="~+11%",
+        apply_as="Retail 1 lot only",
+        horizon="Listing-day sell, no hold",
+        book="opened today · anchor 23 Sep, no names published",
+        flags=(("GMP up", "pass"), ("anchors unnamed", "warn")),
+        stats=(("GMP", "₹55"), ("was", "₹50"), ("GMP %", "+13.6%"),
+               ("expected", "~+11%"), ("status", "open today"), ("closes", "28 Sep")),
+        note=(
+            "Unchanged call. GMP firmed from ₹50 to ₹55 but the percentage barely moved, 12.3% "
+            "to 13.6%, because the band is high. The anchor book still has no published names, "
+            "which is why this stays retail-only and does not get an sHNI cheque."
+        ),
+    ),
+    IPO(
+        name="German Green Steel", call="SKIP — watch after listing", tone="warn",
+        dates="25–29 Sep", band="₹139", size="—", split="—",
+        gmp="₹24", gmp_pct=17.3, expected="~+15%",
+        apply_as="—",
+        horizon="Buy post-listing only at or below book, if steel holds",
+        book="anchor 24 Sep · Systematix, IIFL, CLSA · GMP up from ₹15",
+        flags=(("GMP up 60%", "warn"), ("still a skip", "warn")),
+        stats=(("GMP", "₹24"), ("was", "₹15"), ("GMP %", "+17.3%"),
+               ("expected", "~+15%"), ("anchor", "24 Sep"), ("opens", "tomorrow")),
+        note=(
+            "The largest overnight GMP move on the board, ₹15 to ₹24, and the call does not "
+            "change on that alone. <b>A grey-market quote is not a reason to apply to an issue "
+            "skipped on its fundamentals</b> — it is the half of the evidence with no print "
+            "behind it. What would change the call is the anchor list published today: domestic "
+            "mutual funds rather than a row of small AIFs."
+        ),
+    ),
+    IPO(
+        name="ArMee Infotech", call="SKIP", tone="fail",
+        dates="23–25 Sep (closes tomorrow)", band="₹375", size="—", split="—",
+        gmp="₹55", gmp_pct=14.7, expected="~+12%",
+        apply_as="—", horizon="—",
+        book="day 2: 0.53x · QIB 0.93x · HNI 0.39x · retail 0.5x",
+        flags=(("book under 1x", "fail"), ("GMP rising anyway", "warn"),
+               ("retail quota 52.5%", "fail")),
+        stats=(("overall", "0.53x"), ("QIB", "0.93x"), ("retail", "0.5x"),
+               ("GMP", "₹55 (was ₹46)"), ("GMP %", "+14.7%"), ("closes", "tomorrow")),
+        note=(
+            "<b>The clearest divergence on the board and the reason the two columns are both "
+            "printed.</b> The grey market marked this up from ₹46 to ₹55 overnight while the "
+            "exchange book sits at <b>0.53x with one day left</b> — retail itself only 0.5x "
+            "against a quota that is 52.5% retail. One of those numbers is an unregulated "
+            "quote with no print behind it and the other is the exchange's own record of money "
+            "actually bid. The skip stands on the verifiable half."
+        ),
+    ),
+    IPO(
+        name="Swastika Infra", call="SKIP — revisit", tone="warn",
+        dates="23–25 Sep (closes tomorrow)", band="₹185", size="—", split="—",
+        gmp="₹8", gmp_pct=4.3, expected="~+2%",
+        apply_as="—", horizon="Post-listing study if the order book converts",
+        book="day 2: 0.96x · QIB 0.69x · HNI 1.9x · retail 0.71x",
+        flags=(("not yet 1x", "warn"),),
+        stats=(("overall", "0.96x"), ("QIB", "0.69x"), ("HNI", "1.9x"),
+               ("retail", "0.71x"), ("GMP", "₹8 unchanged"), ("closes", "tomorrow")),
+        note=(
+            "Unchanged on every number that matters — GMP still ₹8, book still under 1x on the "
+            "second day with only the HNI line above water. Expected listing of about +2% does "
+            "not pay for the application."
+        ),
+    ),
+    IPO(
+        name="Elevate Campuses", call="AVOID at IPO", tone="fail",
+        dates="23–25 Sep (closes tomorrow)", band="₹362", size="—", split="—",
+        gmp="₹3", gmp_pct=0.8, expected="~−2%",
+        apply_as="—",
+        horizon="Revisit below ~₹270 with verified debt reduction",
+        book="day 2: 0.2x · QIB 0.18x · HNI 0.3x · retail 0.13x",
+        flags=(("0.2x on day 2", "fail"), ("GMP collapsing", "fail"),
+               ("₹1,100 Cr to sponsor's Singapore entities", "fail")),
+        stats=(("overall", "0.2x"), ("QIB", "0.18x"), ("retail", "0.13x"),
+               ("GMP", "₹3 (was ₹5)"), ("GMP %", "+0.8%"), ("expected", "~−2%")),
+        note=(
+            "The avoid is being confirmed by the tape. GMP fell from ₹5 to ₹3 and the book is "
+            "<b>0.2x with one day left</b>, retail at 0.13x against a retail quota of only 10%. "
+            "At a GMP of 0.8% the expected listing is already negative once the 2.6-point "
+            "overstatement is taken off. The structural objection is unchanged and is the real "
+            "one: ₹1,100 Cr of proceeds to the sponsor's Singapore entities."
+        ),
+    ),
+    IPO(
+        name="Varmora Granito", call="AVOID", tone="fail",
+        dates="22–24 Sep (closes today)", band="₹148", size="—", split="—",
+        gmp="₹0", gmp_pct=0.0, expected="~−6.6%",
+        apply_as="—", horizon="—",
+        book="final day: 0.27x · QIB 0.11x · HNI 0.17x · retail 0.4x",
+        flags=(("GMP now zero", "fail"), ("0.27x on the final day", "fail")),
+        stats=(("overall", "0.27x"), ("QIB", "0.11x"), ("retail", "0.4x"),
+               ("GMP", "₹0 (was ₹5)"), ("expected", "~−6.6%"), ("closes", "today")),
+        note=(
+            "Closes today at <b>0.27x</b> with the grey market at zero, down from ₹5 yesterday. "
+            "A zero GMP has averaged <b>−6.6%</b> on listing and listed positive 29% of the "
+            "time across the 295 listings behind the lens. An issue that cannot fill its own "
+            "book is the cleanest avoid on this page, and the valuation objection — 61x against "
+            "Kajaria's 40x on half the RoE — was there before the book confirmed it."
+        ),
+    ),
+    IPO(
+        name="Runwal Enterprises", call="SKIP", tone="warn",
+        dates="25–29 Sep", band="₹305", size="—", split="—",
+        gmp="₹18", gmp_pct=5.9, expected="~+3%",
+        apply_as="—", horizon="—",
+        book="ICICI Sec + Jefferies · GMP unchanged",
+        flags=(("unchanged", "warn"),),
+        stats=(("GMP", "₹18"), ("GMP %", "+5.9%"), ("expected", "~+3%"),
+               ("band", "₹305"), ("opens", "tomorrow"), ("change", "none")),
+        note="Nothing moved overnight. Expected listing of about +3% does not pay for the lock-up.",
+    ),
+    IPO(
+        name="AceVector (Snapdeal)", call="AVOID", tone="fail",
+        dates="25–29 Sep", band="₹32", size="—", split="—",
+        gmp="₹0", gmp_pct=0.0, expected="~−6.6%",
+        apply_as="—", horizon="—",
+        book="anchor 24 Sep · SoftBank and Nexus selling",
+        flags=(("zero GMP", "fail"), ("sponsors exiting", "fail")),
+        stats=(("GMP", "₹0"), ("expected", "~−6.6%"), ("band", "₹32"),
+               ("opens", "tomorrow"), ("sellers", "SoftBank, Nexus"), ("change", "none")),
+        note=(
+            "Still zero in the grey market on the day before it opens. The objection is "
+            "unchanged: SoftBank and Nexus are selling, which makes the issue an exit rather "
+            "than a raise."
+        ),
+    ),
+    IPO(
+        name="SRIT India", call="AVOID", tone="fail",
+        dates="28–30 Sep", band="₹123–130", size="₹218 Cr", split="100% fresh / no OFS",
+        gmp="₹12", gmp_pct=9.2, expected="~+6.6%",
+        apply_as="—",
+        horizon="Revisit only after the Blossom transaction is closed and disclosed",
+        book="new today · anchor bidding 25 Sep · sole BRLM Choice Capital",
+        flags=(("related-party ₹140 Cr", "fail"), ("operating cash flow negative", "fail"),
+               ("RoE 38.8% → 16.0%", "fail"), ("100% fresh, no OFS", "pass")),
+        stats=(("P/E post", "19.3–24.8x"), ("RoE FY26", "30.2%"), ("RoE H1", "16.0%"),
+               ("D/E", "0.23"), ("govt revenue", "~92%"), ("OCF FY25", "−₹58.9 Cr")),
+        note=(
+            "Bengaluru IT services for government — e-governance, healthcare, telecom; CMMI "
+            "Level 5; ₹1,280 Cr order book at 3.3x revenue. The structure is the good part: "
+            "<b>100% fresh, no OFS</b>, promoter 84.9% → 62.7%, D/E 0.23. "
+            "<b>Three things override it.</b> First, the RHP discloses a conditional binding "
+            "term sheet to buy 50% of Blossom Multi Specialty Hospital at an indicative ₹280 Cr "
+            "valuation — <b>₹140 Cr for the stake, against a ₹218 Cr raise</b> — plus an "
+            "inter-corporate deposit of up to ₹50 Cr, and the seller, Dr Chandan Dash, has been "
+            "a non-executive director of SRIT since 10 August 2026 while the relationship is "
+            "recorded as “Nil”. Whether IPO money funds it is not stated, and about 35% of "
+            "gross proceeds is earmarked for <em>unidentified</em> acquisitions. Second, "
+            "<b>profit is not becoming cash</b>: operating cash flow −₹58.9 Cr in FY25 and "
+            "−₹17.5 Cr in H1 FY26 while PAT rose to ₹43.3 Cr, with cash down 69% to ₹7.6 Cr. "
+            "Third, the headline 30% RoE is backward-looking — H1 FY26 is 16.0% RoE and 16.4% "
+            "RoCE, and sub-contracting has gone from 61% of revenue to 73%. At 24.8x trailing "
+            "against Mastek's 17.5x with worse margins and worse conversion, a +6.6% expected "
+            "listing is not payment for any of that."
+        ),
+    ),
+    IPO(
+        name="Shah Investor’s Home", call="AVOID", tone="fail",
+        dates="28–30 Sep", band="₹159–167", size="₹90 Cr", split="100% fresh / no OFS",
+        gmp="₹10", gmp_pct=6.0, expected="~+3.4%",
+        apply_as="—",
+        horizon="Revisit only on two quarters of recovering revenue",
+        book="new today · anchor 25–26 Sep · sole BRLM Beeline Capital",
+        flags=(("PAT −44% into the issue", "fail"), ("27x on a falling base", "fail"),
+               ("SME-heavy banker on a mainboard issue", "warn"), ("no OFS", "pass")),
+        stats=(("P/E post", "26.9x"), ("revenue FY26", "−23%"), ("PAT FY26", "−44%"),
+               ("RoE", "7.6% (was 14.7%)"), ("OCF FY26", "−₹19.7 Cr"), ("D/E", "0.10")),
+        note=(
+            "Gujarat and Maharashtra retail broker, 1994, eleven branches, ~38,000 active "
+            "clients. No OFS, promoters stay at 62.8%, D/E 0.10, and a genuinely thick 30% "
+            "EBITDA margin even in a bad year. <b>The problem is the direction of travel.</b> "
+            "Revenue fell 23% and PAT fell 44% into the issue — ₹23.4 Cr to ₹13.1 Cr — RoE "
+            "halved from 14.7% to 7.6%, and it is priced at <b>26.9x post-issue on that "
+            "declining base</b>. Operating cash flow is −₹19.7 Cr against ~₹13 Cr of reported "
+            "profit, and borrowings tripled to ₹18.5 Cr while the issue asks for ₹60 Cr of "
+            "working capital. The sole banker, Beeline Capital, is predominantly an SME-IPO "
+            "house with no retrievable mainboard listing record. A broking cycle turns and this "
+            "may well be a trough — but the trough is being sold at a peak multiple, and a GMP "
+            "of 6% that was zero yesterday is not conviction."
+        ),
+    ),
+]
+
+LEAD_24 = (
+    "Thirteen mainboard issues on the board, read at 10:30 IST on 24 September across "
+    "Trendlyne, Chittorgarh, the IPO Watch and InvestorGain GMP boards, and the exchange's own "
+    "subscription figures. <strong>This is a refresh: eleven of the thirteen were called "
+    "yesterday and the calls are carried forward unless a number moved.</strong> What moved: "
+    "the exchange book on the four issues closing tomorrow, and the GMP on almost everything. "
+    "<strong>Expected listing is the GMP percentage less 2.6 points</strong> — the "
+    "overstatement <code>backtest_gmp</code> measured over 295 listings (r = 0.87); a zero GMP "
+    "has averaged −6.6% and listed positive 29% of the time. <em>Held: Adroit Industries, "
+    "sHNI ₹2L+, applied 23 Sep. NSE allotment, 120 shares at ₹1,785, listed today at ₹1,862 "
+    "and being held.</em>"
+)
+
+FOOTNOTE_24 = (
+    "Two columns are printed for every open issue because they disagree today. The grey market "
+    "marked ArMee up 20% overnight while its exchange book sits at 0.53x with a day to go, and "
+    "marked German Green Steel up 60% on an issue that has not opened. GMP predicts the listing "
+    "well in aggregate and has no print behind any single quote; the subscription figures are "
+    "the exchange's own. Where they conflict, the call follows the book. Before tomorrow's "
+    "close: Adroit's QIB line, and whether Varmora completes at all."
+)
+
 LEAD = (
     "Eleven mainboard issues open or opening, read at 11:45 and deepened at 12:45 IST on "
     "23 September across Trendlyne (detail pages and the brokerage-report list), Chittorgarh, "
@@ -384,10 +662,20 @@ FOOTNOTE = (
 )
 
 
+BY_DAY = {
+    "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
+    "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
+}
+
+
 def main() -> int:
-    day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-23"
-    write(day, section(IPOS_2026_09_23, LEAD, FOOTNOTE))
-    print(f"{day}: {len(IPOS_2026_09_23)} issues written to extras/ and overrides/")
+    day = sys.argv[1] if len(sys.argv) > 1 else "2026-09-24"
+    if day not in BY_DAY:
+        print(f"no review written for {day}; known: {', '.join(sorted(BY_DAY))}")
+        return 1
+    issues, lead, footnote = BY_DAY[day]
+    write(day, section(issues, lead, footnote))
+    print(f"{day}: {len(issues)} issues written to extras/ and overrides/")
     return 0
 
 
