@@ -1,0 +1,334 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MarketSmith's exits against ours</title><style>/* Morning Book — light fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+   Light only, on purpose: the pages are read beside Trendlyne / Screener / Kite, all of which are light. */
+:root{
+  --canvas:#f4f6fa;--card:#ffffff;--line:#e5e9f0;--line-strong:#cfd6e0;
+  --ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;
+  --blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;
+  --green:#15803d;--green-50:#f0fdf4;--green-100:#dcfce7;
+  --red:#b91c1c;--red-50:#fef2f2;--red-100:#fee2e2;
+  --amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(15,23,42,.06),0 1px 3px rgba(15,23,42,.04);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,rgba(244,246,250,0))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:#bbf7d0}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:#fecaca}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:#fde68a}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:#bbf7d0}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:#fecaca}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:#fde68a}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:#f1f5f9;color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:#bbf7d0}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:#fecaca}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:#fde68a}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:#eef2f7;border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+/* Bridge: the six-month retrospective's own class names, expressed in the
+   Morning Book's tokens. Appended after theme.css, never instead of it.
+
+   The document was written before this theme with its own palette
+   (--paper/--ink/--gain/--loss/--accent) and its charts read those variables
+   at runtime through getComputedStyle — so the tokens are redefined here
+   rather than the markup rewritten, and the SVG repaints itself in the new
+   colours for free. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:rgba(21,128,61,.12);
+  --loss:var(--red);--loss-fill:rgba(185,28,28,.12);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:#f8fafc;text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:#f8fafc;border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+
+.fig{display:block;width:100%;height:auto;background:var(--card);border:1px solid var(--line);
+border-radius:var(--radius);box-shadow:var(--shadow);margin:14px 0}
+</style></head><body><div class="wrap">
+<header class="top"><div class="rule-top"></div>
+<div class="eyebrow">equity book &middot; exit study &middot; 129 of the 132 trades</div>
+<h1>MarketSmith's Exits Against Ours</h1>
+<p class="lede">We ship a close-based structural stop, breakeven at +8% and a 20-day trail.
+MarketSmith ships a fixed 7&ndash;8% loss rule and a 20&ndash;25% profit target. Both claim to be
+the right way to leave a trade and they had never been measured against each other on the same
+fills. <strong>192 cells across six levers</strong>, replayed on the six-month book's own daily
+bars. The arm that matches what we ship reproduces its pinned figure of
+&#8377;21.16L exactly, which is what grounds the rest.</p></header>
+
+<div class="glance">
+<div class="stat"><div class="k">ours, per trade</div><div class="v">3.38%</div><div class="s">&amp;#8377;21.16L</div></div>
+<div class="stat"><div class="k">MarketSmith, per trade</div><div class="v">4.66%</div><div class="s">&amp;#8377;30.00L</div></div>
+<div class="stat"><div class="k">best of 192 cells</div><div class="v">6.21%</div><div class="s">&amp;#8377;39.96L</div></div>
+<div class="stat"><div class="k">cost of a 20% target</div><div class="v">-1.14pp</div><div class="s">p = 0.0001</div></div>
+<div class="stat"><div class="k">cost of our own trail</div><div class="v">-0.59pp</div><div class="s">p = 0.0001</div></div>
+<div class="stat"><div class="k">cells that beat ours</div><div class="v">116</div><div class="s">of 192</div></div>
+</div>
+
+<h2>One finding, and it is not about MarketSmith</h2>
+<p class="lead">Every lever that takes a winner off the table early costs money on this book, and
+every lever that keeps you in pays. That is the whole result; the rest is detail.</p>
+<svg viewBox="0 0 1040 320" class="fig"><line x1="520.0" y1="18" x2="520.0" y2="294" stroke="#cfd6e0"/><rect x="247.0" y="26.0" width="273.0" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="38.7" font-size="12" fill="#334155" text-anchor="start">profit target +20%</text><text x="241.0" y="38.7" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-1.14pp</text><rect x="273.3" y="59.5" width="246.7" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="72.2" font-size="12" fill="#334155" text-anchor="start">profit target +25%</text><text x="267.3" y="72.2" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-1.03pp</text><rect x="378.7" y="93.0" width="141.3" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="105.7" font-size="12" fill="#334155" text-anchor="start">our 20-day trail</text><text x="372.7" y="105.7" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.59pp</text><rect x="472.1" y="126.5" width="47.9" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="139.2" font-size="12" fill="#334155" text-anchor="start">intraday stop trigger</text><text x="466.1" y="139.2" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.20pp</text><rect x="520.0" y="160.0" width="16.8" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="172.7" font-size="12" fill="#334155" text-anchor="end">breakeven at +8%</text><text x="542.8" y="172.7" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+0.07pp</text><rect x="520.0" y="193.5" width="43.1" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="206.2" font-size="12" fill="#334155" text-anchor="end">stop at -7% of entry</text><text x="569.1" y="206.2" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+0.18pp</text><rect x="520.0" y="227.0" width="126.9" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="239.7" font-size="12" fill="#334155" text-anchor="end">stop at -8% of entry</text><text x="652.9" y="239.7" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+0.53pp</text><rect x="520.0" y="260.5" width="371.2" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="273.2" font-size="12" fill="#334155" text-anchor="end">8-week hold</text><text x="897.2" y="273.2" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+1.55pp</text><text x="520.0" y="312" font-size="11" fill="#64748b" text-anchor="middle">mean change in per-trade return, paired across all other levers</text></svg>
+<p class="note">Each lever is measured only on the cells that differ in it and nothing else, so
+every comparison is paired twice over &mdash; same trade, same other five settings. The p-values
+are paired sign-flip permutations over the pooled per-trade differences.</p>
+
+<h2>The profit target is the single worst rule tested</h2>
+<p class="lead">MarketSmith's 20&ndash;25% target costs <strong>1.0 to 1.1 points a trade</strong>,
+and in not one of the sixty-four paired comparisons was it positive. The best it ever managed was
+&minus;0.02pp. This is the rule we declined to port, and the decision holds.</p>
+<p class="lead">Our own 20-day trail is the same mistake in a milder form: <strong>&minus;0.59pp</strong>,
+worst case &minus;2.59pp. Removing it from the shipped rule and changing nothing else is worth
+<strong>+1.57pp a trade and &#8377;10.1L</strong> on this book (p = 0.047).</p>
+
+<h2>What each named arm makes</h2>
+<svg viewBox="0 0 1040 300" class="fig"><rect x="83.8" y="146.5" width="99.0" height="99.5" fill="#2563eb" rx="3"/><text x="133.3" y="139.5" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">21.16L</text><text x="133.3" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours (shipped)</text><rect x="238.5" y="99.0" width="99.0" height="147.0" fill="#94a3b8" rx="3"/><text x="288.0" y="92.0" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">31.28L</text><text x="288.0" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours</text><text x="288.0" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no trail</text><rect x="393.2" y="74.4" width="99.0" height="171.6" fill="#94a3b8" rx="3"/><text x="442.7" y="67.4" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">36.52L</text><text x="442.7" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours</text><text x="442.7" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no trail</text><text x="442.7" y="288.0" font-size="10.5" text-anchor="middle" fill="#64748b">8% stop</text><rect x="547.8" y="105.0" width="99.0" height="141.0" fill="#94a3b8" rx="3"/><text x="597.3" y="98.0" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">30.00L</text><text x="597.3" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MarketSmith as published</text><rect x="702.5" y="96.4" width="99.0" height="149.6" fill="#94a3b8" rx="3"/><text x="752.0" y="89.4" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">31.82L</text><text x="752.0" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MS</text><text x="752.0" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no profit target</text><rect x="857.2" y="58.2" width="99.0" height="187.8" fill="#15803d" rx="3"/><text x="906.7" y="51.2" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">39.96L</text><text x="906.7" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MS stop + our close trigger</text></svg>
+<p class="note">Rupees at the book's own sizing &mdash; &#8377;40,000 risk, &#8377;5L deploy cap,
+quantity from each arm's own stop. Per-trade return is the primary number because it is free of
+sizing; the two can disagree when an arm's stops are wider.</p>
+
+<h2>The 8-week hold does not make money</h2>
+<p class="lead">It is the largest single effect in the table at <strong>+1.55pp</strong> &mdash; and
+it is an interaction, not an effect. With no target and no trail to suspend, the hold is
+<em>inert</em>: those cells are identical to four decimal places. Put a target and a trail back and
+it is worth <strong>+2.28pp</strong> (p = 0.0295). It does not win trades. It stops the other rules
+losing them.</p>
+
+<h2>The uncomfortable one</h2>
+<p class="lead">A flat <strong>&minus;8% stop beats our structural stop by +0.53pp</strong>, and was
+never negative in any paired cell (p = 0.0001). A &minus;7% stop beats it too, by +0.18pp. This is a
+finding against a rule we shipped this morning, and it is consistent with something already known
+about this book: fifteen of sixty stopped losers never closed below their stop, and thirteen of
+those were back above entry within twenty sessions. Wider stops survive noise.</p>
+<p class="note"><strong>Before acting on that</strong>: it is six months and 129 trades, the stop is
+being measured on fills that were <em>chosen</em> under our rules, and a sample that mean-reverts
+rewards width. It also cuts against the one thing the structural stop demonstrably does better
+&mdash; it matches the stops actually recorded in the book to a median 2.24% against 8.61% for the
+old pivot rule. Measure it on the population before moving it.</p>
+
+<h2>What survives the split</h2>
+<div class="scroll"><table><thead><tr><th class="l">arm</th><th>mean %</th><th>median %</th>
+<th>win %</th><th>&#8377; L</th><th>Apr&ndash;May</th><th>Jun&ndash;Sep</th></tr></thead><tbody>
+<tr><td class="l">ours (shipped)</td><td>3.38</td><td>-2.77</td><td>34</td><td>21.16</td><td>3.57</td><td>2.96</td></tr><tr><td class="l">ours, no trail</td><td>4.95</td><td>-3.07</td><td>30</td><td>31.28</td><td>5.39</td><td>3.96</td></tr><tr><td class="l">ours, no trail, 8% stop</td><td>5.67</td><td>-2.31</td><td>36</td><td>36.52</td><td>5.76</td><td>5.49</td></tr><tr><td class="l">MarketSmith as published</td><td>4.66</td><td>-6.57</td><td>39</td><td>30.00</td><td>4.59</td><td>4.82</td></tr><tr><td class="l">MS, no profit target</td><td>4.94</td><td>-8.46</td><td>36</td><td>31.82</td><td>5.56</td><td>3.58</td></tr><tr><td class="l">MS stop + our close trigger</td><td>6.21</td><td>-3.52</td><td>43</td><td>39.96</td><td>6.36</td><td>5.87</td></tr><tr><td class="l">target + trail, hold OFF</td><td>2.32</td><td>-2.03</td><td>46</td><td>14.89</td><td>1.50</td><td>4.12</td></tr><tr><td class="l">target + trail, hold ON</td><td>4.60</td><td>-2.57</td><td>44</td><td>29.59</td><td>4.43</td><td>4.97</td></tr>
+</tbody></table></div>
+<p class="note">Every arm above is positive in both halves, and the ordering is the same in both.
+The same grid run on only the 93 trades with a stop the book actually recorded &mdash; dropping the
+39 that carry a 5% assumption &mdash; keeps the ordering too: ours 3.78%, MarketSmith 5.69%, best
+cell 6.20%.</p>
+
+<h2>What this does not say</h2>
+<p class="lead">The best of 192 cells beat ours by +2.83pp at p = 0.0167. <strong>Multiplied through
+192 comparisons that is 1.00.</strong> A single winning cell out of a grid this size is luck until
+it is shown otherwise, and 116 of the 192 beat ours, which is itself a reason to look at the levers
+rather than the leaderboard. The main-effect table is the evidence here; the leaderboard is not.</p>
+<p class="lead">Nothing was changed. This is a measurement.</p>
+
+<footer>Run 25 September 2026 on <code>tests/fixtures/book_2026_09.csv</code> and its bars,
+by <code>2026-09-25_ms_vs_ours.py</code>. The shipped arm reproduces the &#8377;21.16L pinned in
+<code>tests/regressions/test_the_book.py</code>; the script refuses to print a grid it cannot
+ground.</footer></div></body></html>
