@@ -717,7 +717,8 @@ LEAD_25 = (
     "that was. Expected listing is the GMP percentage less 2.6 points — the overstatement "
     "<code>backtest_gmp</code> measured over 295 listings (r = 0.87); a zero GMP has averaged "
     "&minus;6.6% and listed positive 29% of the time. Applied: Adroit Industries sHNI on "
-    "23 Sep; Moneyview HNI on 24 Sep. Held: NSE, 120 shares at &#8377;1,785."
+    "23 Sep; Moneyview HNI on 24 Sep; <b>Orient Cables on 25 Sep</b>. "
+    "Held: NSE, 120 shares at &#8377;1,785."
 )
 
 FOOTNOTE_25 = (
@@ -781,13 +782,14 @@ IPOS_2026_09_25 = [
         ),
     ),
     IPO(
-        name="Orient Cables", call="APPLY", tone="pass",
+        name="Orient Cables", call="APPLIED — SELL HALF ON LISTING", tone="pass",
         dates="25–29 Sep (opens today)", band="₹272", size="₹528 Cr", split="fresh + OFS",
         gmp="₹113", gmp_pct=41.5, expected="~+39%",
-        apply_as="Retail 1 lot (₹14,960); sHNI ₹2–10L",
+        apply_as="applied 25 Sep",
         horizon="Sell half on listing, hold half",
         book="opens today · anchor book taken 24 Sep",
-        flags=(("GMP up ₹45 → ₹60 overnight", "pass"), ("second-best on the board", "pass")),
+        flags=(("applied", "pass"), ("GMP ₹45 → ₹60 → ₹113 in a day", "pass"),
+               ("joint best on the board", "pass")),
         stats=(("GMP 01:30", "₹60 (+22.1%)"), ("GMP 10:30", "₹113 (+41.5%)"),
                ("lot", "55 shares"), ("min retail", "₹14,960"),
                ("listing", "5 Oct"), ("band", "₹258–272")),
@@ -799,9 +801,16 @@ IPOS_2026_09_25 = [
             "The call was APPLY yesterday on a weaker number and is unchanged, which is the "
             "point: the case was made before the premium moved, so the move is confirmation "
             "rather than the reason. "
-            "Retail one lot and sHNI as sized yesterday. Half sold at the listing print, half "
-            "held — the cable and wire sector has been the one place a listing premium has "
-            "extended rather than faded this quarter."
+            "<b>Applied on 25 September.</b> Half sold at the listing print, half held — the "
+            "cable and wire sector has been the one place a listing premium has extended rather "
+            "than faded this quarter. "
+            "<b>What to watch before the book closes on the 29th:</b> QIB at the final close. "
+            "Adroit is this week\u2019s lesson in both directions — QIB read 0.05x intraday on day "
+            "2 and closed that same day at 1.82x, and Varmora finished at 3.16x against the 0.27x "
+            "an intraday read had shown. An intraday subscription figure is not a book. "
+            "<b>What would flip the hold half:</b> QIB under 1x at the 29 September close with "
+            "retail above 5x — the weak-listing pattern — in which case the whole allotment goes "
+            "at the open."
         ),
     ),
     IPO(
