@@ -707,7 +707,8 @@ FOOTNOTE = (
 
 
 LEAD_25 = (
-    "Thirteen mainboard issues, read at 01:30 IST on 25 September off the service's own "
+    "Twelve mainboard issues, read at 01:30 and <b>refreshed at 10:30 IST</b> on 25 September off "
+    "the service's own "
     "board — which is working again: ipowatch dropped a column from its table overnight, "
     "every row stopped parsing, and <code>show_ipos</code> reported the board as "
     "<em>missing</em> rather than broken. Six issues were open at the time. The parser was "
@@ -782,18 +783,19 @@ IPOS_2026_09_25 = [
     IPO(
         name="Orient Cables", call="APPLY", tone="pass",
         dates="25–29 Sep (opens today)", band="₹272", size="₹528 Cr", split="fresh + OFS",
-        gmp="₹60", gmp_pct=22.1, expected="~+19%",
+        gmp="₹113", gmp_pct=41.5, expected="~+39%",
         apply_as="Retail 1 lot (₹14,960); sHNI ₹2–10L",
         horizon="Sell half on listing, hold half",
         book="opens today · anchor book taken 24 Sep",
         flags=(("GMP up ₹45 → ₹60 overnight", "pass"), ("second-best on the board", "pass")),
-        stats=(("GMP yesterday", "₹45 (+16.5%)"), ("GMP today", "₹60 (+22.1%)"),
+        stats=(("GMP 01:30", "₹60 (+22.1%)"), ("GMP 10:30", "₹113 (+41.5%)"),
                ("lot", "55 shares"), ("min retail", "₹14,960"),
                ("listing", "5 Oct"), ("band", "₹258–272")),
         note=(
-            "Two decades in networking cable and passive equipment, and the only issue on this "
-            "board whose grey market has <b>improved into its own opening</b> — ₹45 to ₹60, "
-            "+16.5% to +22.1%, while four of the six issues already open saw their GMP fall. "
+            "Two decades in networking cable and passive equipment, and the grey market has "
+            "<b>doubled into its own opening</b>: ₹45 at yesterday\u2019s read, ₹60 at 01:30 this "
+            "morning, <b>₹113 by 10:30</b> — +41.5%, level with Moneyview at the top of the board "
+            "and the largest single move on it. "
             "The call was APPLY yesterday on a weaker number and is unchanged, which is the "
             "point: the case was made before the premium moved, so the move is confirmation "
             "rather than the reason. "
@@ -828,11 +830,11 @@ IPOS_2026_09_25 = [
     IPO(
         name="Runwal Enterprises", call="SKIP", tone="warn",
         dates="25–29 Sep (opens today)", band="₹305", size="₹500 Cr", split="100% fresh",
-        gmp="₹35", gmp_pct=11.5, expected="~+9%",
+        gmp="₹30", gmp_pct=9.8, expected="~+7%",
         apply_as="—", horizon="—",
         book="opens today · ICICI Sec + Jefferies",
         flags=(("GMP doubled ₹18 → ₹35", "warn"), ("₹325 Cr of ₹500 Cr to debt", "fail")),
-        stats=(("GMP yesterday", "₹18 (+5.9%)"), ("GMP today", "₹35 (+11.5%)"),
+        stats=(("GMP 01:30", "₹35 (+11.5%)"), ("GMP 10:30", "₹30 (+9.8%)"),
                ("to debt repayment", "₹325 Cr"), ("to growth", "₹175 Cr"),
                ("lot", "49 shares"), ("listing", "5 Oct")),
         note=(
@@ -849,7 +851,7 @@ IPOS_2026_09_25 = [
         name="AceVector (Snapdeal)", call="AVOID", tone="fail",
         dates="25–29 Sep (opens today)", band="₹32", size="₹420 Cr",
         split="₹287 Cr fresh / OFS 4.16 Cr shares",
-        gmp="₹1.5", gmp_pct=4.7, expected="~+2%",
+        gmp="₹2", gmp_pct=6.2, expected="~+4%",
         apply_as="—", horizon="—",
         book="opens today · SoftBank and Nexus selling",
         flags=(("trackers disagree: ₹0 to ₹1.5", "fail"), ("negative EBITDA", "fail"),
@@ -871,7 +873,7 @@ IPOS_2026_09_25 = [
     IPO(
         name="A-One Steels", call="SKIP — downgraded from apply", tone="fail",
         dates="24–28 Sep", band="₹405", size="₹650 Cr", split="fresh + OFS",
-        gmp="₹45", gmp_pct=11.1, expected="~+9%",
+        gmp="₹49", gmp_pct=12.1, expected="~+10%",
         apply_as="— (was: retail 1 lot)", horizon="—",
         book="day 1 close: 0.58x · retail 0.77x · HNI 0.77x · QIB 0.09x",
         flags=(("GMP fell ₹55 → ₹45", "fail"), ("book under 1x after day 1", "fail"),
@@ -964,17 +966,18 @@ IPOS_2026_09_25 = [
     IPO(
         name="SRIT India", call="AVOID", tone="fail",
         dates="28–30 Sep", band="₹130", size="₹135 Cr", split="fresh + OFS",
-        gmp="₹13", gmp_pct=10.0, expected="~+7%",
+        gmp="₹22", gmp_pct=16.9, expected="~+14%",
         apply_as="—", horizon="Revisit only after the Blossom transaction is closed and disclosed",
         book="anchor bidding 25 Sep · sole BRLM Choice Capital",
         flags=(("sole book-runner", "warn"), ("undisclosed related transaction", "fail")),
-        stats=(("GMP yesterday", "₹12 (+9.2%)"), ("GMP today", "₹13 (+10.0%)"),
+        stats=(("GMP 01:30", "₹13 (+10.0%)"), ("GMP 10:30", "₹22 (+16.9%)"),
                ("BRLM", "Choice Capital"), ("opens", "Mon 28 Sep")),
         note=(
             "Unchanged from yesterday and not decided today — it opens Monday. A sole "
             "book-runner and a related transaction that is referenced without being closed or "
-            "disclosed; +10.0% does not pay for either. The revisit condition is the "
-            "transaction, not the premium."
+            "disclosed. The premium went from +10.0% to <b>+16.9%</b> between 01:30 and 10:30 and "
+            "the call does not move with it: the revisit condition is the transaction, not the "
+            "premium. It opens Monday, so there is time for the disclosure to arrive."
         ),
     ),
     IPO(
