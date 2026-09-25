@@ -250,85 +250,118 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 
 .fig{display:block;width:100%;height:auto;background:var(--card);border:1px solid var(--line);
 border-radius:var(--radius);box-shadow:var(--shadow);margin:14px 0}
+.warn{background:#fff7ed;border:1px solid #fdba74;border-left:4px solid #ea580c;
+padding:14px 16px;border-radius:8px;margin:16px 0}
+.warn h3{margin:0 0 6px;font-size:14px;color:#9a3412}
 </style></head><body><div class="wrap">
 <header class="top"><div class="rule-top"></div>
-<div class="eyebrow">equity book &middot; exit study &middot; 129 of the 132 trades</div>
+<div class="eyebrow">equity book &middot; exit study &middot; 127 signals &middot;
+one &#8377;60L account</div>
 <h1>MarketSmith's Exits Against Ours</h1>
 <p class="lede">We ship a close-based structural stop, breakeven at +8% and a 20-day trail.
-MarketSmith ships a fixed 7&ndash;8% loss rule and a 20&ndash;25% profit target. Both claim to be
-the right way to leave a trade and they had never been measured against each other on the same
-fills. <strong>192 cells across six levers</strong>, replayed on the six-month book's own daily
-bars. The arm that matches what we ship reproduces its pinned figure of
-&#8377;21.16L exactly, which is what grounds the rest.</p></header>
+MarketSmith ships a fixed 7&ndash;8% loss rule and a 20&ndash;25% profit target. This replays
+<strong>192 cells across six levers</strong> on the six-month book's own daily bars
+&mdash; <strong>through one &#8377;60L account with 12 slots</strong>,
+so a rule that holds a position pays for it by missing the next signal.</p></header>
+
+<div class="warn"><h3>This page replaces two earlier versions that were wrong</h3>
+<p>The first sized every signal independently, with no cash pool and no slot limit. Measured
+afterwards, the arms needed <strong>&#8377;339L across
+68 simultaneous positions</strong> against a
+&#8377;60L book. Under unlimited capital holding is free, so the arm that
+never sells always wins &mdash; the ranking was ordering arms by how much imaginary money they
+borrowed, and its top arm is near the bottom here.</p>
+<p>The second still marked two names on stale dates. <strong>BLISSGVS carried &#8377;4.49L of
+MarketSmith's total &mdash; 19.5% of that arm &mdash; marked at its 2 July close because the
+bhavcopy has no later bars for it</strong>, on a name that in the real book was a same-day scratch
+for &minus;&#8377;175. BLISSGVS and HFCL are excluded here, which costs MarketSmith
+4.6 points and leaves our own arms untouched.</p></div>
 
 <div class="glance">
-<div class="stat"><div class="k">ours, per trade</div><div class="v">3.38%</div><div class="s">&amp;#8377;21.16L</div></div>
-<div class="stat"><div class="k">MarketSmith, per trade</div><div class="v">4.66%</div><div class="s">&amp;#8377;30.00L</div></div>
-<div class="stat"><div class="k">best of 192 cells</div><div class="v">6.21%</div><div class="s">&amp;#8377;39.96L</div></div>
-<div class="stat"><div class="k">cost of a 20% target</div><div class="v">-1.14pp</div><div class="s">p = 0.0001</div></div>
-<div class="stat"><div class="k">cost of our own trail</div><div class="v">-0.59pp</div><div class="s">p = 0.0001</div></div>
-<div class="stat"><div class="k">cells that beat ours</div><div class="v">116</div><div class="s">of 192</div></div>
+<div class="stat"><div class="k">what the book actually made</div><div class="v">&#8377;3.64L</div><div class="s">6.1% on &#8377;60L</div></div>
+<div class="stat"><div class="k">ours (shipped)</div><div class="v">21.0%</div><div class="s">&#8377;12.60L &middot; 47 taken, 80 missed</div></div>
+<div class="stat"><div class="k">MarketSmith</div><div class="v">33.9%</div><div class="s">&#8377;20.34L &middot; 30 taken, 97 missed</div></div>
+<div class="stat"><div class="k">our worst drawdown</div><div class="v">-5.1%</div><div class="s">MarketSmith -5.0%</div></div>
+<div class="stat"><div class="k">levers that survive the split</div><div class="v">3 of 9</div><div class="s">the rest reverse sign</div></div>
+<div class="stat"><div class="k">MS wins, Apr&ndash;May / Jun&ndash;Sep</div><div class="v">34 / 200</div><div class="s">out of 200 orderings each</div></div>
 </div>
 
-<h2>One finding, and it is not about MarketSmith</h2>
-<p class="lead">Every lever that takes a winner off the table early costs money on this book, and
-every lever that keeps you in pays. That is the whole result; the rest is detail.</p>
-<svg viewBox="0 0 1040 320" class="fig"><line x1="520.0" y1="18" x2="520.0" y2="294" stroke="#cfd6e0"/><rect x="247.0" y="26.0" width="273.0" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="38.7" font-size="12" fill="#334155" text-anchor="start">profit target +20%</text><text x="241.0" y="38.7" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-1.14pp</text><rect x="273.3" y="59.5" width="246.7" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="72.2" font-size="12" fill="#334155" text-anchor="start">profit target +25%</text><text x="267.3" y="72.2" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-1.03pp</text><rect x="378.7" y="93.0" width="141.3" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="105.7" font-size="12" fill="#334155" text-anchor="start">our 20-day trail</text><text x="372.7" y="105.7" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.59pp</text><rect x="472.1" y="126.5" width="47.9" height="17.4" fill="#b91c1c" opacity="0.85" rx="2"/><text x="528.0" y="139.2" font-size="12" fill="#334155" text-anchor="start">intraday stop trigger</text><text x="466.1" y="139.2" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.20pp</text><rect x="520.0" y="160.0" width="16.8" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="172.7" font-size="12" fill="#334155" text-anchor="end">breakeven at +8%</text><text x="542.8" y="172.7" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+0.07pp</text><rect x="520.0" y="193.5" width="43.1" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="206.2" font-size="12" fill="#334155" text-anchor="end">stop at -7% of entry</text><text x="569.1" y="206.2" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+0.18pp</text><rect x="520.0" y="227.0" width="126.9" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="239.7" font-size="12" fill="#334155" text-anchor="end">stop at -8% of entry</text><text x="652.9" y="239.7" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+0.53pp</text><rect x="520.0" y="260.5" width="371.2" height="17.4" fill="#15803d" opacity="0.85" rx="2"/><text x="512.0" y="273.2" font-size="12" fill="#334155" text-anchor="end">8-week hold</text><text x="897.2" y="273.2" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+1.55pp</text><text x="520.0" y="312" font-size="11" fill="#64748b" text-anchor="middle">mean change in per-trade return, paired across all other levers</text></svg>
-<p class="note">Each lever is measured only on the cells that differ in it and nothing else, so
-every comparison is paired twice over &mdash; same trade, same other five settings. The p-values
-are paired sign-flip permutations over the pooled per-trade differences.</p>
-
-<h2>The profit target is the single worst rule tested</h2>
-<p class="lead">MarketSmith's 20&ndash;25% target costs <strong>1.0 to 1.1 points a trade</strong>,
-and in not one of the sixty-four paired comparisons was it positive. The best it ever managed was
-&minus;0.02pp. This is the rule we declined to port, and the decision holds.</p>
-<p class="lead">Our own 20-day trail is the same mistake in a milder form: <strong>&minus;0.59pp</strong>,
-worst case &minus;2.59pp. Removing it from the shipped rule and changing nothing else is worth
-<strong>+1.57pp a trade and &#8377;10.1L</strong> on this book (p = 0.047).</p>
-
-<h2>What each named arm makes</h2>
-<svg viewBox="0 0 1040 300" class="fig"><rect x="83.8" y="146.5" width="99.0" height="99.5" fill="#2563eb" rx="3"/><text x="133.3" y="139.5" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">21.16L</text><text x="133.3" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours (shipped)</text><rect x="238.5" y="99.0" width="99.0" height="147.0" fill="#94a3b8" rx="3"/><text x="288.0" y="92.0" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">31.28L</text><text x="288.0" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours</text><text x="288.0" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no trail</text><rect x="393.2" y="74.4" width="99.0" height="171.6" fill="#94a3b8" rx="3"/><text x="442.7" y="67.4" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">36.52L</text><text x="442.7" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours</text><text x="442.7" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no trail</text><text x="442.7" y="288.0" font-size="10.5" text-anchor="middle" fill="#64748b">8% stop</text><rect x="547.8" y="105.0" width="99.0" height="141.0" fill="#94a3b8" rx="3"/><text x="597.3" y="98.0" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">30.00L</text><text x="597.3" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MarketSmith as published</text><rect x="702.5" y="96.4" width="99.0" height="149.6" fill="#94a3b8" rx="3"/><text x="752.0" y="89.4" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">31.82L</text><text x="752.0" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MS</text><text x="752.0" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no profit target</text><rect x="857.2" y="58.2" width="99.0" height="187.8" fill="#15803d" rx="3"/><text x="906.7" y="51.2" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">39.96L</text><text x="906.7" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MS stop + our close trigger</text></svg>
-<p class="note">Rupees at the book's own sizing &mdash; &#8377;40,000 risk, &#8377;5L deploy cap,
-quantity from each arm's own stop. Per-trade return is the primary number because it is free of
-sizing; the two can disagree when an arm's stops are wider.</p>
-
-<h2>The 8-week hold does not make money</h2>
-<p class="lead">It is the largest single effect in the table at <strong>+1.55pp</strong> &mdash; and
-it is an interaction, not an effect. With no target and no trail to suspend, the hold is
-<em>inert</em>: those cells are identical to four decimal places. Put a target and a trail back and
-it is worth <strong>+2.28pp</strong> (p = 0.0295). It does not win trades. It stops the other rules
-losing them.</p>
-
-<h2>The uncomfortable one</h2>
-<p class="lead">A flat <strong>&minus;8% stop beats our structural stop by +0.53pp</strong>, and was
-never negative in any paired cell (p = 0.0001). A &minus;7% stop beats it too, by +0.18pp. This is a
-finding against a rule we shipped this morning, and it is consistent with something already known
-about this book: fifteen of sixty stopped losers never closed below their stop, and thirteen of
-those were back above entry within twenty sessions. Wider stops survive noise.</p>
-<p class="note"><strong>Before acting on that</strong>: it is six months and 129 trades, the stop is
-being measured on fills that were <em>chosen</em> under our rules, and a sample that mean-reverts
-rewards width. It also cuts against the one thing the structural stop demonstrably does better
-&mdash; it matches the stops actually recorded in the book to a median 2.24% against 8.61% for the
-old pivot rule. Measure it on the population before moving it.</p>
-
-<h2>What survives the split</h2>
-<div class="scroll"><table><thead><tr><th class="l">arm</th><th>mean %</th><th>median %</th>
-<th>win %</th><th>&#8377; L</th><th>Apr&ndash;May</th><th>Jun&ndash;Sep</th></tr></thead><tbody>
-<tr><td class="l">ours (shipped)</td><td>3.38</td><td>-2.77</td><td>34</td><td>21.16</td><td>3.57</td><td>2.96</td></tr><tr><td class="l">ours, no trail</td><td>4.95</td><td>-3.07</td><td>30</td><td>31.28</td><td>5.39</td><td>3.96</td></tr><tr><td class="l">ours, no trail, 8% stop</td><td>5.67</td><td>-2.31</td><td>36</td><td>36.52</td><td>5.76</td><td>5.49</td></tr><tr><td class="l">MarketSmith as published</td><td>4.66</td><td>-6.57</td><td>39</td><td>30.00</td><td>4.59</td><td>4.82</td></tr><tr><td class="l">MS, no profit target</td><td>4.94</td><td>-8.46</td><td>36</td><td>31.82</td><td>5.56</td><td>3.58</td></tr><tr><td class="l">MS stop + our close trigger</td><td>6.21</td><td>-3.52</td><td>43</td><td>39.96</td><td>6.36</td><td>5.87</td></tr><tr><td class="l">target + trail, hold OFF</td><td>2.32</td><td>-2.03</td><td>46</td><td>14.89</td><td>1.50</td><td>4.12</td></tr><tr><td class="l">target + trail, hold ON</td><td>4.60</td><td>-2.57</td><td>44</td><td>29.59</td><td>4.43</td><td>4.97</td></tr>
+<h2>Position size is worth more than any exit rule here</h2>
+<p class="lead">Hold sizing fixed at the book's own quantities and our exit rule is worth
+<strong>+3.4 points</strong>
+over what actually happened. Change the sizing to today's rule &mdash; &#8377;40,000 of risk,
+&#8377;5L a name, 12 slots instead of the 35 thin positions the book ran at its April peak
+&mdash; and that becomes
+<strong>+14.9
+points</strong>. Roughly three and a half times as much of the improvement is size, not exits.</p>
+<div class="scroll"><table><thead><tr><th class="l">arm</th>
+<th>today's sizing</th><th>book's own sizing</th></tr></thead><tbody>
+<tr><td class="l">ours (shipped)</td><td>21.0%</td><td>9.4%</td></tr><tr><td class="l">MarketSmith</td><td>33.9%</td><td>15.0%</td></tr>
+<tr><td class="l">ACTUAL BOOK, real quantities</td><td>&mdash;</td>
+<td>6.1%</td></tr>
 </tbody></table></div>
-<p class="note">Every arm above is positive in both halves, and the ordering is the same in both.
-The same grid run on only the 93 trades with a stop the book actually recorded &mdash; dropping the
-39 that carry a 5% assumption &mdash; keeps the ordering too: ours 3.78%, MarketSmith 5.69%, best
-cell 6.20%.</p>
+
+<h2>What each arm makes on one &#8377;60L account</h2>
+<svg viewBox="0 0 1040 300" class="fig"><rect x="83.8" y="213.3" width="99.0" height="32.7" fill="#0f172a" rx="3"/><text x="133.3" y="206.3" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">3.64L</text><text x="133.3" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ACTUAL BOOK</text><rect x="238.5" y="132.6" width="99.0" height="113.4" fill="#2563eb" rx="3"/><text x="288.0" y="125.6" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">12.60L</text><text x="288.0" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours (shipped)</text><rect x="393.2" y="134.5" width="99.0" height="111.5" fill="#94a3b8" rx="3"/><text x="442.7" y="127.5" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">12.39L</text><text x="442.7" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">ours</text><text x="442.7" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no trail</text><rect x="547.8" y="62.9" width="99.0" height="183.1" fill="#94a3b8" rx="3"/><text x="597.3" y="55.9" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">20.34L</text><text x="597.3" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MarketSmith</text><rect x="702.5" y="128.2" width="99.0" height="117.8" fill="#94a3b8" rx="3"/><text x="752.0" y="121.2" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">13.09L</text><text x="752.0" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MS</text><text x="752.0" y="275.0" font-size="10.5" text-anchor="middle" fill="#64748b">no target</text><rect x="857.2" y="122.1" width="99.0" height="123.9" fill="#94a3b8" rx="3"/><text x="906.7" y="115.1" font-size="12" font-weight="700" text-anchor="middle" fill="#0f172a">13.77L</text><text x="906.7" y="262.0" font-size="10.5" text-anchor="middle" fill="#64748b">MS stop + our trigger</text></svg>
+<div class="scroll"><table><thead><tr><th class="l">arm</th><th>realised</th><th>open</th>
+<th>total</th><th>return</th><th>CAGR</th><th>max DD</th><th>taken</th><th>missed</th>
+<th>win %</th></tr></thead><tbody>
+<tr><td class="l"><b>ACTUAL BOOK</b></td><td colspan="2">&mdash;</td>
+<td><b>3.64</b></td><td>6.1%</td>
+<td colspan="3">&mdash;</td><td>132</td><td>37</td></tr>
+<tr><td class="l">ours (shipped)</td><td>10.35</td><td>2.25</td><td>12.60</td><td>21.0%</td><td>50%</td><td>-5.1%</td><td>47</td><td>80</td><td>53</td></tr><tr><td class="l">ours, no trail</td><td>-3.21</td><td>15.60</td><td>12.39</td><td>20.7%</td><td>49%</td><td>-10.3%</td><td>23</td><td>104</td><td>43</td></tr><tr><td class="l">MarketSmith</td><td>14.39</td><td>5.95</td><td>20.34</td><td>33.9%</td><td>85%</td><td>-5.0%</td><td>30</td><td>97</td><td>67</td></tr><tr><td class="l">MS, no target</td><td>-2.21</td><td>15.30</td><td>13.09</td><td>21.8%</td><td>52%</td><td>-6.9%</td><td>15</td><td>112</td><td>67</td></tr><tr><td class="l">MS stop + our trigger</td><td>-1.73</td><td>15.49</td><td>13.77</td><td>22.9%</td><td>55%</td><td>-8.0%</td><td>14</td><td>113</td><td>71</td></tr>
+</tbody></table></div>
+<p class="note">Equity is marked to market daily, and every curve reconciles to
+&#8377;60L plus its own P&amp;L. CAGR annualises a 173-day window
+and should be read as arithmetic, not as a forecast. <strong>Win rates include unsold
+positions</strong>, which cannot have lost yet: MarketSmith's 67% is
+30 trades of which 10 are still open.</p>
+
+<h2>Three levers of nine survive the split</h2>
+<svg viewBox="0 0 1040 360" class="fig"><line x1="538.56" y1="18" x2="538.56" y2="326" stroke="#cfd6e0"/><rect x="525.3" y="26.0" width="13.3" height="16.7" fill="#b91c1c" opacity="0.35" rx="2"/><text x="56.0" y="38.7" font-size="12" fill="#334155">stop pct5 vs structural</text><text x="519.3" y="38.7" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.23pp  SIGN FLIP</text><rect x="514.3" y="59.3" width="24.3" height="16.7" fill="#b91c1c" opacity="0.35" rx="2"/><text x="56.0" y="72.0" font-size="12" fill="#334155">stop pct7 vs structural</text><text x="508.3" y="72.0" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.43pp  SIGN FLIP</text><rect x="514.7" y="92.7" width="23.8" height="16.7" fill="#b91c1c" opacity="0.35" rx="2"/><text x="56.0" y="105.3" font-size="12" fill="#334155">stop pct8 vs structural</text><text x="508.7" y="105.3" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.42pp  SIGN FLIP</text><rect x="538.6" y="126.0" width="164.5" height="16.7" fill="#15803d" opacity="0.9" rx="2"/><text x="56.0" y="138.7" font-size="12" fill="#334155">trigger intraday vs close</text><text x="709.1" y="138.7" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+2.90pp</text><rect x="507.1" y="159.3" width="31.5" height="16.7" fill="#b91c1c" opacity="0.35" rx="2"/><text x="56.0" y="172.0" font-size="12" fill="#334155">target t20 vs none</text><text x="501.1" y="172.0" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-0.56pp  SIGN FLIP</text><rect x="311.7" y="192.7" width="226.9" height="16.7" fill="#c2410c" opacity="0.9" rx="2"/><text x="56.0" y="205.3" font-size="12" fill="#334155">target t25 vs none</text><text x="305.7" y="205.3" font-size="12" font-weight="700" fill="#c2410c" text-anchor="end">-4.00pp</text><rect x="478.0" y="226.0" width="60.5" height="16.7" fill="#b91c1c" opacity="0.35" rx="2"/><text x="56.0" y="238.7" font-size="12" fill="#334155">breakeven be8 vs none</text><text x="472.0" y="238.7" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="end">-1.07pp  SIGN FLIP</text><rect x="538.6" y="259.3" width="288.7" height="16.7" fill="#15803d" opacity="0.9" rx="2"/><text x="56.0" y="272.0" font-size="12" fill="#334155">trail ma20 vs none</text><text x="833.3" y="272.0" font-size="12" font-weight="700" fill="#15803d" text-anchor="start">+5.09pp</text><rect x="538.6" y="292.7" width="149.7" height="16.7" fill="#b91c1c" opacity="0.35" rx="2"/><text x="56.0" y="305.3" font-size="12" fill="#334155">8wk hold on vs off</text><text x="694.3" y="305.3" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">+2.64pp  SIGN FLIP</text><text x="538.56" y="348" font-size="11" fill="#64748b" text-anchor="middle">change in return on the &#8377;60L account, paired across all other levers</text></svg>
+<p class="lead">A lever measured on six months that helps in April&ndash;May and hurts in
+June&ndash;September is a fact about those months. Faded bars reverse sign between the halves.
+What is left standing is
+<strong>trigger intraday vs close</strong>, <strong>target t25 vs none</strong>, <strong>trail ma20 vs none</strong>.</p>
+<div class="scroll"><table><thead><tr><th class="l">lever</th><th>whole period</th>
+<th>Apr&ndash;May</th><th>Jun&ndash;Sep</th><th>verdict</th></tr></thead><tbody>
+<tr><td class="l">stop pct5 vs structural</td><td>-0.23</td><td>-0.06</td><td>+0.36</td><td>sign flip</td></tr><tr><td class="l">stop pct7 vs structural</td><td>-0.43</td><td>-0.52</td><td>+0.76</td><td>sign flip</td></tr><tr><td class="l">stop pct8 vs structural</td><td>-0.42</td><td>-0.26</td><td>+1.09</td><td>sign flip</td></tr><tr><td class="l">trigger intraday vs close</td><td>+2.90</td><td>+0.66</td><td>+1.59</td><td>agrees</td></tr><tr><td class="l">target t20 vs none</td><td>-0.56</td><td>-7.13</td><td>+4.00</td><td>sign flip</td></tr><tr><td class="l">target t25 vs none</td><td>-4.00</td><td>-6.84</td><td>-0.03</td><td>agrees</td></tr><tr><td class="l">breakeven be8 vs none</td><td>-1.07</td><td>-2.13</td><td>+0.97</td><td>sign flip</td></tr><tr><td class="l">trail ma20 vs none</td><td>+5.09</td><td>+1.16</td><td>+0.87</td><td>agrees</td></tr><tr><td class="l">8wk hold on vs off</td><td>+2.64</td><td>+2.64</td><td>-0.49</td><td>sign flip</td></tr>
+</tbody></table></div>
+
+<h2>The trail earns its keep in the drawdown, not the return</h2>
+<p class="lead">Dropping the 20-day trail returns
+20.7% against our 21.0% &mdash; almost
+identical &mdash; at <strong>-10.3% drawdown against
+-5.1%</strong>. It also takes 23 trades where we
+take 47, because a position that is never sold never frees its slot. As a paired lever
+across all 192 cells the trail is worth <strong>+5.09pp</strong> and it agrees in both halves. This is
+the lever the unconstrained version of this study scored as <em>negative</em>; recycling capital is
+invisible when capital is free.</p>
+
+<h2>MarketSmith wins the second half and loses the first</h2>
+<div class="scroll"><table><thead><tr><th class="l">period</th><th>signals</th><th>ours</th>
+<th>MarketSmith</th><th>MS wins, of 200 orderings</th></tr></thead><tbody>
+<tr><td class="l">Apr-May</td><td>87</td><td>19.8%</td><td>15.6%</td><td>34 / 200</td></tr><tr><td class="l">Jun-Sep</td><td>40</td><td>3.8%</td><td>11.4%</td><td>200 / 200</td></tr>
+</tbody></table></div>
+<p class="lead">Over the whole window MarketSmith leads in 200 of 200 random
+tie-break orderings. Split it and the direction reverses: <strong>ours wins April&ndash;May
+166 times out of 200, theirs wins June&ndash;September
+all 200</strong>. Two rules that each win half the sample decisively are not one rule beating
+another; that is a regime effect, and it is the same verdict the sign-flipping target and 8-week
+hold already point at.</p>
 
 <h2>What this does not say</h2>
-<p class="lead">The best of 192 cells beat ours by +2.83pp at p = 0.0167. <strong>Multiplied through
-192 comparisons that is 1.00.</strong> A single winning cell out of a grid this size is luck until
-it is shown otherwise, and 116 of the 192 beat ours, which is itself a reason to look at the levers
-rather than the leaderboard. The main-effect table is the evidence here; the leaderboard is not.</p>
-<p class="lead">Nothing was changed. This is a measurement.</p>
+<p class="lead">Ours ranks 131 of 192 cells, and the leaderboard is not the
+evidence &mdash; picking the best of 192 is a selection, not a measurement. The main-effect table
+with the split is the evidence, and it supports changing nothing about our exits. The one durable
+difference between the two systems is that <strong>MarketSmith's stop triggers intraday and ours
+waits for the close</strong>; that lever agrees in both halves and is the only part of their exit
+set that is both theirs and survives.</p>
+<p class="lead"><strong>Nothing was changed on the strength of this page.</strong> The one rule
+change made on 2026-09-25 was recording the 12 slots the account already ran, which is a
+sizing fact and sits on the other side of the decomposition above.</p>
 
-<footer>Run 25 September 2026 on <code>tests/fixtures/book_2026_09.csv</code> and its bars,
-by <code>2026-09-25_ms_vs_ours.py</code>. The shipped arm reproduces the &#8377;21.16L pinned in
-<code>tests/regressions/test_the_book.py</code>; the script refuses to print a grid it cannot
-ground.</footer></div></body></html>
+<footer>Run 25 September 2026 on <code>tests/fixtures/book_2026_09.csv</code> and its
+bhavcopy bars, by <code>2026-09-25_ms_vs_ours_v3.py</code>; this page is rendered from that run's
+JSON, not from figures typed in by hand. Superseded versions: v1 (no capital constraint), v2
+(twelve mark dates, then two stale ones).</footer></div></body></html>

@@ -397,6 +397,35 @@ the exits moves the other, and neither can drift unnoticed again. The missing-st
 still stands: 39 of the 132 have no recorded entry stop and both figures assume 5% for them.</p>
 </div></section>
 
+<section><div class="sec-head"><span class="eyebrow">Correction &middot; 25 Sep</span>
+<h2>The &#8377;21.16L is real, needs &#8377;242L, and is not the largest effect</h2></div>
+<div class="prose">
+<p>Two things above need qualifying. Neither is an arithmetic error &mdash; the
+&#8377;10.91L&nbsp;&rarr;&nbsp;&#8377;21.16L pair is properly paired, same fills, same sizing,
+same 60-session horizon, and it still reproduces.</p>
+<p><strong>First, it assumes capital we do not have.</strong> Both rows size every one of the 132
+trades independently at &#8377;40,000 of risk capped at &#8377;5L, with no cash pool and no slot
+limit. Measured afterwards, that book needs a peak of <strong>&#8377;242.5L across 49 simultaneous
+positions on 8 May</strong>. The account is &#8377;60L. Sequenced through one &#8377;60L pool with
+twelve slots &mdash; so that a full account simply misses the next signal &mdash; the same exit
+rule returns <strong>&#8377;12.60L, or 21.0%</strong>, taking 47 of 127 signals and missing 80. The
+&#8377;21.16L is the right number for the question "what are these exits worth per trade"; it is
+not an amount this account could have made.</p>
+<p><strong>Second, "the single largest measured effect in this system" is no longer true.</strong>
+Holding sizing fixed at the book's own quantities, the exit rule is worth
+<strong>+3.4 points</strong> over what the book actually did (6.1% &rarr; 9.4% on &#8377;60L).
+Holding the exit rule fixed and changing only the sizing &mdash; &#8377;40,000 of risk, &#8377;5L a
+name, twelve slots, against the 35 thin positions the book really ran at its April peak &mdash; is
+worth <strong>+11.6 points</strong> (9.4% &rarr; 21.0%). <strong>Position sizing is roughly three
+and a half times the exit rule.</strong> The exit rule remains the largest thing we have measured
+<em>about exits</em>, which is what the sentence should have said.</p>
+<p class="muted">Both corrections come from
+<span class="mono">cortex/india_strategy/retrospectives/2026-09-25_ms_vs_ours_v3.py</span>, which
+runs every arm through a single &#8377;60L pool. See
+<a href="2026-09-25_ms_vs_ours.html">MarketSmith's Exits Against Ours</a> for the full study and
+for two superseded versions of it that got this wrong in the other direction.</p>
+</div></section>
+
 <section><div class="sec-head"><span class="eyebrow">Correction &middot; 23 Sep, evening</span>
 <h2>A third of these trades have no recorded entry stop</h2></div>
 <div class="prose">
