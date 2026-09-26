@@ -420,15 +420,24 @@ worth <strong>+11.6 points</strong> (9.4% &rarr; 21.0%). <strong>Position sizing
 and a half times the exit rule.</strong> The exit rule remains the largest thing we have measured
 <em>about exits</em>, which is what the sentence should have said.</p>
 <div class="prose" style="border-left:4px solid #ea580c;padding-left:14px;margin:18px 0">
-<p><strong>Correction &middot; 26 Sep &mdash; the figure is &#8377;23.2L, not &#8377;21.16L.</strong>
+<p><strong>Correction &middot; 26 Sep &mdash; the figure is &#8377;23.8L, not &#8377;21.16L.</strong> Two faults, found in that order.
 The bar fixture these replays read held <em>split-adjusted</em> prices for TDPOWERSYS (2:1) and
 POCL (2.5:1), while the trade book beside it holds the prices actually traded. Those two symbols
 were replayed across two price scales &mdash; their entries read 1.97&times; and 2.48&times; their
 own bars. Correcting the bars to the book's raw scale moves the close-based replay from
-<strong>&#8377;21.16L to &#8377;23.2L</strong>, and the gap it opens over the recorded exits from
-&#8377;10.25L to about <strong>&#8377;12L</strong>. Every &#8377;21.16L on this page should be read
-as &#8377;23.2L. No rule changed; two symbols' bars were wrong. Found by an audit after a backtest
-figure moved twice in an afternoon, and now pinned by
+<strong>&#8377;21.16L to &#8377;23.2L</strong>. No rule changed; two symbols' bars were wrong.</p>
+<p><strong>Then to &#8377;23.8L on 26 Sep</strong>, after the broker's own contract-note trail was
+recovered. WELCORP's second lot was carrying the first lot's fill price: the P&amp;L statement shows
+270 shares in two lots for &#8377;355,605.30, and with the 21 May lot at 1348.81 confirmed by that
+day's GTT alert, the 22 May lot works out at <strong>&#8377;1,285.30</strong> &mdash; a price that
+session actually traded, where 1348.81 never did. A lower entry buys a larger position for the same
+&#8377;40,000 of risk, which is why the sizing row moved further than the replay:
+<strong>&#8377;11.16L &rarr; &#8377;12.44L</strong>. The exit rule's edge over the recorded exits is
+<strong>&#8377;11.4L</strong>, not &#8377;10.25L.</p>
+<p>So every <strong>&#8377;21.16L</strong> on this page should be read as
+<strong>&#8377;23.8L</strong>, and every &#8377;11.16L as &#8377;12.44L. Three further entry dates
+were corrected the same day from the tradebook and the GTT alerts (SAKAR, GOLDBEES, NATIONALUM).
+All of it is now pinned by
 <span class="mono">tests/regressions/test_book_fills_are_possible.py</span>, which fails if any
 recorded fill sits outside the bar of the session it claims.</p></div>
 
