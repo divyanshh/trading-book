@@ -15,6 +15,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import subprocess
 import sys
 import urllib.request
 from collections import defaultdict
@@ -107,14 +108,50 @@ def restyle_analysis(style: str) -> int:
     return n
 
 
-def analyses() -> list[tuple[str, str, int]]:
-    """(file, title, bytes) for every standing analysis, newest first."""
+def last_revised(page: Path) -> str:
+    """The date this file last actually changed, from git.
+
+    The filename date says what a study is *about*; it says nothing about when
+    it was last right. On 2026-09-26 four analyses were corrected — two of them
+    materially, the close-based replay moving from Rs 21.16L to Rs 23.8L — and
+    the index went on showing 2026-09-23 and 2026-09-25 beside them, so the
+    owner looked at the site and saw nothing had happened. It had; the column
+    was answering a different question.
+
+    Git rather than mtime: a checkout touches every file, and a revision date
+    that moves when nothing was revised is worse than none.
+
+    **The mirror's own commits are excluded**, and that is the whole
+    difficulty. :func:`restyle_analysis` rewrites the stylesheet inside every
+    analysis page whenever the renderer's theme moves, and those runs are
+    committed as "mirror <date>". Counting them made six pages claim they were
+    revised on 2026-09-24 when what changed was their CSS. So the newest commit
+    that is *not* one of the mirror's own is the one that means something.
+    """
+    try:
+        out = subprocess.run(
+            ["git", "log", "-1", "--format=%cs",
+             "--invert-grep", "--grep=^mirror ", "--", page.name],
+            cwd=page.parent, capture_output=True, text=True, timeout=10, check=False,
+        )
+        return out.stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return ""
+
+
+def analyses() -> list[tuple[str, str, int, str]]:
+    """(file, title, bytes, revised) for every standing analysis, newest first.
+
+    ``revised`` is empty unless the page changed after the day it is named for,
+    which is the only case worth a reader's attention.
+    """
     out = []
     for page in sorted(ANALYSIS.glob("*.html"), reverse=True):
         text = page.read_text(encoding="utf-8")
         found = re.search(r"<title>(.*?)</title>", text, re.S)
+        revised = last_revised(page)
         out.append((page.name, html.unescape(found.group(1)).strip() if found else page.stem,
-                    len(text)))
+                    len(text), revised if revised > page.name[:10] else ""))
     return out
 
 
@@ -212,13 +249,16 @@ def build_index(rows: list[dict]) -> None:
         items = "".join(
             f'<tr><td class="l"><a href="analysis/{name}">{html.escape(title)}</a></td>'
             f'<td class="l"><span class="badge">analysis</span></td>'
-            f'<td class="l">{html.escape(name[:10])}</td><td>{size // 1024} KB</td></tr>'
-            for name, title, size in found
+            f'<td class="l">{html.escape(name[:10])}</td>'
+            f'<td class="l">{f"<b>revised {html.escape(revised)}</b>" if revised else ""}</td>'
+            f'<td>{size // 1024} KB</td></tr>'
+            for name, title, size, revised in found
         )
         parts.insert(
             0,
             '<h2>Analysis</h2><div class="scroll"><table><thead><tr>'
             '<th class="l">document</th><th class="l">kind</th><th class="l">as of</th>'
+            '<th class="l">revised</th>'
             "<th>size</th></tr></thead><tbody>" + items + "</tbody></table></div>",
         )
     newest = rows[0]["as_of"] if rows else ""  # a real report, never an extras-only day
