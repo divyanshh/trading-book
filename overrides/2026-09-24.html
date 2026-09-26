@@ -8,7 +8,7 @@
 
    Every colour is a variable here and a reference everywhere else, so a future
    swap is this block again and nothing else. That was already nearly true and
-   is now enforced by `test_theme_has_no_stray_colours`: the eleven literals
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
    that had leaked into rules below — a hardcoded #f8fafc table head, the light
    rgba in the sticky nav's fade, the pale badge borders — were the reason the
    first dark build had white strips across it. */
