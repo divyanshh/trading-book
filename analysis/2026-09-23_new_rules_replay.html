@@ -419,6 +419,19 @@ name, twelve slots, against the 35 thin positions the book really ran at its Apr
 worth <strong>+11.6 points</strong> (9.4% &rarr; 21.0%). <strong>Position sizing is roughly three
 and a half times the exit rule.</strong> The exit rule remains the largest thing we have measured
 <em>about exits</em>, which is what the sentence should have said.</p>
+<div class="prose" style="border-left:4px solid #ea580c;padding-left:14px;margin:18px 0">
+<p><strong>Correction &middot; 26 Sep &mdash; the figure is &#8377;23.2L, not &#8377;21.16L.</strong>
+The bar fixture these replays read held <em>split-adjusted</em> prices for TDPOWERSYS (2:1) and
+POCL (2.5:1), while the trade book beside it holds the prices actually traded. Those two symbols
+were replayed across two price scales &mdash; their entries read 1.97&times; and 2.48&times; their
+own bars. Correcting the bars to the book's raw scale moves the close-based replay from
+<strong>&#8377;21.16L to &#8377;23.2L</strong>, and the gap it opens over the recorded exits from
+&#8377;10.25L to about <strong>&#8377;12L</strong>. Every &#8377;21.16L on this page should be read
+as &#8377;23.2L. No rule changed; two symbols' bars were wrong. Found by an audit after a backtest
+figure moved twice in an afternoon, and now pinned by
+<span class="mono">tests/regressions/test_book_fills_are_possible.py</span>, which fails if any
+recorded fill sits outside the bar of the session it claims.</p></div>
+
 <p class="muted">Both corrections come from
 <span class="mono">cortex/india_strategy/retrospectives/2026-09-25_ms_vs_ours_v3.py</span>, which
 runs every arm through a single &#8377;60L pool. See
