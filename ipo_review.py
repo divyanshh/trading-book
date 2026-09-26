@@ -1223,11 +1223,42 @@ IPOS_2026_09_26 = [
     ),
 ]
 
+
+LEAD_27 = (
+    "Sunday 27 September. <strong>Nothing on the board has moved since Friday's close</strong> "
+    "&mdash; the exchange was shut, so every subscription figure below is the same one the "
+    "26 September review carried, and the grey-market quotes have not been re-read. The calls "
+    "are unchanged and are repeated here rather than left on yesterday's page, because "
+    "<strong>tomorrow is the day they are acted on</strong>: Moneyview and A-One Steels close, "
+    "SRIT India and Shah Investor's Home open. "
+    "Expected listing is the GMP percentage less 2.6 points &mdash; the overstatement "
+    "<code>backtest_gmp</code> measured over 295 listings (r&nbsp;=&nbsp;0.87). "
+    "<strong>Applied so far:</strong> Adroit Industries sHNI on 23 Sep (listed, sold); "
+    "Moneyview HNI on 24 Sep; Orient Cables on 25 Sep. "
+    "<strong>Held:</strong> NSE, 120 shares at &#8377;1,785 &mdash; still untracked, still "
+    "without a stop, into a market that turned Downtrend on Thursday."
+)
+
+FOOTNOTE_27 = (
+    "<strong>Read the books again on Monday before applying.</strong> The two issues closing "
+    "tomorrow have one day left and the QIB column is where it will show: institutions bid on "
+    "the final day, so Moneyview at 0.25x and A-One at 0.09x are not yet verdicts. Orient "
+    "Cables at 0.01x with two days left is the one to watch &mdash; on a &#8377;552 Cr issue, a "
+    "QIB book that finishes under 1x means retail and HNI carried it alone, and that is a "
+    "listing to sell into rather than hold. "
+    "German Green Steel still has a grey-market quote and no exchange book matched: the two "
+    "sources name the company differently and a name is never guessed at."
+)
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
     "2026-09-25": (IPOS_2026_09_25, LEAD_25, FOOTNOTE_25),
     "2026-09-26": (IPOS_2026_09_26, LEAD_26, FOOTNOTE_26),
+    # Same ten issues, unchanged because the market was shut. Pointed at the
+    # same list rather than copied: a duplicate would drift the moment one
+    # number was corrected in only one of them.
+    "2026-09-27": (IPOS_2026_09_26, LEAD_27, FOOTNOTE_27),
 }
 
 
