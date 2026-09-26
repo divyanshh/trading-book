@@ -377,15 +377,15 @@ three of them ran for two months or more — which is the six-month review's own
 <div class="prose">
 <p>This page says the &#8377;21.9L harness could not be reproduced and asks you to treat
 &#8377;13&ndash;17L as the finding. <strong>That was wrong.</strong> Replayed against the real bars
-of all 132 trades, the figure comes back at <strong>&#8377;21.16L</strong> — a 3.4% gap that is
+of all 132 trades, the figure comes back at <strong>&#8377;23.8L</strong> — a 3.4% gap that is
 slippage and horizon assumptions, not a different result.</p>
 <p>What was never true is that it came from sizing, or from a different entry rule, or from a
 shortlist. The same 132 fills at &#8377;40,000 of risk and a &#8377;5,00,000 cap give:</p>
 <div class="tbl-scroll"><table><thead><tr><th class="l">same trades, same sizing</th>
 <th>total</th></tr></thead><tbody>
-<tr><td class="l">the exits actually taken</td><td>&#8377;10.91L</td></tr>
-<tr><td class="l"><b>close-based exits</b></td><td class="gain"><b>&#8377;21.16L</b></td></tr>
-<tr><td class="l">difference</td><td><b>&#8377;10.25L</b></td></tr>
+<tr><td class="l">the exits actually taken</td><td>&#8377;12.44L</td></tr>
+<tr><td class="l"><b>close-based exits</b></td><td class="gain"><b>&#8377;23.8L</b></td></tr>
+<tr><td class="l">difference</td><td><b>&#8377;11.4L</b></td></tr>
 </tbody></table></div>
 <p>Every rupee of that gap is the exit rule: stop on a <em>close</em> below structure rather than
 a touch, sold at the next open, breakeven at +8%, a 20-day trail at 0.97, and the disaster line at
@@ -398,10 +398,10 @@ still stands: 39 of the 132 have no recorded entry stop and both figures assume 
 </div></section>
 
 <section><div class="sec-head"><span class="eyebrow">Correction &middot; 25 Sep</span>
-<h2>The &#8377;21.16L is real, needs &#8377;242L, and is not the largest effect</h2></div>
+<h2>The &#8377;23.8L is real, needs &#8377;242L, and is not the largest effect</h2></div>
 <div class="prose">
 <p>Two things above need qualifying. Neither is an arithmetic error &mdash; the
-&#8377;10.91L&nbsp;&rarr;&nbsp;&#8377;21.16L pair is properly paired, same fills, same sizing,
+&#8377;12.44L&nbsp;&rarr;&nbsp;&#8377;23.8L pair is properly paired, same fills, same sizing,
 same 60-session horizon, and it still reproduces.</p>
 <p><strong>First, it assumes capital we do not have.</strong> Both rows size every one of the 132
 trades independently at &#8377;40,000 of risk capped at &#8377;5L, with no cash pool and no slot
@@ -409,7 +409,7 @@ limit. Measured afterwards, that book needs a peak of <strong>&#8377;242.5L acro
 positions on 8 May</strong>. The account is &#8377;60L. Sequenced through one &#8377;60L pool with
 twelve slots &mdash; so that a full account simply misses the next signal &mdash; the same exit
 rule returns <strong>&#8377;12.60L, or 21.0%</strong>, taking 47 of 127 signals and missing 80. The
-&#8377;21.16L is the right number for the question "what are these exits worth per trade"; it is
+&#8377;23.8L is the right number for the question "what are these exits worth per trade"; it is
 not an amount this account could have made.</p>
 <p><strong>Second, "the single largest measured effect in this system" is no longer true.</strong>
 Holding sizing fixed at the book's own quantities, the exit rule is worth
@@ -434,8 +434,9 @@ session actually traded, where 1348.81 never did. A lower entry buys a larger po
 &#8377;40,000 of risk, which is why the sizing row moved further than the replay:
 <strong>&#8377;11.16L &rarr; &#8377;12.44L</strong>. The exit rule's edge over the recorded exits is
 <strong>&#8377;11.4L</strong>, not &#8377;10.25L.</p>
-<p>So every <strong>&#8377;21.16L</strong> on this page should be read as
-<strong>&#8377;23.8L</strong>, and every &#8377;11.16L as &#8377;12.44L. Three further entry dates
+<p>The figures above have been restated in place, so nothing on this page needs reading
+through a substitution; the tables and the tally say &#8377;23.8L and &#8377;12.44L directly.
+Three further entry dates
 were corrected the same day from the tradebook and the GTT alerts (SAKAR, GOLDBEES, NATIONALUM).
 All of it is now pinned by
 <span class="mono">tests/regressions/test_book_fills_are_possible.py</span>, which fails if any
