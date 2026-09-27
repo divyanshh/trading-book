@@ -1,0 +1,20 @@
+{
+  "written_at": "2026-09-27 23:33:28.393165+00:00",
+  "selected": {
+    "runner": null,
+    "high_r": "expanded_high_r_183"
+  },
+  "eligible_counts": {
+    "runner": 0,
+    "high_r": 8
+  },
+  "criteria": ">=15 closed, positive closed net, PF>=1.2, DD<=25%, one-sided 90% normal lower bound on closed net >0; removed largest-winner/net ratio before locked replay because losses can make the ratio exceed 100% even without concentration",
+  "selection_period": [
+    "2026-03-27 00:00:00+00:00",
+    "2026-08-01 00:00:00+00:00"
+  ],
+  "locked_period_not_read_by_selection": [
+    "2026-08-01 00:00:00+00:00",
+    "2026-09-27 00:00:00+00:00"
+  ]
+}

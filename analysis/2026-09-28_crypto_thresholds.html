@@ -1,0 +1,282 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A seeded crypto threshold search porting equity's eight-gate logic, with exact-hourly validation, $100 risk and full disclosure of the failed locked selection."><title>Crypto thresholds: what survived the six-month replay</title><style>/* Morning Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+/* Bridges the standing analyses onto the renderer's theme.
+   Every colour is a reference into theme.css so these pages follow a palette
+   swap with the rest. The four literals that were here until 2026-09-26 - two
+   table backgrounds and the tinted gain/loss fills - are why the first dark
+   build had white table heads on the six-month review. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:var(--green-100);
+  --loss:var(--red);--loss-fill:var(--red-100);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:var(--head);border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+</style><link rel="stylesheet" href="2026-09-28_crypto_thresholds.css"></head><body><main class="wrap crypto-study">
+<header class="top"><p class="eyebrow"><a href="../index.html">Morning Book</a> · crypto research / 28 September 2026</p><h1>Crypto thresholds:<br>what survived the six-month replay</h1><p class="dek">1,536 seeded threshold profiles, exact hourly trade and mark execution, $100 risk per trade, and a locked-period failure that changes the conclusion.</p><div class="meta"><span>Period 27 Mar–26 Sep 2026</span><span>Capital $6,000</span><span>Risk up to $100</span><span>Published 28 Sep 2026</span></div></header>
+<nav class="toc"><a href="#answer">Answer</a><a href="#rules">Rules</a><a href="#results">Results</a><a href="#validation">Validation</a><a href="#evidence">Evidence</a></nav>
+<section id="answer"><h2>The answer</h2><p class="warning"><strong>There is no honestly validated optimum yet.</strong> The automatically selected development winner lost <strong>$-377.29</strong> in the locked August–September period. The balanced profile below is the best paper candidate after inspecting the complete six months; it is not ready for live capital.</p><div class="stats"><article><b>Balanced high-R</b><strong>$+1,512.36</strong><span>9/20 wins · 45.0%</span></article><article><b>Profit-oriented</b><strong>$+1,742.97</strong><span>8/24 wins · 33.3%</span></article></div><p>The balanced candidate produced <strong>20 closed trades, nine wins (45%), $+1,315.69 closed profit</strong>, $+196.68 open P&amp;L after reserved exit costs, profit factor 3.37, and 7.4% maximum hourly-close drawdown. It preserves the requested high reward/risk: a six-historical-ADR target and at least 4R at plan and simulated fill.</p></section>
+<section id="rules"><h2>The crypto numbers</h2><div class="scroll"><table><thead><tr><th>Gate</th><th>Balanced crypto threshold</th><th>Logic retained</th></tr></thead><tbody>
+<tr><td>G1</td><td>Close ≤2% above SMA10</td><td>Do not chase the short moving average</td></tr>
+<tr><td>G2</td><td>Close ≤8% above SMA20; forgive through 12% when momentum ≥30%</td><td>Cap extension but allow exceptional strength</td></tr>
+<tr><td>G3</td><td>30-day return ≥0%</td><td>Mandatory trend direction</td></tr>
+<tr><td>G4</td><td>Daily base and contraction ≤8%</td><td>Mandatory, objectively bounded setup</td></tr>
+<tr><td>G5</td><td>30-day return minus BTC ≥−10 points</td><td>Crypto leadership context</td></tr>
+<tr><td>G6</td><td>Last completed funding observation ≥−0.01%</td><td>Historical setup-time context; missing blocks</td></tr>
+<tr><td>G7</td><td>30-day universe percentile ≥60</td><td>Cross-sectional leadership proxy</td></tr>
+<tr><td>G8</td><td>Historical ADR20 between 1% and 8%</td><td>Volatility at entry, never today's ADR written backward</td></tr>
+<tr><td>Admission</td><td>G1–G4 mandatory; at least 6/8</td><td>Current equity tolerance shape; missing inputs never pass</td></tr>
+<tr><td>Exit</td><td>6 ADR target; minimum 4R</td><td>High reward/risk requested by the user</td></tr>
+</tbody></table></div><p>Every ADR reading uses only the twenty completed daily UTC candles available at that historical signal. BTC-relative strength, return percentile and funding are likewise frozen at the setup timestamp.</p></section>
+<section id="results"><h2>Full six-month results and stress</h2><p>All results use 5bps fees and 5bps adverse slippage on each side plus 3bps/day adverse funding unless the row says doubled costs. The $1,200 notional cap and integer contracts often reduce actual structural risk below $100.</p><div class="scroll"><table><thead><tr><th>Profile / scenario</th><th>Closed</th><th>Wins</th><th>Win rate</th><th>Closed net</th><th>Open net</th><th>Total</th><th>PF</th><th>Drawdown</th></tr></thead><tbody><tr><td>156 / base</td><td>20</td><td>9</td><td>45.0%</td><td>$+1,315.69</td><td>$+196.68</td><td>$+1,512.36</td><td>3.37</td><td>7.4%</td></tr><tr><td>156 / double_costs</td><td>20</td><td>9</td><td>45.0%</td><td>$+1,234.56</td><td>$+187.84</td><td>$+1,422.41</td><td>3.10</td><td>8.0%</td></tr><tr><td>156 / one_hour_later</td><td>23</td><td>10</td><td>43.5%</td><td>$+1,223.92</td><td>$+28.01</td><td>$+1,251.93</td><td>2.84</td><td>7.7%</td></tr><tr><td>156 / risk_to_disaster</td><td>20</td><td>9</td><td>45.0%</td><td>$+1,315.69</td><td>$+196.68</td><td>$+1,512.36</td><td>3.37</td><td>7.4%</td></tr><tr><td>226 / base</td><td>24</td><td>8</td><td>33.3%</td><td>$+1,546.29</td><td>$+196.68</td><td>$+1,742.97</td><td>2.78</td><td>8.1%</td></tr><tr><td>226 / double_costs</td><td>24</td><td>8</td><td>33.3%</td><td>$+1,456.20</td><td>$+187.84</td><td>$+1,644.05</td><td>2.59</td><td>8.3%</td></tr><tr><td>226 / one_hour_later</td><td>26</td><td>8</td><td>30.8%</td><td>$+1,465.89</td><td>$+28.01</td><td>$+1,493.90</td><td>2.54</td><td>8.1%</td></tr><tr><td>226 / risk_to_disaster</td><td>24</td><td>8</td><td>33.3%</td><td>$+1,546.29</td><td>$+196.68</td><td>$+1,742.97</td><td>2.78</td><td>8.1%</td></tr></tbody></table></div><p class="good">The balanced candidate retained <strong>$+1,234.56</strong> closed profit under doubled costs and <strong>$+1,223.92</strong> with entry delayed one hour.</p></section>
+<section id="validation"><h2>Why this is still paper-only</h2><p>The first 768 profiles copied equity-scale ranges. None qualified. The June–July development section had only five BTC-above-EMA50 dates, so treating each calendar half as if it should trade equally was wrong.</p><p>The expanded search tested another 384 runners and 384 high-R profiles. Exact-hourly development ended on 31 July. A profile needed at least 15 closed trades, positive closed profit, profit factor at least 1.2, drawdown no more than 25%, and a positive one-sided 90% lower confidence score. No equity-style uncapped runner qualified. Eight high-R profiles did.</p><p>The locked winner had 20 development trades, six wins, +$623.83 closed profit and 8.0% drawdown. In August–September it produced six closed trades, one win and <strong>$-377.29</strong> closed profit. Two open positions marked at $+196.68, leaving total P&amp;L $-180.61. That is a failed locked test.</p><p>Seven other qualifying profiles were positive in the locked-period diagnostic, but selecting among them after seeing those outcomes would be data snooping. The balanced candidate is therefore a frozen forward-paper hypothesis. Changing its thresholds during forward observation restarts validation.</p><h3>All eight development-qualified profiles over the complete, already-inspected six months</h3><div class="scroll"><table><thead><tr><th>Profile</th><th>Closed</th><th>Wins</th><th>Win rate</th><th>Closed net</th><th>Total</th><th>PF</th><th>Drawdown</th></tr></thead><tbody><tr><td>expanded_high_r_009</td><td>22</td><td>7</td><td>31.8%</td><td>$+1,129.23</td><td>$+1,325.91</td><td>2.37</td><td>9.8%</td></tr><tr><td>expanded_high_r_026</td><td>21</td><td>7</td><td>33.3%</td><td>$+1,225.81</td><td>$+1,422.49</td><td>2.68</td><td>8.4%</td></tr><tr><td>expanded_high_r_101</td><td>18</td><td>6</td><td>33.3%</td><td>$+1,251.92</td><td>$+1,448.60</td><td>2.88</td><td>8.3%</td></tr><tr><td>expanded_high_r_122</td><td>21</td><td>6</td><td>28.6%</td><td>$+1,158.57</td><td>$+1,355.24</td><td>2.47</td><td>8.0%</td></tr><tr><td>expanded_high_r_156</td><td>20</td><td>9</td><td>45.0%</td><td>$+1,315.69</td><td>$+1,512.36</td><td>3.37</td><td>7.4%</td></tr><tr><td>expanded_high_r_183</td><td>27</td><td>8</td><td>29.6%</td><td>$+298.82</td><td>$+495.49</td><td>1.28</td><td>10.0%</td></tr><tr><td>expanded_high_r_226</td><td>24</td><td>8</td><td>33.3%</td><td>$+1,546.29</td><td>$+1,742.97</td><td>2.78</td><td>8.1%</td></tr><tr><td>expanded_high_r_291</td><td>21</td><td>6</td><td>28.6%</td><td>$+649.25</td><td>$+845.92</td><td>1.70</td><td>7.4%</td></tr></tbody></table></div></section>
+<section id="evidence"><h2>Reproduction and evidence</h2><p>The offline command now accepts crypto-specific SMA extension, momentum, BTC-relative, funding, percentile, ADR, gate-count, mandatory-gate and reward/risk parameters. The balanced command reproduced the saved summary exactly: 20 closed, nine wins and $+1,512.36 total P&amp;L.</p><p>Verification: 808 tests passed with one existing skip. Changed source files pass Ruff and strict mypy. The repository-wide Ruff check is blocked by a pre-existing long line in <code>crypto_service/tasks.py</code>; repository-wide mypy is blocked by two pre-existing errors in <code>backtest_tis_chop.py</code>.</p><p>Downloads: <a href="data/2026-09-28_crypto_thresholds/summary.json">summary</a> · <a href="data/2026-09-28_crypto_thresholds/frontier-full.json">full finalist table</a> · <a href="data/2026-09-28_crypto_thresholds/frontier-validation.json">locked frontier diagnostic</a> · <a href="data/2026-09-28_crypto_thresholds/finalist-stress.json">cost and latency stress</a> · <a href="data/2026-09-28_crypto_thresholds/selection-lock.json">selection lock</a> · <a href="data/2026-09-28_crypto_thresholds/cli-verification.json">command replay</a>.</p><p>Production configuration was not changed, no order was placed, and both agent processes remain intended to stay at zero dynos.</p></section>
+<footer>Research published 28 September 2026. Historical replay is not an expected return. <a href="../index.html">Morning Book index</a>.</footer></main></body></html>
