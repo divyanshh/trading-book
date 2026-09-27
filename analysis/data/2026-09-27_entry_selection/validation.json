@@ -1,0 +1,631 @@
+{
+  "independently_verified_policy_count": 59,
+  "all_127_adr_features_verified": true,
+  "cost_scenarios_verified_for": [
+    "baseline",
+    "adr_3_to_5",
+    "adr_3_to_6",
+    "trend_stack",
+    "stocks_only",
+    "one_lot_per_stock",
+    "rank_low_extension",
+    "adr_2_to_5",
+    "adr_le_5",
+    "rank_rs60"
+  ],
+  "missing_20bar_history": [
+    {
+      "symbol": "GSPCROP",
+      "entry_date": "2026-04-15",
+      "prior_sessions": 12
+    },
+    {
+      "symbol": "RSL",
+      "entry_date": "2026-04-15",
+      "prior_sessions": 15
+    }
+  ],
+  "june_selected_continuous_account": {
+    "name": "June_selected_rule_for_new_July_onward_entries",
+    "total": 2193571.011622429,
+    "realised": 1017922.0816224288,
+    "open_pnl": 1175648.93,
+    "taken": 41,
+    "offered": 127,
+    "filtered": 0,
+    "skipped_slots": 76,
+    "skipped_cash": 10,
+    "skipped_same_stock": 0,
+    "minimum_cash": 2981.610000000859,
+    "maximum_cost_deployment": 5997018.39,
+    "maximum_slots": 12
+  },
+  "admission_changes": {
+    "adr_2_to_5": {
+      "new_winners": 8,
+      "new_losers": 3,
+      "new_pnl": 324023.3225000002,
+      "removed_pnl": 105892.17464310987,
+      "removed_by_filter": [
+        96,
+        3,
+        102,
+        7,
+        103,
+        9,
+        75,
+        123,
+        77,
+        82,
+        88,
+        90,
+        91,
+        120,
+        93,
+        94,
+        95
+      ],
+      "removed_by_capacity": [
+        111
+      ],
+      "top_missed_decisions": [
+        {
+          "id": 32,
+          "symbol": "LAURUSLABS",
+          "date": "2026-04-23",
+          "adr20": 2.688339267657865,
+          "hypothetical_pnl": 391852.19999999995,
+          "decision": "slots"
+        },
+        {
+          "id": 41,
+          "symbol": "ATHERENERG",
+          "date": "2026-04-27",
+          "adr20": 5.502957317250638,
+          "hypothetical_pnl": 315638.39999999997,
+          "decision": "filter"
+        },
+        {
+          "id": 65,
+          "symbol": "LAURUSLABS",
+          "date": "2026-05-08",
+          "adr20": 2.6883821271609754,
+          "hypothetical_pnl": 315624.4,
+          "decision": "cash"
+        },
+        {
+          "id": 113,
+          "symbol": "SHILPAMED",
+          "date": "2026-08-05",
+          "adr20": 3.4445028008832463,
+          "hypothetical_pnl": 294642.3500000001,
+          "decision": "slots"
+        },
+        {
+          "id": 58,
+          "symbol": "CPPLUS",
+          "date": "2026-05-05",
+          "adr20": 4.662318668206209,
+          "hypothetical_pnl": 207008.03199999995,
+          "decision": "slots"
+        },
+        {
+          "id": 73,
+          "symbol": "KIRLOSENG",
+          "date": "2026-05-15",
+          "adr20": 3.9412346442880706,
+          "hypothetical_pnl": 193564.24349999998,
+          "decision": "cash"
+        },
+        {
+          "id": 42,
+          "symbol": "KIRLOSENG",
+          "date": "2026-04-27",
+          "adr20": 4.330805416057731,
+          "hypothetical_pnl": 167499.53549999997,
+          "decision": "slots"
+        },
+        {
+          "id": 99,
+          "symbol": "LAURUSLABS",
+          "date": "2026-07-10",
+          "adr20": 3.1289132218263593,
+          "hypothetical_pnl": 153465.00000000003,
+          "decision": "taken"
+        },
+        {
+          "id": 62,
+          "symbol": "HONASA",
+          "date": "2026-05-07",
+          "adr20": 3.6216511968123526,
+          "hypothetical_pnl": 112818.29124999998,
+          "decision": "cash"
+        },
+        {
+          "id": 98,
+          "symbol": "RUBICON",
+          "date": "2026-07-10",
+          "adr20": 5.325084542437521,
+          "hypothetical_pnl": 99970.50000000004,
+          "decision": "filter"
+        }
+      ]
+    },
+    "adr_3_to_5": {
+      "new_winners": 8,
+      "new_losers": 6,
+      "new_pnl": 378252.30250000017,
+      "removed_pnl": 219428.80444310987,
+      "removed_by_filter": [
+        0,
+        1,
+        3,
+        7,
+        9,
+        75,
+        77,
+        82,
+        88,
+        90,
+        91,
+        93,
+        94,
+        95,
+        96,
+        102,
+        103,
+        104,
+        120,
+        122,
+        123
+      ],
+      "removed_by_capacity": [
+        68
+      ],
+      "top_missed_decisions": [
+        {
+          "id": 32,
+          "symbol": "LAURUSLABS",
+          "date": "2026-04-23",
+          "adr20": 2.688339267657865,
+          "hypothetical_pnl": 391852.19999999995,
+          "decision": "filter"
+        },
+        {
+          "id": 41,
+          "symbol": "ATHERENERG",
+          "date": "2026-04-27",
+          "adr20": 5.502957317250638,
+          "hypothetical_pnl": 315638.39999999997,
+          "decision": "filter"
+        },
+        {
+          "id": 65,
+          "symbol": "LAURUSLABS",
+          "date": "2026-05-08",
+          "adr20": 2.6883821271609754,
+          "hypothetical_pnl": 315624.4,
+          "decision": "filter"
+        },
+        {
+          "id": 113,
+          "symbol": "SHILPAMED",
+          "date": "2026-08-05",
+          "adr20": 3.4445028008832463,
+          "hypothetical_pnl": 294642.3500000001,
+          "decision": "slots"
+        },
+        {
+          "id": 58,
+          "symbol": "CPPLUS",
+          "date": "2026-05-05",
+          "adr20": 4.662318668206209,
+          "hypothetical_pnl": 207008.03199999995,
+          "decision": "slots"
+        },
+        {
+          "id": 73,
+          "symbol": "KIRLOSENG",
+          "date": "2026-05-15",
+          "adr20": 3.9412346442880706,
+          "hypothetical_pnl": 193564.24349999998,
+          "decision": "taken"
+        },
+        {
+          "id": 42,
+          "symbol": "KIRLOSENG",
+          "date": "2026-04-27",
+          "adr20": 4.330805416057731,
+          "hypothetical_pnl": 167499.53549999997,
+          "decision": "slots"
+        },
+        {
+          "id": 99,
+          "symbol": "LAURUSLABS",
+          "date": "2026-07-10",
+          "adr20": 3.1289132218263593,
+          "hypothetical_pnl": 153465.00000000003,
+          "decision": "taken"
+        },
+        {
+          "id": 62,
+          "symbol": "HONASA",
+          "date": "2026-05-07",
+          "adr20": 3.6216511968123526,
+          "hypothetical_pnl": 112818.29124999998,
+          "decision": "cash"
+        },
+        {
+          "id": 98,
+          "symbol": "RUBICON",
+          "date": "2026-07-10",
+          "adr20": 5.325084542437521,
+          "hypothetical_pnl": 99970.50000000004,
+          "decision": "filter"
+        }
+      ]
+    },
+    "rank_low_extension": {
+      "new_winners": 2,
+      "new_losers": 2,
+      "new_pnl": -33209.5402499999,
+      "removed_pnl": -136562.1718959999,
+      "removed_by_filter": [],
+      "removed_by_capacity": [
+        3,
+        9,
+        75,
+        79,
+        82
+      ],
+      "top_missed_decisions": [
+        {
+          "id": 32,
+          "symbol": "LAURUSLABS",
+          "date": "2026-04-23",
+          "adr20": 2.688339267657865,
+          "hypothetical_pnl": 391852.19999999995,
+          "decision": "slots"
+        },
+        {
+          "id": 41,
+          "symbol": "ATHERENERG",
+          "date": "2026-04-27",
+          "adr20": 5.502957317250638,
+          "hypothetical_pnl": 315638.39999999997,
+          "decision": "slots"
+        },
+        {
+          "id": 65,
+          "symbol": "LAURUSLABS",
+          "date": "2026-05-08",
+          "adr20": 2.6883821271609754,
+          "hypothetical_pnl": 315624.4,
+          "decision": "cash"
+        },
+        {
+          "id": 113,
+          "symbol": "SHILPAMED",
+          "date": "2026-08-05",
+          "adr20": 3.4445028008832463,
+          "hypothetical_pnl": 294642.3500000001,
+          "decision": "slots"
+        },
+        {
+          "id": 58,
+          "symbol": "CPPLUS",
+          "date": "2026-05-05",
+          "adr20": 4.662318668206209,
+          "hypothetical_pnl": 207008.03199999995,
+          "decision": "slots"
+        },
+        {
+          "id": 73,
+          "symbol": "KIRLOSENG",
+          "date": "2026-05-15",
+          "adr20": 3.9412346442880706,
+          "hypothetical_pnl": 193564.24349999998,
+          "decision": "cash"
+        },
+        {
+          "id": 42,
+          "symbol": "KIRLOSENG",
+          "date": "2026-04-27",
+          "adr20": 4.330805416057731,
+          "hypothetical_pnl": 167499.53549999997,
+          "decision": "slots"
+        },
+        {
+          "id": 99,
+          "symbol": "LAURUSLABS",
+          "date": "2026-07-10",
+          "adr20": 3.1289132218263593,
+          "hypothetical_pnl": 153465.00000000003,
+          "decision": "slots"
+        },
+        {
+          "id": 62,
+          "symbol": "HONASA",
+          "date": "2026-05-07",
+          "adr20": 3.6216511968123526,
+          "hypothetical_pnl": 112818.29124999998,
+          "decision": "cash"
+        },
+        {
+          "id": 98,
+          "symbol": "RUBICON",
+          "date": "2026-07-10",
+          "adr20": 5.325084542437521,
+          "hypothetical_pnl": 99970.50000000004,
+          "decision": "slots"
+        }
+      ]
+    },
+    "posthoc_adr_2_to_4": {
+      "new_winners": 7,
+      "new_losers": 6,
+      "new_pnl": 917904.657251975,
+      "removed_pnl": 415828.6728224286,
+      "removed_by_filter": [
+        3,
+        4,
+        7,
+        9,
+        11,
+        68,
+        75,
+        77,
+        78,
+        79,
+        82,
+        88,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        100,
+        101,
+        102,
+        103,
+        105,
+        106,
+        111,
+        120,
+        123
+      ],
+      "removed_by_capacity": [
+        122
+      ],
+      "top_missed_decisions": [
+        {
+          "id": 32,
+          "symbol": "LAURUSLABS",
+          "date": "2026-04-23",
+          "adr20": 2.688339267657865,
+          "hypothetical_pnl": 391852.19999999995,
+          "decision": "taken"
+        },
+        {
+          "id": 41,
+          "symbol": "ATHERENERG",
+          "date": "2026-04-27",
+          "adr20": 5.502957317250638,
+          "hypothetical_pnl": 315638.39999999997,
+          "decision": "filter"
+        },
+        {
+          "id": 65,
+          "symbol": "LAURUSLABS",
+          "date": "2026-05-08",
+          "adr20": 2.6883821271609754,
+          "hypothetical_pnl": 315624.4,
+          "decision": "slots"
+        },
+        {
+          "id": 113,
+          "symbol": "SHILPAMED",
+          "date": "2026-08-05",
+          "adr20": 3.4445028008832463,
+          "hypothetical_pnl": 294642.3500000001,
+          "decision": "taken"
+        },
+        {
+          "id": 58,
+          "symbol": "CPPLUS",
+          "date": "2026-05-05",
+          "adr20": 4.662318668206209,
+          "hypothetical_pnl": 207008.03199999995,
+          "decision": "filter"
+        },
+        {
+          "id": 73,
+          "symbol": "KIRLOSENG",
+          "date": "2026-05-15",
+          "adr20": 3.9412346442880706,
+          "hypothetical_pnl": 193564.24349999998,
+          "decision": "cash"
+        },
+        {
+          "id": 42,
+          "symbol": "KIRLOSENG",
+          "date": "2026-04-27",
+          "adr20": 4.330805416057731,
+          "hypothetical_pnl": 167499.53549999997,
+          "decision": "filter"
+        },
+        {
+          "id": 99,
+          "symbol": "LAURUSLABS",
+          "date": "2026-07-10",
+          "adr20": 3.1289132218263593,
+          "hypothetical_pnl": 153465.00000000003,
+          "decision": "taken"
+        },
+        {
+          "id": 62,
+          "symbol": "HONASA",
+          "date": "2026-05-07",
+          "adr20": 3.6216511968123526,
+          "hypothetical_pnl": 112818.29124999998,
+          "decision": "slots"
+        },
+        {
+          "id": 98,
+          "symbol": "RUBICON",
+          "date": "2026-07-10",
+          "adr20": 5.325084542437521,
+          "hypothetical_pnl": 99970.50000000004,
+          "decision": "filter"
+        }
+      ]
+    }
+  },
+  "original_library": 59,
+  "post_screening_followup_count": 18,
+  "post_screening_unique_policies": 17,
+  "extended_robustness": [
+    {
+      "name": "baseline",
+      "total": 2193571.011622429,
+      "taken": 41,
+      "median": 1750872.018445429,
+      "p10": 1347512.1227842977,
+      "p90": 2257373.767654589,
+      "paired_wins": 0,
+      "paired_median_delta": 0.0,
+      "fixed_lots_costs": 2124019.559522429,
+      "costs_with_reallocation": 1889733.3784848289,
+      "next_day_proceeds": 2016505.887371779,
+      "next_day_and_costs": 1790000.4052308288,
+      "without_welcorp": 1191204.2181882975,
+      "without_lauruslabs": 2193571.011622429,
+      "without_rubicon": 1638734.8964382976
+    },
+    {
+      "name": "adr_2_to_5",
+      "total": 2411702.159479319,
+      "taken": 34,
+      "median": 2350896.363979319,
+      "p10": 2216475.6836293186,
+      "p90": 2396428.444979319,
+      "paired_wins": 189,
+      "paired_median_delta": 569512.5858358904,
+      "fixed_lots_costs": 2350281.213029319,
+      "costs_with_reallocation": 2324747.969669019,
+      "next_day_proceeds": 1993556.505979319,
+      "next_day_and_costs": 1942449.5570440192,
+      "without_welcorp": 1388442.4149793189,
+      "without_lauruslabs": 2338051.779479319,
+      "without_rubicon": 1925984.649479319
+    },
+    {
+      "name": "adr_3_to_5",
+      "total": 2352394.5096793193,
+      "taken": 33,
+      "median": 2141657.961679319,
+      "p10": 2093963.391681294,
+      "p90": 2324968.471179319,
+      "paired_wins": 145,
+      "paired_median_delta": 397834.07515929313,
+      "fixed_lots_costs": 2294591.5162793193,
+      "costs_with_reallocation": 2083759.8847190193,
+      "next_day_proceeds": 2024176.1316793193,
+      "next_day_and_costs": 1879309.7145690194,
+      "without_welcorp": 1457879.680179319,
+      "without_lauruslabs": 2493571.859679319,
+      "without_rubicon": 2107223.939679319
+    },
+    {
+      "name": "adr_le_5",
+      "total": 2403662.4294793187,
+      "taken": 36,
+      "median": 2337250.683979319,
+      "p10": 2205283.011979319,
+      "p90": 2388388.714979319,
+      "paired_wins": 189,
+      "paired_median_delta": 559576.3806779557,
+      "fixed_lots_costs": 2334784.5925793187,
+      "costs_with_reallocation": 2309251.349219019,
+      "next_day_proceeds": 1986713.7759793191,
+      "next_day_and_costs": 1931893.5540940193,
+      "without_welcorp": 1380402.6849793189,
+      "without_lauruslabs": 2330012.049479319,
+      "without_rubicon": 1917944.9194793191
+    },
+    {
+      "name": "rank_low_extension",
+      "total": 2296923.6432684287,
+      "taken": 40,
+      "median": 2296923.6432684287,
+      "p10": 2296923.6432684287,
+      "p90": 2296923.6432684287,
+      "paired_wins": 194,
+      "paired_median_delta": 546051.6248229998,
+      "fixed_lots_costs": 2228626.523393429,
+      "costs_with_reallocation": 1732045.076193429,
+      "next_day_proceeds": 1479704.782809379,
+      "next_day_and_costs": 1064814.1778548977,
+      "without_welcorp": 1252261.3525842975,
+      "without_lauruslabs": 2296923.6432684287,
+      "without_rubicon": 1783371.9623342976
+    },
+    {
+      "name": "posthoc_adr_2_to_4",
+      "total": 2695646.9960519755,
+      "taken": 25,
+      "median": 2695646.9960519755,
+      "p10": 2695646.9960519755,
+      "p90": 2695646.9960519755,
+      "paired_wins": 200,
+      "paired_median_delta": 944774.9776065466,
+      "fixed_lots_costs": 2639530.2370769754,
+      "costs_with_reallocation": 2799916.848576975,
+      "next_day_proceeds": 2327734.0635519754,
+      "next_day_and_costs": 2758289.192701975,
+      "without_welcorp": 1506489.816551975,
+      "without_lauruslabs": 2037395.5623949752,
+      "without_rubicon": 2252426.618394975
+    }
+  ],
+  "sources": [
+    {
+      "bytes": 8540,
+      "sha256": "db3512055d2c401e0e791994767eba1a1f7154790ee0bd1a330d7a5be671da77",
+      "source_file": "validate.py"
+    },
+    {
+      "bytes": 15889,
+      "sha256": "9915579db664083b3ef377d23a29b87b94bf7469ea9ab0388ff443d645e3b367",
+      "source_file": "analyze.py"
+    },
+    {
+      "bytes": 21941,
+      "sha256": "9b663959f563e93c0e4fd57d39ac6ae6f73edf91e07735bd7f626e3106d62072",
+      "source_file": "audit.py"
+    },
+    {
+      "bytes": 10566,
+      "sha256": "8ff46268eec5e2ae0988d8d0a2b9d7c5227d07a3d587f14d753f934b2f6dcb90",
+      "source_file": "book_2026_09.csv"
+    },
+    {
+      "bytes": 1194544,
+      "sha256": "8e3a6552eb15ffe284da705a5d6c144ef60762512fadea2ed3e76636596cfecf",
+      "source_file": "book_panel.pkl"
+    },
+    {
+      "bytes": 36297287,
+      "sha256": "d7436a3952a9a7c1b108a72882f14c4a9112c2ef6f5c9285f06584867d72d51c",
+      "source_file": "panel.pkl"
+    },
+    {
+      "bytes": 26948,
+      "sha256": "05fc25a297eb4b5583a898c48bf3c676d300f4e457d51b5945e392f111203760",
+      "source_file": "2026-09-25_ms_vs_ours_v3.py"
+    }
+  ],
+  "public_package_note": "Source hashes describe the local audit inputs. Raw OHLC panels and private service repositories are not included. replay.py verifies allocation from published features and exits only."
+}

@@ -1,0 +1,25 @@
+/* Scoped additions survive the nightly mirror's replacement of inline theme CSS. */
+.entry-study{--maxw:1240px}
+.entry-study h1 br{display:initial}
+.entry-study h2{margin-top:38px;scroll-margin-top:120px}
+.entry-study section{margin:0}
+.entry-study p,.entry-study li{max-width:105ch;overflow-wrap:anywhere}
+.entry-study .meta,.entry-study .stats{max-width:none}
+.entry-study img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius);margin:24px 0}
+.entry-study pre{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.entry-study pre code{background:transparent;padding:0}
+.entry-study .baseline-row td{background:var(--blue-50);font-weight:700;color:var(--ink)}
+.entry-study #policy-table td:nth-child(2){white-space:normal;min-width:290px;max-width:430px;text-align:left}
+.entry-study #skipped-table td:nth-child(2),.entry-study #skipped-table td:nth-child(3){text-align:left}
+.entry-study .tbl-scroll:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.entry-study .explorer-controls{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.entry-study label{display:flex;flex-direction:column;gap:7px;color:var(--ink-2);font-size:13px;flex:1;min-width:220px;max-width:390px}
+.entry-study input,.entry-study select{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line-strong);padding:11px 12px;border-radius:8px;width:100%}
+.entry-study input:focus-visible,.entry-study select:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.entry-study details{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:12px 0}
+.entry-study summary{font-weight:600;cursor:pointer;color:var(--ink);line-height:1.6}
+.entry-study summary:focus-visible{outline:2px solid var(--blue)}
+.entry-study .download-button{display:inline-block;padding:10px 14px;background:var(--blue-50);border:1px solid var(--blue-100);border-radius:8px;font-weight:600;margin:0 12px 8px 0;text-decoration:none}
+.entry-study [hidden]{display:none!important}
+@media(max-width:640px){.entry-study h2{scroll-margin-top:180px}.entry-study .stats{grid-template-columns:1fr}.entry-study nav.toc{gap:5px}.entry-study nav.toc a{font-size:11px;padding:6px 9px}}
+@media print{.entry-study .explorer-controls{display:none}.entry-study details{break-inside:avoid}}

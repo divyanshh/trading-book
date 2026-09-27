@@ -1,0 +1,776 @@
+{
+  "policy_count": 59,
+  "timing": "All features strictly before entry date; ranking assumes same-date batch availability",
+  "policies": [
+    {
+      "name": "baseline",
+      "conditions": [],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "stocks_only",
+      "conditions": [
+        [
+          "is_etf",
+          "eq",
+          false
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "one_lot_per_stock",
+      "conditions": [],
+      "rank": null,
+      "no_duplicate": true
+    },
+    {
+      "name": "momentum20_ge_0",
+      "conditions": [
+        [
+          "mom20",
+          "ge",
+          0
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "momentum20_ge_5",
+      "conditions": [
+        [
+          "mom20",
+          "ge",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "momentum20_ge_10",
+      "conditions": [
+        [
+          "mom20",
+          "ge",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "momentum60_ge_0",
+      "conditions": [
+        [
+          "mom60",
+          "ge",
+          0
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "momentum60_ge_10",
+      "conditions": [
+        [
+          "mom60",
+          "ge",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "momentum60_ge_20",
+      "conditions": [
+        [
+          "mom60",
+          "ge",
+          20
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "rs60_ge_0",
+      "conditions": [
+        [
+          "rs60",
+          "ge",
+          0
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "rs60_ge_5",
+      "conditions": [
+        [
+          "rs60",
+          "ge",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "rs60_ge_10",
+      "conditions": [
+        [
+          "rs60",
+          "ge",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "above_ma20",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "above_ma50",
+      "conditions": [
+        [
+          "ext50",
+          "ge",
+          0
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "trend_stack",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ma20_over_50",
+          "eq",
+          true
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "trend_stack_rising50",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ma20_over_50",
+          "eq",
+          true
+        ],
+        [
+          "ma50_rising",
+          "eq",
+          true
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "extension20_le_5",
+      "conditions": [
+        [
+          "ext20",
+          "le",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "extension20_0_to_5",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ext20",
+          "le",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "extension20_le_10",
+      "conditions": [
+        [
+          "ext20",
+          "le",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "extension20_0_to_10",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ext20",
+          "le",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "extension20_le_15",
+      "conditions": [
+        [
+          "ext20",
+          "le",
+          15
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "extension20_0_to_15",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ext20",
+          "le",
+          15
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_2_to_5",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          2
+        ],
+        [
+          "adr20",
+          "le",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_3_to_5",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          3
+        ],
+        [
+          "adr20",
+          "le",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_2_to_6",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          2
+        ],
+        [
+          "adr20",
+          "le",
+          6
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_3_to_6",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          3
+        ],
+        [
+          "adr20",
+          "le",
+          6
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_3_to_8",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          3
+        ],
+        [
+          "adr20",
+          "le",
+          8
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_4_to_8",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          4
+        ],
+        [
+          "adr20",
+          "le",
+          8
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_ge_2",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          2
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_ge_3",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          3
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_ge_4",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          4
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_le_5",
+      "conditions": [
+        [
+          "adr20",
+          "le",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr_le_6",
+      "conditions": [
+        [
+          "adr20",
+          "le",
+          6
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "within_10pct_high20",
+      "conditions": [
+        [
+          "near_high20",
+          "ge",
+          90
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "within_5pct_high20",
+      "conditions": [
+        [
+          "near_high20",
+          "ge",
+          95
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "within_2pct_high20",
+      "conditions": [
+        [
+          "near_high20",
+          "ge",
+          98
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "within_10pct_high60",
+      "conditions": [
+        [
+          "near_high60",
+          "ge",
+          90
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "within_5pct_high60",
+      "conditions": [
+        [
+          "near_high60",
+          "ge",
+          95
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "turnover_ge_1cr",
+      "conditions": [
+        [
+          "median_turnover20_cr",
+          "ge",
+          1
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "turnover_ge_5cr",
+      "conditions": [
+        [
+          "median_turnover20_cr",
+          "ge",
+          5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "turnover_ge_10cr",
+      "conditions": [
+        [
+          "median_turnover20_cr",
+          "ge",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "prior_volume_ge_1x",
+      "conditions": [
+        [
+          "volume_ratio",
+          "ge",
+          1
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "prior_volume_ge_1.5x",
+      "conditions": [
+        [
+          "volume_ratio",
+          "ge",
+          1.5
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "prior_volume_ge_2x",
+      "conditions": [
+        [
+          "volume_ratio",
+          "ge",
+          2
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "volume_dryup_le_0.8",
+      "conditions": [
+        [
+          "dryup5",
+          "le",
+          0.8
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "volume_dryup_le_1",
+      "conditions": [
+        [
+          "dryup5",
+          "le",
+          1
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "rank_rs60",
+      "conditions": [],
+      "rank": "rs60",
+      "no_duplicate": false
+    },
+    {
+      "name": "rank_mom20",
+      "conditions": [],
+      "rank": "mom20",
+      "no_duplicate": false
+    },
+    {
+      "name": "rank_mom60",
+      "conditions": [],
+      "rank": "mom60",
+      "no_duplicate": false
+    },
+    {
+      "name": "rank_turnover",
+      "conditions": [],
+      "rank": "turnover",
+      "no_duplicate": false
+    },
+    {
+      "name": "rank_low_extension",
+      "conditions": [],
+      "rank": "low_extension",
+      "no_duplicate": false
+    },
+    {
+      "name": "rank_near_high20",
+      "conditions": [],
+      "rank": "near_high20",
+      "no_duplicate": false
+    },
+    {
+      "name": "adr3_6_and_rs_positive",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          3
+        ],
+        [
+          "adr20",
+          "le",
+          6
+        ],
+        [
+          "rs60",
+          "ge",
+          0
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr3_6_and_trend",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          3
+        ],
+        [
+          "adr20",
+          "le",
+          6
+        ],
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ma20_over_50",
+          "eq",
+          true
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "trend_and_extension_le10",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ma20_over_50",
+          "eq",
+          true
+        ],
+        [
+          "ext20",
+          "le",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "rs_positive_and_extension_le10",
+      "conditions": [
+        [
+          "rs60",
+          "ge",
+          0
+        ],
+        [
+          "ext20",
+          "le",
+          10
+        ]
+      ],
+      "rank": null,
+      "no_duplicate": false
+    },
+    {
+      "name": "adr3_6_rank_rs",
+      "conditions": [
+        [
+          "adr20",
+          "ge",
+          3
+        ],
+        [
+          "adr20",
+          "le",
+          6
+        ]
+      ],
+      "rank": "rs60",
+      "no_duplicate": false
+    },
+    {
+      "name": "trend_rank_rs",
+      "conditions": [
+        [
+          "ext20",
+          "ge",
+          0
+        ],
+        [
+          "ma20_over_50",
+          "eq",
+          true
+        ]
+      ],
+      "rank": "rs60",
+      "no_duplicate": false
+    },
+    {
+      "name": "stocks_rank_rs",
+      "conditions": [
+        [
+          "is_etf",
+          "eq",
+          false
+        ]
+      ],
+      "rank": "rs60",
+      "no_duplicate": false
+    }
+  ]
+}
