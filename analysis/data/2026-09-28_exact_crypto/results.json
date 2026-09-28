@@ -1,0 +1,1017 @@
+{
+  "period": {
+    "start": "2026-03-27 00:00:00+00:00",
+    "end_exclusive": "2026-09-27 00:00:00+00:00",
+    "months": 6
+  },
+  "exact_tape": {
+    "positions": 9,
+    "wins": 5,
+    "net_usd": "561.3375400500000000000000000",
+    "gross_usd": "567.6113200000000000000000000",
+    "fees_usd": "6.27377995",
+    "symbols": [
+      "ARBUSD",
+      "BIOUSD",
+      "ENAUSD",
+      "MUSD",
+      "NEIROUSD",
+      "PENDLEUSD",
+      "PNUTUSD",
+      "SWARMSUSD",
+      "VVVUSD"
+    ],
+    "cash_reconciled": true,
+    "scope": "recorded fills; no funding record was available in the fill export"
+  },
+  "selector_audit": {
+    "manual_positions_matched": 9,
+    "manual_positions_total": 9,
+    "recall_pct": "100",
+    "matched_modes": {
+      "ARBUSD": "leader_recovery",
+      "BIOUSD": "leader_recovery",
+      "ENAUSD": "resting_breakout",
+      "MUSD": "leader_recovery",
+      "NEIROUSD": "leader_recovery",
+      "PENDLEUSD": "resting_breakout",
+      "PNUTUSD": "resting_breakout",
+      "SWARMSUSD": "leader_recovery",
+      "VVVUSD": "leader_recovery"
+    },
+    "distinct_april_candidates": 37,
+    "extra_distinct_symbols": [
+      "1000SATSUSD",
+      "ACTUSD",
+      "AIOUSD",
+      "AIXBTUSD",
+      "ARCUSD",
+      "AVAAIUSD",
+      "BLURUSD",
+      "COAIUSD",
+      "DASHUSD",
+      "DOGSUSD",
+      "DUSKUSD",
+      "EDENUSD",
+      "EVAAUSD",
+      "GIGGLEUSD",
+      "GRIFFAINUSD",
+      "HYPEUSD",
+      "KSMUSD",
+      "MASKUSD",
+      "MMTUSD",
+      "MONUSD",
+      "ORDERUSD",
+      "ORDIUSD",
+      "RAREUSD",
+      "SPXUSD",
+      "TRBUSD",
+      "TSTUSD",
+      "XANUSD",
+      "ZENUSD"
+    ],
+    "candidate_days": {
+      "2026-04-24": [
+        "1000SATSUSD",
+        "ARBUSD",
+        "ARCUSD",
+        "COAIUSD",
+        "DASHUSD",
+        "DUSKUSD",
+        "ENAUSD",
+        "GIGGLEUSD",
+        "MMTUSD",
+        "MONUSD",
+        "SWARMSUSD",
+        "TSTUSD"
+      ],
+      "2026-04-25": [
+        "1000SATSUSD",
+        "ARBUSD",
+        "ARCUSD",
+        "AVAAIUSD",
+        "DASHUSD",
+        "DUSKUSD",
+        "GIGGLEUSD",
+        "MMTUSD",
+        "MONUSD",
+        "SWARMSUSD",
+        "TSTUSD",
+        "VVVUSD"
+      ],
+      "2026-04-26": [
+        "1000SATSUSD",
+        "ACTUSD",
+        "AIXBTUSD",
+        "ARCUSD",
+        "AVAAIUSD",
+        "BLURUSD",
+        "DASHUSD",
+        "DOGSUSD",
+        "ENAUSD",
+        "MMTUSD",
+        "MONUSD",
+        "ORDIUSD",
+        "PENDLEUSD",
+        "PNUTUSD",
+        "SWARMSUSD",
+        "TSTUSD",
+        "VVVUSD"
+      ],
+      "2026-04-27": [
+        "1000SATSUSD",
+        "AIOUSD",
+        "AIXBTUSD",
+        "ARCUSD",
+        "AVAAIUSD",
+        "BIOUSD",
+        "COAIUSD",
+        "DASHUSD",
+        "DOGSUSD",
+        "GIGGLEUSD",
+        "MMTUSD",
+        "MONUSD",
+        "ORDIUSD",
+        "PNUTUSD",
+        "SWARMSUSD",
+        "TRBUSD",
+        "TSTUSD",
+        "ZENUSD"
+      ],
+      "2026-04-28": [
+        "1000SATSUSD",
+        "AIXBTUSD",
+        "AVAAIUSD",
+        "BIOUSD",
+        "BLURUSD",
+        "COAIUSD",
+        "DASHUSD",
+        "DOGSUSD",
+        "GIGGLEUSD",
+        "MONUSD",
+        "NEIROUSD",
+        "ORDIUSD",
+        "PNUTUSD",
+        "TRBUSD",
+        "TSTUSD",
+        "ZENUSD"
+      ],
+      "2026-04-29": [
+        "1000SATSUSD",
+        "AVAAIUSD",
+        "BLURUSD",
+        "COAIUSD",
+        "DOGSUSD",
+        "EVAAUSD",
+        "GIGGLEUSD",
+        "NEIROUSD",
+        "ORDERUSD",
+        "ORDIUSD",
+        "PNUTUSD",
+        "SPXUSD",
+        "TSTUSD",
+        "XANUSD",
+        "ZENUSD"
+      ],
+      "2026-04-22": [
+        "AIXBTUSD",
+        "ARCUSD",
+        "COAIUSD",
+        "DASHUSD",
+        "DUSKUSD",
+        "MASKUSD",
+        "MMTUSD",
+        "MONUSD",
+        "SWARMSUSD"
+      ],
+      "2026-04-23": [
+        "AIXBTUSD",
+        "ARCUSD",
+        "COAIUSD",
+        "DUSKUSD",
+        "EDENUSD",
+        "HYPEUSD",
+        "KSMUSD",
+        "MASKUSD",
+        "MMTUSD",
+        "MONUSD",
+        "SWARMSUSD"
+      ],
+      "2026-04-15": [
+        "ARCUSD",
+        "GRIFFAINUSD",
+        "SWARMSUSD"
+      ],
+      "2026-04-16": [
+        "ARCUSD",
+        "MUSD",
+        "SWARMSUSD"
+      ],
+      "2026-04-18": [
+        "ARCUSD",
+        "DASHUSD",
+        "MONUSD",
+        "ORDERUSD"
+      ],
+      "2026-04-19": [
+        "ARCUSD",
+        "DUSKUSD",
+        "MMTUSD",
+        "MONUSD",
+        "SWARMSUSD"
+      ],
+      "2026-04-20": [
+        "ARCUSD",
+        "DUSKUSD",
+        "EVAAUSD"
+      ],
+      "2026-04-21": [
+        "ARCUSD",
+        "DUSKUSD",
+        "MASKUSD",
+        "MMTUSD",
+        "MONUSD"
+      ],
+      "2026-04-30": [
+        "AVAAIUSD",
+        "BLURUSD",
+        "COAIUSD",
+        "DOGSUSD",
+        "DUSKUSD",
+        "EVAAUSD",
+        "MUSD",
+        "NEIROUSD",
+        "ORDIUSD",
+        "PNUTUSD",
+        "RAREUSD",
+        "TSTUSD",
+        "XANUSD"
+      ],
+      "2026-04-17": [
+        "MONUSD"
+      ],
+      "2026-04-14": [
+        "MUSD"
+      ]
+    },
+    "warning": "coverage is in-sample; extra candidates prove the rules do not uniquely reconstruct human discretion"
+  },
+  "variants": [
+    {
+      "name": "recovered_5r_025adr_6k",
+      "reward_r": "5",
+      "adr_stop_floor": "0.25",
+      "portfolio": {
+        "capital": "6000",
+        "risk": "100",
+        "max_notional": "1200",
+        "max_positions": 8,
+        "fee_bps": "5",
+        "slippage_bps": "5",
+        "funding_bps_daily": "3",
+        "reserve_fraction": "0.02",
+        "entry_delay_hours": 0,
+        "directional_risk_multiple": "8",
+        "risk_to_disaster": false
+      },
+      "gates": {
+        "btc_below_or_missing_ema50": 7692,
+        "leader_trend": 2243,
+        "outside_recovered_entry_envelope": 3588,
+        "planned_resting_breakout": 296,
+        "turnover": 1852,
+        "planned_leader_recovery": 396,
+        "stop_width": 17,
+        "planned_deep_pullback": 13
+      },
+      "summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "10135.31053379171307022557999",
+        "net": "4135.31053379171307022557999",
+        "return_pct": "68.92184222986188450375966650",
+        "max_hour_close_drawdown_pct": "24.33564331493642510609431227",
+        "closed_positions": 168,
+        "wins": 45,
+        "win_rate_pct": "26.78571428571428571428571429",
+        "profit_factor": "1.560262917983750552563900143",
+        "open_positions": 7,
+        "counts": {
+          "prepared": 462,
+          "triggered": 424,
+          "limit_unfilled": 2898,
+          "entered": 175,
+          "intrabar_stop": 81,
+          "setup_invalidated": 39,
+          "duplicate_setup": 243,
+          "profit_target": 28,
+          "insufficient_cash_or_contract_size": 58,
+          "ema20_exit": 58,
+          "expired": 38,
+          "position_cap": 149,
+          "regime_invalidated": 1,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "first_half_summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-06-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "6840.676957165484582236671471",
+        "net": "840.676957165484582236671471",
+        "return_pct": "14.01128261942474303727785785",
+        "max_hour_close_drawdown_pct": "19.41867836733304851548619009",
+        "closed_positions": 82,
+        "wins": 22,
+        "win_rate_pct": "26.82926829268292682926829268",
+        "profit_factor": "1.331843814139304440755684442",
+        "open_positions": 0,
+        "counts": {
+          "prepared": 280,
+          "triggered": 248,
+          "limit_unfilled": 1339,
+          "entered": 82,
+          "intrabar_stop": 35,
+          "setup_invalidated": 32,
+          "duplicate_setup": 119,
+          "profit_target": 12,
+          "insufficient_cash_or_contract_size": 55,
+          "ema20_exit": 35,
+          "expired": 18,
+          "position_cap": 92,
+          "regime_invalidated": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "second_half_summary": {
+        "start": "2026-06-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "9189.771235836420487988908515",
+        "net": "3189.771235836420487988908515",
+        "return_pct": "53.16285393060700813314847525",
+        "max_hour_close_drawdown_pct": "24.52479043920670951094158566",
+        "closed_positions": 82,
+        "wins": 23,
+        "win_rate_pct": "28.04878048780487804878048780",
+        "profit_factor": "1.845803546076481406265146608",
+        "open_positions": 7,
+        "counts": {
+          "prepared": 184,
+          "triggered": 177,
+          "entered": 89,
+          "duplicate_setup": 122,
+          "ema20_exit": 24,
+          "setup_invalidated": 8,
+          "intrabar_stop": 42,
+          "limit_unfilled": 1606,
+          "profit_target": 15,
+          "expired": 21,
+          "position_cap": 38,
+          "insufficient_cash_or_contract_size": 26,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "closed_net": "3209.242974957760570225579986",
+      "open_net": "926.0675588339525000",
+      "entered_positions": 175,
+      "april_entered_manual_symbols": [
+        "BIOUSD",
+        "ENAUSD",
+        "MUSD",
+        "SWARMSUSD",
+        "VVVUSD"
+      ],
+      "april_missed_after_execution_rules": [
+        "ARBUSD",
+        "NEIROUSD",
+        "PENDLEUSD",
+        "PNUTUSD"
+      ],
+      "open_positions": [
+        {
+          "symbol": "CAKEUSD",
+          "entry_at": "2026-09-15T21:00:00+00:00",
+          "remaining": 540,
+          "net_including_exit_reserve": "277.257816243000"
+        },
+        {
+          "symbol": "NOTUSD",
+          "entry_at": "2026-09-17T01:00:00+00:00",
+          "remaining": 27547,
+          "net_including_exit_reserve": "176.105279176027500"
+        },
+        {
+          "symbol": "SUSHIUSD",
+          "entry_at": "2026-09-17T02:00:00+00:00",
+          "remaining": 875,
+          "net_including_exit_reserve": "39.705231912500"
+        },
+        {
+          "symbol": "DASHUSD",
+          "entry_at": "2026-09-21T02:00:00+00:00",
+          "remaining": 150,
+          "net_including_exit_reserve": "228.33215422500"
+        },
+        {
+          "symbol": "ORDERUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 3065,
+          "net_including_exit_reserve": "58.0499047266250"
+        },
+        {
+          "symbol": "DOGSUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 25776,
+          "net_including_exit_reserve": "113.6703398922000000"
+        },
+        {
+          "symbol": "ZORAUSD",
+          "entry_at": "2026-09-24T02:00:00+00:00",
+          "remaining": 1226,
+          "net_including_exit_reserve": "32.94683265860000"
+        }
+      ]
+    },
+    {
+      "name": "recovered_8r_025adr_6k",
+      "reward_r": "8",
+      "adr_stop_floor": "0.25",
+      "portfolio": {
+        "capital": "6000",
+        "risk": "100",
+        "max_notional": "1200",
+        "max_positions": 8,
+        "fee_bps": "5",
+        "slippage_bps": "5",
+        "funding_bps_daily": "3",
+        "reserve_fraction": "0.02",
+        "entry_delay_hours": 0,
+        "directional_risk_multiple": "8",
+        "risk_to_disaster": false
+      },
+      "gates": {
+        "btc_below_or_missing_ema50": 7692,
+        "leader_trend": 2243,
+        "outside_recovered_entry_envelope": 3588,
+        "planned_resting_breakout": 296,
+        "turnover": 1852,
+        "planned_leader_recovery": 396,
+        "stop_width": 17,
+        "planned_deep_pullback": 13
+      },
+      "summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "9082.738133976557938944437828",
+        "net": "3082.738133976557938944437828",
+        "return_pct": "51.37896889960929898240729713",
+        "max_hour_close_drawdown_pct": "26.00115773284825129728069042",
+        "closed_positions": 151,
+        "wins": 38,
+        "win_rate_pct": "25.16556291390728476821192053",
+        "profit_factor": "1.389585044588726380517169256",
+        "open_positions": 8,
+        "counts": {
+          "prepared": 485,
+          "triggered": 448,
+          "limit_unfilled": 3090,
+          "entered": 159,
+          "intrabar_stop": 74,
+          "setup_invalidated": 38,
+          "duplicate_setup": 220,
+          "profit_target": 12,
+          "insufficient_cash_or_contract_size": 120,
+          "ema20_exit": 64,
+          "expired": 41,
+          "position_cap": 123,
+          "execution_invalidated": 1,
+          "regime_invalidated": 1,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "first_half_summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-06-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "6002.738292325287704412184205",
+        "net": "2.738292325287704412184205",
+        "return_pct": "0.04563820542146174020307008333",
+        "max_hour_close_drawdown_pct": "24.30688773040952360415655818",
+        "closed_positions": 74,
+        "wins": 19,
+        "win_rate_pct": "25.67567567567567567567567568",
+        "profit_factor": "1.001109235236531623129100742",
+        "open_positions": 0,
+        "counts": {
+          "prepared": 297,
+          "triggered": 266,
+          "limit_unfilled": 1477,
+          "entered": 74,
+          "intrabar_stop": 34,
+          "setup_invalidated": 31,
+          "duplicate_setup": 102,
+          "profit_target": 3,
+          "insufficient_cash_or_contract_size": 63,
+          "ema20_exit": 37,
+          "expired": 20,
+          "position_cap": 107,
+          "execution_invalidated": 1,
+          "regime_invalidated": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "second_half_summary": {
+        "start": "2026-06-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "9078.340366514495684532253623",
+        "net": "3078.340366514495684532253623",
+        "return_pct": "51.30567277524159474220422705",
+        "max_hour_close_drawdown_pct": "24.00417007966085740670569864",
+        "closed_positions": 78,
+        "wins": 19,
+        "win_rate_pct": "24.35897435897435897435897436",
+        "profit_factor": "1.759793992846794426373789962",
+        "open_positions": 8,
+        "counts": {
+          "prepared": 187,
+          "triggered": 181,
+          "entered": 86,
+          "duplicate_setup": 119,
+          "ema20_exit": 27,
+          "setup_invalidated": 7,
+          "intrabar_stop": 41,
+          "limit_unfilled": 1613,
+          "expired": 21,
+          "profit_target": 9,
+          "position_cap": 22,
+          "insufficient_cash_or_contract_size": 49,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "closed_net": "1970.868516627105438944437828",
+      "open_net": "1111.8696173494525000",
+      "entered_positions": 159,
+      "april_entered_manual_symbols": [
+        "ENAUSD",
+        "MUSD",
+        "PNUTUSD",
+        "SWARMSUSD",
+        "VVVUSD"
+      ],
+      "april_missed_after_execution_rules": [
+        "ARBUSD",
+        "BIOUSD",
+        "NEIROUSD",
+        "PENDLEUSD"
+      ],
+      "open_positions": [
+        {
+          "symbol": "CAKEUSD",
+          "entry_at": "2026-09-15T21:00:00+00:00",
+          "remaining": 540,
+          "net_including_exit_reserve": "277.257816243000"
+        },
+        {
+          "symbol": "NOTUSD",
+          "entry_at": "2026-09-17T01:00:00+00:00",
+          "remaining": 27547,
+          "net_including_exit_reserve": "176.105279176027500"
+        },
+        {
+          "symbol": "ZORAUSD",
+          "entry_at": "2026-09-17T02:00:00+00:00",
+          "remaining": 660,
+          "net_including_exit_reserve": "96.2621360250000"
+        },
+        {
+          "symbol": "DASHUSD",
+          "entry_at": "2026-09-21T02:00:00+00:00",
+          "remaining": 150,
+          "net_including_exit_reserve": "228.33215422500"
+        },
+        {
+          "symbol": "ORDERUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 3065,
+          "net_including_exit_reserve": "58.0499047266250"
+        },
+        {
+          "symbol": "KSMUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 2757,
+          "net_including_exit_reserve": "121.522694758200"
+        },
+        {
+          "symbol": "DOGSUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 25776,
+          "net_including_exit_reserve": "113.6703398922000000"
+        },
+        {
+          "symbol": "BLURUSD",
+          "entry_at": "2026-09-24T02:00:00+00:00",
+          "remaining": 2603,
+          "net_including_exit_reserve": "40.6692923034000"
+        }
+      ]
+    },
+    {
+      "name": "recovered_5r_050adr_6k",
+      "reward_r": "5",
+      "adr_stop_floor": "0.5",
+      "portfolio": {
+        "capital": "6000",
+        "risk": "100",
+        "max_notional": "1200",
+        "max_positions": 8,
+        "fee_bps": "5",
+        "slippage_bps": "5",
+        "funding_bps_daily": "3",
+        "reserve_fraction": "0.02",
+        "entry_delay_hours": 0,
+        "directional_risk_multiple": "8",
+        "risk_to_disaster": false
+      },
+      "gates": {
+        "btc_below_or_missing_ema50": 7692,
+        "leader_trend": 2243,
+        "outside_recovered_entry_envelope": 3588,
+        "planned_resting_breakout": 296,
+        "turnover": 1852,
+        "planned_leader_recovery": 396,
+        "stop_width": 17,
+        "planned_deep_pullback": 13
+      },
+      "summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "10421.22321039575645559366184",
+        "net": "4421.22321039575645559366184",
+        "return_pct": "73.68705350659594092656103067",
+        "max_hour_close_drawdown_pct": "23.44338473983170680184526392",
+        "closed_positions": 151,
+        "wins": 40,
+        "win_rate_pct": "26.49006622516556291390728477",
+        "profit_factor": "1.498017047303544978833371867",
+        "open_positions": 8,
+        "counts": {
+          "prepared": 478,
+          "triggered": 445,
+          "limit_unfilled": 3024,
+          "entered": 159,
+          "intrabar_stop": 62,
+          "setup_invalidated": 32,
+          "duplicate_setup": 227,
+          "profit_target": 21,
+          "insufficient_cash_or_contract_size": 68,
+          "ema20_exit": 67,
+          "expired": 42,
+          "position_cap": 174,
+          "regime_invalidated": 1,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "first_half_summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-06-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "7720.881222116780915216722632",
+        "net": "1720.881222116780915216722632",
+        "return_pct": "28.68135370194634858694537720",
+        "max_hour_close_drawdown_pct": "19.29813743856279261100068280",
+        "closed_positions": 75,
+        "wins": 22,
+        "win_rate_pct": "29.33333333333333333333333333",
+        "profit_factor": "1.706500639116728274934738729",
+        "open_positions": 0,
+        "counts": {
+          "prepared": 292,
+          "triggered": 263,
+          "limit_unfilled": 1410,
+          "entered": 75,
+          "intrabar_stop": 24,
+          "setup_invalidated": 27,
+          "duplicate_setup": 107,
+          "profit_target": 10,
+          "insufficient_cash_or_contract_size": 64,
+          "ema20_exit": 41,
+          "expired": 20,
+          "position_cap": 105,
+          "regime_invalidated": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "second_half_summary": {
+        "start": "2026-06-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "8462.776901274595482294346515",
+        "net": "2462.776901274595482294346515",
+        "return_pct": "41.04628168790992470490577525",
+        "max_hour_close_drawdown_pct": "20.52271109326070376764314014",
+        "closed_positions": 71,
+        "wins": 18,
+        "win_rate_pct": "25.35211267605633802816901408",
+        "profit_factor": "1.430970283196516546964741715",
+        "open_positions": 8,
+        "counts": {
+          "prepared": 189,
+          "triggered": 185,
+          "entered": 79,
+          "duplicate_setup": 117,
+          "ema20_exit": 26,
+          "setup_invalidated": 5,
+          "intrabar_stop": 33,
+          "limit_unfilled": 1618,
+          "profit_target": 11,
+          "expired": 22,
+          "insufficient_cash_or_contract_size": 17,
+          "position_cap": 64,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "closed_net": "3023.678708047466455593661838",
+      "open_net": "1397.5445023482900000",
+      "entered_positions": 159,
+      "april_entered_manual_symbols": [
+        "BIOUSD",
+        "ENAUSD",
+        "MUSD",
+        "SWARMSUSD",
+        "VVVUSD"
+      ],
+      "april_missed_after_execution_rules": [
+        "ARBUSD",
+        "NEIROUSD",
+        "PENDLEUSD",
+        "PNUTUSD"
+      ],
+      "open_positions": [
+        {
+          "symbol": "CAKEUSD",
+          "entry_at": "2026-09-15T21:00:00+00:00",
+          "remaining": 540,
+          "net_including_exit_reserve": "277.257816243000"
+        },
+        {
+          "symbol": "NOTUSD",
+          "entry_at": "2026-09-17T01:00:00+00:00",
+          "remaining": 27547,
+          "net_including_exit_reserve": "176.105279176027500"
+        },
+        {
+          "symbol": "ZORAUSD",
+          "entry_at": "2026-09-17T02:00:00+00:00",
+          "remaining": 1609,
+          "net_including_exit_reserve": "234.6754194912500"
+        },
+        {
+          "symbol": "SUSHIUSD",
+          "entry_at": "2026-09-17T02:00:00+00:00",
+          "remaining": 4335,
+          "net_including_exit_reserve": "196.711063246500"
+        },
+        {
+          "symbol": "DASHUSD",
+          "entry_at": "2026-09-21T02:00:00+00:00",
+          "remaining": 150,
+          "net_including_exit_reserve": "228.33215422500"
+        },
+        {
+          "symbol": "ORDERUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 3065,
+          "net_including_exit_reserve": "58.0499047266250"
+        },
+        {
+          "symbol": "KSMUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 2757,
+          "net_including_exit_reserve": "121.522694758200"
+        },
+        {
+          "symbol": "DOGSUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 23785,
+          "net_including_exit_reserve": "104.8901704816875000"
+        }
+      ]
+    },
+    {
+      "name": "recovered_5r_025adr_12k",
+      "reward_r": "5",
+      "adr_stop_floor": "0.25",
+      "portfolio": {
+        "capital": "12000",
+        "risk": "100",
+        "max_notional": "1200",
+        "max_positions": 8,
+        "fee_bps": "5",
+        "slippage_bps": "5",
+        "funding_bps_daily": "3",
+        "reserve_fraction": "0.02",
+        "entry_delay_hours": 0,
+        "directional_risk_multiple": "8",
+        "risk_to_disaster": false
+      },
+      "gates": {
+        "btc_below_or_missing_ema50": 7692,
+        "leader_trend": 2243,
+        "outside_recovered_entry_envelope": 3588,
+        "planned_resting_breakout": 296,
+        "turnover": 1852,
+        "planned_leader_recovery": 396,
+        "stop_width": 17,
+        "planned_deep_pullback": 13
+      },
+      "summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "12000",
+        "final_equity": "17087.07429009833697990109272",
+        "net": "5087.07429009833697990109272",
+        "return_pct": "42.39228575081947483250910600",
+        "max_hour_close_drawdown_pct": "15.29042216440743002317021045",
+        "closed_positions": 168,
+        "wins": 45,
+        "win_rate_pct": "26.78571428571428571428571429",
+        "profit_factor": "1.532856643165271415886431744",
+        "open_positions": 7,
+        "counts": {
+          "prepared": 461,
+          "triggered": 426,
+          "limit_unfilled": 2812,
+          "entered": 175,
+          "intrabar_stop": 79,
+          "setup_invalidated": 36,
+          "duplicate_setup": 244,
+          "profit_target": 27,
+          "position_cap": 211,
+          "ema20_exit": 61,
+          "expired": 36,
+          "regime_invalidated": 1,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "first_half_summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-06-27T00:00:00+00:00",
+        "capital": "12000",
+        "final_equity": "13470.89630791444009191218420",
+        "net": "1470.89630791444009191218420",
+        "return_pct": "12.25746923262033409926820167",
+        "max_hour_close_drawdown_pct": "13.39209034033559736548225774",
+        "closed_positions": 85,
+        "wins": 23,
+        "win_rate_pct": "27.05882352941176470588235294",
+        "profit_factor": "1.416934130983318254106550095",
+        "open_positions": 0,
+        "counts": {
+          "prepared": 278,
+          "triggered": 249,
+          "limit_unfilled": 1299,
+          "entered": 85,
+          "intrabar_stop": 35,
+          "setup_invalidated": 29,
+          "duplicate_setup": 121,
+          "profit_target": 12,
+          "position_cap": 146,
+          "ema20_exit": 38,
+          "expired": 17,
+          "regime_invalidated": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "second_half_summary": {
+        "start": "2026-06-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "12000",
+        "final_equity": "15616.17798218389688798890852",
+        "net": "3616.17798218389688798890852",
+        "return_pct": "30.13481651819914073324090433",
+        "max_hour_close_drawdown_pct": "16.78408559082447220178429136",
+        "closed_positions": 83,
+        "wins": 22,
+        "win_rate_pct": "26.50602409638554216867469880",
+        "profit_factor": "1.649756571285327049547577151",
+        "open_positions": 7,
+        "counts": {
+          "prepared": 183,
+          "triggered": 177,
+          "entered": 90,
+          "duplicate_setup": 123,
+          "ema20_exit": 23,
+          "setup_invalidated": 7,
+          "intrabar_stop": 44,
+          "limit_unfilled": 1513,
+          "profit_target": 15,
+          "expired": 19,
+          "position_cap": 65,
+          "time_exit": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "closed_net": "3743.997813803134479901092720",
+      "open_net": "1343.0764762952025000",
+      "entered_positions": 175,
+      "april_entered_manual_symbols": [
+        "ENAUSD",
+        "MUSD",
+        "PNUTUSD",
+        "SWARMSUSD",
+        "VVVUSD"
+      ],
+      "april_missed_after_execution_rules": [
+        "ARBUSD",
+        "BIOUSD",
+        "NEIROUSD",
+        "PENDLEUSD"
+      ],
+      "open_positions": [
+        {
+          "symbol": "CAKEUSD",
+          "entry_at": "2026-09-15T21:00:00+00:00",
+          "remaining": 540,
+          "net_including_exit_reserve": "277.257816243000"
+        },
+        {
+          "symbol": "NOTUSD",
+          "entry_at": "2026-09-17T01:00:00+00:00",
+          "remaining": 27547,
+          "net_including_exit_reserve": "176.105279176027500"
+        },
+        {
+          "symbol": "SUSHIUSD",
+          "entry_at": "2026-09-17T02:00:00+00:00",
+          "remaining": 5573,
+          "net_including_exit_reserve": "252.888294226700"
+        },
+        {
+          "symbol": "LISTAUSD",
+          "entry_at": "2026-09-17T13:00:00+00:00",
+          "remaining": 1671,
+          "net_including_exit_reserve": "236.7726878056500"
+        },
+        {
+          "symbol": "DASHUSD",
+          "entry_at": "2026-09-21T02:00:00+00:00",
+          "remaining": 150,
+          "net_including_exit_reserve": "228.33215422500"
+        },
+        {
+          "symbol": "ORDERUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 3065,
+          "net_including_exit_reserve": "58.0499047266250"
+        },
+        {
+          "symbol": "DOGSUSD",
+          "entry_at": "2026-09-24T01:00:00+00:00",
+          "remaining": 25776,
+          "net_including_exit_reserve": "113.6703398922000000"
+        }
+      ]
+    }
+  ],
+  "interpretation": {
+    "exact": "the fill replay is exact to the archived execution export",
+    "inferred": "the selector has 100% in-sample April recall but is not an exact reconstruction of unrecorded human discretion",
+    "live_status": "research only; no cron registration and no broker calls"
+  }
+}
