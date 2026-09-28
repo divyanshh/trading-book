@@ -3,6 +3,8 @@
   "reward_r": "5",
   "adr_stop_floor": "0.5",
   "automatic_filter": false,
+  "exit_rule": "full_planned",
+  "max_hold_days": 21,
   "portfolio": {
     "capital": "6000",
     "risk": "100",

@@ -421,7 +421,7 @@ the first half, and this market history has already been researched repeatedly.<
 <p>More capital does not scale profit linearly here. Doubling cash from $6,000 to
 $12,000 raises total marked P&amp;L from $4,135 to $5,087 because the $1,200
 per-position notional cap, contract granularity and signal ordering still bind.</p>
-<h2>Higher-win automatic profile</h2>
+<h2>Higher-win, $4,000 automatic profile</h2>
 <p>The exact-recall rule is intentionally broad, so it is the wrong rule to
 automate. A separate profile narrows admission to dry pullbacks in leaders:</p>
 <ul>
@@ -429,29 +429,37 @@ automate. A separate profile narrows admission to dry pullbacks in leaders:</p>
 <li>EMA20 must be above EMA50 and the coin must close above EMA50;</li>
 <li>30-day momentum must be at least 5%;</li>
 <li>30-day relative strength versus BTC must be at least +10 percentage points;</li>
-<li>five-day mean volume divided by twenty-day mean volume must be at most 0.35;</li>
+<li>five-day mean volume divided by twenty-day mean volume must be at most 0.28;</li>
 <li>the completed daily close must be 4%–8% below EMA10;</li>
 <li>the structural stop must be 0.1%–15% away and at least 0.25 historical ADR;</li>
-<li>the proposed fill must still offer at least 5R;</li>
+<li>the proposed fill must still offer at least 8.5R;</li>
 <li>choose at most one new plan per day, ranked nearest to a 4% pullback, with a
   three-day cooldown per symbol.</li>
 </ul>
-<p>The exact hourly portfolio replay closed <strong>20 positions, won 10 (50.0%) and
-made $1,212.66</strong>, with profit factor <strong>3.42</strong> and maximum drawdown <strong>5.65%</strong>.
-There was no open P&amp;L in that result. This satisfies the requested full-period
-win-rate threshold without lowering the 5R target or adding breakeven.</p>
-<p>It does not pass a temporal stability test. The first half closed 12 positions,
-won four (33.3%) and lost $18.04. The second half closed eight, won six (75%)
-and made $1,230.70. This is consistent with a regime-sensitive edge and too
-small to authorize unattended money. The headline 50% was also found after
-comparing filters and ranks, so it is an in-sample research result.</p>
-<p><code>manual_tis_automatic_5r</code> is now registered with the existing scheduled shadow
+<p>At <strong>$12,000 research capital</strong>, a <strong>$5,000 maximum notional</strong>, and <strong>$100
+planned stop risk</strong>, the exact hourly portfolio replay entered 19 positions and
+closed 18. Nine closed as winners: <strong>50.0% win rate</strong>. Closed trades made
+<strong>$4,074.44</strong>; one open ZORA position added <strong>$473.43</strong> at the final mark, for
+<strong>$4,547.88 total marked P&amp;L</strong>. Profit factor was <strong>4.76</strong> and maximum drawdown
+was <strong>6.99%</strong>. The engine charged fees, slippage and funding and made no
+breakeven stop move.</p>
+<p>This profile was selected after comparing pullback depth, dryness, ranking and
+target thresholds on the same history. The dry-volume ceiling of 0.28 removes
+one losing selection compared with 0.35; the 8.5R target is the smallest tested
+nearby target for which closed P&amp;L exceeded $4,000. Those facts make the result
+in-sample and vulnerable to selection bias.</p>
+<p>It also fails a temporal stability test. The first half closed 11 positions,
+won four (<strong>36.4%</strong>) and made <strong>$354.99</strong>. The second half closed seven, won five
+(<strong>71.4%</strong>) and made <strong>$4,192.89</strong> including the open final mark. Most profit
+came from the later regime, so this is not evidence that a stable 50% win rate
+has been recovered.</p>
+<p><code>manual_tis_automatic_8_5r</code> is now registered with the existing scheduled shadow
 scanner. It calculates the same candidate bracket, ranks one daily candidate,
 records rank exclusions and enforces the three-day signal cooldown. The shadow
 path cannot construct a broker, and the central entry service rejects every
 shadow strategy. This provides an automatic forward decision log without
-placing an order. Live activation remains disabled until forward results—not
-this reused history—show at least a 50% win rate with the 5R plan.</p>
+placing an order. Live activation remains disabled until forward results show
+that the selected 50% win rate and 8.5R plan persist.</p>
 <h2>Why this does not produce the manual win rate</h2>
 <p>The exact tape is 5/9 (55.6%), or 5/8 (62.5%) for the limit-entry cohort. The
 mechanical rule is about 26% because it trades the whole recovered envelope,
@@ -472,9 +480,9 @@ the variant JSON files.</p>
 <p>The exact-recall strategy is <strong>not ready for automatic trading</strong>. Its 26% win
 rate, 23–26% drawdowns, 28 extra April symbols, survivor-universe limitation
 and in-sample recovery prevent an honest claim that it recreates the manual
-selection skill. The narrower 50% profile is implemented as an automatic
-shadow algorithm, but its losing first half and eight-trade later half prevent
-live activation. Every forward scan now records the complete automatic choice
+selection skill. The narrower 50% / $4,000 profile is implemented as an
+automatic shadow algorithm, but its 36.4% first-half win rate and seven closed
+later-half trades prevent live activation. Every forward scan records the complete automatic choice
 and its rank exclusions, providing the labels needed to verify or revise the
 final ranking rule.</p>
 <h2>Reproduction</h2>

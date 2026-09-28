@@ -1,14 +1,14 @@
 {
-  "name": "automatic_pullback_5r_025adr_6k",
-  "reward_r": "5",
+  "name": "automatic_pullback_8_5r_028dry_12k",
+  "reward_r": "8.5",
   "adr_stop_floor": "0.25",
   "automatic_filter": true,
   "exit_rule": "full_planned",
   "max_hold_days": 21,
   "portfolio": {
-    "capital": "6000",
+    "capital": "12000",
     "risk": "100",
-    "max_notional": "1200",
+    "max_notional": "5000",
     "max_positions": 8,
     "fee_bps": "5",
     "slippage_bps": "5",
@@ -32,23 +32,23 @@
   "summary": {
     "start": "2026-03-27T00:00:00+00:00",
     "end_exclusive": "2026-09-27T00:00:00+00:00",
-    "capital": "6000",
-    "final_equity": "7310.974094633238472573043021",
-    "net": "1310.974094633238472573043021",
-    "return_pct": "21.84956824388730787621738368",
-    "max_hour_close_drawdown_pct": "5.563921294996056576497023685",
-    "closed_positions": 19,
-    "wins": 10,
-    "win_rate_pct": "52.63157894736842105263157895",
-    "profit_factor": "4.255181688481394452698074393",
-    "open_positions": 0,
+    "capital": "12000",
+    "final_equity": "16547.87694834968534775834758",
+    "net": "4547.87694834968534775834758",
+    "return_pct": "37.89897456958071123131956317",
+    "max_hour_close_drawdown_pct": "6.993862558446105416818044174",
+    "closed_positions": 18,
+    "wins": 9,
+    "win_rate_pct": "50.0",
+    "profit_factor": "4.756993352772749122942227760",
+    "open_positions": 1,
     "counts": {
       "prepared": 27,
       "triggered": 24,
       "limit_unfilled": 267,
       "entered": 19,
       "intrabar_stop": 8,
-      "profit_target": 6,
+      "profit_target": 5,
       "setup_invalidated": 4,
       "ema20_exit": 5,
       "expired": 4
@@ -60,15 +60,15 @@
   "first_half_summary": {
     "start": "2026-03-27T00:00:00+00:00",
     "end_exclusive": "2026-06-27T00:00:00+00:00",
-    "capital": "6000",
-    "final_equity": "6080.274551511688045256905073",
-    "net": "80.274551511688045256905073",
-    "return_pct": "1.337909191861467420948417883",
-    "max_hour_close_drawdown_pct": "5.563921294996056576497023685",
+    "capital": "12000",
+    "final_equity": "12354.99189328265840197108846",
+    "net": "354.99189328265840197108846",
+    "return_pct": "2.958265777355486683092403833",
+    "max_hour_close_drawdown_pct": "6.993862558446105416818044174",
     "closed_positions": 11,
     "wins": 4,
     "win_rate_pct": "36.36363636363636363636363636",
-    "profit_factor": "1.252207923559602225288525679",
+    "profit_factor": "1.407367828689690312763000739",
     "open_positions": 0,
     "counts": {
       "prepared": 14,
@@ -88,16 +88,16 @@
   "second_half_summary": {
     "start": "2026-06-27T00:00:00+00:00",
     "end_exclusive": "2026-09-27T00:00:00+00:00",
-    "capital": "6000",
-    "final_equity": "7230.699543121550427316137948",
-    "net": "1230.699543121550427316137948",
-    "return_pct": "20.51165905202584045526896580",
-    "max_hour_close_drawdown_pct": "3.368791855774268898877093969",
-    "closed_positions": 8,
-    "wins": 6,
-    "win_rate_pct": "75.00",
-    "profit_factor": "15.57357252644012999252890611",
-    "open_positions": 0,
+    "capital": "12000",
+    "final_equity": "16192.88505506702694578725912",
+    "net": "4192.88505506702694578725912",
+    "return_pct": "34.94070879222522454822715933",
+    "max_hour_close_drawdown_pct": "4.704463842676602548416059394",
+    "closed_positions": 7,
+    "wins": 5,
+    "win_rate_pct": "71.42857142857142857142857143",
+    "profit_factor": "18.45671133984868211340619084",
+    "open_positions": 1,
     "counts": {
       "prepared": 13,
       "setup_invalidated": 2,
@@ -105,7 +105,7 @@
       "limit_unfilled": 179,
       "entered": 8,
       "ema20_exit": 2,
-      "profit_target": 5,
+      "profit_target": 4,
       "expired": 3,
       "intrabar_stop": 1
     },
@@ -113,8 +113,8 @@
     "data_valid": true,
     "cash_reconciled": true
   },
-  "closed_net": "1310.974094633238472573043021",
-  "open_net": "0",
+  "closed_net": "4074.442261172185347758347582",
+  "open_net": "473.4346871775000",
   "entered_positions": 19,
   "april_entered_manual_symbols": [],
   "april_missed_after_execution_rules": [
@@ -163,17 +163,17 @@
       "at": "2026-04-21T04:00:00+00:00",
       "symbol": "DUSKUSD",
       "action": "entered",
-      "contracts": 86,
+      "contracts": 362,
       "price": "0.138079005",
       "stop": "0.1355453239432068189355872526",
-      "target": "0.1566741802839659053220637370",
-      "minimum_reward_risk": "5"
+      "target": "0.1689993464827420390475083529",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-04-23T10:00:00+00:00",
       "symbol": "DUSKUSD",
       "action": "intrabar_stop",
-      "contracts": 86,
+      "contracts": 362,
       "price": "0.135162385"
     },
     {
@@ -195,17 +195,17 @@
       "at": "2026-04-28T01:00:00+00:00",
       "symbol": "MONUSD",
       "action": "entered",
-      "contracts": 395,
+      "contracts": 1504,
       "price": "0.030305145",
       "stop": "0.0296406",
-      "target": "0.034893600",
-      "minimum_reward_risk": "5"
+      "target": "0.0379578500",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-04-28T06:00:00+00:00",
       "symbol": "MONUSD",
       "action": "intrabar_stop",
-      "contracts": 395,
+      "contracts": 1504,
       "price": "0.029625180"
     },
     {
@@ -237,18 +237,18 @@
       "at": "2026-04-30T03:00:00+00:00",
       "symbol": "ORDIUSD",
       "action": "entered",
-      "contracts": 2811,
+      "contracts": 4952,
       "price": "4.2681330",
       "stop": "4.066228865299678038101227723",
-      "target": "5.382980673501609809493861385",
-      "minimum_reward_risk": "5"
+      "target": "6.151085894952736676139564354",
+      "minimum_reward_risk": "8.5"
     },
     {
-      "at": "2026-05-02T16:00:00+00:00",
+      "at": "2026-05-02T17:00:00+00:00",
       "symbol": "ORDIUSD",
       "action": "profit_target",
-      "contracts": 2811,
-      "price": "5.380289183164859004589114454"
+      "contracts": 4952,
+      "price": "6.148010352005260307801494572"
     },
     {
       "at": "2026-05-04T00:00:00+00:00",
@@ -314,11 +314,11 @@
       "at": "2026-05-04T11:00:00+00:00",
       "symbol": "BLURUSD",
       "action": "entered",
-      "contracts": 4576,
+      "contracts": 17563,
       "price": "0.026223105",
       "stop": "0.02565375853384112991895941398",
-      "target": "0.03094825733079435040520293010",
-      "minimum_reward_risk": "5"
+      "target": "0.03403671496235039568884498117",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-06T00:00:00+00:00",
@@ -359,7 +359,7 @@
       "at": "2026-05-07T00:00:00+00:00",
       "symbol": "BLURUSD",
       "action": "ema20_exit",
-      "contracts": 4576,
+      "contracts": 17563,
       "price": "0.026696645"
     },
     {
@@ -641,11 +641,11 @@
       "at": "2026-05-12T02:00:00+00:00",
       "symbol": "BIOUSD",
       "action": "entered",
-      "contracts": 2546,
+      "contracts": 3276,
       "price": "0.04712355",
       "stop": "0.04407168",
-      "target": "0.063970650",
-      "minimum_reward_risk": "5"
+      "target": "0.0755783825",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-13T00:00:00+00:00",
@@ -721,24 +721,24 @@
       "at": "2026-05-13T12:00:00+00:00",
       "symbol": "AIXBTUSD",
       "action": "entered",
-      "contracts": 3752,
+      "contracts": 15636,
       "price": "0.031975980",
       "stop": "0.0313372",
-      "target": "0.036455650",
-      "minimum_reward_risk": "5"
+      "target": "0.0394414125",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-13T14:00:00+00:00",
       "symbol": "BIOUSD",
       "action": "intrabar_stop",
-      "contracts": 2546,
+      "contracts": 3276,
       "price": "0.043358310"
     },
     {
       "at": "2026-05-13T14:00:00+00:00",
       "symbol": "AIXBTUSD",
       "action": "intrabar_stop",
-      "contracts": 3752,
+      "contracts": 15636,
       "price": "0.030994495"
     },
     {
@@ -760,17 +760,17 @@
       "at": "2026-05-14T01:00:00+00:00",
       "symbol": "IOUSD",
       "action": "entered",
-      "contracts": 8530,
+      "contracts": 29894,
       "price": "0.14067030",
       "stop": "0.1373252000610106574603008855",
-      "target": "0.1590829996949467126984955725",
-      "minimum_reward_risk": "5"
+      "target": "0.1717750494814094115874424732",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-14T04:00:00+00:00",
       "symbol": "IOUSD",
       "action": "intrabar_stop",
-      "contracts": 8530,
+      "contracts": 29894,
       "price": "0.13673160"
     },
     {
@@ -797,17 +797,17 @@
       "at": "2026-05-15T02:00:00+00:00",
       "symbol": "ORDIUSD",
       "action": "entered",
-      "contracts": 2588,
+      "contracts": 4921,
       "price": "4.6353165",
       "stop": "4.432118",
-      "target": "6.1520150",
-      "minimum_reward_risk": "5"
+      "target": "7.15528825",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-15T06:00:00+00:00",
       "symbol": "ORDIUSD",
       "action": "intrabar_stop",
-      "contracts": 2588,
+      "contracts": 4921,
       "price": "4.4247865"
     },
     {
@@ -839,11 +839,11 @@
       "at": "2026-05-20T03:00:00+00:00",
       "symbol": "AIXBTUSD",
       "action": "entered",
-      "contracts": 3927,
+      "contracts": 13792,
       "price": "0.030555270",
       "stop": "0.02983022",
-      "target": "0.034787600",
-      "minimum_reward_risk": "5"
+      "target": "0.0376794050",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-21T00:00:00+00:00",
@@ -889,24 +889,24 @@
       "at": "2026-05-21T06:00:00+00:00",
       "symbol": "NOTUSD",
       "action": "entered",
-      "contracts": 24422,
+      "contracts": 41353,
       "price": "0.00049134555",
       "stop": "0.0004671638",
-      "target": "0.0006235610",
-      "minimum_reward_risk": "5"
+      "target": "0.00071479270",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-22T00:00:00+00:00",
       "symbol": "AIXBTUSD",
       "action": "ema20_exit",
-      "contracts": 3927,
+      "contracts": 13792,
       "price": "0.032123930"
     },
     {
       "at": "2026-05-22T00:00:00+00:00",
       "symbol": "NOTUSD",
       "action": "ema20_exit",
-      "contracts": 24422,
+      "contracts": 41353,
       "price": "0.00049565205"
     },
     {
@@ -948,17 +948,17 @@
       "at": "2026-05-22T05:00:00+00:00",
       "symbol": "AIOUSD",
       "action": "entered",
-      "contracts": 124,
+      "contracts": 464,
       "price": "0.096718335",
       "stop": "0.09456414905867494752688120328",
-      "target": "0.1093109547066252623655939836",
-      "minimum_reward_risk": "5"
+      "target": "0.1179132580012629460215097721",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-05-22T21:00:00+00:00",
       "symbol": "AIOUSD",
       "action": "intrabar_stop",
-      "contracts": 124,
+      "contracts": 464,
       "price": "0.093843055"
     },
     {
@@ -1013,11 +1013,11 @@
       "at": "2026-08-26T02:00:00+00:00",
       "symbol": "MUBARAKUSD",
       "action": "entered",
-      "contracts": 6085,
+      "contracts": 10458,
       "price": "0.019719855",
       "stop": "0.01876365787466532064613550227",
-      "target": "0.02485766062667339676932248865",
-      "minimum_reward_risk": "5"
+      "target": "0.02841249556534477450784823070",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-08-29T00:00:00+00:00",
@@ -1053,25 +1053,25 @@
       "at": "2026-08-29T04:00:00+00:00",
       "symbol": "GRIFFAINUSD",
       "action": "entered",
-      "contracts": 10484,
+      "contracts": 43684,
       "price": "0.011445720",
       "stop": "0.01125592394541573957481303994",
-      "target": "0.01277258027292130212593480030",
-      "minimum_reward_risk": "5"
+      "target": "0.01365729646396621361408916051",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-08-31T00:00:00+00:00",
       "symbol": "GRIFFAINUSD",
       "action": "ema20_exit",
-      "contracts": 10484,
+      "contracts": 43684,
       "price": "0.011544225"
     },
     {
-      "at": "2026-09-02T15:00:00+00:00",
+      "at": "2026-09-02T17:00:00+00:00",
       "symbol": "MUBARAKUSD",
       "action": "profit_target",
-      "contracts": 6085,
-      "price": "0.02484523179636006007093782741"
+      "contracts": 10458,
+      "price": "0.02839828931756210212059430658"
     },
     {
       "at": "2026-09-03T00:00:00+00:00",
@@ -1616,17 +1616,17 @@
       "at": "2026-09-13T01:00:00+00:00",
       "symbol": "SPXUSD",
       "action": "entered",
-      "contracts": 244,
+      "contracts": 397,
       "price": "0.49094535",
       "stop": "0.4657666",
-      "target": "0.61972000",
-      "minimum_reward_risk": "5"
+      "target": "0.709526150",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-09-14T00:00:00+00:00",
       "symbol": "SPXUSD",
       "action": "ema20_exit",
-      "contracts": 244,
+      "contracts": 397,
       "price": "0.47926025"
     },
     {
@@ -1783,11 +1783,11 @@
       "at": "2026-09-15T01:00:00+00:00",
       "symbol": "ARBUSD",
       "action": "entered",
-      "contracts": 8984,
+      "contracts": 28953,
       "price": "0.13356675",
       "stop": "0.1301129788559548385941581197",
-      "target": "0.1548436057202258070292094015",
-      "minimum_reward_risk": "5"
+      "target": "0.1692698047243838719496559826",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-09-15T01:00:00+00:00",
@@ -1828,25 +1828,18 @@
       "at": "2026-09-15T08:00:00+00:00",
       "symbol": "DASHUSD",
       "action": "entered",
-      "contracts": 226,
+      "contracts": 682,
       "price": "52.976475",
       "stop": "51.51029960438556737587770277",
-      "target": "60.64200197807216312061148615",
-      "minimum_reward_risk": "5"
+      "target": "65.96882836272267730503952646",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-09-15T15:00:00+00:00",
       "symbol": "DASHUSD",
       "action": "intrabar_stop",
-      "contracts": 226,
+      "contracts": 682,
       "price": "50.624675"
-    },
-    {
-      "at": "2026-09-15T17:00:00+00:00",
-      "symbol": "ARBUSD",
-      "action": "profit_target",
-      "contracts": 8984,
-      "price": "0.1547661839173656941256947968"
     },
     {
       "at": "2026-09-16T00:00:00+00:00",
@@ -1867,11 +1860,18 @@
       "at": "2026-09-16T01:00:00+00:00",
       "symbol": "ENAUSD",
       "action": "entered",
-      "contracts": 8625,
+      "contracts": 22474,
       "price": "0.139119525",
       "stop": "0.13467012",
-      "target": "0.169290750",
-      "minimum_reward_risk": "5"
+      "target": "0.1894861175",
+      "minimum_reward_risk": "8.5"
+    },
+    {
+      "at": "2026-09-16T13:00:00+00:00",
+      "symbol": "ARBUSD",
+      "action": "profit_target",
+      "contracts": 28953,
+      "price": "0.1691851698220216800136811546"
     },
     {
       "at": "2026-09-17T00:00:00+00:00",
@@ -1897,11 +1897,11 @@
       "at": "2026-09-17T02:00:00+00:00",
       "symbol": "ZORAUSD",
       "action": "entered",
-      "contracts": 1609,
+      "contracts": 3246,
       "price": "0.007453725",
       "stop": "0.00714568",
-      "target": "0.009203650",
-      "minimum_reward_risk": "5"
+      "target": "0.0104041325",
+      "minimum_reward_risk": "8.5"
     },
     {
       "at": "2026-09-18T00:00:00+00:00",
@@ -1952,13 +1952,6 @@
       "at": "2026-09-18T07:00:00+00:00",
       "symbol": "SPXUSD",
       "action": "limit_unfilled"
-    },
-    {
-      "at": "2026-09-18T08:00:00+00:00",
-      "symbol": "ENAUSD",
-      "action": "profit_target",
-      "contracts": 8625,
-      "price": "0.1692061046250"
     },
     {
       "at": "2026-09-18T08:00:00+00:00",
@@ -2087,6 +2080,13 @@
     },
     {
       "at": "2026-09-19T09:00:00+00:00",
+      "symbol": "ENAUSD",
+      "action": "profit_target",
+      "contracts": 22474,
+      "price": "0.18939137444125"
+    },
+    {
+      "at": "2026-09-19T09:00:00+00:00",
       "symbol": "SPXUSD",
       "action": "limit_unfilled"
     },
@@ -2194,25 +2194,18 @@
       "at": "2026-09-20T03:00:00+00:00",
       "symbol": "FFUSD",
       "action": "entered",
-      "contracts": 94,
+      "contracts": 170,
       "price": "0.126703320",
       "stop": "0.12082786",
-      "target": "0.156277000",
-      "minimum_reward_risk": "5"
+      "target": "0.1769556650",
+      "minimum_reward_risk": "8.5"
     },
     {
-      "at": "2026-09-20T21:00:00+00:00",
+      "at": "2026-09-20T22:00:00+00:00",
       "symbol": "FFUSD",
       "action": "profit_target",
-      "contracts": 94,
-      "price": "0.1561988615000"
-    },
-    {
-      "at": "2026-09-22T22:00:00+00:00",
-      "symbol": "ZORAUSD",
-      "action": "profit_target",
-      "contracts": 1609,
-      "price": "0.0091990481750"
+      "contracts": 170,
+      "price": "0.17686718716750"
     }
   ],
   "trades": [
@@ -2221,15 +2214,15 @@
       "entry_at": "2026-04-21T04:00:00+00:00",
       "exit_at": "2026-04-23T10:00:00+00:00",
       "entry": "0.138079005",
-      "contracts": 86,
-      "gross": "-25.082932000",
-      "fees": "1.1749379770000",
-      "funding": "0.798587400",
-      "net": "-27.0564573770000",
+      "contracts": 362,
+      "gross": "-105.581644000",
+      "fees": "4.9456691590000",
+      "funding": "3.361495800",
+      "net": "-113.8888089590000",
       "fills": [
         {
           "at": "2026-04-23T10:00:00+00:00",
-          "contracts": 86,
+          "contracts": 362,
           "price": "0.135162385",
           "reason": "intrabar_stop"
         }
@@ -2241,15 +2234,15 @@
       "entry_at": "2026-04-28T01:00:00+00:00",
       "exit_at": "2026-04-28T06:00:00+00:00",
       "entry": "0.030305145",
-      "contracts": 395,
-      "gross": "-26.858617500",
-      "fees": "1.1836239187500",
-      "funding": "0.0593339375",
-      "net": "-28.1015753562500",
+      "contracts": 1504,
+      "gross": "-102.266736000",
+      "fees": "4.5067604400000",
+      "funding": "0.2259196",
+      "net": "-106.9994160400000",
       "fills": [
         {
           "at": "2026-04-28T06:00:00+00:00",
-          "contracts": 395,
+          "contracts": 1504,
           "price": "0.029625180",
           "reason": "intrabar_stop"
         }
@@ -2259,18 +2252,18 @@
     {
       "symbol": "ORDIUSD",
       "entry_at": "2026-04-30T03:00:00+00:00",
-      "exit_at": "2026-05-02T16:00:00+00:00",
+      "exit_at": "2026-05-02T17:00:00+00:00",
       "entry": "4.2681330",
-      "contracts": 2811,
-      "gross": "312.6271030876418661900000730",
-      "fees": "1.356085737843820933095000036",
-      "funding": "0.93666033750",
-      "net": "310.3343570122980452569050730",
+      "contracts": 4952,
+      "gross": "930.9152647130049044233001121",
+      "fees": "2.579037093956502452211650056",
+      "funding": "1.68509132",
+      "net": "926.6511362990484019710884620",
       "fills": [
         {
-          "at": "2026-05-02T16:00:00+00:00",
-          "contracts": 2811,
-          "price": "5.380289183164859004589114454",
+          "at": "2026-05-02T17:00:00+00:00",
+          "contracts": 4952,
+          "price": "6.148010352005260307801494572",
           "reason": "profit_target"
         }
       ],
@@ -2281,15 +2274,15 @@
       "entry_at": "2026-05-04T11:00:00+00:00",
       "exit_at": "2026-05-07T00:00:00+00:00",
       "entry": "0.026223105",
-      "contracts": 4576,
-      "gross": "21.669190400",
-      "fees": "1.2108038800000",
-      "funding": "0.95240288",
-      "net": "19.5059836400000",
+      "contracts": 17563,
+      "gross": "83.167830200",
+      "fees": "4.6471478462500",
+      "funding": "3.65538719000",
+      "net": "74.8652951637500",
       "fills": [
         {
           "at": "2026-05-07T00:00:00+00:00",
-          "contracts": 4576,
+          "contracts": 17563,
           "price": "0.026696645",
           "reason": "ema20_exit"
         }
@@ -2301,15 +2294,15 @@
       "entry_at": "2026-05-12T02:00:00+00:00",
       "exit_at": "2026-05-13T14:00:00+00:00",
       "entry": "0.04712355",
-      "contracts": 2546,
-      "gross": "-95.863010400",
-      "fees": "1.1518340778000",
-      "funding": "0.5196672425",
-      "net": "-97.5345117203000",
+      "contracts": 3276,
+      "gross": "-123.349262400",
+      "fees": "1.4820928668000",
+      "funding": "0.668668455",
+      "net": "-125.5000237218000",
       "fills": [
         {
           "at": "2026-05-13T14:00:00+00:00",
-          "contracts": 2546,
+          "contracts": 3276,
           "price": "0.043358310",
           "reason": "intrabar_stop"
         }
@@ -2321,15 +2314,15 @@
       "entry_at": "2026-05-13T12:00:00+00:00",
       "exit_at": "2026-05-13T14:00:00+00:00",
       "entry": "0.031975980",
-      "contracts": 3752,
-      "gross": "-36.825317200",
-      "fees": "1.1813261110000",
-      "funding": "0.01486261",
-      "net": "-38.0215059210000",
+      "contracts": 15636,
+      "gross": "-153.464994600",
+      "fees": "4.9230317355000",
+      "funding": "0.061938105",
+      "net": "-158.4499644405000",
       "fills": [
         {
           "at": "2026-05-13T14:00:00+00:00",
-          "contracts": 3752,
+          "contracts": 15636,
           "price": "0.030994495",
           "reason": "intrabar_stop"
         }
@@ -2341,15 +2334,15 @@
       "entry_at": "2026-05-14T01:00:00+00:00",
       "exit_at": "2026-05-14T04:00:00+00:00",
       "entry": "0.14067030",
-      "contracts": 8530,
-      "gross": "-33.59711100",
-      "fees": "1.183119103500",
-      "funding": "0.0301428875",
-      "net": "-34.810372991000",
+      "contracts": 29894,
+      "gross": "-117.74349780",
+      "fees": "4.146326199300",
+      "funding": "0.1056379225",
+      "net": "-121.995461921800",
       "fills": [
         {
           "at": "2026-05-14T04:00:00+00:00",
-          "contracts": 8530,
+          "contracts": 29894,
           "price": "0.13673160",
           "reason": "intrabar_stop"
         }
@@ -2361,15 +2354,15 @@
       "entry_at": "2026-05-15T02:00:00+00:00",
       "exit_at": "2026-05-15T06:00:00+00:00",
       "entry": "4.6353165",
-      "contracts": 2588,
-      "gross": "-54.48516400",
-      "fees": "1.172377328200",
-      "funding": "0.044387435",
-      "net": "-55.701928763200",
+      "contracts": 4921,
+      "gross": "-103.60181300",
+      "fees": "2.229238343150",
+      "funding": "0.08440130125",
+      "net": "-105.915452644400",
       "fills": [
         {
           "at": "2026-05-15T06:00:00+00:00",
-          "contracts": 2588,
+          "contracts": 4921,
           "price": "4.4247865",
           "reason": "intrabar_stop"
         }
@@ -2381,15 +2374,15 @@
       "entry_at": "2026-05-20T03:00:00+00:00",
       "exit_at": "2026-05-22T00:00:00+00:00",
       "entry": "0.030555270",
-      "contracts": 3927,
-      "gross": "61.601278200",
-      "fees": "1.2307060920000",
-      "funding": "0.69471575250",
-      "net": "59.6758563555000",
+      "contracts": 13792,
+      "gross": "216.349587200",
+      "fees": "4.3223576320000",
+      "funding": "2.43990824",
+      "net": "209.5873213280000",
       "fills": [
         {
           "at": "2026-05-22T00:00:00+00:00",
-          "contracts": 3927,
+          "contracts": 13792,
           "price": "0.032123930",
           "reason": "ema20_exit"
         }
@@ -2401,15 +2394,15 @@
       "entry_at": "2026-05-21T06:00:00+00:00",
       "exit_at": "2026-05-22T00:00:00+00:00",
       "entry": "0.00049134555",
-      "contracts": 24422,
-      "gross": "10.51733430000",
-      "fees": "1.205222769360000",
-      "funding": "0.26656613000",
-      "net": "9.045545400640000",
+      "contracts": 41353,
+      "gross": "17.80866945000",
+      "fees": "2.040765587640000",
+      "funding": "0.451367995000",
+      "net": "15.316535867360000",
       "fills": [
         {
           "at": "2026-05-22T00:00:00+00:00",
-          "contracts": 24422,
+          "contracts": 41353,
           "price": "0.00049565205",
           "reason": "ema20_exit"
         }
@@ -2421,15 +2414,15 @@
       "entry_at": "2026-05-22T05:00:00+00:00",
       "exit_at": "2026-05-22T21:00:00+00:00",
       "entry": "0.096718335",
-      "contracts": 124,
-      "gross": "-35.653472000",
-      "fees": "1.1814806180000",
-      "funding": "0.22588615",
-      "net": "-37.0608387680000",
+      "contracts": 464,
+      "gross": "-133.412992000",
+      "fees": "4.4210242480000",
+      "funding": "0.8452514",
+      "net": "-138.6792676480000",
       "fills": [
         {
           "at": "2026-05-22T21:00:00+00:00",
-          "contracts": 124,
+          "contracts": 464,
           "price": "0.093843055",
           "reason": "intrabar_stop"
         }
@@ -2441,15 +2434,15 @@
       "entry_at": "2026-08-29T04:00:00+00:00",
       "exit_at": "2026-08-31T00:00:00+00:00",
       "entry": "0.011445720",
-      "contracts": 10484,
-      "gross": "10.327264200",
-      "fees": "1.2051329169000",
-      "funding": "0.6945951415",
-      "net": "8.4275361416000",
+      "contracts": 43684,
+      "gross": "43.030924200",
+      "fees": "5.0214637869000",
+      "funding": "2.8941905915",
+      "net": "35.1152698216000",
       "fills": [
         {
           "at": "2026-08-31T00:00:00+00:00",
-          "contracts": 10484,
+          "contracts": 43684,
           "price": "0.011544225",
           "reason": "ema20_exit"
         }
@@ -2459,18 +2452,18 @@
     {
       "symbol": "MUBARAKUSD",
       "entry_at": "2026-08-26T02:00:00+00:00",
-      "exit_at": "2026-09-02T15:00:00+00:00",
+      "exit_at": "2026-09-02T17:00:00+00:00",
       "entry": "0.019719855",
-      "contracts": 6085,
-      "gross": "311.8791780585096553165667979",
-      "fees": "1.355892765779254827658283399",
-      "funding": "2.90097811250",
-      "net": "307.6223071802304004889085145",
+      "contracts": 10458,
+      "gross": "907.5906609306446397717525821",
+      "fees": "2.516097766365322319885876291",
+      "funding": "5.0545736325",
+      "net": "900.0199895317793174518667058",
       "fills": [
         {
-          "at": "2026-09-02T15:00:00+00:00",
-          "contracts": 6085,
-          "price": "0.02484523179636006007093782741",
+          "at": "2026-09-02T17:00:00+00:00",
+          "contracts": 10458,
+          "price": "0.02839828931756210212059430658",
           "reason": "profit_target"
         }
       ],
@@ -2481,15 +2474,15 @@
       "entry_at": "2026-09-13T01:00:00+00:00",
       "exit_at": "2026-09-14T00:00:00+00:00",
       "entry": "0.49094535",
-      "contracts": 244,
-      "gross": "-28.51164400",
-      "fees": "1.183650832000",
-      "funding": "0.34074295",
-      "net": "-30.036037782000",
+      "contracts": 397,
+      "gross": "-46.38984700",
+      "fees": "1.925858116000",
+      "funding": "0.5544055375",
+      "net": "-48.870110653500",
       "fills": [
         {
           "at": "2026-09-14T00:00:00+00:00",
-          "contracts": 244,
+          "contracts": 397,
           "price": "0.47926025",
           "reason": "ema20_exit"
         }
@@ -2501,15 +2494,15 @@
       "entry_at": "2026-09-15T08:00:00+00:00",
       "exit_at": "2026-09-15T15:00:00+00:00",
       "entry": "52.976475",
-      "contracts": 226,
-      "gross": "-53.1506800",
-      "fees": "1.17069299500",
-      "funding": "0.089936700",
-      "net": "-54.41130969500",
+      "contracts": 682,
+      "gross": "-160.3927600",
+      "fees": "3.53279921500",
+      "funding": "0.271401900",
+      "net": "-164.19696111500",
       "fills": [
         {
           "at": "2026-09-15T15:00:00+00:00",
-          "contracts": 226,
+          "contracts": 682,
           "price": "50.624675",
           "reason": "intrabar_stop"
         }
@@ -2519,18 +2512,18 @@
     {
       "symbol": "ARBUSD",
       "entry_at": "2026-09-15T01:00:00+00:00",
-      "exit_at": "2026-09-15T17:00:00+00:00",
+      "exit_at": "2026-09-16T13:00:00+00:00",
       "entry": "0.13356675",
-      "contracts": 8984,
-      "gross": "190.4557143136133960252420545",
-      "fees": "1.295191539156806698012621027",
-      "funding": "0.22979949",
-      "net": "188.9307232844565893272294335",
+      "contracts": 28953,
+      "gross": "1031.260109106993701436110469",
+      "fees": "4.382788167303496850718055234",
+      "funding": "1.84220700750",
+      "net": "1025.035113932190204585392414",
       "fills": [
         {
-          "at": "2026-09-15T17:00:00+00:00",
-          "contracts": 8984,
-          "price": "0.1547661839173656941256947968",
+          "at": "2026-09-16T13:00:00+00:00",
+          "contracts": 28953,
+          "price": "0.1691851698220216800136811546",
           "reason": "profit_target"
         }
       ],
@@ -2539,18 +2532,18 @@
     {
       "symbol": "ENAUSD",
       "entry_at": "2026-09-16T01:00:00+00:00",
-      "exit_at": "2026-09-18T08:00:00+00:00",
+      "exit_at": "2026-09-19T09:00:00+00:00",
       "entry": "0.139119525",
-      "contracts": 8625,
-      "gross": "259.4967492656250",
-      "fees": "1.32965427775781250",
-      "funding": "0.871654359375",
-      "net": "257.29544062849218750",
+      "contracts": 22474,
+      "gross": "1129.80954434265250",
+      "fees": "3.691476977021326250",
+      "funding": "3.46264502975",
+      "net": "1122.655422335881173750",
       "fills": [
         {
-          "at": "2026-09-18T08:00:00+00:00",
-          "contracts": 8625,
-          "price": "0.1692061046250",
+          "at": "2026-09-19T09:00:00+00:00",
+          "contracts": 22474,
+          "price": "0.18939137444125",
           "reason": "profit_target"
         }
       ],
@@ -2559,43 +2552,30 @@
     {
       "symbol": "FFUSD",
       "entry_at": "2026-09-20T03:00:00+00:00",
-      "exit_at": "2026-09-20T21:00:00+00:00",
+      "exit_at": "2026-09-20T22:00:00+00:00",
       "entry": "0.126703320",
-      "contracts": 94,
-      "gross": "277.2580901000000",
-      "fees": "1.32964025305000000",
-      "funding": "0.264702825",
-      "net": "275.66374702195000000",
+      "contracts": 170,
+      "gross": "852.78574184750000",
+      "fees": "2.580349310923750000",
+      "funding": "0.513748500",
+      "net": "849.691644036576250000",
       "fills": [
         {
-          "at": "2026-09-20T21:00:00+00:00",
-          "contracts": 94,
-          "price": "0.1561988615000",
-          "reason": "profit_target"
-        }
-      ],
-      "missing_hours": 0
-    },
-    {
-      "symbol": "ZORAUSD",
-      "entry_at": "2026-09-17T02:00:00+00:00",
-      "exit_at": "2026-09-22T22:00:00+00:00",
-      "entry": "0.007453725",
-      "contracts": 1609,
-      "gross": "280.8224988575000",
-      "fees": "1.33971560192875000",
-      "funding": "2.27564691375",
-      "net": "277.20713634182125000",
-      "fills": [
-        {
-          "at": "2026-09-22T22:00:00+00:00",
-          "contracts": 1609,
-          "price": "0.0091990481750",
+          "at": "2026-09-20T22:00:00+00:00",
+          "contracts": 170,
+          "price": "0.17686718716750",
           "reason": "profit_target"
         }
       ],
       "missing_hours": 0
     }
   ],
-  "open_positions": []
+  "open_positions": [
+    {
+      "symbol": "ZORAUSD",
+      "entry_at": "2026-09-17T02:00:00+00:00",
+      "remaining": 3246,
+      "net_including_exit_reserve": "473.4346871775000"
+    }
+  ]
 }
