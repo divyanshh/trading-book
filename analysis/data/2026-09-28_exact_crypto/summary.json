@@ -1236,5 +1236,5 @@
       "open_positions": []
     }
   ],
-  "live_status": "research only; agents kept at zero dynos"
+  "live_status": "manual_tis_automatic_8_5r deployed in cryptoo-service; agents kept at zero dynos"
 }

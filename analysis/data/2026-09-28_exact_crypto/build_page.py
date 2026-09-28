@@ -56,7 +56,7 @@ summary = {
         if key != "candidate_days"
     },
     "variants": results["variants"],
-    "live_status": "research only; agents kept at zero dynos",
+    "live_status": "manual_tis_automatic_8_5r deployed in cryptoo-service; agents kept at zero dynos",
 }
 (HERE / "summary.json").write_text(json.dumps(summary, indent=2))
 

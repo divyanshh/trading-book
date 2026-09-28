@@ -263,8 +263,10 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 </style><link rel="stylesheet" href="2026-09-28_crypto_thresholds.css"></head><body><main class="wrap crypto-study">
 <header class="top"><p class="eyebrow"><a href="../index.html">Morning Book</a> · crypto research / 28 September 2026</p><h1>Can code reproduce<br>the April crypto trades?</h1><p class="dek">An exact nine-position fill reconciliation, a symbol-blind three-mode strategy with 100% April candidate recall, and the six-month test that shows what the archive still cannot recover.</p><div class="meta"><span>Exact tape: 9 positions</span><span>Backtest: 6 months</span><span>Risk: $100/trade</span><span>Agents: 0 dynos</span></div></header>
 <nav class="toc"><a href="#what-exact-can-and-cannot-mean">Exactness</a><a href="#the-recovered-entry-family">Rules</a><a href="#april-parity-test">April parity</a><a href="#six-month-backtest">Backtest</a><a href="#implementation-and-decision">Decision</a></nav>
-<section id="report"><p><strong>As of 28 September 2026. Research only. Both trading agents remain at zero
-dynos. No live strategy was enabled and no broker call was made.</strong></p>
+<section id="report"><p><strong>As of 28 September 2026. The broad exact-recall strategy remains research.
+The narrower <code>manual_tis_automatic_8_5r</code> profile is deployed in production.
+Both trading agents remain at zero dynos; its scheduled lifecycle runs inside
+<code>cryptoo-service</code>.</strong></p>
 <h2>What “exact” can and cannot mean</h2>
 <p>The Delta fill export can be replayed exactly. It contains nine April positions
 with at least $100 entry notional: five winners, four losers and <strong>+$561.34 net
@@ -453,13 +455,21 @@ won four (<strong>36.4%</strong>) and made <strong>$354.99</strong>. The second 
 (<strong>71.4%</strong>) and made <strong>$4,192.89</strong> including the open final mark. Most profit
 came from the later regime, so this is not evidence that a stable 50% win rate
 has been recovered.</p>
-<p><code>manual_tis_automatic_8_5r</code> is now registered with the existing scheduled shadow
-scanner. It calculates the same candidate bracket, ranks one daily candidate,
-records rank exclusions and enforces the three-day signal cooldown. The shadow
-path cannot construct a broker, and the central entry service rejects every
-shadow strategy. This provides an automatic forward decision log without
-placing an order. Live activation remains disabled until forward results show
-that the selected 50% win rate and 8.5R plan persist.</p>
+<p><code>manual_tis_automatic_8_5r</code> now has a dedicated production workflow. At 00:45
+UTC the planner reads completed daily candles, calculates the same candidate
+bracket, ranks at most one candidate and persists a 48-hour plan with the
+three-day symbol cooldown. At minute 06 of every UTC hour the executor reads the
+last completed H1 candle, invalidates a stop touch or BTC EMA50 failure, and
+arms a crossed trigger. It submits only while the current mark is between stop
+and limit, using an IOC limit bracket with the structural stop and 8.5R target
+attached. An unfilled order cannot rest and an unknown venue outcome is not
+retried automatically.</p>
+<p>Production sizes from $100 planned stop risk, with a $5,000 notional cap and a
+$12,000 capital envelope after a 2% reserve. It records the confirmed average
+fill and filled contracts. It applies no breakeven or generic chandelier move;
+positions also close after a completed daily close below EMA20 or 21 elapsed
+days. The historical headline remains in-sample and is not a production return
+forecast.</p>
 <h2>Why this does not produce the manual win rate</h2>
 <p>The exact tape is 5/9 (55.6%), or 5/8 (62.5%) for the limit-entry cohort. The
 mechanical rule is about 26% because it trades the whole recovered envelope,
@@ -477,14 +487,14 @@ The two goals conflict in this nine-trade sample.</p>
 pin every April position without symbol/date lookup. The complete replay is
 <code>crypto-exact-manual-2026-09-28/study.py</code>, with full event and trade ledgers in
 the variant JSON files.</p>
-<p>The exact-recall strategy is <strong>not ready for automatic trading</strong>. Its 26% win
+<p>The exact-recall strategy is <strong>not enabled for automatic trading</strong>. Its 26% win
 rate, 23–26% drawdowns, 28 extra April symbols, survivor-universe limitation
 and in-sample recovery prevent an honest claim that it recreates the manual
-selection skill. The narrower 50% / $4,000 profile is implemented as an
-automatic shadow algorithm, but its 36.4% first-half win rate and seven closed
-later-half trades prevent live activation. Every forward scan records the complete automatic choice
-and its rank exclusions, providing the labels needed to verify or revise the
-final ranking rule.</p>
+selection skill. The narrower 50% / $4,000 profile is deployed as an automatic
+production algorithm at the user's direction. Its 36.4% first-half win rate and
+seven closed later-half trades remain material limitations. Production plans,
+submissions, fills and exits now provide the forward evidence needed to verify
+or revise the final ranking rule.</p>
 <h2>Reproduction</h2>
 <pre><code class="language-bash">cd /Users/divyanshjain/Documents/my_repos/crypto-exact-manual-2026-09-28
 /Users/divyanshjain/Documents/my_repos/crypto-service/.venv/bin/python study.py
