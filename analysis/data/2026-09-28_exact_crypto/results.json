@@ -261,6 +261,7 @@
       "name": "recovered_5r_025adr_6k",
       "reward_r": "5",
       "adr_stop_floor": "0.25",
+      "automatic_filter": false,
       "portfolio": {
         "capital": "6000",
         "risk": "100",
@@ -446,6 +447,7 @@
       "name": "recovered_8r_025adr_6k",
       "reward_r": "8",
       "adr_stop_floor": "0.25",
+      "automatic_filter": false,
       "portfolio": {
         "capital": "6000",
         "risk": "100",
@@ -639,6 +641,7 @@
       "name": "recovered_5r_050adr_6k",
       "reward_r": "5",
       "adr_stop_floor": "0.5",
+      "automatic_filter": false,
       "portfolio": {
         "capital": "6000",
         "risk": "100",
@@ -830,6 +833,7 @@
       "name": "recovered_5r_025adr_12k",
       "reward_r": "5",
       "adr_stop_floor": "0.25",
+      "automatic_filter": false,
       "portfolio": {
         "capital": "12000",
         "risk": "100",
@@ -1007,6 +1011,136 @@
           "net_including_exit_reserve": "113.6703398922000000"
         }
       ]
+    },
+    {
+      "name": "automatic_pullback_5r_025adr_6k",
+      "reward_r": "5",
+      "adr_stop_floor": "0.25",
+      "automatic_filter": true,
+      "portfolio": {
+        "capital": "6000",
+        "risk": "100",
+        "max_notional": "1200",
+        "max_positions": 8,
+        "fee_bps": "5",
+        "slippage_bps": "5",
+        "funding_bps_daily": "3",
+        "reserve_fraction": "0.02",
+        "entry_delay_hours": 0,
+        "directional_risk_multiple": "8",
+        "risk_to_disaster": false
+      },
+      "gates": {
+        "btc_below_or_missing_ema50": 7692,
+        "leader_trend": 2243,
+        "outside_recovered_entry_envelope": 3588,
+        "relative_strength": 207,
+        "turnover": 1852,
+        "pullback_depth": 405,
+        "dry_volume": 76,
+        "planned_leader_recovery": 34,
+        "automatic_ranked_plans": 29
+      },
+      "summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "7212.657652026488472573043021",
+        "net": "1212.657652026488472573043021",
+        "return_pct": "20.21096086710814120955071702",
+        "max_hour_close_drawdown_pct": "5.651312829160911149650271850",
+        "closed_positions": 20,
+        "wins": 10,
+        "win_rate_pct": "50.0",
+        "profit_factor": "3.420228076698811852178910018",
+        "open_positions": 0,
+        "counts": {
+          "prepared": 29,
+          "triggered": 26,
+          "limit_unfilled": 340,
+          "entered": 20,
+          "intrabar_stop": 9,
+          "profit_target": 6,
+          "setup_invalidated": 4,
+          "ema20_exit": 5,
+          "expired": 5
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "first_half_summary": {
+        "start": "2026-03-27T00:00:00+00:00",
+        "end_exclusive": "2026-06-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "5981.958108904938045256905073",
+        "net": "-18.041891095061954743094927",
+        "return_pct": "-0.3006981849176992457182487833",
+        "max_hour_close_drawdown_pct": "5.651312829160911149650271850",
+        "closed_positions": 12,
+        "wins": 4,
+        "win_rate_pct": "33.33333333333333333333333333",
+        "profit_factor": "0.9566929098929465291672252305",
+        "open_positions": 0,
+        "counts": {
+          "prepared": 15,
+          "triggered": 14,
+          "limit_unfilled": 114,
+          "entered": 12,
+          "intrabar_stop": 8,
+          "profit_target": 1,
+          "setup_invalidated": 2,
+          "ema20_exit": 3,
+          "expired": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "second_half_summary": {
+        "start": "2026-06-27T00:00:00+00:00",
+        "end_exclusive": "2026-09-27T00:00:00+00:00",
+        "capital": "6000",
+        "final_equity": "7230.699543121550427316137948",
+        "net": "1230.699543121550427316137948",
+        "return_pct": "20.51165905202584045526896580",
+        "max_hour_close_drawdown_pct": "3.368791855774268898877093969",
+        "closed_positions": 8,
+        "wins": 6,
+        "win_rate_pct": "75.00",
+        "profit_factor": "15.57357252644012999252890611",
+        "open_positions": 0,
+        "counts": {
+          "prepared": 14,
+          "setup_invalidated": 2,
+          "triggered": 12,
+          "limit_unfilled": 226,
+          "entered": 8,
+          "ema20_exit": 2,
+          "profit_target": 5,
+          "expired": 4,
+          "intrabar_stop": 1
+        },
+        "missing_held_hours": 0,
+        "data_valid": true,
+        "cash_reconciled": true
+      },
+      "closed_net": "1212.657652026488472573043021",
+      "open_net": "0",
+      "entered_positions": 20,
+      "april_entered_manual_symbols": [],
+      "april_missed_after_execution_rules": [
+        "ARBUSD",
+        "BIOUSD",
+        "ENAUSD",
+        "MUSD",
+        "NEIROUSD",
+        "PENDLEUSD",
+        "PNUTUSD",
+        "SWARMSUSD",
+        "VVVUSD"
+      ],
+      "open_positions": []
     }
   ],
   "interpretation": {

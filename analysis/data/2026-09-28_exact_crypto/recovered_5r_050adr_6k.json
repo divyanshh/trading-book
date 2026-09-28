@@ -2,6 +2,7 @@
   "name": "recovered_5r_050adr_6k",
   "reward_r": "5",
   "adr_stop_floor": "0.5",
+  "automatic_filter": false,
   "portfolio": {
     "capital": "6000",
     "risk": "100",

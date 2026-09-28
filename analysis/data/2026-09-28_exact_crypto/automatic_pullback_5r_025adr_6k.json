@@ -1,0 +1,3036 @@
+{
+  "name": "automatic_pullback_5r_025adr_6k",
+  "reward_r": "5",
+  "adr_stop_floor": "0.25",
+  "automatic_filter": true,
+  "portfolio": {
+    "capital": "6000",
+    "risk": "100",
+    "max_notional": "1200",
+    "max_positions": 8,
+    "fee_bps": "5",
+    "slippage_bps": "5",
+    "funding_bps_daily": "3",
+    "reserve_fraction": "0.02",
+    "entry_delay_hours": 0,
+    "directional_risk_multiple": "8",
+    "risk_to_disaster": false
+  },
+  "gates": {
+    "btc_below_or_missing_ema50": 7692,
+    "leader_trend": 2243,
+    "outside_recovered_entry_envelope": 3588,
+    "relative_strength": 207,
+    "turnover": 1852,
+    "pullback_depth": 405,
+    "dry_volume": 76,
+    "planned_leader_recovery": 34,
+    "automatic_ranked_plans": 29
+  },
+  "summary": {
+    "start": "2026-03-27T00:00:00+00:00",
+    "end_exclusive": "2026-09-27T00:00:00+00:00",
+    "capital": "6000",
+    "final_equity": "7212.657652026488472573043021",
+    "net": "1212.657652026488472573043021",
+    "return_pct": "20.21096086710814120955071702",
+    "max_hour_close_drawdown_pct": "5.651312829160911149650271850",
+    "closed_positions": 20,
+    "wins": 10,
+    "win_rate_pct": "50.0",
+    "profit_factor": "3.420228076698811852178910018",
+    "open_positions": 0,
+    "counts": {
+      "prepared": 29,
+      "triggered": 26,
+      "limit_unfilled": 340,
+      "entered": 20,
+      "intrabar_stop": 9,
+      "profit_target": 6,
+      "setup_invalidated": 4,
+      "ema20_exit": 5,
+      "expired": 5
+    },
+    "missing_held_hours": 0,
+    "data_valid": true,
+    "cash_reconciled": true
+  },
+  "first_half_summary": {
+    "start": "2026-03-27T00:00:00+00:00",
+    "end_exclusive": "2026-06-27T00:00:00+00:00",
+    "capital": "6000",
+    "final_equity": "5981.958108904938045256905073",
+    "net": "-18.041891095061954743094927",
+    "return_pct": "-0.3006981849176992457182487833",
+    "max_hour_close_drawdown_pct": "5.651312829160911149650271850",
+    "closed_positions": 12,
+    "wins": 4,
+    "win_rate_pct": "33.33333333333333333333333333",
+    "profit_factor": "0.9566929098929465291672252305",
+    "open_positions": 0,
+    "counts": {
+      "prepared": 15,
+      "triggered": 14,
+      "limit_unfilled": 114,
+      "entered": 12,
+      "intrabar_stop": 8,
+      "profit_target": 1,
+      "setup_invalidated": 2,
+      "ema20_exit": 3,
+      "expired": 1
+    },
+    "missing_held_hours": 0,
+    "data_valid": true,
+    "cash_reconciled": true
+  },
+  "second_half_summary": {
+    "start": "2026-06-27T00:00:00+00:00",
+    "end_exclusive": "2026-09-27T00:00:00+00:00",
+    "capital": "6000",
+    "final_equity": "7230.699543121550427316137948",
+    "net": "1230.699543121550427316137948",
+    "return_pct": "20.51165905202584045526896580",
+    "max_hour_close_drawdown_pct": "3.368791855774268898877093969",
+    "closed_positions": 8,
+    "wins": 6,
+    "win_rate_pct": "75.00",
+    "profit_factor": "15.57357252644012999252890611",
+    "open_positions": 0,
+    "counts": {
+      "prepared": 14,
+      "setup_invalidated": 2,
+      "triggered": 12,
+      "limit_unfilled": 226,
+      "entered": 8,
+      "ema20_exit": 2,
+      "profit_target": 5,
+      "expired": 4,
+      "intrabar_stop": 1
+    },
+    "missing_held_hours": 0,
+    "data_valid": true,
+    "cash_reconciled": true
+  },
+  "closed_net": "1212.657652026488472573043021",
+  "open_net": "0",
+  "entered_positions": 20,
+  "april_entered_manual_symbols": [],
+  "april_missed_after_execution_rules": [
+    "ARBUSD",
+    "BIOUSD",
+    "ENAUSD",
+    "MUSD",
+    "NEIROUSD",
+    "PENDLEUSD",
+    "PNUTUSD",
+    "SWARMSUSD",
+    "VVVUSD"
+  ],
+  "events": [
+    {
+      "at": "2026-04-20T00:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "prepared",
+      "trigger": "0.06536",
+      "limit": "0.065523400",
+      "stop": "0.06201572",
+      "expires_at": "2026-04-22T00:00:00+00:00"
+    },
+    {
+      "at": "2026-04-20T01:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-04-20T01:00:00+00:00"
+    },
+    {
+      "at": "2026-04-20T01:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T02:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T03:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T04:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T05:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T06:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T07:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T08:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T09:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T10:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T11:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T12:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T13:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T14:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T15:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T16:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T17:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T18:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T19:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T20:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T21:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T22:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-20T23:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-21T00:00:00+00:00",
+      "symbol": "DUSKUSD",
+      "action": "prepared",
+      "trigger": "0.13872",
+      "limit": "0.139066800",
+      "stop": "0.1355453239432068189355872526",
+      "expires_at": "2026-04-23T00:00:00+00:00"
+    },
+    {
+      "at": "2026-04-21T01:00:00+00:00",
+      "symbol": "DUSKUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-04-21T01:00:00+00:00"
+    },
+    {
+      "at": "2026-04-21T00:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-21T01:00:00+00:00",
+      "symbol": "DUSKUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-21T01:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-21T02:00:00+00:00",
+      "symbol": "DUSKUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-21T02:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-21T03:00:00+00:00",
+      "symbol": "DUSKUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-21T03:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "entered",
+      "contracts": 1838,
+      "price": "0.065262615",
+      "stop": "0.06201572",
+      "target": "0.083061800",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-04-21T04:00:00+00:00",
+      "symbol": "DUSKUSD",
+      "action": "entered",
+      "contracts": 86,
+      "price": "0.138079005",
+      "stop": "0.1355453239432068189355872526",
+      "target": "0.1566741802839659053220637370",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-04-23T10:00:00+00:00",
+      "symbol": "DUSKUSD",
+      "action": "intrabar_stop",
+      "contracts": 86,
+      "price": "0.135162385"
+    },
+    {
+      "at": "2026-04-24T21:00:00+00:00",
+      "symbol": "ARCUSD",
+      "action": "intrabar_stop",
+      "contracts": 1838,
+      "price": "0.060049960"
+    },
+    {
+      "at": "2026-04-28T00:00:00+00:00",
+      "symbol": "MONUSD",
+      "action": "prepared",
+      "trigger": "0.03044",
+      "limit": "0.030516100",
+      "stop": "0.0296406",
+      "expires_at": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "at": "2026-04-28T01:00:00+00:00",
+      "symbol": "MONUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-04-28T01:00:00+00:00"
+    },
+    {
+      "at": "2026-04-28T01:00:00+00:00",
+      "symbol": "MONUSD",
+      "action": "entered",
+      "contracts": 395,
+      "price": "0.030305145",
+      "stop": "0.0296406",
+      "target": "0.034893600",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-04-28T06:00:00+00:00",
+      "symbol": "MONUSD",
+      "action": "intrabar_stop",
+      "contracts": 395,
+      "price": "0.029625180"
+    },
+    {
+      "at": "2026-04-30T00:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "prepared",
+      "trigger": "4.275",
+      "limit": "4.2856875",
+      "stop": "4.066228865299678038101227723",
+      "expires_at": "2026-05-02T00:00:00+00:00"
+    },
+    {
+      "at": "2026-04-30T01:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-04-30T01:00:00+00:00"
+    },
+    {
+      "at": "2026-04-30T01:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-30T02:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-04-30T03:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "entered",
+      "contracts": 2811,
+      "price": "4.2681330",
+      "stop": "4.066228865299678038101227723",
+      "target": "5.382980673501609809493861385",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-02T16:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "profit_target",
+      "contracts": 2811,
+      "price": "5.380289183164859004589114454"
+    },
+    {
+      "at": "2026-05-04T00:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "prepared",
+      "trigger": "0.02647",
+      "limit": "0.026536175",
+      "stop": "0.02565375853384112991895941398",
+      "expires_at": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-04T02:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-04T02:00:00+00:00"
+    },
+    {
+      "at": "2026-05-04T02:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T03:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T04:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T05:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T06:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T07:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T08:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T09:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T10:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-04T11:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "entered",
+      "contracts": 4576,
+      "price": "0.026223105",
+      "stop": "0.02565375853384112991895941398",
+      "target": "0.03094825733079435040520293010",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-06T00:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "prepared",
+      "trigger": "0.01702",
+      "limit": "0.017062550",
+      "stop": "0.01630359914836917773556027364",
+      "expires_at": "2026-05-08T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-06T01:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-06T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-06T01:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-06T02:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-06T03:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-06T04:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "setup_invalidated"
+    },
+    {
+      "at": "2026-05-07T00:00:00+00:00",
+      "symbol": "BLURUSD",
+      "action": "ema20_exit",
+      "contracts": 4576,
+      "price": "0.026696645"
+    },
+    {
+      "at": "2026-05-09T00:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "prepared",
+      "trigger": "0.09987",
+      "limit": "0.100119675",
+      "stop": "0.0964068",
+      "expires_at": "2026-05-11T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-09T01:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-09T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-09T01:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T02:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T03:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T04:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T05:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T06:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T07:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T08:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T09:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T10:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T11:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T12:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T13:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T14:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T15:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T16:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T17:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T18:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T19:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T20:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T21:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T22:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-09T23:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T00:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T01:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T02:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T03:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T04:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T05:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T06:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T07:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T08:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T09:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T10:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T11:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T12:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T13:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T14:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T15:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T16:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T17:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T18:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T19:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T20:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T21:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T22:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-10T23:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-11T00:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "expired"
+    },
+    {
+      "at": "2026-05-12T00:00:00+00:00",
+      "symbol": "BIOUSD",
+      "action": "prepared",
+      "trigger": "0.04727",
+      "limit": "0.047388175",
+      "stop": "0.04407168",
+      "expires_at": "2026-05-14T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-12T01:00:00+00:00",
+      "symbol": "BIOUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-12T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-12T01:00:00+00:00",
+      "symbol": "BIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-12T02:00:00+00:00",
+      "symbol": "BIOUSD",
+      "action": "entered",
+      "contracts": 2546,
+      "price": "0.04712355",
+      "stop": "0.04407168",
+      "target": "0.063970650",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-13T00:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "prepared",
+      "trigger": "0.03211",
+      "limit": "0.032190275",
+      "stop": "0.0313372",
+      "expires_at": "2026-05-15T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-13T01:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-13T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-13T01:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T02:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T03:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T04:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T05:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T06:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T07:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T08:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T09:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T10:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T11:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-13T12:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "entered",
+      "contracts": 3752,
+      "price": "0.031975980",
+      "stop": "0.0313372",
+      "target": "0.036455650",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-13T14:00:00+00:00",
+      "symbol": "BIOUSD",
+      "action": "intrabar_stop",
+      "contracts": 2546,
+      "price": "0.043358310"
+    },
+    {
+      "at": "2026-05-13T14:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "intrabar_stop",
+      "contracts": 3752,
+      "price": "0.030994495"
+    },
+    {
+      "at": "2026-05-14T00:00:00+00:00",
+      "symbol": "IOUSD",
+      "action": "prepared",
+      "trigger": "0.1406",
+      "limit": "0.14095150",
+      "stop": "0.1373252000610106574603008855",
+      "expires_at": "2026-05-16T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-14T01:00:00+00:00",
+      "symbol": "IOUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-14T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-14T01:00:00+00:00",
+      "symbol": "IOUSD",
+      "action": "entered",
+      "contracts": 8530,
+      "price": "0.14067030",
+      "stop": "0.1373252000610106574603008855",
+      "target": "0.1590829996949467126984955725",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-14T04:00:00+00:00",
+      "symbol": "IOUSD",
+      "action": "intrabar_stop",
+      "contracts": 8530,
+      "price": "0.13673160"
+    },
+    {
+      "at": "2026-05-15T00:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "prepared",
+      "trigger": "4.707",
+      "limit": "4.7187675",
+      "stop": "4.432118",
+      "expires_at": "2026-05-17T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-15T01:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-15T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-15T01:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-15T02:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "entered",
+      "contracts": 2588,
+      "price": "4.6353165",
+      "stop": "4.432118",
+      "target": "6.1520150",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-15T06:00:00+00:00",
+      "symbol": "ORDIUSD",
+      "action": "intrabar_stop",
+      "contracts": 2588,
+      "price": "4.4247865"
+    },
+    {
+      "at": "2026-05-20T00:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "prepared",
+      "trigger": "0.03058",
+      "limit": "0.030656450",
+      "stop": "0.02983022",
+      "expires_at": "2026-05-22T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-20T01:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-20T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-20T01:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-20T02:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-20T03:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "entered",
+      "contracts": 3927,
+      "price": "0.030555270",
+      "stop": "0.02983022",
+      "target": "0.034787600",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-21T00:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "prepared",
+      "trigger": "0.000492",
+      "limit": "0.0004932300",
+      "stop": "0.0004671638",
+      "expires_at": "2026-05-23T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-21T01:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-21T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-21T01:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-21T02:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-21T03:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-21T04:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-21T05:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-21T06:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "entered",
+      "contracts": 24422,
+      "price": "0.00049134555",
+      "stop": "0.0004671638",
+      "target": "0.0006235610",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-22T00:00:00+00:00",
+      "symbol": "AIXBTUSD",
+      "action": "ema20_exit",
+      "contracts": 3927,
+      "price": "0.032123930"
+    },
+    {
+      "at": "2026-05-22T00:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "ema20_exit",
+      "contracts": 24422,
+      "price": "0.00049565205"
+    },
+    {
+      "at": "2026-05-22T00:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "prepared",
+      "trigger": "0.09678",
+      "limit": "0.097021950",
+      "stop": "0.09456414905867494752688120328",
+      "expires_at": "2026-05-24T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-22T01:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-05-22T01:00:00+00:00"
+    },
+    {
+      "at": "2026-05-22T01:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-22T02:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-22T03:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-22T04:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-05-22T05:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "entered",
+      "contracts": 124,
+      "price": "0.096718335",
+      "stop": "0.09456414905867494752688120328",
+      "target": "0.1093109547066252623655939836",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-05-22T21:00:00+00:00",
+      "symbol": "AIOUSD",
+      "action": "intrabar_stop",
+      "contracts": 124,
+      "price": "0.093843055"
+    },
+    {
+      "at": "2026-05-24T00:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "prepared",
+      "trigger": "0.0004711",
+      "limit": "0.00047227775",
+      "stop": "0.000438122",
+      "expires_at": "2026-05-26T00:00:00+00:00"
+    },
+    {
+      "at": "2026-05-24T21:00:00+00:00",
+      "symbol": "NOTUSD",
+      "action": "setup_invalidated"
+    },
+    {
+      "at": "2026-07-24T00:00:00+00:00",
+      "symbol": "LITUSD",
+      "action": "prepared",
+      "trigger": "2.175",
+      "limit": "2.1804375",
+      "stop": "2.117756",
+      "expires_at": "2026-07-26T00:00:00+00:00"
+    },
+    {
+      "at": "2026-07-24T05:00:00+00:00",
+      "symbol": "LITUSD",
+      "action": "setup_invalidated"
+    },
+    {
+      "at": "2026-08-26T00:00:00+00:00",
+      "symbol": "MUBARAKUSD",
+      "action": "prepared",
+      "trigger": "0.01973",
+      "limit": "0.019779325",
+      "stop": "0.01876365787466532064613550227",
+      "expires_at": "2026-08-28T00:00:00+00:00"
+    },
+    {
+      "at": "2026-08-26T01:00:00+00:00",
+      "symbol": "MUBARAKUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-08-26T01:00:00+00:00"
+    },
+    {
+      "at": "2026-08-26T01:00:00+00:00",
+      "symbol": "MUBARAKUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-08-26T02:00:00+00:00",
+      "symbol": "MUBARAKUSD",
+      "action": "entered",
+      "contracts": 6085,
+      "price": "0.019719855",
+      "stop": "0.01876365787466532064613550227",
+      "target": "0.02485766062667339676932248865",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-08-29T00:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "prepared",
+      "trigger": "0.01148",
+      "limit": "0.011508700",
+      "stop": "0.01125592394541573957481303994",
+      "expires_at": "2026-08-31T00:00:00+00:00"
+    },
+    {
+      "at": "2026-08-29T01:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-08-29T01:00:00+00:00"
+    },
+    {
+      "at": "2026-08-29T01:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-08-29T02:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-08-29T03:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-08-29T04:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "entered",
+      "contracts": 10484,
+      "price": "0.011445720",
+      "stop": "0.01125592394541573957481303994",
+      "target": "0.01277258027292130212593480030",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-08-31T00:00:00+00:00",
+      "symbol": "GRIFFAINUSD",
+      "action": "ema20_exit",
+      "contracts": 10484,
+      "price": "0.011544225"
+    },
+    {
+      "at": "2026-09-02T15:00:00+00:00",
+      "symbol": "MUBARAKUSD",
+      "action": "profit_target",
+      "contracts": 6085,
+      "price": "0.02484523179636006007093782741"
+    },
+    {
+      "at": "2026-09-03T00:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "prepared",
+      "trigger": "1.0031",
+      "limit": "1.00560775",
+      "stop": "0.9797183094136214242343375912",
+      "expires_at": "2026-09-05T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-03T01:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-03T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-03T01:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T02:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T03:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T04:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T05:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T06:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T07:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T08:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T09:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T10:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T11:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T12:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T13:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T14:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T15:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T16:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T17:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T18:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T19:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T20:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T21:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T22:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-03T23:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T00:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T01:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T02:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T03:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T04:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T05:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T06:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T07:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T08:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T09:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T10:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T11:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T12:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T13:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T14:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T15:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T16:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T17:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T18:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T19:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T20:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T21:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T22:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-04T23:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-05T00:00:00+00:00",
+      "symbol": "ZROUSD",
+      "action": "expired"
+    },
+    {
+      "at": "2026-09-10T00:00:00+00:00",
+      "symbol": "ENAUSD",
+      "action": "prepared",
+      "trigger": "0.15235",
+      "limit": "0.152730875",
+      "stop": "0.1476651538892849455442946772",
+      "expires_at": "2026-09-12T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-10T01:00:00+00:00",
+      "symbol": "ENAUSD",
+      "action": "setup_invalidated"
+    },
+    {
+      "at": "2026-09-11T00:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "prepared",
+      "trigger": "0.00771",
+      "limit": "0.007729275",
+      "stop": "0.007421186074917192259747690686",
+      "expires_at": "2026-09-13T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-11T01:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-11T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-11T01:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T02:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T03:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T04:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T05:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T06:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T07:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T08:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T09:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T10:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T11:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T12:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T13:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T14:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T15:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T16:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T17:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T18:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T19:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T20:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T21:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T22:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-11T23:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T00:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T01:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T02:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T03:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T04:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T05:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T06:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T07:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T08:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T09:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T10:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T11:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T12:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T13:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T14:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T15:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T16:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T17:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T18:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T19:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T20:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T21:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T22:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-12T23:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-13T00:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "expired"
+    },
+    {
+      "at": "2026-09-13T00:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "prepared",
+      "trigger": "0.4902",
+      "limit": "0.49142550",
+      "stop": "0.4657666",
+      "expires_at": "2026-09-15T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-13T01:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-13T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-13T01:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "entered",
+      "contracts": 244,
+      "price": "0.49094535",
+      "stop": "0.4657666",
+      "target": "0.61972000",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-09-14T00:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "ema20_exit",
+      "contracts": 244,
+      "price": "0.47926025"
+    },
+    {
+      "at": "2026-09-14T00:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "prepared",
+      "trigger": "52.9",
+      "limit": "53.03225",
+      "stop": "51.51029960438556737587770277",
+      "expires_at": "2026-09-16T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-14T01:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-14T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-14T01:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T02:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T03:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T04:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T05:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T06:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T07:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T08:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T09:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T10:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T11:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T12:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T13:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T14:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T15:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T16:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T17:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T18:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T19:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T20:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T21:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T22:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-14T23:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T00:00:00+00:00",
+      "symbol": "ARBUSD",
+      "action": "prepared",
+      "trigger": "0.1339",
+      "limit": "0.13423475",
+      "stop": "0.1301129788559548385941581197",
+      "expires_at": "2026-09-17T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-15T01:00:00+00:00",
+      "symbol": "ARBUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-15T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-15T00:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T01:00:00+00:00",
+      "symbol": "ARBUSD",
+      "action": "entered",
+      "contracts": 8984,
+      "price": "0.13356675",
+      "stop": "0.1301129788559548385941581197",
+      "target": "0.1548436057202258070292094015",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-09-15T01:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T02:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T03:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T04:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T05:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T06:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T07:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-15T08:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "entered",
+      "contracts": 226,
+      "price": "52.976475",
+      "stop": "51.51029960438556737587770277",
+      "target": "60.64200197807216312061148615",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-09-15T15:00:00+00:00",
+      "symbol": "DASHUSD",
+      "action": "intrabar_stop",
+      "contracts": 226,
+      "price": "50.624675"
+    },
+    {
+      "at": "2026-09-15T17:00:00+00:00",
+      "symbol": "ARBUSD",
+      "action": "profit_target",
+      "contracts": 8984,
+      "price": "0.1547661839173656941256947968"
+    },
+    {
+      "at": "2026-09-16T00:00:00+00:00",
+      "symbol": "ENAUSD",
+      "action": "prepared",
+      "trigger": "0.14009",
+      "limit": "0.140440225",
+      "stop": "0.13467012",
+      "expires_at": "2026-09-18T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-16T01:00:00+00:00",
+      "symbol": "ENAUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-16T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-16T01:00:00+00:00",
+      "symbol": "ENAUSD",
+      "action": "entered",
+      "contracts": 8625,
+      "price": "0.139119525",
+      "stop": "0.13467012",
+      "target": "0.169290750",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-09-17T00:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "prepared",
+      "trigger": "0.00747",
+      "limit": "0.007488675",
+      "stop": "0.00714568",
+      "expires_at": "2026-09-19T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-17T01:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-17T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-17T01:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-17T02:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "entered",
+      "contracts": 1609,
+      "price": "0.007453725",
+      "stop": "0.00714568",
+      "target": "0.009203650",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-09-18T00:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "prepared",
+      "trigger": "0.4643",
+      "limit": "0.46546075",
+      "stop": "0.4386210",
+      "expires_at": "2026-09-20T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-18T01:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-18T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-18T01:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T02:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T03:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T04:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T05:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T06:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T07:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T08:00:00+00:00",
+      "symbol": "ENAUSD",
+      "action": "profit_target",
+      "contracts": 8625,
+      "price": "0.1692061046250"
+    },
+    {
+      "at": "2026-09-18T08:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T09:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T10:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T11:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T12:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T13:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T14:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T15:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T16:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T17:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T18:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T19:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T20:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T21:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T22:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-18T23:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T00:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T01:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T02:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T03:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T04:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T05:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T06:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T07:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T08:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T09:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T10:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T11:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T12:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T13:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T14:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T15:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T16:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T17:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T18:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T19:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T20:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T21:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T22:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-19T23:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-20T00:00:00+00:00",
+      "symbol": "SPXUSD",
+      "action": "expired"
+    },
+    {
+      "at": "2026-09-20T00:00:00+00:00",
+      "symbol": "FFUSD",
+      "action": "prepared",
+      "trigger": "0.12642",
+      "limit": "0.126736050",
+      "stop": "0.12082786",
+      "expires_at": "2026-09-22T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-20T01:00:00+00:00",
+      "symbol": "FFUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-20T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-20T01:00:00+00:00",
+      "symbol": "FFUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-20T02:00:00+00:00",
+      "symbol": "FFUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-20T03:00:00+00:00",
+      "symbol": "FFUSD",
+      "action": "entered",
+      "contracts": 94,
+      "price": "0.126703320",
+      "stop": "0.12082786",
+      "target": "0.156277000",
+      "minimum_reward_risk": "5"
+    },
+    {
+      "at": "2026-09-20T21:00:00+00:00",
+      "symbol": "FFUSD",
+      "action": "profit_target",
+      "contracts": 94,
+      "price": "0.1561988615000"
+    },
+    {
+      "at": "2026-09-22T22:00:00+00:00",
+      "symbol": "ZORAUSD",
+      "action": "profit_target",
+      "contracts": 1609,
+      "price": "0.0091990481750"
+    },
+    {
+      "at": "2026-09-24T00:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "prepared",
+      "trigger": "0.004099",
+      "limit": "0.0041092475",
+      "stop": "0.00384230",
+      "expires_at": "2026-09-26T00:00:00+00:00"
+    },
+    {
+      "at": "2026-09-24T01:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "triggered",
+      "earliest_fill": "2026-09-24T01:00:00+00:00"
+    },
+    {
+      "at": "2026-09-24T01:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T02:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T03:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T04:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T05:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T06:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T07:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T08:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T09:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T10:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T11:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T12:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T13:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T14:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T15:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T16:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T17:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T18:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T19:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T20:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T21:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T22:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-24T23:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T00:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T01:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T02:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T03:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T04:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T05:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T06:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T07:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T08:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T09:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T10:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T11:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T12:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T13:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T14:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T15:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T16:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T17:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T18:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T19:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T20:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T21:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T22:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-25T23:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "limit_unfilled"
+    },
+    {
+      "at": "2026-09-26T00:00:00+00:00",
+      "symbol": "SOLVUSD",
+      "action": "expired"
+    }
+  ],
+  "trades": [
+    {
+      "symbol": "DUSKUSD",
+      "entry_at": "2026-04-21T04:00:00+00:00",
+      "exit_at": "2026-04-23T10:00:00+00:00",
+      "entry": "0.138079005",
+      "contracts": 86,
+      "gross": "-25.082932000",
+      "fees": "1.1749379770000",
+      "funding": "0.798587400",
+      "net": "-27.0564573770000",
+      "fills": [
+        {
+          "at": "2026-04-23T10:00:00+00:00",
+          "contracts": 86,
+          "price": "0.135162385",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "ARCUSD",
+      "entry_at": "2026-04-21T03:00:00+00:00",
+      "exit_at": "2026-04-24T21:00:00+00:00",
+      "entry": "0.065262615",
+      "contracts": 1838,
+      "gross": "-95.808598900",
+      "fees": "1.1516225642500",
+      "funding": "1.3562211425",
+      "net": "-98.3164426067500",
+      "fills": [
+        {
+          "at": "2026-04-24T21:00:00+00:00",
+          "contracts": 1838,
+          "price": "0.060049960",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "MONUSD",
+      "entry_at": "2026-04-28T01:00:00+00:00",
+      "exit_at": "2026-04-28T06:00:00+00:00",
+      "entry": "0.030305145",
+      "contracts": 395,
+      "gross": "-26.858617500",
+      "fees": "1.1836239187500",
+      "funding": "0.0593339375",
+      "net": "-28.1015753562500",
+      "fills": [
+        {
+          "at": "2026-04-28T06:00:00+00:00",
+          "contracts": 395,
+          "price": "0.029625180",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "ORDIUSD",
+      "entry_at": "2026-04-30T03:00:00+00:00",
+      "exit_at": "2026-05-02T16:00:00+00:00",
+      "entry": "4.2681330",
+      "contracts": 2811,
+      "gross": "312.6271030876418661900000730",
+      "fees": "1.356085737843820933095000036",
+      "funding": "0.93666033750",
+      "net": "310.3343570122980452569050730",
+      "fills": [
+        {
+          "at": "2026-05-02T16:00:00+00:00",
+          "contracts": 2811,
+          "price": "5.380289183164859004589114454",
+          "reason": "profit_target"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "BLURUSD",
+      "entry_at": "2026-05-04T11:00:00+00:00",
+      "exit_at": "2026-05-07T00:00:00+00:00",
+      "entry": "0.026223105",
+      "contracts": 4576,
+      "gross": "21.669190400",
+      "fees": "1.2108038800000",
+      "funding": "0.95240288",
+      "net": "19.5059836400000",
+      "fills": [
+        {
+          "at": "2026-05-07T00:00:00+00:00",
+          "contracts": 4576,
+          "price": "0.026696645",
+          "reason": "ema20_exit"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "BIOUSD",
+      "entry_at": "2026-05-12T02:00:00+00:00",
+      "exit_at": "2026-05-13T14:00:00+00:00",
+      "entry": "0.04712355",
+      "contracts": 2546,
+      "gross": "-95.863010400",
+      "fees": "1.1518340778000",
+      "funding": "0.5196672425",
+      "net": "-97.5345117203000",
+      "fills": [
+        {
+          "at": "2026-05-13T14:00:00+00:00",
+          "contracts": 2546,
+          "price": "0.043358310",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "AIXBTUSD",
+      "entry_at": "2026-05-13T12:00:00+00:00",
+      "exit_at": "2026-05-13T14:00:00+00:00",
+      "entry": "0.031975980",
+      "contracts": 3752,
+      "gross": "-36.825317200",
+      "fees": "1.1813261110000",
+      "funding": "0.01486261",
+      "net": "-38.0215059210000",
+      "fills": [
+        {
+          "at": "2026-05-13T14:00:00+00:00",
+          "contracts": 3752,
+          "price": "0.030994495",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "IOUSD",
+      "entry_at": "2026-05-14T01:00:00+00:00",
+      "exit_at": "2026-05-14T04:00:00+00:00",
+      "entry": "0.14067030",
+      "contracts": 8530,
+      "gross": "-33.59711100",
+      "fees": "1.183119103500",
+      "funding": "0.0301428875",
+      "net": "-34.810372991000",
+      "fills": [
+        {
+          "at": "2026-05-14T04:00:00+00:00",
+          "contracts": 8530,
+          "price": "0.13673160",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "ORDIUSD",
+      "entry_at": "2026-05-15T02:00:00+00:00",
+      "exit_at": "2026-05-15T06:00:00+00:00",
+      "entry": "4.6353165",
+      "contracts": 2588,
+      "gross": "-54.48516400",
+      "fees": "1.172377328200",
+      "funding": "0.044387435",
+      "net": "-55.701928763200",
+      "fills": [
+        {
+          "at": "2026-05-15T06:00:00+00:00",
+          "contracts": 2588,
+          "price": "4.4247865",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "AIXBTUSD",
+      "entry_at": "2026-05-20T03:00:00+00:00",
+      "exit_at": "2026-05-22T00:00:00+00:00",
+      "entry": "0.030555270",
+      "contracts": 3927,
+      "gross": "61.601278200",
+      "fees": "1.2307060920000",
+      "funding": "0.69471575250",
+      "net": "59.6758563555000",
+      "fills": [
+        {
+          "at": "2026-05-22T00:00:00+00:00",
+          "contracts": 3927,
+          "price": "0.032123930",
+          "reason": "ema20_exit"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "NOTUSD",
+      "entry_at": "2026-05-21T06:00:00+00:00",
+      "exit_at": "2026-05-22T00:00:00+00:00",
+      "entry": "0.00049134555",
+      "contracts": 24422,
+      "gross": "10.51733430000",
+      "fees": "1.205222769360000",
+      "funding": "0.26656613000",
+      "net": "9.045545400640000",
+      "fills": [
+        {
+          "at": "2026-05-22T00:00:00+00:00",
+          "contracts": 24422,
+          "price": "0.00049565205",
+          "reason": "ema20_exit"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "AIOUSD",
+      "entry_at": "2026-05-22T05:00:00+00:00",
+      "exit_at": "2026-05-22T21:00:00+00:00",
+      "entry": "0.096718335",
+      "contracts": 124,
+      "gross": "-35.653472000",
+      "fees": "1.1814806180000",
+      "funding": "0.22588615",
+      "net": "-37.0608387680000",
+      "fills": [
+        {
+          "at": "2026-05-22T21:00:00+00:00",
+          "contracts": 124,
+          "price": "0.093843055",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "GRIFFAINUSD",
+      "entry_at": "2026-08-29T04:00:00+00:00",
+      "exit_at": "2026-08-31T00:00:00+00:00",
+      "entry": "0.011445720",
+      "contracts": 10484,
+      "gross": "10.327264200",
+      "fees": "1.2051329169000",
+      "funding": "0.6945951415",
+      "net": "8.4275361416000",
+      "fills": [
+        {
+          "at": "2026-08-31T00:00:00+00:00",
+          "contracts": 10484,
+          "price": "0.011544225",
+          "reason": "ema20_exit"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "MUBARAKUSD",
+      "entry_at": "2026-08-26T02:00:00+00:00",
+      "exit_at": "2026-09-02T15:00:00+00:00",
+      "entry": "0.019719855",
+      "contracts": 6085,
+      "gross": "311.8791780585096553165667979",
+      "fees": "1.355892765779254827658283399",
+      "funding": "2.90097811250",
+      "net": "307.6223071802304004889085145",
+      "fills": [
+        {
+          "at": "2026-09-02T15:00:00+00:00",
+          "contracts": 6085,
+          "price": "0.02484523179636006007093782741",
+          "reason": "profit_target"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "SPXUSD",
+      "entry_at": "2026-09-13T01:00:00+00:00",
+      "exit_at": "2026-09-14T00:00:00+00:00",
+      "entry": "0.49094535",
+      "contracts": 244,
+      "gross": "-28.51164400",
+      "fees": "1.183650832000",
+      "funding": "0.34074295",
+      "net": "-30.036037782000",
+      "fills": [
+        {
+          "at": "2026-09-14T00:00:00+00:00",
+          "contracts": 244,
+          "price": "0.47926025",
+          "reason": "ema20_exit"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "DASHUSD",
+      "entry_at": "2026-09-15T08:00:00+00:00",
+      "exit_at": "2026-09-15T15:00:00+00:00",
+      "entry": "52.976475",
+      "contracts": 226,
+      "gross": "-53.1506800",
+      "fees": "1.17069299500",
+      "funding": "0.089936700",
+      "net": "-54.41130969500",
+      "fills": [
+        {
+          "at": "2026-09-15T15:00:00+00:00",
+          "contracts": 226,
+          "price": "50.624675",
+          "reason": "intrabar_stop"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "ARBUSD",
+      "entry_at": "2026-09-15T01:00:00+00:00",
+      "exit_at": "2026-09-15T17:00:00+00:00",
+      "entry": "0.13356675",
+      "contracts": 8984,
+      "gross": "190.4557143136133960252420545",
+      "fees": "1.295191539156806698012621027",
+      "funding": "0.22979949",
+      "net": "188.9307232844565893272294335",
+      "fills": [
+        {
+          "at": "2026-09-15T17:00:00+00:00",
+          "contracts": 8984,
+          "price": "0.1547661839173656941256947968",
+          "reason": "profit_target"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "ENAUSD",
+      "entry_at": "2026-09-16T01:00:00+00:00",
+      "exit_at": "2026-09-18T08:00:00+00:00",
+      "entry": "0.139119525",
+      "contracts": 8625,
+      "gross": "259.4967492656250",
+      "fees": "1.32965427775781250",
+      "funding": "0.871654359375",
+      "net": "257.29544062849218750",
+      "fills": [
+        {
+          "at": "2026-09-18T08:00:00+00:00",
+          "contracts": 8625,
+          "price": "0.1692061046250",
+          "reason": "profit_target"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "FFUSD",
+      "entry_at": "2026-09-20T03:00:00+00:00",
+      "exit_at": "2026-09-20T21:00:00+00:00",
+      "entry": "0.126703320",
+      "contracts": 94,
+      "gross": "277.2580901000000",
+      "fees": "1.32964025305000000",
+      "funding": "0.264702825",
+      "net": "275.66374702195000000",
+      "fills": [
+        {
+          "at": "2026-09-20T21:00:00+00:00",
+          "contracts": 94,
+          "price": "0.1561988615000",
+          "reason": "profit_target"
+        }
+      ],
+      "missing_hours": 0
+    },
+    {
+      "symbol": "ZORAUSD",
+      "entry_at": "2026-09-17T02:00:00+00:00",
+      "exit_at": "2026-09-22T22:00:00+00:00",
+      "entry": "0.007453725",
+      "contracts": 1609,
+      "gross": "280.8224988575000",
+      "fees": "1.33971560192875000",
+      "funding": "2.27564691375",
+      "net": "277.20713634182125000",
+      "fills": [
+        {
+          "at": "2026-09-22T22:00:00+00:00",
+          "contracts": 1609,
+          "price": "0.0091990481750",
+          "reason": "profit_target"
+        }
+      ],
+      "missing_hours": 0
+    }
+  ],
+  "open_positions": []
+}

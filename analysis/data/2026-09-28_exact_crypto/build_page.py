@@ -40,6 +40,7 @@ for name in (
     "recovered_8r_025adr_6k.json",
     "recovered_5r_050adr_6k.json",
     "recovered_5r_025adr_12k.json",
+    "automatic_pullback_5r_025adr_6k.json",
 ):
     shutil.copyfile(RESEARCH / name, HERE / name)
 
