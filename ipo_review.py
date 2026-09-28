@@ -1252,7 +1252,16 @@ FOOTNOTE_27 = (
 
 
 LEAD_28 = (
-    "Monday 28 September, before the open. <strong>Today is the day four of these change "
+    "Monday 28 September, read again at 09:00 after the pre-open mail. "
+    "<strong>Overnight the grey market moved and two of the moves matter.</strong> "
+    "Runwal Enterprises has halved, &#8377;30 to &#8377;14 &mdash; 9.8% to 4.6%, which after the "
+    "2.6-point overstatement is about two points and inside the noise of a listing day; the SKIP "
+    "hardens. Orient Cables firmed &#8377;80 to &#8377;90, 29.4% to 33.1%, which is the market "
+    "disagreeing with that 0.01x QIB book. SRIT India edged up to 25.4% and Shah Investor's Home "
+    "down to 6.0% &mdash; both in the direction the calls already point. Moneyview and A-One are "
+    "unchanged. Subscription figures are still Friday's close; the exchange book updates through "
+    "the session. "
+    "<strong>Today is the day four of these change "
     "status</strong>: SRIT India and Shah Investor's Home open, Moneyview and A-One Steels "
     "close. The subscription figures below are still Friday's close &mdash; the exchange book "
     "updates through the session, so re-read it before applying rather than acting on these. "
