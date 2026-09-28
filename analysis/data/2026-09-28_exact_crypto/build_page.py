@@ -27,7 +27,7 @@ content = content.replace(
 )
 
 body = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Exact April crypto fill reconciliation, recovered three-mode TIS selector, and a six-month $100-risk hourly backtest."><title>Can code reproduce the April crypto trades?</title>{style.group()}<link rel="stylesheet" href="2026-09-28_crypto_thresholds.css"></head><body><main class="wrap crypto-study">
-<header class="top"><p class="eyebrow"><a href="../index.html">Morning Book</a> · crypto research / 28 September 2026</p><h1>Can code reproduce<br>the April crypto trades?</h1><p class="dek">An exact nine-position fill reconciliation, a symbol-blind three-mode strategy with 100% April candidate recall, and the six-month test that shows what the archive still cannot recover.</p><div class="meta"><span>Exact tape: 9 positions</span><span>Backtest: 6 months</span><span>Risk: $100/trade</span><span>Agents: 0 dynos</span></div></header>
+<header class="top"><p class="eyebrow"><a href="../index.html">Morning Book</a> · crypto research / 28 September 2026</p><h1>Can code reproduce<br>the April crypto trades?</h1><p class="dek">An exact nine-position fill reconciliation, a symbol-blind three-mode strategy with 100% April candidate recall, and the six-month test that shows what the archive still cannot recover.</p><div class="meta"><span>Exact tape: 9 positions</span><span>Backtest: 6 months</span><span>Backtest risk: $100/trade</span><span>Live risk: $30/trade</span><span>Agents: 0 dynos</span></div></header>
 <nav class="toc"><a href="#what-exact-can-and-cannot-mean">Exactness</a><a href="#the-recovered-entry-family">Rules</a><a href="#april-parity-test">April parity</a><a href="#six-month-backtest">Backtest</a><a href="#implementation-and-decision">Decision</a></nav>
 <section id="report">{content}</section>
 <footer>Research published 28 September 2026. Historical replay is not an expected return. <a href="../index.html">Morning Book index</a>.</footer></main></body></html>'''
@@ -56,7 +56,7 @@ summary = {
         if key != "candidate_days"
     },
     "variants": results["variants"],
-    "live_status": "manual_tis_automatic_8_5r deployed in cryptoo-service; agents kept at zero dynos",
+    "live_status": "manual_tis_automatic_8_5r deployed at $30 risk/trade in cryptoo-service; agents kept at zero dynos",
 }
 (HERE / "summary.json").write_text(json.dumps(summary, indent=2))
 

@@ -261,7 +261,7 @@ tfoot td{font-weight:700;color:var(--ink);background:var(--head);border-top:1px 
 footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
 @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
 </style><link rel="stylesheet" href="2026-09-28_crypto_thresholds.css"></head><body><main class="wrap crypto-study">
-<header class="top"><p class="eyebrow"><a href="../index.html">Morning Book</a> · crypto research / 28 September 2026</p><h1>Can code reproduce<br>the April crypto trades?</h1><p class="dek">An exact nine-position fill reconciliation, a symbol-blind three-mode strategy with 100% April candidate recall, and the six-month test that shows what the archive still cannot recover.</p><div class="meta"><span>Exact tape: 9 positions</span><span>Backtest: 6 months</span><span>Risk: $100/trade</span><span>Agents: 0 dynos</span></div></header>
+<header class="top"><p class="eyebrow"><a href="../index.html">Morning Book</a> · crypto research / 28 September 2026</p><h1>Can code reproduce<br>the April crypto trades?</h1><p class="dek">An exact nine-position fill reconciliation, a symbol-blind three-mode strategy with 100% April candidate recall, and the six-month test that shows what the archive still cannot recover.</p><div class="meta"><span>Exact tape: 9 positions</span><span>Backtest: 6 months</span><span>Backtest risk: $100/trade</span><span>Live risk: $30/trade</span><span>Agents: 0 dynos</span></div></header>
 <nav class="toc"><a href="#what-exact-can-and-cannot-mean">Exactness</a><a href="#the-recovered-entry-family">Rules</a><a href="#april-parity-test">April parity</a><a href="#six-month-backtest">Backtest</a><a href="#implementation-and-decision">Decision</a></nav>
 <section id="report"><p><strong>As of 28 September 2026. The broad exact-recall strategy remains research.
 The narrower <code>manual_tis_automatic_8_5r</code> profile is deployed in production.
@@ -464,9 +464,11 @@ arms a crossed trigger. It submits only while the current mark is between stop
 and limit, using an IOC limit bracket with the structural stop and 8.5R target
 attached. An unfilled order cannot rest and an unknown venue outcome is not
 retried automatically.</p>
-<p>Production sizes from $100 planned stop risk, with a $5,000 notional cap and a
-$12,000 capital envelope after a 2% reserve. It records the confirmed average
-fill and filled contracts. It applies no breakeven or generic chandelier move;
+<p>Production sizes from $30 planned stop risk, with a $5,000 notional cap, $240
+aggregate/long risk cap and a $12,000 capital envelope after a 2% reserve. The
+historical replay above remains the measured $100-risk result. Production
+records the confirmed average fill and filled contracts. It applies no
+breakeven or generic chandelier move;
 positions also close after a completed daily close below EMA20 or 21 elapsed
 days. The historical headline remains in-sample and is not a production return
 forecast.</p>
