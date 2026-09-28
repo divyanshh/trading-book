@@ -23,7 +23,7 @@ from __future__ import annotations
 import html
 import re
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -1250,6 +1250,61 @@ FOOTNOTE_27 = (
     "sources name the company differently and a name is never guessed at."
 )
 
+
+LEAD_28 = (
+    "Monday 28 September, before the open. <strong>Today is the day four of these change "
+    "status</strong>: SRIT India and Shah Investor's Home open, Moneyview and A-One Steels "
+    "close. The subscription figures below are still Friday's close &mdash; the exchange book "
+    "updates through the session, so re-read it before applying rather than acting on these. "
+    "Expected listing is the GMP percentage less 2.6 points, the overstatement "
+    "<code>backtest_gmp</code> measured over 295 listings (r&nbsp;=&nbsp;0.87). "
+    "<strong>Applied:</strong> Adroit sHNI 23 Sep (listed, sold); Moneyview HNI 24 Sep; "
+    "Orient Cables 25 Sep. <strong>Held:</strong> NSE, 120 at &#8377;1,785, still without a "
+    "stop, in a market that has been in a Downtrend since Thursday."
+)
+
+FOOTNOTE_28 = (
+    "<strong>The one number to read again before applying to SRIT is its day-one book.</strong> "
+    "A no-OFS issue at 21x with 30% return on equity is the best structure on this board, and "
+    "an opening-day book under 1x would say the market disagrees with that reading. "
+    "For the two closing today, QIB is now decisive rather than indicative: institutions bid on "
+    "the final day, so Moneyview at 0.25x and A-One at 0.09x are Friday's picture, not the "
+    "verdict. Orient Cables closes tomorrow with QIB at 0.01x &mdash; on a &#8377;552 Cr issue a "
+    "book that finishes under 1x means retail and HNI carried it alone, and that is a listing "
+    "to sell into rather than hold."
+)
+
+def _for_28() -> list[IPO]:
+    """The 26 September calls, restated for the day they are acted on.
+
+    The research is the same research — nothing moved over a shut weekend — so
+    the stats, flags and notes are reused rather than retyped, which is what
+    keeps a correction to one of them from living in only one copy. What is
+    rewritten is the part that is about *today*: which issues open, which close,
+    and what a reader is supposed to do about it this morning.
+    """
+    today = {
+        "Moneyview": ("APPLIED — closes today", "24–28 Sep (CLOSES TODAY)"),
+        "A-One Steels": ("SKIP — closes today", "24–28 Sep (CLOSES TODAY)"),
+        "SRIT India": ("APPLY — opens today", "28–30 Sep (OPENS TODAY)"),
+        "Shah Investor’s Home": ("AVOID — opens today", "28–30 Sep (OPENS TODAY)"),
+        "Orient Cables": ("APPLIED — closes tomorrow", "25–29 Sep (closes tomorrow)"),
+        "Acevector": ("AVOID", "25–29 Sep (closes tomorrow)"),
+        "German Green Steel": ("WATCH — no book to read", "25–29 Sep (closes tomorrow)"),
+        "Runwal Enterprises": ("SKIP", "25–29 Sep (closes tomorrow)"),
+    }
+    out = []
+    for ipo in IPOS_2026_09_26:
+        if ipo.name in today:
+            call, dates = today[ipo.name]
+            out.append(replace(ipo, call=call, dates=dates))
+        else:
+            out.append(ipo)
+    return out
+
+
+IPOS_2026_09_28 = _for_28()
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -1259,6 +1314,7 @@ BY_DAY = {
     # same list rather than copied: a duplicate would drift the moment one
     # number was corrected in only one of them.
     "2026-09-27": (IPOS_2026_09_26, LEAD_27, FOOTNOTE_27),
+    "2026-09-28": (IPOS_2026_09_28, LEAD_28, FOOTNOTE_28),
 }
 
 
