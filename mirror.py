@@ -560,172 +560,72 @@ def landing_html(style: str, stats: dict[str, object]) -> str:
 
 LANDING = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="A systematic India equity and crypto trading book, published every session: the rules, the realised record, and the ideas that were tested and thrown away.">
-<title>Morning Book — a trading system, in the open</title>@@STYLE@@<style>
-.wrap{max-width:1100px}
-.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
-.hero h1{font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.08;margin:.2em 0 .3em;letter-spacing:-.02em}
-.hero .tag{font-size:clamp(1rem,2.2vw,1.2rem);color:var(--ink-2);max-width:62ch;line-height:1.55}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:34px 0 8px}
-.kpi{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:16px 18px}
-.kpi b{display:block;font-size:clamp(1.3rem,3vw,1.9rem);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.kpi span{display:block;font-size:12px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
-.chartwrap{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:20px;margin:26px 0}
-.chartwrap header{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between;margin-bottom:6px}
-.toggle{display:flex;gap:0;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden}
-.toggle button{background:transparent;border:0;color:var(--ink-2);font:inherit;font-size:12.5px;
-  padding:6px 13px;cursor:pointer}
-.toggle button[aria-pressed=true]{background:var(--line);color:var(--ink)}
-.bars{display:flex;align-items:flex-end;gap:clamp(4px,1.6vw,16px);height:190px;margin-top:18px}
-.bar-slot{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
-  height:100%;cursor:pointer;border-radius:6px;outline-offset:3px}
-.bar-slot:hover,.bar-slot:focus-visible{background:rgba(255,255,255,.04)}
-.bar{width:100%;max-width:64px;height:0;border-radius:5px 5px 0 0;transition:height .9s cubic-bezier(.2,.7,.2,1)}
-.loaded .bar{height:var(--h)}
-.bar.up{background:linear-gradient(180deg,var(--green),color-mix(in srgb,var(--green) 55%,transparent))}
-.bar.down{background:linear-gradient(180deg,color-mix(in srgb,var(--red) 55%,transparent),var(--red))}
-.bar-label{font-size:11.5px;color:var(--muted);margin-top:8px}
-.readout{min-height:1.5em;font-size:13.5px;color:var(--ink-2);margin-top:14px;font-variant-numeric:tabular-nums}
-.curve{width:100%;height:190px;margin-top:18px;display:none}
-.curve polyline{fill:none;stroke:var(--green);stroke-width:2.2;vector-effect:non-scaling-stroke;
-  stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.5s .2s cubic-bezier(.3,.7,.3,1) forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.showcurve .bars{display:none}.showcurve .curve{display:block}
-.dis{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:16px 18px}
-.dis h3{margin:0 0 6px;font-size:15px}
-.dis p{margin:0;color:var(--ink-2);font-size:13.5px;line-height:1.6}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:18px 0}
-.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
-.book{display:block;border:1px solid var(--line);background:var(--card);border-radius:12px;
-  padding:22px;text-decoration:none;transition:border-color .18s,transform .18s}
-.book:hover{border-color:var(--accent);transform:translateY(-2px)}
-.book h3{margin:0 0 4px}.book p{margin:0;color:var(--muted);font-size:13px}
-.cta{border:1px solid var(--line-strong);background:var(--card);border-radius:12px;
-  padding:26px;margin:30px 0;text-align:center}
-.cta a.btn{display:inline-block;margin-top:12px;padding:11px 22px;border-radius:8px;
-  background:var(--accent);color:var(--canvas);font-weight:650;text-decoration:none}
-@media (prefers-reduced-motion:reduce){.bar{transition:none}.curve polyline{animation:none;stroke-dashoffset:0}}
-</style></head><body><div class="wrap">
+<meta name="description" content="A systematic India equity and crypto trading book: live rules, realised evidence, and every rejected idea.">
+<meta name="theme-color" content="#050814"><title>Morning Book — rules, results, receipts</title>@@STYLE@@<style>
+:root{--accent:#5eead4;--cyan:#22d3ee;--violet:#a78bfa;--pink:#f472b6;--night:#050814}
+html{scroll-behavior:smooth;scroll-padding-top:90px}body{background:var(--night);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:
+ radial-gradient(circle at 18% 12%,rgba(34,211,238,.11),transparent 28%),
+ radial-gradient(circle at 82% 22%,rgba(167,139,250,.10),transparent 25%),
+ linear-gradient(rgba(94,234,212,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(94,234,212,.025) 1px,transparent 1px);background-size:auto,auto,54px 54px,54px 54px}
+.page-progress{position:fixed;inset:0 0 auto;height:2px;z-index:1000;background:rgba(255,255,255,.03)}
+.page-progress span{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink))}
+.site-nav{position:fixed;z-index:50;top:18px;left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 28px));display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 12px 10px 16px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(5,8,20,.72);backdrop-filter:blur(22px);box-shadow:0 18px 60px rgba(0,0,0,.3)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:850;letter-spacing:-.03em}.brand-mark{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#051018;font-size:14px;box-shadow:0 0 24px rgba(34,211,238,.22)}
+.nav-links{display:flex;gap:6px;align-items:center}.nav-links a{color:var(--muted);text-decoration:none;font-size:12.5px;font-weight:650;padding:8px 11px;border-radius:10px}.nav-links a:hover,.nav-links a:focus-visible{color:var(--ink);background:rgba(255,255,255,.06)}
+.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border-radius:11px;font-weight:750;transition:transform .2s,border-color .2s,box-shadow .2s}.nav-cta{padding:9px 13px;color:#061018;background:var(--accent);font-size:12px}.button{padding:12px 17px;border:1px solid rgba(255,255,255,.12);color:var(--ink)}.button.primary{background:linear-gradient(135deg,var(--cyan),var(--violet));color:#050814;border:0;box-shadow:0 10px 32px rgba(34,211,238,.15)}.button:hover{transform:translateY(-2px);border-color:var(--cyan)}
+.nav-toggle{display:none;border:0;background:transparent;color:var(--ink);font-size:22px}
+.landing-wrap{max-width:1180px;margin:0 auto;padding:0 28px 84px;position:relative}.hero{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:clamp(36px,7vw,88px);align-items:center;padding:125px 0 72px;position:relative}
+#market-canvas{position:absolute;inset:76px -12vw 0;width:124vw;height:calc(100% - 76px);opacity:.48;z-index:-1;mask-image:linear-gradient(to bottom,black,transparent 94%)}
+.status{display:inline-flex;align-items:center;gap:9px;padding:7px 12px;border:1px solid rgba(94,234,212,.22);border-radius:99px;background:rgba(94,234,212,.06);color:var(--accent);font-size:11px;font-weight:750;letter-spacing:.09em;text-transform:uppercase}.pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);animation:pulse 2s ease-in-out infinite}@keyframes pulse{50%{opacity:.35;box-shadow:none}}
+.hero h1{font-size:clamp(3.6rem,8.5vw,7.7rem);line-height:.9;letter-spacing:-.075em;margin:24px 0;color:#f6f8ff;max-width:8ch}.hero h1 em{font-family:Georgia,serif;font-weight:400;background:linear-gradient(100deg,var(--cyan),var(--violet) 52%,var(--pink));-webkit-background-clip:text;color:transparent}.hero-copy{font-size:clamp(1rem,1.7vw,1.18rem);line-height:1.72;color:var(--ink-2);max-width:59ch}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}.micro-proof{display:flex;flex-wrap:wrap;gap:18px;margin-top:34px;color:var(--faint);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.micro-proof span::before{content:"✓";color:var(--accent);margin-right:7px}
+.system-card{border:1px solid rgba(255,255,255,.1);border-radius:24px;background:linear-gradient(145deg,rgba(19,28,46,.86),rgba(9,14,29,.72));backdrop-filter:blur(24px);padding:22px;box-shadow:0 40px 100px rgba(0,0,0,.35);transform:perspective(900px) rotateY(-3deg) rotateX(1deg);transition:transform .35s}.system-card:hover{transform:none}.window-bar{display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:16px;color:var(--muted);font:11px var(--mono)}.window-bar i{width:8px;height:8px;border-radius:50%;background:#fb7185}.window-bar i:nth-child(2){background:#fbbf24}.window-bar i:nth-child(3){background:#4ade80}.window-bar span{margin-left:auto}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;align-items:center;margin:26px 0}.flow-step{position:relative;text-align:center;padding:12px 3px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025);font:700 9px var(--mono);letter-spacing:.08em;color:var(--muted)}.flow-step.active{color:var(--accent);border-color:rgba(94,234,212,.35);box-shadow:inset 0 0 25px rgba(94,234,212,.05)}.flow-step:not(:last-child)::after{content:"";position:absolute;right:-7px;top:50%;width:7px;height:1px;background:var(--line-strong)}
+.terminal{font:12px/1.8 var(--mono);color:var(--ink-2);background:#060a14;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:15px 16px}.terminal div{display:flex;justify-content:space-between;gap:10px}.terminal code{background:none;padding:0;color:var(--muted)}.terminal b{font-weight:650}.terminal .ok{color:var(--accent)}.terminal .wait{color:#fbbf24}
+.mini-curve{width:100%;height:110px;margin-top:20px}.mini-curve path{fill:none;stroke:url(#heroGradient);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 7px rgba(34,211,238,.35));stroke-dasharray:700;stroke-dashoffset:700;animation:draw 2s .4s ease forwards}@keyframes draw{to{stroke-dashoffset:0}}
+.ticker{border-block:1px solid rgba(255,255,255,.07);overflow:hidden;margin:0 calc(50% - 50vw);background:rgba(255,255,255,.018)}.ticker-track{display:flex;width:max-content;gap:44px;padding:13px 0;animation:marquee 28s linear infinite;color:var(--muted);font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}.ticker-track b{color:var(--accent)}@keyframes marquee{to{transform:translateX(-50%)}}
+.section{padding:110px 0 0}.section-head{display:grid;grid-template-columns:.65fr 1.35fr;gap:40px;align-items:start;margin-bottom:30px}.section-kicker{color:var(--cyan);font:750 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin:7px 0}.section h2{border:0;padding:0;margin:0;font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.02;letter-spacing:-.055em}.section-head p:last-child{color:var(--ink-2);font-size:16px;line-height:1.7;max-width:56ch;margin:6px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 18px}.kpi{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:linear-gradient(145deg,rgba(19,28,46,.8),rgba(12,18,33,.65));border-radius:16px;padding:20px}.kpi::after{content:"";position:absolute;inset:auto -20% -80% 30%;height:120px;background:radial-gradient(circle,var(--glow,rgba(34,211,238,.14)),transparent 66%)}.kpi b{display:block;font-size:clamp(1.45rem,3vw,2.3rem);letter-spacing:-.045em;font-variant-numeric:tabular-nums;color:#f6f8ff}.kpi span{display:block;font:650 10px var(--mono);color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:.09em}
+.chartwrap{border:1px solid rgba(255,255,255,.09);background:rgba(13,20,36,.72);border-radius:22px;padding:24px;margin-top:14px;box-shadow:0 30px 80px rgba(0,0,0,.22)}.chartwrap header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}.chart-label{margin:0;color:var(--muted);font:650 11px var(--mono);text-transform:uppercase;letter-spacing:.08em}.toggle,.filters{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:11px;background:#080d19}.toggle button,.filters button{background:transparent;border:0;color:var(--muted);font:650 11px var(--mono);padding:7px 10px;border-radius:7px;cursor:pointer}.toggle button[aria-pressed=true],.filters button[aria-pressed=true]{background:var(--line);color:var(--ink)}
+.bars{display:flex;align-items:flex-end;gap:clamp(5px,1.5vw,16px);height:215px;margin-top:22px}.bar-slot{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;cursor:pointer;border-radius:8px;outline-offset:3px}.bar-slot:hover,.bar-slot:focus-visible{background:rgba(255,255,255,.035)}.bar{width:100%;max-width:70px;height:0;border-radius:7px 7px 2px 2px;transition:height 1s cubic-bezier(.2,.75,.2,1)}.loaded .bar{height:var(--h)}.bar.up{background:linear-gradient(180deg,var(--accent),rgba(94,234,212,.25));box-shadow:0 -8px 24px rgba(94,234,212,.12)}.bar.down{background:linear-gradient(180deg,rgba(248,113,113,.22),var(--red))}.bar-label{font:650 10px var(--mono);color:var(--muted);margin-top:8px}.readout{min-height:1.5em;font-size:13px;color:var(--ink-2);margin:15px 0 0;font-variant-numeric:tabular-nums}.curve{width:100%;height:215px;margin-top:22px;display:none}.curve polyline{fill:none;stroke:var(--accent);stroke-width:2.4;vector-effect:non-scaling-stroke;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.5s .2s ease forwards}.showcurve .bars{display:none}.showcurve .curve{display:block}.data-table{margin-top:14px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.evidence-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:18px}.evidence-card{border:1px solid rgba(255,255,255,.09);border-radius:22px;background:rgba(13,20,36,.72);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.22)}.browser-bar{display:flex;align-items:center;gap:7px;height:48px;padding:0 15px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.025)}.browser-bar i{width:7px;height:7px;border-radius:50%;background:#fb7185}.browser-bar i:nth-child(2){background:#fbbf24}.browser-bar i:nth-child(3){background:#4ade80}.address{margin-left:7px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--faint);font:10px var(--mono)}.external{margin-left:auto;color:var(--accent);text-decoration:none;font:700 10px var(--mono);white-space:nowrap}.embed-shell{position:relative;height:520px;background:#fff}.embed-shell iframe{width:100%;height:100%;border:0;background:#fff}.embed-note{position:absolute;inset:auto 14px 14px;z-index:2;padding:10px 12px;border-radius:10px;background:rgba(5,8,20,.92);color:var(--ink-2);font-size:11px;box-shadow:0 10px 30px rgba(0,0,0,.3)}.embed-note a{color:var(--accent)}
+.proof-image{display:block;width:100%;height:520px;object-fit:contain;background:#fff;cursor:zoom-in}.evidence-caption{padding:15px 18px;color:var(--ink-2);font-size:12.5px;border-top:1px solid var(--line)}
+.research-controls{display:flex;justify-content:flex-end;margin-bottom:14px}.research-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.research-card{display:flex;min-height:235px;flex-direction:column;padding:20px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:linear-gradient(145deg,rgba(19,28,46,.76),rgba(10,15,28,.6));text-decoration:none;transition:transform .22s,border-color .22s}.research-card:hover{transform:translateY(-5px);border-color:rgba(34,211,238,.42)}.research-card[hidden]{display:none}.research-card small{font:750 10px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--cyan)}.research-card h3{font-size:20px;line-height:1.25;color:var(--ink);margin:18px 0 10px}.research-card p{color:var(--muted);font-size:13px;line-height:1.55;margin:0}.research-card span{margin-top:auto;padding-top:20px;color:var(--accent);font-weight:700}
+.books{display:grid;grid-template-columns:1fr 1fr;gap:18px}.book{position:relative;overflow:hidden;display:block;min-height:260px;padding:28px;border:1px solid rgba(255,255,255,.09);border-radius:22px;background:rgba(13,20,36,.72);text-decoration:none;transition:transform .25s,border-color .25s}.book:hover{transform:translateY(-4px);border-color:var(--book-accent)}.book::after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-90px;bottom:-120px;background:radial-gradient(circle,var(--book-glow),transparent 70%)}.book small{font:700 10px var(--mono);color:var(--book-accent);letter-spacing:.1em;text-transform:uppercase}.book h3{font-size:clamp(2rem,4vw,3.5rem);color:var(--ink);letter-spacing:-.05em;margin:42px 0 8px}.book p{color:var(--muted);max-width:38ch}.book b{display:block;color:var(--ink-2);margin-top:24px}.closing{margin-top:110px;padding:70px 30px;text-align:center;border:1px solid rgba(255,255,255,.09);border-radius:26px;background:radial-gradient(circle at 50% 120%,rgba(167,139,250,.18),transparent 52%),rgba(13,20,36,.7)}.closing h2{font-size:clamp(2.6rem,7vw,6rem);max-width:12ch;margin:0 auto 20px;line-height:.95}.closing p{max-width:56ch;margin:0 auto 25px;color:var(--ink-2)}
+[data-reveal]{opacity:1;transform:translateY(24px);transition:transform .7s ease}[data-reveal].visible{transform:none}.lightbox{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:24px;background:rgba(2,4,10,.9);backdrop-filter:blur(16px)}.lightbox.open{display:grid}.lightbox img{max-width:min(920px,96vw);max-height:90vh;border-radius:18px;box-shadow:0 30px 100px #000}.lightbox button{position:absolute;right:22px;top:18px;border:0;background:transparent;color:white;font-size:34px;cursor:pointer}
+.site-footer{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}.site-footer p{margin:0;max-width:78ch}.source-note{font:10px var(--mono);color:var(--faint);text-align:right}
+@media(max-width:900px){.nav-links{display:none;position:absolute;top:61px;left:0;right:0;padding:10px;background:rgba(5,8,20,.96);border:1px solid var(--line);border-radius:15px;flex-direction:column;align-items:stretch}.site-nav.open .nav-links{display:flex}.nav-toggle{display:block}.nav-cta{display:none}.hero{grid-template-columns:1fr;padding-top:132px}.system-card{transform:none}.section-head{grid-template-columns:1fr;gap:10px}.kpis{grid-template-columns:1fr 1fr}.evidence-grid,.books{grid-template-columns:1fr}.research-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.landing-wrap{padding-inline:16px}.hero h1{font-size:clamp(3.3rem,18vw,5.2rem)}.kpis,.research-grid{grid-template-columns:1fr}.section{padding-top:82px}.evidence-grid{margin-inline:-8px}.embed-shell,.proof-image{height:430px}.site-footer{grid-template-columns:1fr}.source-note{text-align:left}.flow-step{font-size:7px}.section-head p:last-child{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pulse,.ticker-track,.mini-curve path,.curve polyline{animation:none;stroke-dashoffset:0}.bar,[data-reveal]{transition:none}[data-reveal]{opacity:1;transform:none}}
+</style></head><body><div class="page-progress" aria-hidden="true"><span></span></div>
+<nav class="site-nav" aria-label="Primary"><a class="brand" href="#top"><span class="brand-mark">↗</span><span>Morning Book</span></a><div class="nav-links" id="nav-links"><a href="#record">Record</a><a href="#evidence">Evidence</a><a href="#research">Research</a><a href="#books">Books</a></div><a class="nav-cta" href="latest.html">Open latest ↗</a><button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation">☰</button></nav>
+<main id="top"><div class="landing-wrap"><section class="hero"><canvas id="market-canvas" aria-hidden="true"></canvas><div data-reveal><span class="status"><i class="pulse"></i> systematic &amp; running</span><h1>Rules in public. <em>Results in motion.</em></h1><p class="hero-copy">A real-money India equity and crypto trading book. Every scan, gate, trade, rejection, loss and rule change is published—because a system is only credible when its receipts are visible.</p><div class="hero-actions"><a class="button primary" href="latest.html">Read today’s book <span>↗</span></a><a class="button" href="#evidence">See the actual evidence ↓</a></div><div class="micro-proof"><span>Real fills</span><span>Rules before outcomes</span><span>Losing months included</span></div></div>
+<aside class="system-card" data-reveal><div class="window-bar"><i></i><i></i><i></i><span>system / decision-loop</span></div><div class="flow"><div class="flow-step active">SCAN</div><div class="flow-step active">GATE</div><div class="flow-step active">SIZE</div><div class="flow-step">EXEC</div><div class="flow-step">LEARN</div></div><div class="terminal"><div><code>equity.book</code><b class="ok">published</b></div><div><code>crypto.plan</code><b class="wait">waiting for setup</b></div><div><code>risk.engine</code><b class="ok">hard limits on</b></div><div><code>evidence</code><b class="ok">attached</b></div></div><svg class="mini-curve" viewBox="0 0 500 110" preserveAspectRatio="none" aria-label="decorative equity curve"><defs><linearGradient id="heroGradient"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs><path d="M2 91 C34 88 52 75 78 80 S120 95 146 68 S190 42 221 58 S270 76 301 43 S350 19 381 38 S430 66 498 9"/></svg></aside></section></div>
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span><b>01</b> scan completed candles</span><span><b>02</b> reject before ranking</span><span><b>03</b> size from the stop</span><span><b>04</b> protect at the venue</span><span><b>05</b> publish what happened</span><span><b>01</b> scan completed candles</span><span><b>02</b> reject before ranking</span><span><b>03</b> size from the stop</span><span><b>04</b> protect at the venue</span><span><b>05</b> publish what happened</span></div></div>
+<div class="landing-wrap">
+<section class="section" id="record" data-reveal><div class="section-head"><div><p class="section-kicker">01 / The record</p><h2>The curve, including the crater.</h2></div><p>Six months of realised equity P&amp;L. May stays on the same scale as every winning month. Hover or focus a bar, then switch to the cumulative path.</p></div><div class="kpis"><div class="kpi"><b class="count" data-to="@@TOTAL@@" data-prefix="&#8377;">&#8377;0</b><span>realised / 6 months</span></div><div class="kpi" style="--glow:rgba(167,139,250,.16)"><b class="count" data-to="@@TRADES@@">0</b><span>closed trades</span></div><div class="kpi" style="--glow:rgba(244,114,182,.15)"><b>@@WIN@@%</b><span>win rate</span></div><div class="kpi"><b>@@GL@@&times;</b><span>gain / loss</span></div></div>
+<div class="chartwrap" id="chart"><header><p class="chart-label">Realised P&amp;L by month · as of @@ASOF@@</p><div class="toggle" role="group" aria-label="Chart view"><button type="button" data-view="monthly" aria-pressed="true">monthly</button><button type="button" data-view="cumulative" aria-pressed="false">cumulative</button></div></header><div class="bars">@@BARS@@</div><svg class="curve" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Cumulative realised P and L"><polyline points="@@COORDS@@"/></svg><p class="readout" id="readout">Six months, @@TRADES@@ closed trades, &#8377;@@TOTAL@@ realised.</p></div><div class="data-table"><table><thead><tr><th>month</th><th>trades</th><th>win %</th><th>realised</th></tr></thead><tbody>@@ROWS@@</tbody></table></div><p class="note">The average win is &#8377;@@AVGWIN@@ against an average loss of &#8377;@@AVGLOSS@@. <a href="stocks/analysis/2026-09-29_six_months.html">Audit the full six months →</a></p></section>
 
-<section class="hero">
-<p class="eyebrow">systematic india equity &middot; crypto perpetuals &middot; published every session</p>
-<h1>A trading system, kept in the open.</h1>
-<p class="tag">Every session this book publishes what the scanner found, what was bought and
-sold, and what the rules refused &mdash; along with the research that killed ideas we liked.
-The losing months are on the same page as the winning ones.</p>
+<section class="section" id="evidence" data-reveal><div class="section-head"><div><p class="section-kicker">02 / Embedded evidence</p><h2>The artifacts themselves.</h2></div><p>The broker’s public verification page and the supplied Delta statement are placed here as visual evidence—not rewritten as marketing numbers.</p></div><div class="evidence-grid"><article class="evidence-card"><div class="browser-bar"><i></i><i></i><i></i><span class="address">console.zerodha.com/verified/828da14b</span><a class="external" href="https://console.zerodha.com/verified/828da14b" target="_blank" rel="noopener">OPEN LIVE ↗</a></div><div class="embed-shell"><iframe src="https://console.zerodha.com/verified/828da14b" title="Zerodha verified P and L page" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="embed-note">This is the real Zerodha page embedded directly. Zerodha’s security policy may block it on GitHub Pages. <a href="https://console.zerodha.com/verified/828da14b" target="_blank" rel="noopener">Open the live verification</a> if the panel is blank.</p></div><p class="evidence-caption">Live public broker verification · opens on Zerodha</p></article><article class="evidence-card"><div class="browser-bar"><i></i><i></i><i></i><span class="address">Delta Exchange India · supplied statement</span><a class="external" href="assets/delta-april-may-2026.jpg" target="_blank">FULL SIZE ↗</a></div><img class="proof-image" id="delta-proof" src="assets/delta-april-may-2026.jpg" width="820" height="706" alt="Delta Exchange India statement for 1 April to 15 May 2026 showing initial equity, current equity and realised P and L"><p class="evidence-caption">Click the supplied screenshot to inspect it at full size.</p></article></div></section>
 
-<div class="kpis">
-  <div class="kpi"><b class="count" data-to="@@TOTAL@@" data-prefix="&#8377;">&#8377;0</b><span>realised, 6 months</span></div>
-  <div class="kpi"><b class="count" data-to="@@TRADES@@">0</b><span>closed trades</span></div>
-  <div class="kpi"><b>@@WIN@@%</b><span>win rate</span></div>
-  <div class="kpi"><b>@@GL@@&times;</b><span>gain / loss</span></div>
-</div>
-<p class="note">Realised only, real money, as of @@ASOF@@. Two of three trades lose money &mdash;
-the average win is &#8377;@@AVGWIN@@ against an average loss of &#8377;@@AVGLOSS@@, which is what
-makes a 32% hit rate work.</p>
-</section>
+<section class="section" id="research" data-reveal><div class="section-head"><div><p class="section-kicker">03 / Research log</p><h2>Ideas earn their place.</h2></div><p>Winning narratives are easy to manufacture after the chart moves. These reports preserve the rules, failures and counter-evidence that shaped the live systems.</p></div><div class="research-controls"><div class="filters" role="group" aria-label="Filter research"><button type="button" data-filter="all" aria-pressed="true">all</button><button type="button" data-filter="equity" aria-pressed="false">equity</button><button type="button" data-filter="crypto" aria-pressed="false">crypto</button></div></div><div class="research-grid"><a class="research-card" data-kind="equity" href="stocks/analysis/2026-09-29_six_months.html"><small>Equity · audit</small><h3>Six months, 159 closed trades</h3><p>The realised record, the bad month, and the risk/reward structure behind a low win rate.</p><span>Read analysis →</span></a><a class="research-card" data-kind="equity" href="stocks/analysis/2026-09-27_entry_selection.html"><small>Equity · selection</small><h3>Why 86 trades were skipped</h3><p>Which filters removed opportunity, and whether the best rejected trades were recoverable.</p><span>Read analysis →</span></a><a class="research-card" data-kind="equity" href="stocks/analysis/2026-09-29_industry_rs.html"><small>Equity · rejected idea</small><h3>Industry RS did not predict return</h3><p>A good story that failed the split-period and permutation checks.</p><span>Read analysis →</span></a><a class="research-card" data-kind="crypto" href="crypto/analysis/2026-09-28_exact_crypto.html"><small>Crypto · production</small><h3>Rebuilding the April strategy</h3><p>Exact fills, automatic selection, six-month replay, and the narrow live profile.</p><span>Read analysis →</span></a><a class="research-card" data-kind="crypto" href="crypto/analysis/2026-09-28_crypto_thresholds.html"><small>Crypto · backtest</small><h3>Thresholds that survived</h3><p>What transferred from the equity logic—and what failed when crypto behaved differently.</p><span>Read analysis →</span></a><a class="research-card" data-kind="crypto" href="crypto/analysis/2026-09-29_delta_pnl.html"><small>Crypto · evidence</small><h3>What the Delta record proves</h3><p>The strongest available evidence and the important claims it still cannot support.</p><span>Read analysis →</span></a></div></section>
 
-<h2>The record</h2>
-<div class="chartwrap" id="chart">
-  <header>
-    <p class="stamp" style="margin:0">Realised P&amp;L by month &middot; hover or tab a bar</p>
-    <div class="toggle" role="group" aria-label="chart view">
-      <button type="button" data-view="monthly" aria-pressed="true">monthly</button>
-      <button type="button" data-view="cumulative" aria-pressed="false">cumulative</button>
-    </div>
-  </header>
-  <div class="bars">@@BARS@@</div>
-  <svg class="curve" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="cumulative realised P and L">
-    <polyline points="@@COORDS@@"/>
-  </svg>
-  <p class="readout" id="readout">Six months, 159 closed trades, &#8377;@@TOTAL@@ realised.</p>
-</div>
+<section class="section" id="books" data-reveal><div class="section-head"><div><p class="section-kicker">04 / Two books</p><h2>Choose the market.</h2></div><p>Daily operational reports live separately from standing research. Each book keeps its own rules, schedules and evidence.</p></div><div class="books"><a class="book" href="stocks/" style="--book-accent:var(--cyan);--book-glow:rgba(34,211,238,.18)"><small>India equity</small><h3>Stocks ↗</h3><p>Scans, gates, setups, positions and retrospectives from the equity service.</p><b>@@SDAYS@@ sessions · newest @@SNEW@@ · @@SANA@@ analyses</b></a><a class="book" href="crypto/" style="--book-accent:var(--violet);--book-glow:rgba(167,139,250,.2)"><small>Perpetual futures</small><h3>Crypto ↗</h3><p>The automatic TIS lifecycle, daily book, execution record and research.</p><b>@@CDAYS@@ day(s) · newest @@CNEW@@ · @@CANA@@ analyses</b></a></div></section>
 
-<table>
-<thead><tr><th>month</th><th>trades</th><th>win %</th><th>realised</th></tr></thead>
-<tbody>@@ROWS@@</tbody>
-</table>
-<p class="note">May was the worst month and the most useful one: the loss analysis that followed
-produced the two hard rules the system still runs under. Trade count fell from 61 in May to 11
-in August &mdash; that is the gates refusing, which is most of what they do.
-<a href="stocks/analysis/2026-09-29_six_months.html">The full six months &rarr;</a></p>
-
-<h2>What we tested and threw away</h2>
-<p class="tag" style="max-width:70ch">The interesting part of a system is what it refuses to
-believe. Each of these was an idea we wanted to be true, measured properly &mdash; disjoint
-samples, both halves of the window, a permutation test &mdash; and dropped.</p>
-<div class="grid3">@@CARDS@@</div>
-
-<h2>The books</h2>
-<div class="books">
-  <a class="book" href="stocks/"><h3>Equity &rarr;</h3>
-     <p>@@SDAYS@@ sessions, newest @@SNEW@@ &middot; @@SANA@@ standing analyses</p></a>
-  <a class="book" href="crypto/"><h3>Crypto &rarr;</h3>
-     <p>@@CDAYS@@ day(s), newest @@CNEW@@ &middot; @@CANA@@ standing analyses</p></a>
-</div>
-
-<h2>Evidence</h2>
-<p>The equity figures above are our own bookkeeping, reconstructed from fills &mdash; and that
-reconstruction has been wrong before. The broker's own statement is the one number independent
-of it: <a href="stocks/analysis/2026-09-29_verified_pnl.html">verified P&amp;L &rarr;</a>.
-Crypto is evidenced far more weakly and
-<a href="crypto/analysis/2026-09-29_delta_pnl.html">says so on its own page</a>.</p>
-
-<div class="cta">
-<h2 style="margin-top:0">Interested?</h2>
-<p class="tag" style="margin:0 auto">If you build systematic strategies, trade one, or just
-want to argue about a gate that should be dropped &mdash; get in touch.</p>
-<a class="btn" href="https://divyanshh.github.io/divyanshh/">Contact &rarr;</a>
-</div>
-
-<footer>
-<strong>Not investment advice, and not an offer of any service.</strong> This is a personal
-research log of one person's own trading account, published because writing it down honestly
-is how it gets better. Past results do not predict future results; most of these months are one
-market. Nothing here is a recommendation to buy or sell anything.
-Source: <a href="https://github.com/divyanshh/trading-book">divyanshh/trading-book</a>.
-</footer>
-</div>
-<script>
-(function(){
-  var chart=document.getElementById('chart'), out=document.getElementById('readout');
-  var fmt=function(n){return (n<0?'-':'+')+'₹'+Math.abs(n).toLocaleString('en-IN');};
-  requestAnimationFrame(function(){chart.classList.add('loaded');});
-
-  document.querySelectorAll('.bar-slot').forEach(function(slot){
-    var show=function(){
-      out.textContent=slot.dataset.month+' — '+fmt(+slot.dataset.value)+
-        ' over '+slot.dataset.trades+' trades, '+slot.dataset.win+'% of them winners.';
-    };
-    slot.addEventListener('mouseenter',show); slot.addEventListener('focus',show);
-  });
-
-  document.querySelectorAll('.toggle button').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      document.querySelectorAll('.toggle button').forEach(function(b){
-        b.setAttribute('aria-pressed', String(b===btn));
-      });
-      chart.classList.toggle('showcurve', btn.dataset.view==='cumulative');
-    });
-  });
-
-  // Count up, but only once and only if the visitor has not asked for less motion.
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.count').forEach(function(el){
-    var to=+el.dataset.to.replace(/,/g,''), pre=el.dataset.prefix||'';
-    if(reduce){el.textContent=pre+to.toLocaleString('en-IN');return;}
-    var t0=null, dur=900;
-    function step(ts){
-      if(!t0)t0=ts;
-      var k=Math.min(1,(ts-t0)/dur), eased=1-Math.pow(1-k,3);
-      el.textContent=pre+Math.round(to*eased).toLocaleString('en-IN');
-      if(k<1)requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  });
-})();
-</script>
-</body></html>"""
+<section class="closing" data-reveal><p class="section-kicker">The operating principle</p><h2>Show the rule before the result.</h2><p>This is a personal research log, not investment advice or an offer of any service. It is public because writing every decision down makes the system harder to fool.</p><a class="button primary" href="https://divyanshh.github.io/divyanshh/">Meet the builder ↗</a></section>
+<footer class="site-footer"><p><strong>Not investment advice.</strong> Past results do not predict future results. Nothing here is a recommendation to buy or sell. Source: <a href="https://github.com/divyanshh/trading-book">divyanshh/trading-book</a>.</p><span class="source-note">Interaction patterns inspired by<br><a href="https://github.com/ali-abassi/aster-landing-page-template">Aster · MIT</a></span></footer></div></main>
+<div class="lightbox" role="dialog" aria-modal="true" aria-label="Delta statement preview"><button type="button" aria-label="Close preview">×</button><img src="assets/delta-april-may-2026.jpg" alt="Expanded Delta Exchange India statement"></div>
+<script>(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,progress=document.querySelector('.page-progress span'),nav=document.querySelector('.site-nav');
+function onScroll(){var range=Math.max(1,document.documentElement.scrollHeight-innerHeight);progress.style.transform='scaleX('+Math.min(1,scrollY/range)+')'}addEventListener('scroll',onScroll,{passive:true});onScroll();
+var toggle=document.querySelector('.nav-toggle');toggle.addEventListener('click',function(){var open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'×':'☰'});document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰'})});
+var reveal=function(){document.querySelectorAll('[data-reveal]').forEach(function(el){el.classList.add('visible')})};if('IntersectionObserver'in window&&!reduce){var observer=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.12});document.querySelectorAll('[data-reveal]').forEach(function(el){observer.observe(el)})}else{reveal()}
+var chart=document.getElementById('chart'),out=document.getElementById('readout'),fmt=function(n){return(n<0?'-':'+')+'₹'+Math.abs(n).toLocaleString('en-IN')};requestAnimationFrame(function(){chart.classList.add('loaded')});document.querySelectorAll('.bar-slot').forEach(function(slot){var show=function(){out.textContent=slot.dataset.month+' — '+fmt(+slot.dataset.value)+' over '+slot.dataset.trades+' trades, '+slot.dataset.win+'% winners.'};slot.addEventListener('mouseenter',show);slot.addEventListener('focus',show)});document.querySelectorAll('.toggle button').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.toggle button').forEach(function(b){b.setAttribute('aria-pressed',String(b===btn))});chart.classList.toggle('showcurve',btn.dataset.view==='cumulative')})});
+document.querySelectorAll('.count').forEach(function(el){var to=+el.dataset.to.replace(/,/g,''),pre=el.dataset.prefix||'';if(reduce){el.textContent=pre+to.toLocaleString('en-IN');return}var start=null;function step(ts){if(!start)start=ts;var k=Math.min(1,(ts-start)/950),ease=1-Math.pow(1-k,3);el.textContent=pre+Math.round(to*ease).toLocaleString('en-IN');if(k<1)requestAnimationFrame(step)}requestAnimationFrame(step)});
+document.querySelectorAll('.filters button').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.filters button').forEach(function(b){b.setAttribute('aria-pressed',String(b===btn))});document.querySelectorAll('.research-card').forEach(function(card){card.hidden=btn.dataset.filter!=='all'&&card.dataset.kind!==btn.dataset.filter})})});
+var box=document.querySelector('.lightbox'),proof=document.getElementById('delta-proof');function closeBox(){box.classList.remove('open');document.body.style.overflow=''}proof.addEventListener('click',function(){box.classList.add('open');document.body.style.overflow='hidden';box.querySelector('button').focus()});box.querySelector('button').addEventListener('click',closeBox);box.addEventListener('click',function(e){if(e.target===box)closeBox()});addEventListener('keydown',function(e){if(e.key==='Escape')closeBox()});
+if(!reduce){var canvas=document.getElementById('market-canvas'),ctx=canvas.getContext('2d'),pts=[];function size(){var r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);canvas.width=r.width*d;canvas.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);pts=Array.from({length:34},function(){return{x:Math.random()*r.width,y:Math.random()*r.height,vx:(Math.random()-.5)*.16,vy:(Math.random()-.5)*.16}})}function drawNet(){var w=canvas.clientWidth,h=canvas.clientHeight;ctx.clearRect(0,0,w,h);pts.forEach(function(p,i){p.x=(p.x+p.vx+w)%w;p.y=(p.y+p.vy+h)%h;for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);if(d<145){ctx.strokeStyle='rgba(34,211,238,'+(1-d/145)*.11+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}}ctx.fillStyle='rgba(167,139,250,.42)';ctx.beginPath();ctx.arc(p.x,p.y,1.2,0,Math.PI*2);ctx.fill()});requestAnimationFrame(drawNet)}size();addEventListener('resize',size,{passive:true});drawNet()}
+})();</script></body></html>"""
 
 SECTION = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Morning Book — {book}</title>{style}<style>.wrap{{max-width:1100px}}
