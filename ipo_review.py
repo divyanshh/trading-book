@@ -1315,44 +1315,48 @@ def _for_28() -> list[IPO]:
 IPOS_2026_09_28 = _for_28()
 
 LEAD_29 = (
-    "Tuesday 29 September, written after Monday's close. "
-    "<strong>Monday was the day the books moved, and one of them moved enough to settle an "
-    "argument.</strong> Moneyview closed at 44.17x with QIB at 58.68x &mdash; the "
-    "institutional book that sat at 0.25x on Friday and looked like an absence was simply "
-    "institutions doing what they always do, which is bid on the last day. That is the "
-    "cleanest vindication this board has produced. "
-    "<strong>The grey market went the other way.</strong> Orient Cables &#8377;90 to &#8377;80, "
-    "A-One &#8377;56 to &#8377;40, Runwal &#8377;14 to &#8377;10, SRIT &#8377;33 to &#8377;30 "
-    "&mdash; every live issue faded on a Downtrend session, and only Shah Investor&rsquo;s and "
-    "Nityas Gems ticked up, both from near nothing. "
+    "Tuesday 29 September, re-read at 09:15 against the live book. "
+    "<strong>Monday was ugly and it matters here.</strong> The Nifty fell 360 points to 22,780, "
+    "a six-month low, under 23,000 for the first time since April, decliners beating advancers "
+    "about 2.5 to 1 &mdash; Trump rejected Iran&rsquo;s Hormuz offer and crude went to $107. "
+    "The Rally Attempt that began on 25 September is dead: yesterday&rsquo;s new low at 22,762 "
+    "ended it, and the new condition is holding above 22,762 for three sessions. India is now "
+    "one of thirteen countries in a Downtrend, up from ten. "
     "<strong>Four issues close today</strong>: Orient Cables, Acevector, German Green Steel and "
-    "Runwal. SRIT India and Shah Investor&rsquo;s run one more day. Moneyview and A-One Steels "
-    "are shut and waiting on allotment. "
-    "<strong>And one call is downgraded on its own stated test.</strong> Yesterday&rsquo;s note "
-    "said the number to read again before applying to SRIT was its opening-day book, and that "
-    "a book under 1x would mean the market disagreed. It opened at 0.67x. The test was mine "
-    "and it failed, so the call moves down rather than the test being rewritten. "
+    "Runwal. "
+    "<strong>The number of the day is Orient Cables&rsquo; QIB at 0.06x</strong> with hours "
+    "left, on an 8.32x book carried by HNI at 17.37x and retail at 9.16x. Moneyview went 0.25x "
+    "to 58.68x on its own final day, so this is not yet settled &mdash; but it is the last day "
+    "it can move. "
+    "<strong>Two corrections to yesterday.</strong> Acevector covered, 0.96x to 1.15x with QIB "
+    "at 1.03x, so the under-subscription risk I flagged is gone; the AVOID now rests on the "
+    "6.2% GMP alone. And SRIT India cleared 1x on day two with retail at 1.61x, which does not "
+    "restore the sHNI leg &mdash; that needed a 3x day-one book and got 0.67x &mdash; but it "
+    "does say the retail call was the right half to keep. "
     "Expected listing is the GMP percentage less 2.6 points, the overstatement "
     "<code>backtest_gmp</code> measured over 295 listings (r&nbsp;=&nbsp;0.87). "
-    "<strong>Applied:</strong> Adroit sHNI 23 Sep (listed, sold); Moneyview HNI 24 Sep; "
-    "Orient Cables retail 25 Sep. <strong>Held:</strong> nothing in equities &mdash; NSE was "
-    "sold Monday at &#8377;1,767.30 and the proceeds parked in LIQUIDCASE."
+    "<strong>Applied:</strong> Adroit sHNI 23 Sep (listed, sold); Moneyview HNI 24 Sep "
+    "(closed 44.17x, QIB 58.68x); Orient Cables retail 25 Sep. "
+    "<strong>Held:</strong> nothing in equities &mdash; NSE was sold Monday at &#8377;1,767.30 "
+    "and the proceeds parked in LIQUIDCASE, which on a day the index lost 1.56% was the "
+    "accidental right place to be."
 )
 
 FOOTNOTE_29 = (
-    "<strong>Orient Cables finishes today and QIB at 0.04x is now the whole question.</strong> "
-    "Moneyview just demonstrated that a flat institutional book on the penultimate day means "
-    "nothing &mdash; it went 0.25x to 58.68x in a session. So 0.04x is not yet a verdict "
-    "either, and the honest position is that the same evidence that rescued Moneyview forbids "
-    "reading Orient&rsquo;s book as settled. What does not change is the plan: sell into the "
-    "listing unless QIB finishes above 5x, because an issue carried to 6.48x by HNI at 12.94x "
-    "and retail at 7.39x with institutions absent is a supply problem waiting for the first "
-    "week of trading. "
-    "<strong>Acevector at 0.96x on its fourth of five days is the other number worth a look</strong> "
-    "&mdash; a mainboard issue that has not covered with one day left, where QIB is the only "
-    "leg above water at 1.01x. The AVOID stands and the risk is no longer just a weak listing. "
-    "German Green Steel closes today having never published a readable book at all, which is "
-    "why it stays a WATCH and not a call."
+    "<strong>What today actually decides.</strong> Three of the four closing are already "
+    "called and need nothing: Runwal at 0.71x with retail at 0.42x and about two points of "
+    "expected listing, Acevector covered but thin, German Green Steel closing without ever "
+    "publishing a readable book &mdash; which is the whole reason it stayed a WATCH and never "
+    "became a call. The live one is Orient Cables, and the plan is unchanged: sell into the "
+    "listing unless QIB finishes above 5x. "
+    "<strong>The honest counterweight</strong> is that Moneyview just proved a flat "
+    "penultimate-day institutional book means nothing, so 0.06x is not evidence of absence "
+    "yet. If it finishes there, an issue carried to 8x by HNI and retail with institutions "
+    "out is a supply problem waiting for the first week of trading, and 5 October is the date "
+    "to have an exit ready for. "
+    "<strong>And the market is the bigger fact.</strong> A six-month low with crude at $107 "
+    "is a poor tape to list into, whatever the book says. Nothing on this page is a reason to "
+    "hold a listing gain past the open."
 )
 
 
@@ -1385,54 +1389,58 @@ def _for_29() -> list[IPO]:
         "Orient Cables": dict(
             call="APPLIED — closes today",
             dates="25–29 Sep (CLOSES TODAY)",
-            book="Mon close: 6.48x · QIB 0.04x · HNI 12.94x · retail 7.39x",
-            flags=(("RoE 25.8%", "pass"), ("6.48x overall", "pass"),
-                   ("QIB 0.04x on the final day", "fail"), ("GMP faded ₹90 → ₹80", "warn")),
+            gmp="₹72", gmp_pct=26.5, expected="~+24%",
+            book="Tue 09:00: 8.32x · QIB 0.06x · HNI 17.37x · retail 9.16x",
+            flags=(("RoE 25.8%", "pass"), ("8.32x overall", "pass"),
+                   ("QIB 0.06x with hours left", "fail"), ("GMP ₹90 → ₹80 → ₹72", "warn")),
         ),
         "Acevector": dict(
-            call="AVOID — closes today, still under 1x",
+            call="AVOID — it covered, the call still stands",
             dates="25–29 Sep (CLOSES TODAY)",
-            book="Mon close: 0.96x · QIB 1.01x · HNI 0.78x · retail 1.11x",
-            flags=(("still under 1x with a day left", "fail"), ("QIB 1.01x — the only leg covered", "warn"),
-                   ("GMP 6.2% → ~+4% expected", "warn")),
+            book="Tue 09:00: 1.15x · QIB 1.03x · HNI 1.25x · retail 1.36x",
+            flags=(("covered — the under-subscription risk is gone", "pass"),
+                   ("1.15x is thin for a ₹420 Cr issue", "warn"),
+                   ("GMP 6.2% → ~+4% after overstatement", "warn")),
         ),
         "German Green Steel": dict(
             call="WATCH — closes today, no book to read",
             dates="25–29 Sep (CLOSES TODAY)",
-            book="No subscription figures published",
+            gmp="₹25", gmp_pct=18.0, expected="~+15%",
+            book="No subscription figures published, on its closing day",
         ),
         "Runwal Enterprises": dict(
             call="SKIP — closes today",
             dates="25–29 Sep (CLOSES TODAY)",
-            gmp="₹10", gmp_pct=3.3, expected="~+1%",
-            book="Mon close: 0.55x · QIB 0.96x · HNI 0.47x · retail 0.35x",
-            flags=(("retail 0.35x", "fail"), ("0.55x with one day left", "fail"),
-                   ("GMP halved again, ₹14 → ₹10", "fail")),
+            gmp="₹14", gmp_pct=4.6, expected="~+2%",
+            book="Tue 09:00: 0.71x · QIB 1.05x · HNI 0.94x · retail 0.42x",
+            flags=(("retail 0.42x", "fail"), ("0.71x on the final day", "fail"),
+                   ("GMP back to ₹14 — still ~+2% after overstatement", "warn")),
         ),
         "SRIT India": dict(
             call="APPLY, retail only — downgraded on its own test",
             dates="28–30 Sep (closes tomorrow)",
-            gmp="₹30", gmp_pct=23.1, expected="~+21%",
-            book="Day 1: 0.67x · retail 1.13x · HNI 0.48x · QIB not yet in",
-            apply_as="Retail only — the sHNI leg is off, the day-1 book did not clear 3x",
+            gmp="₹33", gmp_pct=25.4, expected="~+23%",
+            book="Day 2: 1.00x · retail 1.61x · HNI 0.90x · QIB 0x",
+            apply_as="Retail only — the sHNI leg needed a 3x day-1 book and got 0.67x",
             flags=(("no OFS — every rupee goes in", "pass"), ("RoE 30.2%", "pass"),
-                   ("day-1 book 0.67x, under the 1x test", "fail"), ("retail 1.13x is the one leg above water", "warn")),
+                   ("cleared 1x on day 2", "pass"), ("QIB still absent with a day left", "warn")),
         ),
         "Shah Investor’s Home": dict(
             call="AVOID — confirmed by the book",
             dates="28–30 Sep (closes tomorrow)",
-            gmp="₹12", gmp_pct=7.2, expected="~+5%",
-            book="Day 1: 0.25x · QIB 0.5x · HNI 0.12x · retail 0.16x",
+            gmp="₹14", gmp_pct=8.4, expected="~+6%",
+            book="Day 2: 0.31x · QIB 0.5x · HNI 0.25x · retail 0.24x",
         ),
         "Nityas Gems": dict(
             call="WATCH — opens tomorrow",
             dates="30 Sep–5 Oct (opens tomorrow)",
-            gmp="₹5", gmp_pct=6.7, expected="~+4%",
-            flags=(("GMP off zero, ₹0 → ₹5", "warn"), ("no book until it opens", "warn")),
+            gmp="₹9", gmp_pct=12.0, expected="~+9%",
+            flags=(("GMP ₹0 → ₹5 → ₹9 in two sessions", "warn"), ("no book until it opens", "warn")),
         ),
         "Vishal Nirmiti": dict(
-            call="AVOID — opens tomorrow at a zero GMP",
+            call="AVOID — opens tomorrow at a near-zero GMP",
             dates="30 Sep–5 Oct (opens tomorrow)",
+            gmp="₹2", gmp_pct=0.9, expected="~−2%",
         ),
     }
     out = []
