@@ -592,7 +592,7 @@ def landing_html(style: str, stats: dict[str, object]) -> str:
     best_month = max(BOOK_MONTHS, key=lambda row: row[1])
     worst_month = min(BOOK_MONTHS, key=lambda row: row[1])
 
-    return (
+    page = (
         LANDING.replace("@@STYLE@@", style)
         .replace("@@BARS@@", "".join(bars))
         .replace("@@COORDS@@", coords)
@@ -620,6 +620,9 @@ def landing_html(style: str, stats: dict[str, object]) -> str:
         .replace("@@CNEW@@", str(stats["crypto_newest"]))
         .replace("@@CANA@@", str(stats["crypto_analyses"]))
     )
+    # A decorative pseudo-terminal implied live status without adding evidence.
+    # The public homepage should lead with the record, so omit it entirely.
+    return re.sub(r'<aside class="system-card".*?</aside>', '', page, count=1, flags=re.S)
 
 
 LANDING = """<!doctype html><html lang="en"><head><meta charset="utf-8">
