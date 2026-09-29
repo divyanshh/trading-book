@@ -178,6 +178,15 @@ td:has(> svg.spark){padding:6px 10px;width:360px}
 .fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
 @media (max-width:640px){.figures{grid-template-columns:1fr}}
 @media print{.fig{break-inside:avoid;box-shadow:none}}
+
+
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(circle at 50% 0,rgba(37,99,235,.08),transparent 28%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%)}
+body::before{display:none}.wrap{max-width:1240px;padding-top:22px}.mb-nav{width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}h1{font-size:30px}}
 /* Bridges the standing analyses onto the renderer's theme.
    Every colour is a reference into theme.css so these pages follow a palette
    swap with the rest. The four literals that were here until 2026-09-26 - two
@@ -279,7 +288,7 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
   table{border-collapse:collapse}
 </style>
 </head>
-<body>
+<body><nav class="mb-nav" aria-label="Morning Book"><a href="../../"><b aria-hidden="true">↗</b><span>Morning Book <small>— Trading Book</small></span></a></nav>
 <div class="wrap">
 
 <header class="top">

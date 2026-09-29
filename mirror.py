@@ -114,6 +114,43 @@ def verdict(summary: str) -> str:
 STYLE = re.compile(r"<style>.*?</style>", re.S)
 STYLE_FALLBACK = "<style>body{font:15px/1.5 system-ui,sans-serif;margin:2rem}</style>"
 
+# This is deliberately appended after each renderer stylesheet.  Daily reports
+# arrive from two services, while the long-form studies have their own bridge
+# CSS; their semantic classes are stable, so the shared token layer lets the
+# entire public book use the landing page's visual language without changing
+# the evidence or calculations inside any report.
+THEME_MARKER = "/* morning-book-shared-theme */"
+SHARED_THEME = r"""
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(circle at 50% 0,rgba(37,99,235,.08),transparent 28%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%)}
+body::before{display:none}.wrap{max-width:1240px;padding-top:22px}.mb-nav{width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}h1{font-size:30px}}
+"""
+
+
+def themed_style(style: str) -> str:
+    """Add the public Morning Book token layer exactly once to a stylesheet."""
+    if not style:
+        style = STYLE_FALLBACK
+    style = re.sub(r"/\* morning-book-shared-theme \*/.*?(?=</style>)", "", style, flags=re.S)
+    return style[: -len("</style>")] + SHARED_THEME + "</style>"
+
+
+def add_book_nav(text: str, page: Path) -> str:
+    """Give every public daily report and analysis the same way home."""
+    if 'class="mb-nav"' in text:
+        return text
+    home = "../" if page.parent in (REPORTS, CRYPTO_REPORTS) else "../../"
+    nav = (
+        f'<nav class="mb-nav" aria-label="Morning Book"><a href="{home}">'
+        '<b aria-hidden="true">↗</b><span>Morning Book <small>— Trading Book</small></span>'
+        '</a></nav>'
+    )
+    return re.sub(r"(<body(?:\s[^>]*)?>)", r"\1" + nav, text, count=1, flags=re.I)
+
 
 def newest_style(rows: list[dict]) -> str:
     """The renderer's own stylesheet, taken from the service's newest page.
@@ -146,8 +183,7 @@ def restyle_analysis(style: str) -> int:
     are identical today and are kept separate anyway, because the bridge maps
     *that* folder's hand-written class names and the two sets will drift.
     """
-    if not style:
-        return 0
+    style = themed_style(style)
     n = 0
     for folder in (ANALYSIS, CRYPTO_ANALYSIS):
         bridge = folder / "_bridge.css"
@@ -156,8 +192,10 @@ def restyle_analysis(style: str) -> int:
         merged = style[: -len("</style>")] + bridge.read_text(encoding="utf-8") + "</style>"
         for page in folder.glob("*.html"):
             text = page.read_text(encoding="utf-8")
-            if STYLE.search(text) and merged not in text:
-                page.write_text(STYLE.sub(lambda _m: merged, text, count=1), encoding="utf-8")
+            updated = STYLE.sub(lambda _m: merged, text, count=1) if STYLE.search(text) else text
+            updated = add_book_nav(updated, page)
+            if updated != text:
+                page.write_text(updated, encoding="utf-8")
                 n += 1
     return n
 
@@ -215,8 +253,7 @@ def restyle(style: str) -> int:
     The renderer only ever changes CSS against stable class names, so a page
     stored under an older theme re-skins cleanly. Without this the archive
     would be a museum of every theme the report has had."""
-    if not style:
-        return 0
+    style = themed_style(style)
     n = 0
     for page in [
         *REPORTS.glob("20*.html"),
@@ -225,8 +262,10 @@ def restyle(style: str) -> int:
         *CRYPTO_REPORTS.glob("20*.html"),
     ]:
         text = page.read_text(encoding="utf-8")
-        if STYLE.search(text) and style not in text:
-            page.write_text(STYLE.sub(lambda _m: style, text, count=1), encoding="utf-8")
+        updated = STYLE.sub(lambda _m: style, text, count=1) if STYLE.search(text) else text
+        updated = add_book_nav(updated, page)
+        if updated != text:
+            page.write_text(updated, encoding="utf-8")
             n += 1
     return n
 
@@ -388,13 +427,14 @@ def write_redirects() -> int:
 
 def build_site(rows: list[dict], style: str) -> None:
     """The hub and the two section pages."""
+    themed = themed_style(style)
     crypto = crypto_rows()
     newest = rows[0]["as_of"] if rows else ""
     newest_crypto = crypto[0]["as_of"] if crypto else ""
 
     (STOCKS / "index.html").write_text(
         SECTION.format(
-            style=style,
+            style=themed,
             book="Stocks",
             eyebrow="equity-service · nse · daily report archive",
             stamp=(
@@ -413,7 +453,7 @@ def build_site(rows: list[dict], style: str) -> None:
 
     (CRYPTO / "index.html").write_text(
         SECTION.format(
-            style=style,
+            style=themed,
             book="Crypto",
             eyebrow="crypto-service · delta exchange india · perpetual futures",
             stamp=(
