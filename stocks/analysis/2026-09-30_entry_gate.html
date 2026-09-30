@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Measuring whether the breadth and trend entry gate earns its refusals: average forward return, then the real stop-and-trail policy replayed. Stop-out rates are 94.5% against 92.9%."><title>Does the entry gate earn its refusals?</title><style>/* Trading Book — dark fintech dashboard theme.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Corrected entry-gate audit: frozen price proxies, twelve-slot V3 replay, and deduplicated production refusals."><title>Does the entry gate earn its refusals?</title><style>/* Trading Book — dark fintech dashboard theme.
    Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
 
    Dark since 2026-09-26, and light before that. The light theme's reasoning was
@@ -273,97 +273,33 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
 </style></head><body><nav class="mb-nav" aria-label="Trading Book"><a href="../../"><b aria-hidden="true">↗</b><span>Trading Book</span></a><button class="mb-theme" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button></nav><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',function(e){document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px')},{passive:true});var b=document.querySelector('.mb-theme');if(!b)return;function s(){var d=document.documentElement.classList.contains('dark');b.textContent=d?'☀':'◐';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')}s();b.addEventListener('click',function(){document.documentElement.classList.toggle('dark');try{localStorage.setItem('trading-book-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}s()})})();</script><main class="wrap">
 <h1>Does the entry gate earn its refusals?</h1>
-<p class="sub">Tested 30 September 2026 · <code>backtest_entry_gate</code> and
-<code>backtest_gate_replay</code> · 543 sessions, 23 July 2024 – 30 September 2026</p>
-
-<h2>The question</h2>
-<p>Our gate blocks every buy unless breadth is rising against its own prior five-session mean
-and the market is not in a correction. It is inherited from O'Neil &mdash; "three out of four
-stocks follow the market" &mdash; it is enforced in code, and it was written after May 2026, a
-month of 61 trades, a 21% hit rate and &minus;&#8377;1.09 lakh.</p>
-<p>It had also never been measured on our own data. Neither had G3, G5 or industry relative
-strength, and all three turned out to buy nothing.</p>
-
-<h2>Test one: the average forward return</h2>
-<p>Every session classified by the two legs price can settle exactly, then the forward return of
-the strongest third by trailing return &mdash; the names that look buyable on the days the gate
-refuses them. <strong>One observation per session</strong>, 462 sessions, 20-day horizon:</p>
-<table>
-<thead><tr><th>leg</th><th>permits</th><th>refuses</th><th>spread</th><th>t</th><th>halves</th></tr></thead>
-<tbody>
-<tr><td>gate, both legs</td><td>151 @ +0.21%</td><td>311 @ +0.88%</td><td>&minus;0.67pp</td><td>&minus;1.34</td><td class="bad">+0.50 / &minus;1.92</td></tr>
-<tr><td>breadth rising</td><td>226 @ +0.66%</td><td>236 @ +0.66%</td><td><strong>&minus;0.01pp</strong></td><td>&minus;0.02</td><td class="bad">&minus;0.76 / +0.71</td></tr>
-<tr><td>Nifty above 20MA</td><td>239 @ +0.44%</td><td>223 @ +0.89%</td><td>&minus;0.45pp</td><td>&minus;0.85</td><td class="bad">+1.71 / &minus;2.95</td></tr>
+<p class="sub">Corrected 30 September 2026 · frozen production-data rerun · equity-service <code>c67ab25</code></p>
+<div class="note"><div class="eyebrow">Corrected conclusion</div><p><strong>The evidence is mixed and does not justify removing the gate.</strong> The earlier 3,580-entry result ignored occupied slots. Once the fixed ₹60L book is limited to twelve concurrent positions, the policy result reverses direction and mildly favors the proxy gate.</p></div>
+<h2>What was actually tested</h2>
+<p>Production has two blockers: rising universe breadth and a present, fresh computed status that is not <code>DOWNTREND</code>. Long price history can reconstruct breadth and Nifty versus MA20. It cannot reconstruct the historical distribution-day, rally-attempt and follow-through state machine. The long tests below are therefore <strong>price-proxy tests</strong>, not a backtest of the complete production gate.</p>
+<h2>Corrected results</h2>
+<table><thead><tr><th>test</th><th>population</th><th>result</th></tr></thead><tbody>
+<tr><td>20-session basket</td><td>strongest third, no portfolio</td><td>proxy-open −2.40pp · p=0.990</td></tr>
+<tr><td>V3 policy replay</td><td>12 concurrent slots</td><td><strong>proxy-open +1.50pp · p=0.328</strong></td></tr>
+<tr><td>V3 stop-outs</td><td>109 admitted entries</td><td>87.1% open-proxy · 96.2% shut-proxy</td></tr>
+<tr><td>recent blocked setups</td><td>270 deduplicated plans</td><td>19.4% exited · 80.6% unresolved</td></tr>
 </tbody></table>
-<p>Day-level permutation: <strong>p&nbsp;=&nbsp;0.871</strong>. At a 10-day horizon the picture is
-identical &mdash; gate &minus;0.37pp, p&nbsp;=&nbsp;0.861. <strong>The breadth leg is exactly
-zero</strong>: the days it permits and the days it refuses have the same forward return to two
-decimal places. Every leg flips sign between the halves.</p>
-
-<h3>Two methodology errors, both caught, both worth keeping</h3>
-<p><strong>The first run reported t&nbsp;=&nbsp;&minus;3.58 and looked decisive.</strong> Those
-1,970 "disjoint samples" were about <em>twelve sessions</em>. Every name shares one market that
-day, so stock-days are not the sample size and the statistic was inflated by roughly the square
-root of the names. Counting sessions dropped it to noise.</p>
-<p><strong>Then the stock-day figures suggested "breadth rising helps, +3.38pp at
-t&nbsp;=&nbsp;8.47".</strong> At the session level that is &minus;0.01pp. Reported as a finding it
-would have been flatly wrong, and it is the reason both commands now print the honest unit and
-say why.</p>
-
-<h2>Test two: the real policy, with its stop</h2>
-<p>The first test measures a basket, and a basket has no stop. Our edge is asymmetric &mdash;
-about a third of trades win, carried by winners several times the size of the losers &mdash; and
-that shape depends on winners being allowed to run. A choppy tape need not lower the average at
-all and can still destroy the strategy by stopping positions out before the average arrives.
-That is the mechanism the gate is supposed to protect, and test one is blind to it.</p>
-<p>So: enter at the next session's open, hand each candidate to
-<code>domain.book_policy.replay</code> &mdash; the same function the historical regression and
-live close processing use &mdash; stop at entry&nbsp;&times;&nbsp;0.92, MA20 trail, twelve
-candidates per session because the book has twelve slots. <strong>3,580 replayed entries.</strong></p>
-<table>
-<thead><tr><th>gate on entry day</th><th>n</th><th>mean</th><th>median</th><th>win %</th><th>stopped out</th></tr></thead>
-<tbody>
-<tr><td>open</td><td>1,161</td><td>+1.33%</td><td>&minus;5.93%</td><td>33.0%</td><td><strong>94.5%</strong></td></tr>
-<tr><td>shut</td><td>2,419</td><td>+2.74%</td><td>&minus;5.32%</td><td>36.9%</td><td><strong>92.9%</strong></td></tr>
+<h2>The corrected twelve-slot replay</h2>
+<p>The old replay opened twelve fresh names every session even when the book was full. The corrected replay keeps a slot occupied until exit, refuses an already-open symbol, uses the V3 8% stop and MA20 policy, and freezes the sample at 30 September.</p>
+<table><thead><tr><th>proxy state</th><th>n</th><th>mean</th><th>win %</th><th>stopped</th></tr></thead><tbody>
+<tr><td>open</td><td>31</td><td>+5.58%</td><td>51.6%</td><td>87.1%</td></tr>
+<tr><td>shut</td><td>78</td><td>+2.40%</td><td>38.5%</td><td>96.2%</td></tr>
 </tbody></table>
-<p class="note">Exit reasons are near-identical too: gate open closes on a stop 77.5% of the time
-and gaps through the disaster line 17.0%; gate shut, 75.6% and 17.4%. A replayed win rate of
-33&ndash;37% against the real book's 32.1% is a reassuring sign the replay is not fantasy.</p>
-
-<p><strong>The stop-out rate is the whole answer, and it is 94.5% against 92.9%.</strong> The
-gate's protective mechanism &mdash; the one thing test one could not see &mdash; does not exist
-in the data. Trades entered on permitted days are stopped out marginally <em>more</em> often, win
-slightly less often, and return less on average.</p>
-<p>Per session: gate open 138 days @ +0.89%, shut 283 days @ +3.19%, spread &minus;2.30pp,
-t&nbsp;=&nbsp;&minus;2.81. Halves: <strong>+2.31pp then &minus;6.17pp</strong>. Permutation
-<strong>p&nbsp;=&nbsp;0.945</strong>.</p>
-
-<h2>What I am not concluding</h2>
-<p>Every apparent effect here points against the gate, and none of it is significant once the
-day is the unit. That is <strong>absence of evidence</strong>, and on a question this
-consequential the two are worth keeping apart.</p>
-<p><strong>The remaining gap is the candidate list.</strong> Both tests select on trailing
-return &mdash; the strongest third, then the top twelve. That is a momentum proxy, not our
-seven-gate scanner. A real setup has a base, a pivot, a contraction stop and fundamental gates,
-and it is possible the market filter matters more for those than for a momentum basket. Closing
-that gap needs the scanner replayed over the same window, which is a larger piece of work.</p>
-
-<h2>The recommendation</h2>
-<p><strong>Do not change the gate.</strong> Not because the evidence supports it &mdash; it does
-not, at any horizon, on either quantity &mdash; but because:</p>
-<ul>
-<li>The measurement says <em>nothing</em>, and "nothing" is not a mandate to remove a rule.</li>
-<li>Every spread flips sign across the window's halves, in all four tests. That is the signature
-of describing a regime, and this window holds one correction and one recovery.</li>
-<li>The rule was written after a real &#8377;1.09 lakh loss whose shape &mdash; the most trades
-of any month, the worst hit rate &mdash; is exactly what an unfiltered tape produces.</li>
-<li>It is tested against a momentum proxy, not against our actual setups.</li>
-</ul>
-<p>What this does change is the <em>confidence</em>. The gate is not a proven edge; it is an
-unproven rule we keep for asymmetric reasons. It should be first in the queue when the scanner
-replay exists, and nobody should defend it as measured, because it is not.</p>
-
-<p class="note">Reproduce with
-<code>python manage.py backtest_entry_gate --days 800 --horizon 20</code> and
-<code>python manage.py backtest_gate_replay --days 800</code>. Permutations are seeded.</p>
+<p>At the session level: open 27 days at +5.79%, shut 51 days at +4.29%, spread <strong>+1.50pp</strong>, t=0.31, permutation <strong>p=0.328</strong>. Both halves were positive (+7.70pp and +0.86pp), but the sample is too small to call this proof.</p>
+<h2>The basket still disagrees</h2>
+<p>Across 190 sessions, the combined price proxy admitted 61 sessions at +0.71% and refused 129 at +3.11%: −2.40pp, p=0.990. A basket has no slot competition, stop or trailing exit, so it answers a different question from the policy replay.</p>
+<h2>The actual recent refusals</h2>
+<p>The earlier report counted 969 nightly rows as independent trades. The corrected command verifies the breadth/status refusal and deduplicates identical symbol, entry and stop plans. It found 912 blocked rows, reducing to 270 distinct plans across 86 symbols.</p>
+<table><thead><tr><th>outcome at 30 Sep</th><th>n</th><th>share</th></tr></thead><tbody>
+<tr><td>never triggered</td><td>67</td><td>24.8%</td></tr><tr><td>exited</td><td>36</td><td>13.3%</td></tr><tr><td>still open</td><td>150</td><td>55.6%</td></tr><tr><td>no bars yet</td><td>17</td><td>6.3%</td></tr>
+</tbody></table>
+<p>Of 186 fills, 19.4% had exited and 80.6% were unresolved. Exit returns averaged −7.45%; open marks averaged +2.40%. This is descriptive, not an expectancy estimate or control group.</p>
+<h2>Decision</h2>
+<p><strong>Keep the production gate unchanged.</strong> The capacity-constrained strategy replay provides weak support; the basket opposes the price proxy; neither reconstructs the complete status gate. The next valid measurement is a prospective, deduplicated shadow ledger after the same ranking and slot allocation as production.</p>
+<p class="note">Reproduce with <code>backtest_entry_gate ... --as-of 2026-09-30</code>, <code>backtest_gate_replay ... --as-of 2026-09-30</code>, and <code>audit_blocked_setups ... --as-of 2026-09-30</code>. The active universe is still today's membership, so survivor bias remains.</p>
 </main></body></html>
