@@ -274,14 +274,16 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
 </style></head><body><nav class="mb-nav" aria-label="Trading Book"><a href="../../"><b aria-hidden="true">↗</b><span>Trading Book</span></a><button class="mb-theme" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button></nav><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',function(e){document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px')},{passive:true});var b=document.querySelector('.mb-theme');if(!b)return;function s(){var d=document.documentElement.classList.contains('dark');b.textContent=d?'☀':'◐';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')}s();b.addEventListener('click',function(){document.documentElement.classList.toggle('dark');try{localStorage.setItem('trading-book-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}s()})})();</script><main class="wrap">
 <h1>Does the entry gate earn its refusals?</h1>
-<p class="sub">Corrected 30 September 2026 · frozen production-data rerun · equity-service <code>c67ab25</code></p>
-<div class="note"><div class="eyebrow">Corrected conclusion</div><p><strong>The evidence is mixed and does not justify removing the gate.</strong> The earlier 3,580-entry result ignored occupied slots. Once the fixed ₹60L book is limited to twelve concurrent positions, the policy result reverses direction and mildly favors the proxy gate.</p></div>
+<p class="sub">Final component audit · 30 September 2026 · frozen production-data rerun · equity-service <code>b288f41</code></p>
+<div class="note"><div class="eyebrow">Operational conclusion</div><p><strong>There is no Nifty-MA20 hard entry gate in production to remove.</strong> It was retired on 23 September. Nifty versus MA20 remains market context. The live blockers are rising universe breadth and a fresh computed status that is not <code>DOWNTREND</code>. The new component replay argues against restoring Nifty MA20 as a blocker, while breadth remains directionally useful but unproven.</p></div>
 <h2>What was actually tested</h2>
-<p>Production has two blockers: rising universe breadth and a present, fresh computed status that is not <code>DOWNTREND</code>. Long price history can reconstruct breadth and Nifty versus MA20. It cannot reconstruct the historical distribution-day, rally-attempt and follow-through state machine. The long tests below are therefore <strong>price-proxy tests</strong>, not a backtest of the complete production gate.</p>
+<p>Production has two blockers: rising universe breadth and a present, fresh computed status that is not <code>DOWNTREND</code>. Nifty versus MA20 is measured and displayed but does not grant or refuse an order. Long price history can reconstruct breadth and Nifty versus MA20. It cannot reconstruct the historical distribution-day, rally-attempt and follow-through state machine. The long tests below are therefore <strong>component price tests</strong>, not a backtest of the complete production status gate.</p>
 <h2>Corrected results</h2>
 <table><thead><tr><th>test</th><th>population</th><th>result</th></tr></thead><tbody>
 <tr><td>20-session basket</td><td>strongest third, no portfolio</td><td>proxy-open −2.40pp · p=0.990</td></tr>
-<tr><td>V3 policy replay</td><td>12 concurrent slots</td><td><strong>proxy-open +1.50pp · p=0.328</strong></td></tr>
+<tr><td>Nifty MA20 only</td><td>78 entry sessions</td><td><strong>open −4.14pp · p=0.784 · CI [−15.61,+6.13]</strong></td></tr>
+<tr><td>breadth only</td><td>78 entry sessions</td><td><strong>open +5.64pp · p=0.135 · CI [−3.52,+14.66]</strong></td></tr>
+<tr><td>breadth + Nifty</td><td>78 entry sessions</td><td>open +1.50pp · p=0.385 · CI [−9.68,+10.77]</td></tr>
 <tr><td>V3 stop-outs</td><td>109 admitted entries</td><td>87.1% open-proxy · 96.2% shut-proxy</td></tr>
 <tr><td>recent blocked setups</td><td>270 deduplicated plans</td><td>19.4% exited · 80.6% unresolved</td></tr>
 </tbody></table>
@@ -291,7 +293,10 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 <tr><td>open</td><td>31</td><td>+5.58%</td><td>51.6%</td><td>87.1%</td></tr>
 <tr><td>shut</td><td>78</td><td>+2.40%</td><td>38.5%</td><td>96.2%</td></tr>
 </tbody></table>
-<p>At the session level: open 27 days at +5.79%, shut 51 days at +4.29%, spread <strong>+1.50pp</strong>, t=0.31, permutation <strong>p=0.328</strong>. Both halves were positive (+7.70pp and +0.86pp), but the sample is too small to call this proof.</p>
+<p>At the session level, the combined proxy was open 27 days at +5.79% and shut 51 days at +4.29%: spread <strong>+1.50pp</strong>, t=0.31, permutation <strong>p=0.385</strong>, five-session block-bootstrap 95% CI <strong>[−9.68pp,+10.77pp]</strong>. The interval crosses zero by a wide margin.</p>
+<h2>The components answer different questions</h2>
+<p><strong>Nifty MA20 alone was directionally harmful:</strong> open sessions averaged +3.01% against +7.14% when shut, a −4.14pp spread. It changed sign between halves (+4.92pp then −5.71pp), permutation p=0.784, CI [−15.61pp,+6.13pp]. This is not proof of harm, but it is evidence against making Nifty MA20 a hard blocker.</p>
+<p><strong>Breadth alone was directionally helpful:</strong> open sessions averaged +7.85% against +2.21% when shut, a +5.64pp spread. It stayed positive in both halves (+5.77pp and +8.41pp), permutation p=0.135, CI [−3.52pp,+14.66pp]. It has the most stable support of the tested price components, but the confidence interval still crosses zero.</p>
 <h2>The basket still disagrees</h2>
 <p>Across 190 sessions, the combined price proxy admitted 61 sessions at +0.71% and refused 129 at +3.11%: −2.40pp, p=0.990. A basket has no slot competition, stop or trailing exit, so it answers a different question from the policy replay.</p>
 <h2>The actual recent refusals</h2>
@@ -301,6 +306,6 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 </tbody></table>
 <p>Of 186 fills, 19.4% had exited and 80.6% were unresolved. Exit returns averaged −7.45%; open marks averaged +2.40%. This is descriptive, not an expectancy estimate or control group.</p>
 <h2>Decision</h2>
-<p><strong>Keep the production gate unchanged.</strong> The capacity-constrained strategy replay provides weak support; the basket opposes the price proxy; neither reconstructs the complete status gate. The next valid measurement is a prospective, deduplicated shadow ledger after the same ranking and slot allocation as production.</p>
-<p class="note">Reproduce with <code>backtest_entry_gate ... --as-of 2026-09-30</code>, <code>backtest_gate_replay ... --as-of 2026-09-30</code>, and <code>audit_blocked_setups ... --as-of 2026-09-30</code>. The active universe is still today's membership, so survivor bias remains.</p>
+<p><strong>Do not add or restore a Nifty-MA20 hard blocker. Keep the existing breadth and follow-through/status blockers unchanged while exact prospective evidence accumulates.</strong> New scans now persist the scanner's true rank, so the shadow comparison can use the same candidate order and twelve-slot allocation as production rather than reconstructing rank later.</p>
+<p class="note">Reproduce with <code>backtest_gate_replay --gate-mode nifty|breadth|combined --shuffles 5000 --bootstraps 5000 --block-size 5 --as-of 2026-09-30</code>. Each run uses 341 exchange sessions, 879 names, 109 capacity-constrained V3 entries and 78 independent entry sessions. The active universe is today's membership, so survivor bias remains. Historical computed <code>DOWNTREND</code> state is unavailable before it began being stored and is not inferred from Nifty MA20.</p>
 </main></body></html>
