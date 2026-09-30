@@ -3,8 +3,8 @@
 
 Runs in GitHub Actions every evening after the 18:00 IST build (and on demand).
 It reads equity-service's public report index (`/api/v1/reports/`), fetches
-every day this repo does not yet hold, writes `reports/YYYY-MM-DD.html`, then
-rebuilds the site. Idempotent: a day already present is never re-fetched, so a
+every day this repo does not yet hold, writes `stocks/reports/YYYY-MM-DD.html`,
+then rebuilds the site. Idempotent: a day already present is never re-fetched, so a
 rebuilt report replaces its file only if `--refresh` is given.
 
 **Two books, three levels** (2026-09-29). The site used to be one index over
@@ -16,11 +16,11 @@ made both harder to read:
     /stocks/              equity: analyses, then daily reports by month
     /crypto/              crypto: analyses, then daily reports by month
 
-The **equity daily reports stay at `/reports/`** and the paths are not
-rewritten. They are the URLs that have been shared, and a personal archive
-that breaks its own links to look tidier has made itself worse. The section
-pages link to them where they are; only the analyses moved, and those keep
-working through the stubs in :func:`write_redirects`.
+Equity's daily reports moved to `stocks/reports/` on 2026-09-30, so the two
+books finally match — crypto's had always been at `crypto/reports/`, and one
+book sitting at the root while the other was nested was an accident of which
+came first. Every URL this archive has published still resolves: see
+:func:`write_redirects`.
 
 Crypto has no public report API yet, so `crypto/reports/` is filled by hand
 from `crypto-service`:
@@ -48,7 +48,6 @@ BASE = "https://equity-service-fd1143ae8c7a.herokuapp.com/api/v1/reports/"
 """The service serves its stored reports publicly — the owner publishes them
 here anyway, so the mirror needs no credential of any kind (2026-09-23)."""
 ROOT = Path(__file__).resolve().parent
-REPORTS = ROOT / "reports"
 OVERRIDES = ROOT / "overrides"
 """Hand-finished pages, `YYYY-MM-DD.html`. A day here is published in place of
 the dyno's copy — the dyno renders the scan, but analysis written by hand
@@ -56,6 +55,13 @@ the dyno's copy — the dyno renders the scan, but analysis written by hand
 silently threw it away once. Anything under here wins, always."""
 STOCKS = ROOT / "stocks"
 CRYPTO = ROOT / "crypto"
+REPORTS = STOCKS / "reports"
+"""Equity's daily pages. Moved under `stocks/` on 2026-09-30 so the two books
+are symmetrical — crypto's had always been at `crypto/reports/`, and one book
+sitting at the root while the other was nested was an accident of which came
+first. Every old `/reports/<name>` is a meta-refresh onto the new path; those
+URLs have been shared and an archive that breaks its own links to look tidier
+has made itself worse."""
 ANALYSIS = STOCKS / "analysis"
 """Standing analyses — the six-month retrospective and its successors. Not a
 day's page: they are written once, listed separately on the index, and
@@ -148,7 +154,12 @@ def add_book_nav(text: str, page: Path) -> str:
     # and masthead.  Preserve their data while keeping the public brand
     # consistent when archived pages are refreshed.
     text = text.replace("Morning Book", "Trading Book")
-    home = "../" if page.parent in (REPORTS, CRYPTO_REPORTS) else "../../"
+    # Every published page is exactly two levels down now — `stocks/reports/`,
+    # `crypto/reports/`, `*/analysis/` — so the nav reaches the root. It used
+    # to resolve to "../" for report pages, which was right while equity's sat
+    # at `/reports/` and meant crypto's "Trading Book" link landed on
+    # `/crypto/` instead of the book.
+    home = "../../"
     nav = (
         f'<nav class="mb-nav" aria-label="Trading Book"><a href="{home}">'
         '<b aria-hidden="true">↗</b><span>Trading Book</span></a>'
@@ -321,19 +332,23 @@ def primary_page(day: str) -> str | None:
     return f"reports/{pages[0].name}" if pages else None
 
 
-def row_html(r: dict, *, prefix: str = "reports") -> str:
+def row_html(r: dict, *, prefix: str = "reports", with_extras: bool = True) -> str:
     """One day in a section index. A day with no book yet is not a dead row."""
     if r.get("no_report"):
         day, target = r["as_of"], primary_page(r["as_of"])
         head = f'<a href="../{target}">{day}</a>' if target else day
         return (
-            f'<tr><td class="l">{head}{extras_for(r["as_of"], base="../reports")}</td>'
+            f'<tr><td class="l">{head}{extras_for(r["as_of"], base="reports")}</td>'
             '<td class="l warn"><span>no book yet</span></td>'
             '<td class="l">written before the 18:00 build</td>'
             f'<td>{r["bytes"] // 1024} KB</td></tr>'
         )
     gate = "fail" if "BLOCKED" in verdict(r["summary"]) else "pass"
-    extras = extras_for(r["as_of"], base="../reports") if prefix == "../reports" else ""
+    # Passed in, never inferred from `prefix`. It used to read
+    # `prefix == "../reports"`, which worked only because equity's reports sat
+    # at the root and crypto's did not — so the moment both books used the same
+    # relative prefix, every crypto row sprouted equity's IPO reviews.
+    extras = extras_for(r["as_of"], base="reports") if with_extras else ""
     return (
         f'<tr><td class="l"><a href="{prefix}/{r["as_of"]}.html">{r["as_of"]}</a>'
         f"{extras}</td>"
@@ -353,7 +368,7 @@ def months_html(rows: list[dict], *, prefix: str, with_extras: bool) -> list[str
     for month in sorted(by_month, reverse=True):
         label = date.fromisoformat(by_month[month][0]["as_of"]).strftime("%B %Y")
         items = "".join(
-            row_html(r, prefix=prefix)
+            row_html(r, prefix=prefix, with_extras=with_extras)
             for r in sorted(by_month[month], key=lambda r: r["as_of"], reverse=True)
         )
         parts.append(
@@ -413,28 +428,42 @@ def crypto_rows() -> list[dict]:
     return out
 
 
-def write_redirects() -> int:
-    """Keep the pre-2026-09-29 analysis URLs working.
+def _stub(path: Path, target: str, what: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        f'<!doctype html><meta charset="utf-8">'
+        f'<meta http-equiv="refresh" content="0; url={target}">'
+        f'<link rel="canonical" href="{target}">'
+        f'<title>Moved</title><a href="{target}">This {what} moved to {target}</a>',
+        encoding="utf-8",
+    )
 
-    The analyses moved into `stocks/` and `crypto/`; the links to them did not.
-    A one-line meta-refresh at each old path costs nothing and means a shared
-    URL from last week still lands on the page it named.
+
+def write_redirects() -> int:
+    """Keep every URL this archive has ever published working.
+
+    Two moves so far, and the same rule for both: the pages moved, the links
+    people saved did not. A one-line meta-refresh at each old path costs
+    nothing, and an archive that breaks its own links to look tidier has made
+    itself worse.
+
+    * 2026-09-29 — the analyses split into `stocks/` and `crypto/`.
+    * 2026-09-30 — equity's daily reports moved from `/reports/` to
+      `stocks/reports/`, so the two books finally match. That is the bigger
+      set: nine months of daily pages and every IPO review beside them.
+
+    `canonical` as well as the refresh, so a search engine that indexed the old
+    path learns the new one rather than carrying both.
     """
     moved = {p.name: "stocks" for p in ANALYSIS.glob("*.html")}
     moved.update({p.name: "crypto" for p in CRYPTO_ANALYSIS.glob("*.html")})
-    if not moved:
-        return 0
-    old = ROOT / "analysis"
-    old.mkdir(exist_ok=True)
     for name, book in moved.items():
-        target = f"../{book}/analysis/{name}"
-        (old / name).write_text(
-            f'<!doctype html><meta charset="utf-8">'
-            f'<meta http-equiv="refresh" content="0; url={target}">'
-            f'<title>Moved</title><a href="{target}">This analysis moved to {book}/analysis/</a>',
-            encoding="utf-8",
-        )
-    return len(moved)
+        _stub(ROOT / "analysis" / name, f"../{book}/analysis/{name}", "analysis")
+
+    for page in REPORTS.glob("20*.html"):
+        _stub(ROOT / "reports" / page.name, f"../stocks/reports/{page.name}", "report")
+
+    return len(moved) + len(list(REPORTS.glob("20*.html")))
 
 
 def build_site(rows: list[dict], style: str) -> None:
@@ -451,10 +480,10 @@ def build_site(rows: list[dict], style: str) -> None:
             eyebrow="equity-service · nse · daily report archive",
             stamp=(
                 f"{len(rows)} trading days, mirrored every evening at 19:00 IST."
-                + (f' <a href="../reports/{newest}.html">Open the latest ({newest}) →</a>' if newest else "")
+                + (f' <a href="reports/{newest}.html">Open the latest ({newest}) →</a>' if newest else "")
             ),
             body=analysis_html(ANALYSIS)
-            + "".join(months_html(rows, prefix="../reports", with_extras=True)),
+            + "".join(months_html(rows, prefix="reports", with_extras=True)),
             footer=(
                 "Each page is the report as equity-service rendered it that evening; "
                 "hand-written sections (IPO reviews) are added over it."
@@ -503,8 +532,9 @@ def build_site(rows: list[dict], style: str) -> None:
         encoding="utf-8",
     )
     (ROOT / "latest.html").write_text(
-        f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=reports/{newest}.html">'
-        f'<title>Trading Book — latest</title><a href="reports/{newest}.html">{newest}</a>',
+        f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=stocks/reports/{newest}.html">'
+        f'<title>Trading Book — latest</title>'
+        f'<a href="stocks/reports/{newest}.html">{newest}</a>',
         encoding="utf-8",
     )
     (REPORTS / "index.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
