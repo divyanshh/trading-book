@@ -517,6 +517,34 @@ def build_site(rows: list[dict], style: str) -> None:
         encoding="utf-8",
     )
 
+    market_rows = "".join(
+        f"<tr><td>{start}</td><td>{end}</td><td>{condition}</td><td class=\"{'good' if change >= 0 else 'bad'}\">{change:+.2f}%</td></tr>"
+        for start, end, condition, change in (
+            ("25 Sep 2026", "Current", "Downtrend", -1.84),
+            ("19 Sep 2026", "24 Sep 2026", "Rally attempt", -1.22),
+            ("09 Sep 2026", "18 Sep 2026", "Downtrend", -0.37),
+            ("13 May 2026", "08 Sep 2026", "Uptrend under pressure", 0.95),
+            ("09 Apr 2026", "12 May 2026", "Confirmed uptrend", -1.67),
+            ("08 Apr 2026", "08 Apr 2026", "Rally attempt", 0.00),
+            ("31 Mar 2026", "07 Apr 2026", "Downtrend", 3.54),
+        )
+    )
+    market_body = f'''<section class="glance"><div><div class="n bad">−0.71%</div><div class="k">six-month Nifty return</div></div><div><div class="n bad">Downtrend</div><div class="k">current MarketSmith condition</div></div><div><div class="n">25 Sep</div><div class="k">current condition began</div></div></section>
+<section class="prose"><h2>Market condition history</h2><p>MarketSmith's public market-condition API, recorded at 30 September 2026. The six-month return compounds the condition intervals from 31 March onward. It is a market context signal, not a trade recommendation.</p></section>
+<div class="scroll"><table><thead><tr><th>start</th><th>end</th><th>MarketSmith condition</th><th>Nifty 50 return</th></tr></thead><tbody>{market_rows}</tbody></table></div>
+<p class="note">Source: MarketSmith India’s <code>mshkSubscription/getMarketHistory.json</code>. The equity service now reads this API for the market-status input used by the regime recorder; distribution-day counts remain separately sourced from MarketSmith's daily-close feed.</p>'''
+    (STOCKS / "market-trend.html").write_text(
+        SECTION.format(
+            style=themed,
+            book="Market Trend",
+            eyebrow="MarketSmith · Nifty 50 · six-month context",
+            stamp="API snapshot: 30 September 2026",
+            body=market_body,
+            footer="Market context is displayed separately from system performance.",
+        ),
+        encoding="utf-8",
+    )
+
     (ROOT / "index.html").write_text(
         landing_html(
             style,
@@ -715,7 +743,7 @@ body{background:var(--canvas);color:var(--ink);font-size:15px}body::before{backg
 @media(max-width:900px){.site-nav{padding-inline:17px}.nav-links{top:69px;background:var(--canvas);border-color:var(--line)}.nav-actions .nav-cta{display:none}.hero{grid-template-columns:1fr;gap:42px;min-height:auto;padding-top:120px;text-align:center}.hero>div[data-reveal]{margin:auto}.hero h1{margin-inline:auto;font-size:clamp(3rem,13vw,5rem)}.hero-copy{margin-inline:auto}.hero-actions,.micro-proof{justify-content:center}.hero-proof{width:min(560px,100%);margin:auto}.section-head{text-align:left;margin-inline:0}.section-head p:last-child{margin-inline:0}.kpis{grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:20px;overflow:hidden}.kpi{border-bottom:1px solid var(--line)}.kpi:nth-child(2){border-right:0}.kpi:nth-last-child(-n+2){border-bottom:0}}
 @media(max-width:600px){.landing-wrap{padding-inline:16px}.site-nav{max-width:100vw;padding-inline:16px}.brand{white-space:nowrap}.nav-actions{margin-left:auto;gap:2px;flex:0 0 auto}.theme-toggle{width:35px;height:35px}.hero{padding-top:112px}.hero h1{max-width:100%;font-size:clamp(2.55rem,13vw,3.75rem);line-height:.98;overflow-wrap:anywhere}.hero h1 .hero-break,.hero h1 em{display:block}.hero-copy{width:100%;font-size:1rem;line-height:1.65;overflow-wrap:anywhere}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .button{width:100%}.micro-proof{display:grid;grid-template-columns:1fr;justify-content:start;max-width:260px;margin:28px auto 0;text-align:left;gap:8px}.system-card{padding:16px;overflow:hidden}.window-bar span{font-size:9px}.flow{gap:3px}.flow-step:not(:last-child)::after{display:none}.terminal{font-size:10px;padding:13px 11px}.kpis{grid-template-columns:1fr}.kpi{border-right:0}.kpi:nth-last-child(-n+2){border-bottom:1px solid var(--line)}.kpi:last-child{border-bottom:0}.section{padding-top:76px}}
 </style><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}})()</script></head><body><div class="page-progress" aria-hidden="true"><span></span></div>
-<nav class="site-nav" aria-label="Primary"><a class="brand" href="#top"><span class="brand-mark">↗</span><span>Trading Book</span></a><div class="nav-links" id="nav-links"><a href="#record">Record</a><a href="#evidence">Evidence</a><a href="#risk">Risk</a><a href="#research">Research</a><a href="#partner">Partner</a></div><div class="nav-actions"><button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button><a class="nav-cta" href="#partner">Request diligence ↗</a><button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation">☰</button></div></nav>
+<nav class="site-nav" aria-label="Primary"><a class="brand" href="#top"><span class="brand-mark">↗</span><span>Trading Book</span></a><div class="nav-links" id="nav-links"><a href="#record">Record</a><a href="stocks/market-trend.html">Market trend</a><a href="#evidence">Evidence</a><a href="#risk">Risk</a><a href="#research">Research</a><a href="#partner">Partner</a></div><div class="nav-actions"><button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button><a class="nav-cta" href="#partner">Request diligence ↗</a><button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation">☰</button></div></nav>
 <main id="top"><div class="landing-wrap"><section class="hero"><canvas id="market-canvas" aria-hidden="true"></canvas><div data-reveal><span class="status"><i class="pulse"></i> personal capital · public record</span><h1>Agentic trading, <em>documented.</em></h1><p class="hero-copy">A public operating record for an India equity system: independently displayed realised P&amp;L, complete research notes, daily decisions, and risk limits. The evidence comes before the narrative.</p><div class="hero-actions"><a class="button primary" href="#record">Open performance record <span>↓</span></a><a class="button" href="#research">Read the research ↗</a></div><div class="micro-proof"><span>Broker evidence</span><span>Risk disclosed</span><span>Research separated from results</span></div></div>
 <aside class="system-card" data-reveal><div class="window-bar"><i></i><i></i><i></i><span>system / decision-loop</span></div><div class="flow"><div class="flow-step active">SCAN</div><div class="flow-step active">GATE</div><div class="flow-step active">SIZE</div><div class="flow-step">EXEC</div><div class="flow-step">LEARN</div></div><div class="terminal"><div><code>equity.book</code><b class="ok">published</b></div><div><code>crypto.plan</code><b class="wait">waiting for setup</b></div><div><code>risk.engine</code><b class="ok">hard limits on</b></div><div><code>evidence</code><b class="ok">attached</b></div></div><svg class="mini-curve" viewBox="0 0 500 110" preserveAspectRatio="none" aria-label="decorative equity curve"><defs><linearGradient id="heroGradient"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs><path d="M2 91 C34 88 52 75 78 80 S120 95 146 68 S190 42 221 58 S270 76 301 43 S350 19 381 38 S430 66 498 9"/></svg></aside></section></div>
 <div class="ticker" aria-hidden="true"><div class="ticker-track"><span><b>01</b> scan completed candles</span><span><b>02</b> reject before ranking</span><span><b>03</b> size from the stop</span><span><b>04</b> protect at the venue</span><span><b>05</b> publish what happened</span><span><b>01</b> scan completed candles</span><span><b>02</b> reject before ranking</span><span><b>03</b> size from the stop</span><span><b>04</b> protect at the venue</span><span><b>05</b> publish what happened</span></div></div>
