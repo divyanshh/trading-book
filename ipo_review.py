@@ -1579,6 +1579,108 @@ def _for_30() -> list[IPO]:
 IPOS_2026_09_30 = _for_30()
 
 
+LEAD_01 = (
+    "Thursday 1 October, written at 08:00 before the bell. "
+    "<strong>Two calls were overturned on the final day, both the same way, and that is the "
+    "note worth reading.</strong> SRIT India finished with QIB at <strong>91.84x</strong>, "
+    "HNI at 312.99x and retail at 63.7x. On Tuesday it sat at 0.03x and this page called it "
+    "&ldquo;the Orient Cables pattern again&rdquo; &mdash; an issue carried by retail with "
+    "institutions absent. It was nothing of the kind. Shah Investor&rsquo;s Home, carrying an "
+    "AVOID, closed at QIB 28.05x and HNI 95.54x from 1.1x the day before. "
+    "<strong>That is the second and third time this week the same mistake was made.</strong> "
+    "Moneyview went 0.25x to 58.68x on its own last day; the lesson was written down and then "
+    "applied as a warning to SRIT anyway. Institutions bid on the final day. A low QIB book "
+    "with a day left is <em>not information</em>, and this page should stop treating it as any. "
+    "<strong>Moneyview and A-One Steels list today.</strong> Moneyview at a grey-market premium "
+    "of &#8377;13, 38.2%, about 36% after the overstatement &mdash; the plan from the day it "
+    "was applied for is unchanged: sell at the open. The case was the discount, not the "
+    "franchise. "
+    "Expected listing is the GMP percentage less 2.6 points, the overstatement "
+    "<code>backtest_gmp</code> measured over 295 listings (r&nbsp;=&nbsp;0.87). "
+    "<strong>Applied:</strong> Moneyview HNI 24 Sep (lists today); Orient Cables retail 25 Sep "
+    "(lists 5 Oct); SRIT India retail 28 Sep (lists 6 Oct). "
+    "<strong>Held:</strong> nothing in equities. The Nifty closed September 6% lower at 22,620, "
+    "a six-month-low close, on Day 2 of a rally attempt."
+)
+
+FOOTNOTE_01 = (
+    "<strong>What the three reversals actually teach.</strong> Orient Cables, Moneyview, SRIT "
+    "India and Shah Investor&rsquo;s Home all showed a thin or absent QIB book on the "
+    "penultimate day. Three of the four finished with institutional books between 28x and 92x. "
+    "The exception is Orient, which finished at 0.06x &mdash; so the signal is not useless, it "
+    "is simply far weaker than this page has been treating it, and it cannot be read before "
+    "the final day closes. The rule going forward: <strong>quote the QIB book, do not forecast "
+    "from it.</strong> "
+    "<strong>Orient Cables is still the one to watch</strong>, and for the opposite reason to "
+    "the one stated on Monday. It is the only issue this week whose institutional book never "
+    "arrived, it lists 5 October at a 31% premium, and an issue carried to 8.32x by HNI at "
+    "17.37x with QIB at 0.06x has to find real holders in the first week of trading. The plan "
+    "is unchanged and now rests on evidence rather than on a pattern that turned out not to "
+    "be one."
+)
+
+
+def _for_01() -> list[IPO]:
+    """Final books for everything that closed, and two listings today.
+
+    Rebuilt rather than pointed at the 30th because the final-day subscription
+    figures landed overnight and reversed two calls. Reusing yesterday's list
+    would restate the reading that was wrong.
+    """
+    today: dict[str, dict[str, object]] = {
+        "Moneyview": dict(
+            call="APPLIED — LISTS TODAY, sell at the open",
+            dates="lists 1 Oct · closed 44.17x",
+            gmp="₹13", gmp_pct=38.2, expected="~+36%",
+        ),
+        "A-One Steels": dict(
+            call="SKIPPED — lists today",
+            dates="lists 1 Oct · closed 7.14x",
+            gmp="₹35", gmp_pct=8.6, expected="~+6%",
+        ),
+        "SRIT India": dict(
+            call="APPLIED retail — the QIB warning was wrong",
+            dates="lists 6 Oct · closed with QIB 91.84x",
+            book="Final: QIB 91.84x · HNI 312.99x · retail 63.70x",
+            flags=(("no OFS — every rupee goes in", "pass"), ("RoE 30.2%", "pass"),
+                   ("QIB 0.03x → 91.84x on the last day", "pass"),
+                   ("this page called it a retail-only book — wrong", "fail")),
+        ),
+        "Shah Investor’s Home": dict(
+            call="AVOIDED — and the book says the market disagreed",
+            dates="lists 6 Oct · closed with QIB 28.05x",
+            book="Final: QIB 28.05x · HNI 95.54x · retail 19.26x",
+            flags=(("QIB 0.5x → 28.05x on the last day", "pass"),
+                   ("PAT −44%", "fail"), ("RoE 14.7% → 7.6%", "fail"),
+                   ("avoided on fundamentals, not on the book", "warn")),
+        ),
+        "Orient Cables": dict(
+            call="APPLIED — the only book that never arrived",
+            dates="lists 5 Oct · closed 8.32x",
+            gmp="₹85", gmp_pct=31.3, expected="~+29%",
+        ),
+        "Vishal Nirmiti": dict(
+            call="AVOID — open, and the book is not there",
+            dates="30 Sep–5 Oct (open)",
+            book="Day 2: 0.05x · QIB 0.96x · HNI 0.01x · retail 0.06x",
+            flags=(("0.05x on day two", "fail"), ("GMP 2.7%", "fail")),
+        ),
+        "Nityas Gems": dict(
+            call="WATCH — open, no book matched yet",
+            dates="30 Sep–5 Oct (open)",
+            gmp="₹5", gmp_pct=6.7, expected="~+4%",
+        ),
+    }
+    out = []
+    for ipo in IPOS_2026_09_26:
+        change = today.get(ipo.name)
+        out.append(replace(ipo, **change) if change else ipo)  # type: ignore[arg-type]
+    return out
+
+
+IPOS_2026_10_01 = _for_01()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -1591,6 +1693,7 @@ BY_DAY = {
     "2026-09-28": (IPOS_2026_09_28, LEAD_28, FOOTNOTE_28),
     "2026-09-29": (IPOS_2026_09_29, LEAD_29, FOOTNOTE_29),
     "2026-09-30": (IPOS_2026_09_30, LEAD_30, FOOTNOTE_30),
+    "2026-10-01": (IPOS_2026_10_01, LEAD_01, FOOTNOTE_01),
 }
 
 
