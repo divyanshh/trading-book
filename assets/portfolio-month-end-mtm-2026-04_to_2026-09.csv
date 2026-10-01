@@ -1,0 +1,7 @@
+date,realised_pnl_inr,open_unrealised_pnl_inr,total_marked_pnl_inr,total_marked_return_on_20l_pct,status
+2026-04-30,2725.92,-25377.71,-22651.79,-1.13259,month-end mark
+2026-05-29,-105867.42,381106.35,275238.93,13.76195,month-end mark
+2026-06-30,-22184.56,375541.63,353357.07,17.66785,month-end mark
+2026-07-31,100271.78,293065.05,393336.83,19.66684,month-end mark
+2026-08-31,109625.05,877969.74,987594.79,49.37974,month-end mark
+2026-09-29,416382.25,0.00,416382.25,20.81911,realised after 6 months
