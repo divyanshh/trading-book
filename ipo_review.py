@@ -1681,6 +1681,85 @@ def _for_01() -> list[IPO]:
 IPOS_2026_10_01 = _for_01()
 
 
+LEAD_05 = (
+    "Monday 5 October, written at 10:45. "
+    "<strong>Orient Cables finished at 97.28x and lists today.</strong> On the morning of its "
+    "final day this page had it at 8.32x with QIB at 0.06x and called that the number of the "
+    "day. The grey-market premium has since risen &#8377;85 to &#8377;110, an indicative "
+    "listing near &#8377;382 against a &#8377;272 band &mdash; about +40%. "
+    "<strong>That is the fourth time the same mistake would have been made</strong>, after "
+    "Moneyview (0.25x to 58.68x), SRIT India (0.03x to 91.84x) and Shah Investor&rsquo;s Home "
+    "(1.1x to 28.05x). The rule written here on 1 October &mdash; <em>quote the QIB book, do "
+    "not forecast from it</em> &mdash; has now been tested four times and held every time. "
+    "<strong>Nothing was allotted.</strong> The broker shows no Orient Cables, no Moneyview and "
+    "no A-One Steels; the account holds LIQUIDCASE and nothing else. At 97.28x overall and "
+    "44.17x for Moneyview, retail and HNI allotment is a lottery and this is the ordinary "
+    "outcome, not a failure &mdash; but it should be confirmed against the Console rather than "
+    "inferred from an empty holdings list. "
+    "<strong>The generated board is unavailable today.</strong> <code>show_ipos</code> reports "
+    "that the source has restructured and carries no Mainboard GMP table at all, so the numbers "
+    "above are read from the exchange and grey-market pages directly. The parser needs fixing "
+    "before that section is trusted again."
+)
+
+FOOTNOTE_05 = (
+    "<strong>What four reversals in one week actually establish.</strong> Every issue this page "
+    "flagged for a thin institutional book &mdash; Moneyview, SRIT, Shah Investor&rsquo;s Home, "
+    "Orient Cables &mdash; closed with a heavy one. Not one exception. A QIB figure read before "
+    "the final session closes is not weak evidence; on this sample it is anti-evidence, and the "
+    "only honest use of it is to report the number and wait. "
+    "The sell-into-the-listing plan for Orient rested on QIB finishing under 5x. It finished far "
+    "above, so the plan&rsquo;s premise is gone &mdash; which is moot here, since nothing was "
+    "allotted, but it would not have been moot at ten lakh. "
+    "<strong>The market it lists into is the other half.</strong> The Nifty closed 1 October at "
+    "22,421.95, invalidating the second rally attempt in a week, and twenty-seven countries are "
+    "now in a MarketSmith Downtrend against nine in a confirmed uptrend. A 40% indicative "
+    "premium is a grey-market quote, not a print."
+)
+
+
+def _for_05() -> list[IPO]:
+    """Listing day for the 25–29 September cohort.
+
+    The subscription figures here are final and come from the exchange rather
+    than from the generated board, which is down.
+    """
+    today: dict[str, dict[str, object]] = {
+        "Orient Cables": dict(
+            call="LISTS TODAY — not allotted",
+            dates="lists 5 Oct · closed 97.28x",
+            gmp="₹110", gmp_pct=40.4, expected="~+38%",
+            book="Final: 97.28x overall — from 8.32x on the final morning",
+            flags=(("RoE 25.8%", "pass"), ("97.28x final book", "pass"),
+                   ("the 0.06x QIB read was wrong, as it was three times before", "fail")),
+        ),
+        "Moneyview": dict(
+            call="LISTED 1 Oct — not allotted",
+            dates="listed 1 Oct · closed 44.17x",
+        ),
+        "A-One Steels": dict(
+            call="LISTED 1 Oct — skipped",
+            dates="listed 1 Oct · closed 7.14x",
+        ),
+        "SRIT India": dict(
+            call="LISTS 6 Oct — QIB 91.84x",
+            dates="lists 6 Oct",
+        ),
+        "Shah Investor’s Home": dict(
+            call="LISTS 6 Oct — avoided, QIB 28.05x",
+            dates="lists 6 Oct",
+        ),
+    }
+    out = []
+    for ipo in IPOS_2026_09_26:
+        change = today.get(ipo.name)
+        out.append(replace(ipo, **change) if change else ipo)  # type: ignore[arg-type]
+    return out
+
+
+IPOS_2026_10_05 = _for_05()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -1694,6 +1773,7 @@ BY_DAY = {
     "2026-09-29": (IPOS_2026_09_29, LEAD_29, FOOTNOTE_29),
     "2026-09-30": (IPOS_2026_09_30, LEAD_30, FOOTNOTE_30),
     "2026-10-01": (IPOS_2026_10_01, LEAD_01, FOOTNOTE_01),
+    "2026-10-05": (IPOS_2026_10_05, LEAD_05, FOOTNOTE_05),
 }
 
 

@@ -1,5 +1,12 @@
 [
  {
+  "as_of": "2026-10-05",
+  "generated_at": "2026-10-05T03:56:50.486944+00:00",
+  "bytes": 119421,
+  "summary": "Entries BLOCKED\nstate BEAR \u00b7 breadth 27.60% vs prior-5 mean 40.93% [breadth gate SHUT] \u00b7 follow-through gate SHUT \u2014 ours reads DOWNTREND: 9 distribution days we counted, and no follow-through day since \u00b7 Nifty -3.51% vs 20MA \u00b7 7 distribution days per MarketSmith \u00b7 no follow-through day \u00b7 MarketSmith DOWNTREND \u00b7 prices through 2026-10-01 \u2014 TODAY'S SESSION IS NOT IN THIS SCAN \u00b7 read at 2026-10-05 09:05 IST. A buy needs both gates open \u2014 breadth above its prior five-session mean, and a computed status that is not a correction \u2014 so nothing below may be placed however good it looks.\nTIS setups: SWING 6 shown, WEEKLY 1 shown, ETF 1 shown, ETF_WEEKLY 0 shown\nOther scanners: STRIKE 6 shown, REVERSAL 0 shown\nWhat ran: 63 names moved 3% or more; showing 15. 15 shown, Themes: sectors with two or more of the 63 movers. This is what the list is read for 10 shown\nWhat is holding up: Holding up 8 shown, Taking the damage 8 shown\nNews: \nOpen trades: 1 open, 0 with a stop that has moved. 'locked' is where the stop sits relative to entry in units of the original risk 1 shown\nHow the market opened: \nMarketSmith: MarketSmith's Buy Watchlist. Our universe holds tickers and the mail publishes company names, so a blank 'in our universe' is an unmatched name, not an absent one 0 shown, Model portfolio moves 9 shown\nIPOs \u2014 mainboard: \nExchange filings: \nBroker coverage: ",
+  "path": "/api/v1/reports/2026-10-05.html"
+ },
+ {
   "as_of": "2026-10-02",
   "generated_at": "2026-10-02T12:32:36.563980+00:00",
   "bytes": 133912,
