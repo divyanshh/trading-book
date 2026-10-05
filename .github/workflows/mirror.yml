@@ -17,8 +17,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # index.html is the hub, and it is maintained BY HAND -- it carries the
+      # interactive benchmark chart. mirror.py rebuilds it from its own
+      # template and destroys that chart, which has now happened four times:
+      # 74,474 bytes after the crosshair fix, 75,163 after the 1 and 2 October
+      # mirrors, back to 74,474 after "Preserve interactive benchmark across
+      # mirrors", then 77,656 after a run on 5 October.
+      #
+      # So the hub is saved, mirror does its real work -- fetching reports and
+      # rebuilding stocks/, crypto/ and the redirects -- and the hub is put
+      # back. Only its two book counters are re-stamped, from the directories
+      # mirror has just refreshed.
+      - name: keep the hand-maintained hub
+        run: cp index.html /tmp/index.hand.html
       - name: mirror
         run: python3 mirror.py ${{ inputs.refresh && '--refresh' || '' }}
+      - name: restore the hub and re-stamp its counters
+        run: |
+          cp /tmp/index.hand.html index.html
+          python3 stamp_hub.py
+          # Belt and braces: if the chart markup is not there, something has
+          # still eaten the page and the run should fail loudly rather than
+          # commit a hub with no chart on it.
+          for id in benchmark-svg benchmark-algo-path benchmark-nifty-path benchmark-area-path; do
+            grep -q "$id" index.html || { echo "hub lost $id"; exit 1; }
+          done
       # The hand-written IPO review is spliced into the day's report, and until
       # now that only happened when somebody ran it locally -- so a published
       # report could go out without the section the checklist insists on.
