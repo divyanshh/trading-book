@@ -1760,6 +1760,67 @@ def _for_05() -> list[IPO]:
 IPOS_2026_10_05 = _for_05()
 
 
+LEAD_06 = (
+    "Tuesday 6 October, written at 09:45. "
+    "<strong>SRIT India and Shah Investor&rsquo;s Home list today, and neither was "
+    "allotted.</strong> The broker holds LIQUIDCASE and nothing else; at a 91.84x QIB book "
+    "for SRIT, retail allotment was always a lottery. SRIT&rsquo;s grey-market premium has run "
+    "from &#8377;31 to <strong>&#8377;62, 47.7%</strong> &mdash; roughly +45% after the "
+    "2.6-point overstatement &mdash; which is the fifth time in a fortnight that an issue this "
+    "page flagged for a thin institutional book has ended up in demand. "
+    "<strong>The whole September cohort is now settled and the scoreboard is one-sided.</strong> "
+    "Moneyview 0.25x&rarr;58.68x, SRIT 0.03x&rarr;91.84x, Shah 1.1x&rarr;28.05x, Orient Cables "
+    "8.32x&rarr;97.28x. Every single one. The rule written here on 1 October &mdash; "
+    "<em>quote the QIB book, do not forecast from it</em> &mdash; has not been wrong once. "
+    "<strong>Jio Platform is the next real decision</strong>, 21&ndash;23 October, already "
+    "quoted at a &#8377;160 premium with no band published. It is the only name left on the "
+    "board and it deserves proper work before it opens, not a GMP read on the morning. "
+    "<strong>Held:</strong> nothing in equities."
+)
+
+FOOTNOTE_06 = (
+    "<strong>Nothing was applied for and nothing was allotted this cycle</strong>, so the four "
+    "reversals cost nothing in money. They cost something in method, which is the more useful "
+    "loss: a number this page treated as decisive turned out to be noise until the final "
+    "session closed, four times out of four, and it took the fourth before the rule was "
+    "written down rather than merely noticed. "
+    "<strong>The board itself is thinner than it looks.</strong> The four closed issues have "
+    "dropped off the source entirely now that they have listed, so the only live row is Jio "
+    "Platform in a fortnight. That is a gap worth using: the next decision is a large one and "
+    "there is time to do the fundamentals properly instead of reading a grey-market quote at "
+    "08:00 on the opening morning."
+)
+
+
+def _for_06() -> list[IPO]:
+    """Listing day for SRIT and Shah; the cohort closes out."""
+    today: dict[str, dict[str, object]] = {
+        "SRIT India": dict(
+            call="LISTS TODAY — not allotted",
+            dates="lists 6 Oct · closed with QIB 91.84x",
+            gmp="₹62", gmp_pct=47.7, expected="~+45%",
+        ),
+        "Shah Investor’s Home": dict(
+            call="LISTS TODAY — avoided, not allotted",
+            dates="lists 6 Oct · closed with QIB 28.05x",
+            gmp="₹17", gmp_pct=10.2, expected="~+8%",
+        ),
+        "Orient Cables": dict(call="LISTED 5 Oct — not allotted", dates="listed 5 Oct · 97.28x"),
+        "Moneyview": dict(call="LISTED 1 Oct — not allotted", dates="listed 1 Oct · 44.17x"),
+        "A-One Steels": dict(call="LISTED 1 Oct — skipped", dates="listed 1 Oct · 7.14x"),
+        "Vishal Nirmiti": dict(call="CLOSED — avoided", dates="closed 5 Oct · 0.05x"),
+        "Nityas Gems": dict(call="CLOSED — watched, never applied", dates="closed 5 Oct"),
+    }
+    out = []
+    for ipo in IPOS_2026_09_26:
+        change = today.get(ipo.name)
+        out.append(replace(ipo, **change) if change else ipo)  # type: ignore[arg-type]
+    return out
+
+
+IPOS_2026_10_06 = _for_06()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -1774,6 +1835,7 @@ BY_DAY = {
     "2026-09-30": (IPOS_2026_09_30, LEAD_30, FOOTNOTE_30),
     "2026-10-01": (IPOS_2026_10_01, LEAD_01, FOOTNOTE_01),
     "2026-10-05": (IPOS_2026_10_05, LEAD_05, FOOTNOTE_05),
+    "2026-10-06": (IPOS_2026_10_06, LEAD_06, FOOTNOTE_06),
 }
 
 
