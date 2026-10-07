@@ -1821,6 +1821,116 @@ def _for_06() -> list[IPO]:
 IPOS_2026_10_06 = _for_06()
 
 
+LEAD_07 = (
+    "Wednesday 7 October, written at 09:30. "
+    "<strong>Nothing is open for application today and nothing is held.</strong> The September "
+    "cohort has listed out and dropped off the source; the board is down to two forward names, "
+    "neither of which has a published price band. That is the gap the 6 October footnote asked "
+    "for, so this entry spends it on <strong>Jio Platform&rsquo;s accounts rather than its "
+    "grey-market quote</strong> &mdash; the largest IPO India has run, open 21&ndash;23 October. "
+    "The numbers are now in: <strong>FY26 revenue &#8377;1,46,885 Cr (+14.6%), EBITDA "
+    "&#8377;76,255 Cr at a 51.9% margin, PAT &#8377;30,049 Cr (+15.1%)</strong>, 524.4 M "
+    "subscribers, ARPU &#8377;214. At the reported &#8377;13 lakh crore equity value that is "
+    "<strong>about 43&times; FY26 earnings for 15% profit growth</strong>. "
+    "Two structural facts cut opposite ways and both matter: the issue is "
+    "<strong>100% fresh with no offer for sale</strong> &mdash; the one signal in an IPO that "
+    "cannot be dressed, and the same one that made SRIT the pick last month &mdash; but "
+    "<strong>&#8377;27,500 Cr of roughly &#8377;33,000 Cr goes to repaying borrowings</strong>, "
+    "so it is a deleveraging, not an expansion. "
+    "<strong>Held:</strong> nothing in equities."
+)
+
+FOOTNOTE_07 = (
+    "<strong>HD Fire Protect&rsquo;s zero GMP is not a signal today and must not be read as "
+    "one.</strong> Its band is not published until about 9 October, and a premium is a quote "
+    "against a price: with no price there is nothing to quote. Our own calibration &mdash; a "
+    "zero GMP has averaged &minus;6.6% over 295 listings &mdash; is drawn from issues whose "
+    "band existed and whose grey market declined to bid. This is not that, and treating the two "
+    "as the same number is precisely the error this page made four times in September when it "
+    "called thin institutional books decisive and was wrong every time. "
+    "<strong>The one genuinely new argument for Jio is allotment odds, not price.</strong> On a "
+    "&#8377;218 Cr issue a retail application is a lottery &mdash; SRIT closed at 91.84&times; "
+    "QIB and nothing came. The retail quota of a &#8377;33,000 Cr issue is larger in absolute "
+    "rupees by more than two orders of magnitude, so for the first time this quarter an "
+    "application has a real chance of being filled. That changes the arithmetic of applying "
+    "far more than a 14% grey-market premium does."
+)
+
+
+def _for_07() -> list[IPO]:
+    """Board down to two forward names; the Jio fundamentals, done early."""
+    return [
+        IPO(
+            name="Jio Platform", call="WORK DONE EARLY — decide when the band prints", tone="warn",
+            dates="21–23 Oct · allotment 26 Oct · lists 28 Oct",
+            band="not published · reported ₹1,150–1,220",
+            size="~₹33,000 Cr (reports range to ₹37,800 Cr)",
+            split="100% fresh, no OFS — up to 27 Cr shares, FV ₹10",
+            gmp="₹167", gmp_pct=13.7, expected="~+11%",
+            apply_as="Retail — and this is the first issue this quarter where that is worth doing",
+            horizon="Undecided until the band prints. 43× is not a listing-pop multiple.",
+            book="opens 21 Oct · DRHP 19 Jun 2026",
+            flags=(("no OFS — every rupee goes in", "pass"),
+                   ("51.9% EBITDA margin", "pass"),
+                   ("retail allotment actually plausible", "pass"),
+                   ("~43× FY26 for 15% growth", "warn"),
+                   ("₹27,500 Cr of it repays debt", "warn"),
+                   ("band unpublished", "warn")),
+            stats=(("FY26 revenue", "₹1,46,885 Cr"), ("FY26 EBITDA", "₹76,255 Cr"),
+                   ("EBITDA margin", "51.9%"), ("FY26 PAT", "₹30,049 Cr"),
+                   ("PAT growth", "+15.1%"), ("revenue growth", "+14.6%"),
+                   ("subscribers", "524.4 M"), ("ARPU", "₹214/mo")),
+            note=(
+                "The quality is not in question &mdash; a 51.9% EBITDA margin on "
+                "&#8377;1.47 lakh crore of revenue is a utility with a moat. The price is. "
+                "Forty-three times earnings for 15% profit growth is a PEG near 2.9, and the "
+                "growth that would justify it has to come from tariffs rather than "
+                "subscribers: ARPU moved &#8377;206 to &#8377;214 in a year, under 4%, on a "
+                "base of 524 million where there is not much of India left to add. Several "
+                "houses expect the listing itself to trigger a tariff cycle, which is a "
+                "reasonable thesis and an unproven one. "
+                "<strong>Note what the fresh-issue structure does and does not say.</strong> "
+                "No promoter is selling, which is genuinely rare at this size and removes the "
+                "usual exit-at-the-top read. But 83% of the money repays borrowings. That "
+                "lifts earnings by removing interest rather than by building anything, and a "
+                "deleveraging is worth paying for at a lower multiple than a growth raise, "
+                "not a higher one. "
+                "No call today, by design: the band is the whole decision and it is not out."
+            ),
+        ),
+        IPO(
+            name="HD Fire Protect", call="WATCH — nothing to judge yet", tone="warn",
+            dates="13–15 Oct · allotment 16 Oct · lists 21 Oct",
+            band="announced ~9 Oct", size="₹700–750 Cr",
+            split="100% OFS — 2.6 Cr shares, no fresh capital",
+            gmp="₹0", gmp_pct=0.0, expected="—",
+            apply_as="Undecided — no band, no book, no basis",
+            horizon="Revisit 9 October when the band prints",
+            book="opens 13 Oct",
+            flags=(("100% OFS — nothing goes to the company", "fail"),
+                   ("band unpublished", "warn"),
+                   ("zero GMP is uninformative here, not bearish", "warn"),
+                   ("Saudi Aramco among its customers", "pass")),
+            stats=(("issue", "₹700–750 Cr"), ("shares offered", "2.6 Cr"),
+                   ("fresh capital", "nil"), ("opens", "13 Oct"),
+                   ("band due", "~9 Oct"), ("lists", "21 Oct")),
+            note=(
+                "The exact inverse of Jio on the one structural axis that matters: every "
+                "rupee of this goes to selling shareholders and none to the business. That "
+                "is not disqualifying &mdash; a clean OFS of a profitable niche manufacturer "
+                "is an ordinary way to list &mdash; but it removes the only unfakeable "
+                "signal an IPO offers, and it means the sellers chose this price. "
+                "Fire-protection equipment with Saudi Aramco on the customer list is a real "
+                "business with a real export book. None of that can be priced until 9 "
+                "October, so there is no call here and will not be one until there is."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_07 = _for_07()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -1836,6 +1946,7 @@ BY_DAY = {
     "2026-10-01": (IPOS_2026_10_01, LEAD_01, FOOTNOTE_01),
     "2026-10-05": (IPOS_2026_10_05, LEAD_05, FOOTNOTE_05),
     "2026-10-06": (IPOS_2026_10_06, LEAD_06, FOOTNOTE_06),
+    "2026-10-07": (IPOS_2026_10_07, LEAD_07, FOOTNOTE_07),
 }
 
 
