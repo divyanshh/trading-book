@@ -42,8 +42,48 @@ def crypto() -> tuple[int, str, int]:
     )
 
 
+HAND_MARKERS = (
+    "Every fill, every trading day.",
+    "benchmark-svg",
+    "peak unrealised",
+)
+"""Phrases only the hand-maintained hub has.
+
+**The two pages are different designs, not one page with a broken chart.** The
+hub the owner maintains is the daily mark-to-market record — "Every fill, every
+trading day", the Portfolio-vs-Nifty SVG, 2,373 replayed fills. ``mirror.py``
+rebuilds from an older template: "The curve, including the crater", a monthly
+bar chart, 159 closed trades. Mirroring does not damage the chart so much as
+replace the whole page with a superseded one.
+"""
+
+MIRROR_MARKER = "The curve, including the crater."
+"""A phrase only the template has. Its presence means the hub was rebuilt."""
+
+
+def wrong_page(page: str) -> str | None:
+    """Why this is not the hand-maintained hub, or ``None`` if it is.
+
+    Checking that the chart's ids exist is not enough, and that is exactly how
+    this went unnoticed from 5 October: the template declares the same
+    ``benchmark-*`` ids, so a presence check passed a page that had replaced
+    everything around them.
+    """
+    if MIRROR_MARKER in page:
+        return "this is mirror.py's template, not the hand-maintained hub"
+    missing = [m for m in HAND_MARKERS if m not in page]
+    if missing:
+        return "missing from the hand-maintained hub: " + ", ".join(missing)
+    return None
+
+
 def main() -> int:
     page = HUB.read_text(encoding="utf-8")
+    wrong = wrong_page(page)
+    if wrong:
+        print(f"refusing to stamp: {wrong}", file=sys.stderr)
+        print("restore index.html from a good commit, then stamp.", file=sys.stderr)
+        return 1
     e_n, e_new, e_a = equity()
     c_n, c_new, c_a = crypto()
     wanted = {

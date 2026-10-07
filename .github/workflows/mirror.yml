@@ -32,16 +32,6 @@ jobs:
         run: cp index.html /tmp/index.hand.html
       - name: mirror
         run: python3 mirror.py ${{ inputs.refresh && '--refresh' || '' }}
-      - name: restore the hub and re-stamp its counters
-        run: |
-          cp /tmp/index.hand.html index.html
-          python3 stamp_hub.py
-          # Belt and braces: if the chart markup is not there, something has
-          # still eaten the page and the run should fail loudly rather than
-          # commit a hub with no chart on it.
-          for id in benchmark-svg benchmark-algo-path benchmark-nifty-path benchmark-area-path; do
-            grep -q "$id" index.html || { echo "hub lost $id"; exit 1; }
-          done
       # The hand-written IPO review is spliced into the day's report, and until
       # now that only happened when somebody ran it locally -- so a published
       # report could go out without the section the checklist insists on.
@@ -70,6 +60,21 @@ jobs:
           cp "$REPORT" "overrides/$DAY.html"
           python3 ipo_review.py "$DAY"
           python3 mirror.py
+      # **After the splice, not before it.** The step above ends with a second
+      # `mirror.py`, and for two days nothing restored the hub after that one:
+      # the guard had been attached to the first call site rather than to the
+      # file, so every run that spliced a review rebuilt index.html and threw
+      # the chart away again. 5 October onwards, every mirror commit is 77,656
+      # bytes against the hand-maintained 74,474.
+      #
+      # So this is the last thing that touches the page, and `stamp_hub.py`
+      # now refuses to write a hub whose chart carries no geometry — a presence
+      # check passed the broken page, because the template declares the same
+      # three ids with an empty `d`.
+      - name: restore the hub and re-stamp its counters
+        run: |
+          cp /tmp/index.hand.html index.html
+          python3 stamp_hub.py
       - name: commit
         run: |
           git config user.name "trading-book mirror"
