@@ -1931,6 +1931,116 @@ def _for_07() -> list[IPO]:
 IPOS_2026_10_07 = _for_07()
 
 
+LEAD_08 = (
+    "Thursday 8 October, written at 09:45. "
+    "<strong>HD Fire Protect published its band and the picture changed.</strong> "
+    "&#8377;258&ndash;271, opening Monday 13 October, and the grey market moved from "
+    "nothing to <strong>&#8377;80 &mdash; 29.5%</strong> within a day of the price existing. "
+    "Yesterday this page refused to read its zero GMP as bearish, on the grounds that a "
+    "premium is a quote against a price and there was no price. That was the right call and "
+    "the board has now said so. "
+    "<strong>The issue itself is harder than its grey market.</strong> At the top of the band "
+    "the company lists at <strong>&#8377;4,749 Cr against FY26 profit of &#8377;116.79 Cr "
+    "&mdash; 40.7&times; earnings for 6.4% profit growth</strong>, and every rupee of the "
+    "&#8377;712 Cr goes to the promoter couple selling it. "
+    "<strong>Jio Platform&rsquo;s premium keeps climbing</strong> &mdash; &#8377;185 now, from "
+    "&#8377;167 yesterday and &#8377;160 on Monday &mdash; with the band still unpublished. "
+    "<strong>Held:</strong> nothing in equities. Nothing is open for application today."
+)
+
+FOOTNOTE_08 = (
+    "<strong>Two GMP sources disagree on HD Fire Protect today</strong>, one quoting "
+    "&#8377;80 and one still showing zero, and that is worth stating rather than resolving "
+    "by picking the one that suits. A grey-market quote has no print behind it; when the "
+    "feeds diverge on the first day of a band, the honest reading is that the market has not "
+    "settled, not that it has settled at the higher number. "
+    "<strong>The structural case is the one this page keeps returning to.</strong> SRIT was "
+    "worth applying for because every rupee went into the company. This is the inverse: a "
+    "pure secondary sale by two promoters at forty times earnings, where the people who know "
+    "the business best are the sellers and the proceeds build nothing. That is not "
+    "disqualifying &mdash; a 30.75% EBITDA margin and Saudi Aramco on the customer list are "
+    "real &mdash; but it means the entire case rests on the listing pop, and a listing pop is "
+    "the one thing this page has been wrong about four times running when it tried to "
+    "forecast it from the institutional book. Quote the QIB number on day two; do not "
+    "predict it."
+)
+
+
+def _for_08() -> list[IPO]:
+    """HD Fire Protect prices; Jio's premium keeps climbing on no band."""
+    return [
+        IPO(
+            name="HD Fire Protect", call="DECIDE MONDAY — the band is out, the case is split",
+            tone="warn",
+            dates="13–15 Oct · anchors 12 Oct · allotment 16 Oct · lists 21 Oct",
+            band="₹258–271", size="₹712 Cr at the top of the band",
+            split="100% OFS — 2.62 Cr shares, both sellers are the promoters",
+            gmp="₹80", gmp_pct=29.5, expected="~+27%",
+            apply_as="Retail if applying at all — ₹14,905 at 55 shares",
+            horizon="Listing-day sell. At 40.7× for 6.4% growth there is no hold case.",
+            book="opens 13 Oct · anchors 12 Oct",
+            flags=(("GMP 29.5% from a standing start", "pass"),
+                   ("EBITDA margin 30.75%", "pass"),
+                   ("100% OFS — nothing to the company", "fail"),
+                   ("40.7× FY26 for 6.4% PAT growth", "fail"),
+                   ("PAT growing slower than revenue", "warn"),
+                   ("two GMP feeds disagree today", "warn")),
+            stats=(("P/E post", "40.7×"), ("market cap", "₹4,749 Cr"),
+                   ("FY26 revenue", "₹489.28 Cr"), ("revenue growth", "+13.0%"),
+                   ("FY26 PAT", "₹116.79 Cr"), ("PAT growth", "+6.4%"),
+                   ("EBITDA margin", "30.75%"), ("retail min", "₹14,905")),
+            note=(
+                "A good business at a price that needs the grey market to be right. "
+                "Revenue grew 13% and profit 6.4%, so margin is compressing even at 30.75% "
+                "&mdash; and the market is being asked for forty times earnings on that. "
+                "Both sellers are the promoters and the company receives nothing, which is "
+                "the exact inverse of the structure that made SRIT worth applying for last "
+                "month. "
+                "<strong>So the case is entirely the listing pop.</strong> A 29.5% premium "
+                "appearing within a day of the band is genuine demand and not nothing; "
+                "&#8377;712 Cr is also small enough that retail allotment is a real "
+                "possibility rather than the lottery a &#8377;218 Cr issue was. The decision "
+                "belongs on Monday with the anchor book in hand, and the QIB number on day "
+                "two is the thing to read &mdash; not forecast."
+            ),
+        ),
+        IPO(
+            name="Jio Platform", call="WORK DONE — waiting on the band", tone="warn",
+            dates="21–23 Oct · allotment 26 Oct · lists 28 Oct",
+            band="still unpublished · reported ₹1,150–1,220",
+            size="~₹33,000 Cr", split="100% fresh, no OFS — up to 27 Cr shares, FV ₹10",
+            gmp="₹185", gmp_pct=15.2, expected="~+13%",
+            apply_as="Retail — the one issue this quarter where allotment is plausible",
+            horizon="Undecided until the band prints. 43× is not a listing-pop multiple.",
+            book="opens 21 Oct · DRHP 19 Jun 2026",
+            flags=(("no OFS — every rupee goes in", "pass"),
+                   ("51.9% EBITDA margin", "pass"),
+                   ("GMP ₹160 → ₹167 → ₹185 in three sessions", "pass"),
+                   ("~43× FY26 for 15% growth", "warn"),
+                   ("₹27,500 Cr of it repays debt", "warn"),
+                   ("band still unpublished", "warn")),
+            stats=(("FY26 revenue", "₹1,46,885 Cr"), ("FY26 EBITDA", "₹76,255 Cr"),
+                   ("EBITDA margin", "51.9%"), ("FY26 PAT", "₹30,049 Cr"),
+                   ("PAT growth", "+15.1%"), ("subscribers", "524.4 M"),
+                   ("ARPU", "₹214/mo"), ("GMP", "₹185")),
+            note=(
+                "Unchanged from yesterday's work except the premium, which has risen for a "
+                "third session &mdash; &#8377;160, &#8377;167, &#8377;185 &mdash; against a "
+                "band nobody has published. At the reported &#8377;1,220 top that is 15.2%, "
+                "so roughly 13% expected after the overstatement. "
+                "A rising premium on an unpublished band is sentiment rather than "
+                "information, and the thing that will actually decide this is still the "
+                "number Reliance prints. Forty-three times earnings for 15% growth needs the "
+                "tariff cycle several houses expect; 83% of the raise repays borrowings, "
+                "which lifts earnings by removing interest rather than by building anything."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_08 = _for_08()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -1947,6 +2057,7 @@ BY_DAY = {
     "2026-10-05": (IPOS_2026_10_05, LEAD_05, FOOTNOTE_05),
     "2026-10-06": (IPOS_2026_10_06, LEAD_06, FOOTNOTE_06),
     "2026-10-07": (IPOS_2026_10_07, LEAD_07, FOOTNOTE_07),
+    "2026-10-08": (IPOS_2026_10_08, LEAD_08, FOOTNOTE_08),
 }
 
 
