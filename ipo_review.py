@@ -2041,6 +2041,111 @@ def _for_08() -> list[IPO]:
 IPOS_2026_10_08 = _for_08()
 
 
+LEAD_09 = (
+    "Friday 9 October, written at 10:00. "
+    "<strong>The market reverted to a Downtrend overnight and the grey market "
+    "repriced both issues within a session.</strong> HD Fire Protect&rsquo;s premium fell "
+    "from &#8377;80 to <strong>&#8377;55 &mdash; 29.5% to 20.3%</strong> &mdash; and Jio "
+    "Platform&rsquo;s from &#8377;185 to &#8377;177. "
+    "Nifty breached 22,217.30 intraday on Thursday and printed a fresh 52-week low of "
+    "22,179.90; MarketSmith moved the status back to Downtrend this morning. "
+    "<strong>This matters more for HD Fire than for Jio, because HD Fire opens on "
+    "Monday.</strong> Its entire case was the listing pop &mdash; 40.7&times; FY26 earnings "
+    "for 6.4% profit growth, 100% offer for sale, the company receives nothing &mdash; and the "
+    "pop estimate has just fallen by a third before a single bid is placed. "
+    "<strong>Held:</strong> nothing in equities. Nothing is open for application today."
+)
+
+FOOTNOTE_09 = (
+    "<strong>A premium that moves 9.2 points in one session is telling you how much of it "
+    "was sentiment.</strong> Nothing about HD Fire Protect changed yesterday: same band, same "
+    "promoters selling, same 30.75% margin, same forty times earnings. What changed was the "
+    "market, and a fifth of the expected listing gain went with it. That is worth holding "
+    "against the number on the morning it opens, when the grey market will quote something "
+    "again and it will feel like information. "
+    "<strong>The anchor book on Monday is the first verifiable thing on this issue</strong>, "
+    "and it is also where this page has been wrong four times in a row &mdash; flagging thin "
+    "institutional demand as decisive and watching the issue run. So: read the anchor "
+    "allocation, read the QIB number on day two, quote both, forecast neither."
+)
+
+
+def _for_09() -> list[IPO]:
+    """The Downtrend reprices both premiums; HD Fire opens Monday."""
+    return [
+        IPO(
+            name="HD Fire Protect", call="MONDAY — and the case got thinner overnight",
+            tone="warn",
+            dates="13–15 Oct · anchors 12 Oct · allotment 16 Oct · lists 21 Oct",
+            band="₹258–271", size="₹712 Cr at the top of the band",
+            split="100% OFS — 2.62 Cr shares, both sellers are the promoters",
+            gmp="₹55", gmp_pct=20.3, expected="~+18%",
+            apply_as="Retail if at all — ₹14,905 at 55 shares",
+            horizon="Listing-day sell. At 40.7× for 6.4% growth there is no hold case.",
+            book="anchors Monday 12 Oct · opens 13 Oct",
+            flags=(("GMP ₹80 → ₹55 in one session", "fail"),
+                   ("opens into a Downtrend", "fail"),
+                   ("100% OFS — nothing to the company", "fail"),
+                   ("40.7× FY26 for 6.4% PAT growth", "fail"),
+                   ("EBITDA margin 30.75%", "pass"),
+                   ("anchor book Monday — the first verifiable number", "warn")),
+            stats=(("GMP yesterday", "₹80 · 29.5%"), ("GMP today", "₹55 · 20.3%"),
+                   ("P/E post", "40.7×"), ("market cap", "₹4,749 Cr"),
+                   ("FY26 revenue", "₹489.28 Cr"), ("FY26 PAT", "₹116.79 Cr"),
+                   ("PAT growth", "+6.4%"), ("retail min", "₹14,905")),
+            note=(
+                "Nothing about the company changed yesterday. Same band, same promoters "
+                "selling the whole of it, same 30.75% margin, same forty times earnings for "
+                "single-digit growth. What changed was the market, and a fifth of the "
+                "expected listing gain went with it. "
+                "<strong>An issue whose only case is the pop is exactly the issue a "
+                "Downtrend damages most.</strong> The valuation argument was already "
+                "uncomfortable and it has not improved; what has gone is the compensation "
+                "for taking it. "
+                "No call until the anchor allocation prints on Monday. If the premium keeps "
+                "sliding into the open, the honest answer is to skip it &mdash; this page "
+                "does not need to own every issue it has written about."
+            ),
+        ),
+        IPO(
+            name="Jio Platform", call="WAITING — band still unpublished, two weeks out",
+            tone="warn",
+            dates="21–23 Oct · allotment 26 Oct · lists 28 Oct",
+            band="still unpublished · reports now conflict: ₹1,150–1,220 or ₹1,350–1,450",
+            size="~₹33,000 Cr", split="100% fresh, no OFS — up to 27 Cr shares, FV ₹10",
+            gmp="₹177", gmp_pct=14.5, expected="~+12%",
+            apply_as="Retail — allotment is plausible at this size",
+            horizon="Undecided. The band is the whole decision and it is not out.",
+            book="opens 21 Oct · DRHP 19 Jun 2026",
+            flags=(("no OFS — every rupee goes in", "pass"),
+                   ("51.9% EBITDA margin", "pass"),
+                   ("GMP ₹185 → ₹177", "warn"),
+                   ("band reports now disagree by 18%", "warn"),
+                   ("₹27,500 Cr of it repays debt", "warn")),
+            stats=(("FY26 revenue", "₹1,46,885 Cr"), ("FY26 EBITDA", "₹76,255 Cr"),
+                   ("EBITDA margin", "51.9%"), ("FY26 PAT", "₹30,049 Cr"),
+                   ("PAT growth", "+15.1%"), ("subscribers", "524.4 M"),
+                   ("ARPU", "₹214/mo"), ("GMP", "₹177")),
+            note=(
+                "The premium gave back a little with the market, which is the least "
+                "interesting thing about it. The band is the issue. Reports that said "
+                "&#8377;1,150&ndash;1,220 on Monday now also say "
+                "&#8377;1,350&ndash;1,450 &mdash; an eighteen percent spread between "
+                "sources on the single number that decides this, and at the higher end "
+                "today&rsquo;s &#8377;177 is 12.6% rather than 14.5%. "
+                "Two weeks out, with nothing official, the correct position is to hold the "
+                "fundamental work done on 7 October and wait. Reliance fell 2.46% on "
+                "Thursday, the heaviest single drag on the index, three weeks before "
+                "floating its own subsidiary; that is worth watching without being read as "
+                "a signal."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_09 = _for_09()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -2058,6 +2163,7 @@ BY_DAY = {
     "2026-10-06": (IPOS_2026_10_06, LEAD_06, FOOTNOTE_06),
     "2026-10-07": (IPOS_2026_10_07, LEAD_07, FOOTNOTE_07),
     "2026-10-08": (IPOS_2026_10_08, LEAD_08, FOOTNOTE_08),
+    "2026-10-09": (IPOS_2026_10_09, LEAD_09, FOOTNOTE_09),
 }
 
 
