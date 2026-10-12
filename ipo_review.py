@@ -2146,6 +2146,156 @@ def _for_09() -> list[IPO]:
 IPOS_2026_10_09 = _for_09()
 
 
+LEAD_12 = (
+    "Monday 12 October, written at 10:15. "
+    "<strong>The board went from two names to seven over the weekend, and Jio&rsquo;s band is "
+    "finally real.</strong> &#8377;1,065&ndash;1,119, raising about &#8377;30,213 Cr, lot of 13 "
+    "shares at &#8377;14,547, anchors 19 October. "
+    "<strong>That is below the &#8377;1,150&ndash;1,220 the early reports carried and far below "
+    "the &#8377;1,350&ndash;1,450 one source ran last week</strong>, so the valuation is better "
+    "than the work on this page assumed on 7 October &mdash; which is the right direction for a "
+    "rumour to have been wrong in. "
+    "<strong>HD Fire Protect takes anchors today and opens tomorrow</strong>, and its premium "
+    "recovered with Friday&rsquo;s market: &#8377;55 back to <strong>&#8377;86, 31.7%</strong>, "
+    "above where it was before Thursday&rsquo;s fall. "
+    "And five more open together on 15 October &mdash; Bonfiglioli, Tonbo Imaging, Zetwerk, "
+    "Sahjanand Medical and Fusion CX &mdash; with bands announced today. "
+    "<strong>Held:</strong> nothing in equities."
+)
+
+FOOTNOTE_12 = (
+    "<strong>Seven mainboard issues in one week, into a market MarketSmith classes as a "
+    "Downtrend, is itself the story.</strong> Jio alone takes &#8377;30,213 Cr and Zetwerk "
+    "&#8377;5,000 Cr; that money is drawn out of the same pool that has just seen four "
+    "consecutive weekly falls in forex reserves and &#8377;12,943 Cr of foreign selling in a "
+    "single session. A primary-market rush is not usually what a weak secondary market needs, "
+    "and the sequencing matters for us: whatever is decided about HD Fire tomorrow is decided "
+    "before any of the five that follow has shown a book. "
+    "<strong>What this page does not yet have on those five is their accounts</strong>, and it "
+    "will not pretend otherwise. The structures are known and they are the half that cannot be "
+    "dressed: Bonfiglioli is <em>100% OFS</em> by its Italian parent, Tonbo is an OFS of up to "
+    "1.22 Cr shares, Zetwerk is mixed &mdash; &#8377;2,600 Cr fresh against an OFS of 9.68 Cr "
+    "shares. Revenue, profit and the multiples come before any call on them, and that work is "
+    "owed by Wednesday morning, not Thursday."
+)
+
+
+def _for_12() -> list[IPO]:
+    """Jio prices; HD Fire takes anchors; five more arrive for the 15th."""
+    return [
+        IPO(
+            name="HD Fire Protect", call="ANCHORS TODAY, OPENS TOMORROW — decide on the book",
+            tone="warn",
+            dates="13–15 Oct · anchors today · allotment 16 Oct · lists 21 Oct",
+            band="₹258–271", size="₹712 Cr at the top of the band",
+            split="100% OFS — 2.62 Cr shares, both sellers are the promoters",
+            gmp="₹86", gmp_pct=31.7, expected="~+29%",
+            apply_as="Retail — ₹14,905 at 55 shares",
+            horizon="Listing-day sell. At 40.7× for 6.4% growth there is no hold case.",
+            book="anchors today · opens 13 Oct",
+            flags=(("GMP recovered ₹55 → ₹86", "pass"),
+                   ("EBITDA margin 30.75%", "pass"),
+                   ("100% OFS — nothing to the company", "fail"),
+                   ("40.7× FY26 for 6.4% PAT growth", "fail"),
+                   ("opens into a Downtrend", "warn"),
+                   ("five more issues open three days later", "warn")),
+            stats=(("GMP 9 Oct", "₹55 · 20.3%"), ("GMP today", "₹86 · 31.7%"),
+                   ("P/E post", "40.7×"), ("market cap", "₹4,749 Cr"),
+                   ("FY26 revenue", "₹489.28 Cr"), ("FY26 PAT", "₹116.79 Cr"),
+                   ("PAT growth", "+6.4%"), ("retail min", "₹14,905")),
+            note=(
+                "The premium has now been &#8377;0, &#8377;80, &#8377;55 and &#8377;86 in four "
+                "sessions, tracking the market rather than the company &mdash; which is the "
+                "clearest evidence available that it is a sentiment number and not a forecast. "
+                "Nothing in the accounts has moved: forty times earnings for 6.4% profit "
+                "growth, with both sellers the promoters and the company receiving none of the "
+                "&#8377;712 Cr. "
+                "<strong>The anchor allocation prints today and it is the first verifiable "
+                "number this issue has produced.</strong> Read it, and read the QIB book on day "
+                "two. This page called thin institutional demand decisive four times in "
+                "September and was wrong four times; the lesson taken was to quote those "
+                "numbers rather than forecast from them, and that still holds when the premium "
+                "is rising."
+            ),
+        ),
+        IPO(
+            name="Jio Platform", call="BAND IS OUT — and it came in below the rumours",
+            tone="warn",
+            dates="21–23 Oct · anchors 19 Oct · allotment 26 Oct · lists 28 Oct",
+            band="₹1,065–1,119", size="~₹30,213 Cr",
+            split="100% fresh, no OFS — up to 27 Cr shares, FV ₹10",
+            gmp="₹172", gmp_pct=15.4, expected="~+13%",
+            apply_as="Retail — 13 shares, ₹14,547. Quota 50% QIB / 35% retail / 15% HNI",
+            horizon="Worth deciding properly now that the number exists.",
+            book="anchors 19 Oct · opens 21 Oct",
+            flags=(("band below the ₹1,150–1,220 reports", "pass"),
+                   ("no OFS — every rupee goes in", "pass"),
+                   ("51.9% EBITDA margin", "pass"),
+                   ("35% retail quota on a ₹30,213 Cr issue", "pass"),
+                   ("₹27,500 Cr of it repays debt", "warn"),
+                   ("ARPU grew under 4% on 524 M subscribers", "warn")),
+            stats=(("band", "₹1,065–1,119"), ("raise", "~₹30,213 Cr"),
+                   ("lot", "13 sh · ₹14,547"), ("FY26 revenue", "₹1,46,885 Cr"),
+                   ("EBITDA margin", "51.9%"), ("FY26 PAT", "₹30,049 Cr"),
+                   ("PAT growth", "+15.1%"), ("GMP", "₹172 · 15.4%")),
+            note=(
+                "<strong>The band is the thing this page has been waiting on since 7 October "
+                "and it is friendlier than expected.</strong> Reports carried "
+                "&#8377;1,150&ndash;1,220 and one ran &#8377;1,350&ndash;1,450; it priced at "
+                "&#8377;1,065&ndash;1,119. On FY26 profit of &#8377;30,049 Cr that is a "
+                "materially lower multiple than the ~43&times; the earlier valuation talk "
+                "implied &mdash; the exact figure depends on the final share count, which the "
+                "RHP settles, and this page will state it once rather than estimate it twice. "
+                "<strong>What has not changed is where the money goes.</strong> The issue is "
+                "entirely fresh, which is the one structural signal that cannot be dressed, but "
+                "&#8377;27,500 Cr of roughly &#8377;30,213 Cr repays borrowings. That lifts "
+                "earnings by removing interest rather than by building anything, and a "
+                "deleveraging deserves a lower multiple than a growth raise, not a higher one. "
+                "A 35% retail quota on an issue this size makes allotment genuinely plausible "
+                "&mdash; still the strongest practical argument for applying."
+            ),
+        ),
+        IPO(
+            name="The 15 October five", call="BANDS TODAY — accounts owed by Wednesday",
+            tone="warn",
+            dates="15–19 Oct · Bonfiglioli · Tonbo · Zetwerk · Sahjanand Medical · Fusion CX",
+            band="announced today", size="Zetwerk ~₹5,000 Cr; others to confirm",
+            split="Bonfiglioli 100% OFS · Tonbo OFS 1.22 Cr sh · Zetwerk ₹2,600 Cr fresh + 9.68 Cr OFS",
+            gmp="see note", gmp_pct=0.0, expected="—",
+            apply_as="Undecided — no accounts read yet",
+            horizon="Revisit Wednesday with revenue, profit and the multiples",
+            book="opens 15 Oct",
+            flags=(("Tonbo GMP 38.6% — highest on the board", "pass"),
+                   ("Bonfiglioli 100% OFS by its Italian parent", "fail"),
+                   ("Zetwerk is the only one with fresh capital", "pass"),
+                   ("no accounts read on any of them", "warn"),
+                   ("five issues competing on one day", "warn")),
+            stats=(("Tonbo", "band 700 · GMP ₹270 · 38.6%"),
+                   ("Bonfiglioli", "band 586 · GMP ₹175 · 29.9%"),
+                   ("Zetwerk", "band 151 · GMP ₹30 · 19.9%"),
+                   ("Sahjanand Medical", "band 344 · GMP ₹40 · 11.6%"),
+                   ("Fusion CX", "band 289 · GMP ₹25 · 8.7%")),
+            note=(
+                "One card rather than five, because five calls cannot honestly be made from "
+                "grey-market quotes and a structure. <strong>What is known is the structure, "
+                "and it is the half that matters most to this page.</strong> Bonfiglioli is a "
+                "pure secondary sale by Bonfiglioli S.p.A. of Italy &mdash; 4.32 Cr shares, the "
+                "company receives nothing. Tonbo is an offer for sale of up to 1.22 Cr shares. "
+                "Zetwerk is the only one raising real capital: &#8377;2,600 Cr fresh against an "
+                "offer for sale of 9.68 Cr shares. "
+                "<strong>The premiums already disagree sharply</strong> &mdash; 38.6% on Tonbo "
+                "against 8.7% on Fusion CX &mdash; which is a spread worth understanding rather "
+                "than following. Revenue, profit, margin and the multiple come before any call, "
+                "and that work is owed Wednesday morning, with two clear sessions before the "
+                "books open."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_12 = _for_12()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -2164,6 +2314,7 @@ BY_DAY = {
     "2026-10-07": (IPOS_2026_10_07, LEAD_07, FOOTNOTE_07),
     "2026-10-08": (IPOS_2026_10_08, LEAD_08, FOOTNOTE_08),
     "2026-10-09": (IPOS_2026_10_09, LEAD_09, FOOTNOTE_09),
+    "2026-10-12": (IPOS_2026_10_12, LEAD_12, FOOTNOTE_12),
 }
 
 
