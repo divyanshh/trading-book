@@ -2296,6 +2296,204 @@ def _for_12() -> list[IPO]:
 IPOS_2026_10_12 = _for_12()
 
 
+LEAD_13 = (
+    "Tuesday 13 October, written at 09:20. "
+    "<strong>HD Fire Protect opens this morning, and the anchor book answered the "
+    "question this page set yesterday.</strong> It called the anchor allocation &ldquo;the "
+    "first verifiable number this issue has produced&rdquo;, and it came in strong: "
+    "<strong>&#8377;213.11 Cr from 25 funds, allotted at the top of the band at "
+    "&#8377;271</strong>, with Indian mutual funds taking 71.88% of it. That is the full "
+    "anchor allocation taken up, by domestic institutions, at the highest price on offer. "
+    "<strong>The other half of the board moved the opposite way overnight.</strong> Tonbo "
+    "Imaging&rsquo;s premium went from &#8377;270 to <strong>&#8377;427, a 61% expected "
+    "listing gain</strong>, while Zetwerk&rsquo;s halved from &#8377;30 to &#8377;16 and "
+    "Bonfiglioli, Sahajanand and Fusion CX all softened. One name is being bid and the rest "
+    "are being sold. "
+    "<strong>Held:</strong> nothing in equities."
+)
+
+FOOTNOTE_13 = (
+    "<strong>What the anchor book does and does not settle.</strong> It settles that "
+    "institutions would pay &#8377;271 for HD Fire in this tape &mdash; 25 of them, mostly "
+    "domestic mutual funds, taking the whole allocation at the ceiling rather than the "
+    "floor. It does not settle the valuation, which is unchanged: forty times earnings for "
+    "6.4% profit growth, margins compressing, a cash conversion cycle stretched to 102 days, "
+    "and both sellers the promoters taking the entire &#8377;712 Cr out. "
+    "<strong>This page has been wrong about institutional demand before</strong> &mdash; it "
+    "called thin QIB books decisive four times in September and was wrong four times &mdash; "
+    "and the lesson taken was to quote those numbers rather than forecast from them. So: the "
+    "number is strong, it is quoted, and it is a reason to apply rather than a reason to "
+    "hold. "
+    "<strong>Tonbo is the one to be careful about.</strong> A 61% grey-market premium on an "
+    "issue that is <em>entirely</em> an offer for sale, at a &#8377;4,010 Cr valuation, with "
+    "no published profit figure this page has yet read, is not a bargain being spotted. It is "
+    "a theme being bought &mdash; defence, in the week Goodluck India was named sole supplier "
+    "of 155&nbsp;mm shells and Zen Technologies chased a &#8377;6,000 Cr tender. The accounts "
+    "are owed tomorrow, before the 15 October books open, and no call belongs on it until "
+    "they are read."
+)
+
+
+def _for_13() -> list[IPO]:
+    """HD Fire opens on a full anchor book; Tonbo's premium runs away."""
+    return [
+        IPO(
+            name="HD Fire Protect", call="OPEN TODAY — apply retail, sell on listing",
+            tone="good",
+            dates="13–15 Oct · allotment 16 Oct · lists 21 Oct",
+            band="₹258–271", size="₹712.31 Cr, entirely OFS",
+            split="100% OFS — 2,62,84,500 shares, both sellers are the promoters",
+            gmp="₹86", gmp_pct=31.7, expected="~+29%",
+            apply_as="Retail — ₹14,905 at 55 shares. One lot.",
+            horizon="Listing-day sell. Nothing here supports a hold at 40×.",
+            book="opens today · closes 15 Oct",
+            flags=(("anchor book FULL at the top band", "pass"),
+                   ("25 funds, 71.88% domestic MFs", "pass"),
+                   ("RoE 30.17%, RoCE 40.33%", "pass"),
+                   ("EBITDA margin 30.75%", "pass"),
+                   ("40.7× FY26 for 6.4% PAT growth", "fail"),
+                   ("100% OFS — company receives nothing", "fail"),
+                   ("cash conversion cycle out to 102 days", "warn"),
+                   ("Middle East export exposure, Brent above $100", "warn")),
+            stats=(("anchor raise", "₹213.11 Cr"), ("anchor price", "₹271 — top of band"),
+                   ("anchor funds", "25"), ("domestic MF share", "71.88%"),
+                   ("GMP", "₹86 · 31.7%"), ("P/E post", "40.7×"),
+                   ("FY26 PAT", "₹116.79 Cr"), ("PAT growth", "+6.4%"),
+                   ("RoCE", "40.33%"), ("retail min", "₹14,905")),
+            note=(
+                "<strong>Yesterday this page said the anchor allocation was the first "
+                "verifiable number the issue would produce, and to read it rather than "
+                "forecast from it. Here it is.</strong> &#8377;213.11 Cr, which is the full "
+                "anchor allocation, placed with 25 funds at &#8377;271 &mdash; the top of "
+                "the band, not the bottom &mdash; and 71.88% of it went to Indian mutual "
+                "funds rather than to foreign money that can leave on Thursday. Bajaj Life "
+                "and Allianz Global are named among them. "
+                "<strong>That is a genuine institutional vote, and it is the only hard "
+                "evidence this issue has.</strong> It does not touch the arithmetic: 40.7 "
+                "times earnings for 6.4% profit growth is still a PEG above six, margins "
+                "still compressed from 31.89% to 30.75%, working capital still deteriorated "
+                "to a 102-day cycle, and the company still receives none of the "
+                "&#8377;712 Cr because both sellers are the promoters. "
+                "<strong>The business is genuinely good</strong> &mdash; RoE 30%, RoCE 40%, "
+                "a 23% net margin in a niche it leads &mdash; which is why it will find "
+                "buyers. The price is what is wrong, and a listing pop is the only part of "
+                "it worth owning. <strong>One lot, retail, sold on day one.</strong> Do not "
+                "scale to sHNI: &#8377;2 L into a forty-times stock with decelerating "
+                "earnings, in a market MarketSmith still calls a Downtrend, is a position "
+                "rather than a cheap option."
+            ),
+        ),
+        IPO(
+            name="Tonbo Imaging India", call="PREMIUM RAN 58% OVERNIGHT — accounts owed before any call",
+            tone="warn",
+            dates="15–19 Oct", band="₹665–700", size="₹852 Cr",
+            split="100% OFS — 1.22 Cr shares, no fresh capital",
+            gmp="₹427", gmp_pct=61.0, expected="not forecast — see note",
+            apply_as="Undecided. No published profit figure read yet.",
+            horizon="Revisit tomorrow with the accounts, before the book opens",
+            book="opens 15 Oct",
+            flags=(("GMP ₹270 → ₹427 in one session", "warn"),
+                   ("highest premium on the board by 29pp", "warn"),
+                   ("100% OFS at a ₹4,010 Cr valuation", "fail"),
+                   ("no published PAT figure read yet", "fail"),
+                   ("defence theme bid hard this week", "warn")),
+            stats=(("band", "₹665–700"), ("raise", "₹852 Cr"),
+                   ("valuation sought", "₹4,010 Cr"), ("shares offered", "1.22 Cr"),
+                   ("GMP 12 Oct", "₹270 · 38.6%"), ("GMP today", "₹427 · 61.0%"),
+                   ("fresh capital", "nil")),
+            note=(
+                "<strong>A premium that moves 58% in one session is information about "
+                "sentiment, not about the company</strong>, and the company has not "
+                "published anything in that window. Nothing changed at Tonbo overnight; what "
+                "changed is that defence became the thing to own, in the same week Goodluck "
+                "India&rsquo;s arm was named sole supplier of 155&nbsp;mm M1A4 shells to "
+                "Munitions India and Zen Technologies was reported chasing &#8377;6,000 Cr "
+                "of a &#8377;20,000 Cr tender. "
+                "<strong>The structure is the part that is knowable and it is the "
+                "unflattering half.</strong> &#8377;852 Cr, every rupee of it an offer for "
+                "sale of 1.22 Cr shares, at a valuation of &#8377;4,010 Cr. The company "
+                "raises nothing and builds nothing; existing holders are selling into "
+                "enthusiasm. That is not disqualifying on its own &mdash; HD Fire is the "
+                "same shape and this page is applying for it &mdash; but HD Fire has "
+                "published accounts and an anchor book, and Tonbo has neither here yet. "
+                "<strong>No call until the revenue, the profit and the multiple are read.</strong> "
+                "That work is owed tomorrow, which leaves one clear session before the book "
+                "opens on the 15th. A 61% premium is a reason to hurry it, not a reason to "
+                "skip it."
+            ),
+        ),
+        IPO(
+            name="The rest of the 15 October book", call="SOFTENING WHILE TONBO RUNS",
+            tone="warn",
+            dates="15–19 Oct · Bonfiglioli · Zetwerk · Sahajanand · Fusion CX",
+            band="see stats", size="Zetwerk ~₹5,000 Cr; others to confirm",
+            split="Bonfiglioli 100% OFS · Zetwerk ₹2,600 Cr fresh + 9.68 Cr OFS",
+            gmp="all four fell", gmp_pct=0.0, expected="—",
+            apply_as="Undecided — accounts owed tomorrow",
+            horizon="With Tonbo, tomorrow",
+            book="opens 15 Oct",
+            flags=(("Zetwerk GMP halved, 30 → 16", "fail"),
+                   ("Bonfiglioli 175 → 155", "warn"),
+                   ("Sahajanand 40 → 36", "warn"),
+                   ("Fusion CX 25 → 20", "warn"),
+                   ("Zetwerk is the only one raising real capital", "pass")),
+            stats=(("Bonfiglioli", "586 · ₹155 · 26.5%"),
+                   ("Zetwerk", "151 · ₹16 · 10.6%"),
+                   ("Sahajanand Medical", "344 · ₹36 · 10.5%"),
+                   ("Fusion CX", "289 · ₹20 · 6.9%"),
+                   ("Tonbo, for contrast", "700 · ₹427 · 61.0%")),
+            note=(
+                "<strong>Every one of these four fell overnight while Tonbo rose 58%.</strong> "
+                "That is the useful observation on the day: this is not a rising tide under "
+                "the primary market, it is money concentrating into one name and leaving the "
+                "others. Zetwerk is the sharpest &mdash; its premium halved, from &#8377;30 "
+                "to &#8377;16 &mdash; and it is the <em>only</em> issue in the whole cluster "
+                "raising real capital, &#8377;2,600 Cr of fresh money against an offer for "
+                "sale of 9.68 Cr shares. "
+                "The grey market is paying up for the pure secondary sale and marking down "
+                "the one that funds a business, which is worth noticing even though it "
+                "decides nothing. <strong>Accounts on all four are owed tomorrow</strong>, "
+                "with Tonbo, before the books open on the 15th."
+            ),
+        ),
+        IPO(
+            name="Jio Platform", call="BAND HOLDING — premium firm while the rest soften",
+            tone="warn",
+            dates="21–23 Oct · anchors 19 Oct · lists 28 Oct",
+            band="₹1,065–1,119", size="~₹30,213 Cr",
+            split="100% fresh, no OFS",
+            gmp="₹182", gmp_pct=16.3, expected="~+14%",
+            apply_as="Retail — 13 shares, ₹14,547. 35% retail quota.",
+            horizon="Decide at the anchor book on 19 October",
+            book="anchors 19 Oct",
+            flags=(("GMP firmed 172 → 182 while four others fell", "pass"),
+                   ("no OFS — every rupee goes in", "pass"),
+                   ("35% retail quota makes allotment plausible", "pass"),
+                   ("₹27,500 Cr of it repays debt", "warn"),
+                   ("₹30,213 Cr drawn from a thin market", "warn")),
+            stats=(("band", "₹1,065–1,119"), ("raise", "~₹30,213 Cr"),
+                   ("lot", "13 sh · ₹14,547"), ("GMP 12 Oct", "₹172 · 15.4%"),
+                   ("GMP today", "₹182 · 16.3%"), ("anchors", "19 Oct")),
+            note=(
+                "Quietly the second-best news on the board: <strong>Jio&rsquo;s premium "
+                "firmed from &#8377;172 to &#8377;182 on a night when four of the six other "
+                "issues fell.</strong> On a &#8377;30,213 Cr issue that is harder to move "
+                "than on a small one, so it carries more weight than the percentage suggests. "
+                "The case is unchanged from yesterday: entirely fresh capital, which is the "
+                "one structural signal that cannot be dressed, but &#8377;27,500 Cr of it "
+                "repays borrowings rather than building anything &mdash; a deleveraging "
+                "deserves a lower multiple than a growth raise, not a higher one. The 35% "
+                "retail quota remains the strongest practical argument for applying. "
+                "<strong>Its own anchor book prints on 19 October</strong>, and on the "
+                "evidence of HD Fire this morning, that is the number to decide on."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_13 = _for_13()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -2315,6 +2513,7 @@ BY_DAY = {
     "2026-10-08": (IPOS_2026_10_08, LEAD_08, FOOTNOTE_08),
     "2026-10-09": (IPOS_2026_10_09, LEAD_09, FOOTNOTE_09),
     "2026-10-12": (IPOS_2026_10_12, LEAD_12, FOOTNOTE_12),
+    "2026-10-13": (IPOS_2026_10_13, LEAD_13, FOOTNOTE_13),
 }
 
 
