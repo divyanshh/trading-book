@@ -1,0 +1,399 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Six months of the equity book marked to market: alpha, beta, Sharpe and volatility against the Nifty 50, Midcap 150 and Smallcap 100, and where the money actually sat by market-cap tier."><title>Risk, allocation and the benchmark</title><style>/* Trading Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html.dark{color-scheme:dark;--canvas:#0f172a;--card:#111827;--head:#172033;--line:#293548;--line-strong:#475569;--ink:#f8fafc;--ink-2:#cbd5e1;--muted:#94a3b8;--faint:#64748b;--blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#172554;--blue-100:#1e3a8a;--green:#34d399;--green-50:#052e2b;--green-100:#064e3b;--green-line:#065f46;--red:#fb7185;--red-50:#450a0a;--red-100:#7f1d1d;--red-line:#991b1b;--amber:#fbbf24;--amber-50:#422006;--amber-100:#713f12;--amber-line:#92400e;--canvas-fade:rgba(15,23,42,0);--shadow:none}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(520px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(37,99,235,.10),transparent 68%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%);transition:background .45s ease-out}
+body::before{display:none}.dark body{background-image:radial-gradient(560px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(96,165,250,.15),transparent 68%),radial-gradient(circle at 85% 22%,rgba(167,139,250,.07),transparent 22%)}.wrap{max-width:none;width:100%;padding:22px 32px 80px}.mb-nav{box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:9px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}.mb-theme{margin-left:auto;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:17px;cursor:pointer}.mb-theme:hover{background:var(--blue-50);color:var(--blue)}body>.mb-nav{min-height:64px;margin-bottom:28px;padding:13px 38px 14px}header.top{position:relative;overflow:hidden;margin:0 0 28px;padding:30px 32px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--blue-50) 88%,var(--card)),var(--card) 62%,color-mix(in srgb,var(--blue) 8%,var(--card)));box-shadow:var(--shadow)}header.top::after{content:"";position:absolute;width:310px;height:310px;right:-100px;top:-180px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 18%,transparent),transparent 68%);pointer-events:none}header.top>*{position:relative;z-index:1}.wrap>.eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--blue-50);border:1px solid var(--blue-100)}.wrap>.eyebrow+h1{margin-top:12px}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+/* Institutional presentation: information hierarchy over decoration. */
+html.dark{--canvas:#0d0d0c;--card:#171715;--head:#1d1c19;--line:#35332d;--line-strong:#514b3c;--ink:#f4f0e7;--ink-2:#d0c7b8;--muted:#9f9686;--faint:#70695e;--blue:#d7a84e;--blue-ink:#f1ca7a;--blue-50:#272114;--blue-100:#46371d;--green:#72c98c;--green-50:#142419;--green-100:#1c3825;--green-line:#31553a;--red:#ec7d70;--red-50:#321816;--red-100:#51231f;--red-line:#74342c;--amber:#e4b759;--amber-50:#302713;--amber-100:#4b3c1c;--amber-line:#70571f}.dark body{background-color:#0d0d0c;background-image:linear-gradient(rgba(216,168,78,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,168,78,.035) 1px,transparent 1px),radial-gradient(700px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(216,168,78,.12),transparent 66%)}.dark .mb-nav{border-bottom-color:#35332d}.dark .mb-nav b{border-radius:6px;background:#f4f0e7;color:#171715}.dark .mb-theme{border-color:#514b3c}.dark header.top{border-color:#514b3c;background:linear-gradient(135deg,#1b1a17,#151512 68%,#241e14)}.dark .glance>div,.dark .card,.dark figure,.dark .tbl-scroll,.dark .stat,.dark .act,.dark .mrow,.dark .scroll{border-color:#35332d;background:#171715}.dark nav.toc a{border-radius:5px;box-shadow:none}.dark h1,.dark h2,.dark h3{letter-spacing:-.035em}.dark .plate{border-radius:8px}.dark .plate,.dark .plate.open{box-shadow:none}.dark .wrap>.eyebrow{border-radius:4px}.dark td,.dark .prose p,.dark p{color:#d0c7b8}.dark .stamp,.dark .lede{color:#9f9686}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}body>.mb-nav{min-height:58px;padding:10px 16px 11px}h1{font-size:30px}}
+/* Bridges the standing analyses onto the renderer's theme.
+   Every colour is a reference into theme.css so these pages follow a palette
+   swap with the rest. The four literals that were here until 2026-09-26 - two
+   table backgrounds and the tinted gain/loss fills - are why the first dark
+   build had white table heads on the six-month review. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:var(--green-100);
+  --loss:var(--red);--loss-fill:var(--red-100);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:var(--head);border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+</style></head><body><nav class="mb-nav" aria-label="Trading Book"><a href="../../"><b aria-hidden="true">↗</b><span>Trading Book</span></a><button class="mb-theme" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button></nav><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',function(e){document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px')},{passive:true});var b=document.querySelector('.mb-theme');if(!b)return;function s(){var d=document.documentElement.classList.contains('dark');b.textContent=d?'☀':'◐';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')}s();b.addEventListener('click',function(){document.documentElement.classList.toggle('dark');try{localStorage.setItem('trading-book-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}s()})})();</script><main class="wrap">
+<h1>Risk, allocation, and the benchmark that decides the verdict</h1>
+<p class="sub">14 October 2026 &middot; 131 traded positions, 13 April to 13 October, marked to market daily &middot;
+<strong>realised and open, from the live book</strong></p>
+
+<div class="note" style="border-left:3px solid var(--red);padding-left:14px">
+<p><strong>The headline depends entirely on which index you hold it against, and the two answers point
+opposite ways.</strong> Against the Nifty 50 this book returned +9.38% while the index fell 4.70%, for
+an annualised alpha of <strong>+16.19%</strong>. Against the NIFTY Smallcap 100 &mdash; which is where
+41% of the equity exposure actually sat &mdash; the index returned <strong>+16.02%</strong> and the
+book <strong>underperformed it by 6.6 points</strong>, with alpha collapsing to +3.04% and the
+information ratio turning <strong>negative at &minus;0.91</strong>. Both statements describe the same
+six months.</p>
+</div>
+
+<h2>The same book against three benchmarks</h2>
+<table>
+<thead><tr><th class="l">measure</th><th>Nifty 50</th><th>Midcap 150</th><th>Smallcap 100</th></tr></thead>
+<tbody>
+<tr><td class="l">benchmark return</td><td>&minus;4.70%</td><td>+3.08%</td><td><strong>+16.02%</strong></td></tr>
+<tr><td class="l">book return</td><td>+9.38%</td><td>+9.38%</td><td>+9.38%</td></tr>
+<tr><td class="l">beta</td><td>0.257</td><td>0.439</td><td>0.372</td></tr>
+<tr><td class="l">alpha, annualised</td><td><strong>+16.19%</strong></td><td>+11.97%</td><td><strong>+3.04%</strong></td></tr>
+<tr><td class="l">correlation</td><td>0.270</td><td>0.534</td><td>0.511</td></tr>
+<tr><td class="l">r&sup2;</td><td>0.073</td><td>0.285</td><td>0.261</td></tr>
+<tr><td class="l">tracking error</td><td>14.02%</td><td>12.27%</td><td>13.77%</td></tr>
+<tr><td class="l">information ratio</td><td>+1.977</td><td>+0.950</td><td><strong>&minus;0.905</strong></td></tr>
+<tr><td class="l">benchmark volatility</td><td>11.88%</td><td>13.74%</td><td>15.53%</td></tr>
+</tbody>
+</table>
+<p>Everything that does not reference a benchmark is the same in all three columns, because it is a
+property of the book alone: total return <strong>+9.38%</strong>, annualised <strong>19.80%</strong>,
+standard deviation <strong>11.30%</strong>, downside deviation 8.59%, maximum drawdown
+<strong>8.24%</strong>, Sharpe <strong>1.18</strong>, Sortino <strong>1.55</strong>, Calmar 2.40. The
+risk-free rate is 6.50% and is an input, not a measurement; every Sharpe, Sortino and alpha above moves
+with it.</p>
+
+<h2>Why the Smallcap column is the honest one</h2>
+<p>A benchmark is a claim about what the book could have done instead. The Nifty 50 is only the right
+claim if large caps were the alternative, and they were not: nine positions out of 116 were large caps
+and they carried a tenth of the exposure. The allocation says plainly where the money went.</p>
+
+<table>
+<thead><tr><th class="l">tier</th><th>positions</th><th>share of positions</th><th>deployed</th>
+<th>share of exposure</th><th>realised</th><th>win rate</th></tr></thead>
+<tbody>
+<tr><td class="l">large</td><td>9</td><td>7.8%</td><td>&#8377;17.8L</td><td>10.0%</td><td>+11,291</td><td>33.3%</td></tr>
+<tr><td class="l">mid</td><td>19</td><td>16.4%</td><td>&#8377;33.8L</td><td>16.0%</td><td>+72,969</td><td>36.8%</td></tr>
+<tr><td class="l"><strong>small</strong></td><td>38</td><td>32.8%</td><td>&#8377;64.3L</td><td><strong>40.9%</strong></td><td><strong>+367,435</strong></td><td>52.6%</td></tr>
+<tr><td class="l">micro</td><td>20</td><td>17.2%</td><td>&#8377;39.9L</td><td>19.9%</td><td>+180,682</td><td>55.0%</td></tr>
+<tr><td class="l">nano / unlisted</td><td>30</td><td>25.9%</td><td>&#8377;47.6L</td><td>13.2%</td><td><strong>&minus;152,610</strong></td><td><strong>16.7%</strong></td></tr>
+<tr><td class="l">total, equity book</td><td>116</td><td>100%</td><td>&#8377;2.03Cr</td><td>100%</td><td>+479,766</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+<p>Tiers are NSE&rsquo;s own constituent lists &mdash; Nifty 100, Midcap 150, Smallcap 250, Microcap
+250 &mdash; not a threshold invented here. A company in none of them is beyond roughly the 750th by
+market capitalisation and is shown as <em>nano / unlisted</em> rather than guessed at. Membership is
+current while the trades are historical; these lists rebalance twice a year and a name that changed
+tier inside the window is counted in its present tier throughout.</p>
+<p><strong>Small and micro together are 61% of exposure and produced &#8377;5.48L of the
+&#8377;4.80L realised</strong> &mdash; more than all of it, because the nano tier lost money. That is
+why the Smallcap 100 is the benchmark this book has to answer to.</p>
+
+<h2>The book was 11% invested</h2>
+<p>Across all exposure including funds, the equity book was <strong>11.0%</strong> and ETFs were
+<strong>89.0%</strong>, almost entirely idle cash swept into the parking instrument. Fifteen fund
+positions carried &#8377;2.60Cr of deployment and lost &#8377;58,462.</p>
+<p><strong>This is the same fact as the low beta, seen twice.</strong> A book that holds cash most of
+the time cannot move with an index, and cash has a beta of zero. The 0.257 against the Nifty is not a
+hedging achievement; it is a measure of how rarely the gate let anything through. It also means none of
+the three comparisons above is like-for-like in either direction: a book that is 11% invested should
+not be expected to match a fully invested index, and the alpha it does show is earned on a small
+fraction of the capital.</p>
+
+<h2>The tier that lost money</h2>
+<p><em>Nano / unlisted</em> took <strong>26% of all positions</strong> and 13% of exposure, won
+<strong>16.7%</strong> of the time, and lost <strong>&#8377;1.53L</strong>. Every other tier is
+profitable, and small and micro both win more than half the time. It is the clearest tier-level signal
+in the six months, and it is a selection result rather than a market one: these are companies outside
+the largest 750, where the scanner&rsquo;s relative-strength and earnings inputs are thinnest and the
+daily ranges are widest.</p>
+<p>This sits beside a separate observation from the same week: the gate set contains no trend filter at
+all. G1 and G2 cap <em>extension above</em> a moving average to keep stops sizeable, and both pass a
+stock trading below its averages &mdash; the gate text says so in words, &ldquo;BELOW the 10MA, which
+this gate does not refuse&rdquo;. Nothing in the seven gates references the 50-day average.</p>
+
+<h2>What these numbers are not</h2>
+<ul>
+<li><strong>Not a verified statement.</strong> This is the service&rsquo;s own bookkeeping, marked
+against NSE closes. The account&rsquo;s broker statement is the only figure independent of this
+reconstruction.</li>
+<li><strong>The risk-free rate is supplied, not observed.</strong> 6.50% annual. Sharpe, Sortino and
+every alpha are conditional on it.</li>
+<li><strong>r&sup2; is low in all three columns</strong> &mdash; 0.07, 0.29, 0.26. The benchmarks
+explain between 7% and 29% of this book&rsquo;s movement, so alpha and beta are weakly determined and
+should be read as descriptive rather than as a decomposition.</li>
+<li><strong>126 sessions is a small sample.</strong> These are descriptive statistics, not estimates
+with tight intervals.</li>
+<li><strong>Ten position-sessions had no close</strong> and were carried at their previous mark out of
+1,807. Volatility is understated to that extent.</li>
+<li><strong>Cancelled triggers are excluded.</strong> 26 of them, inside the window. They bought
+nothing, so they carry no risk and no return; counting them would dilute every per-trade figure with
+rows that never happened. The commonly quoted 157 includes them.</li>
+</ul>
+
+<h2>Two errors made producing this, and corrected</h2>
+<p>Both are recorded because a number that was wrong and plausible is worth more as a warning than as a
+deleted draft.</p>
+<ul>
+<li><strong>The first equity curve was 43% stale.</strong> The price fetch was passed a count of
+sessions where it wanted calendar days, returning 94 trading days of closes for a 126-session window.
+A curve that does not move cannot correlate with one that does, so beta came out at 0.082 and
+r&sup2; at 0.007 &mdash; artefacts of the construction, and precisely the failure the command was
+written to avoid.</li>
+<li><strong>The first allocation reported &ldquo;unlisted-tier: 90.4% of exposure&rdquo;.</strong> It
+was arithmetically correct and read as the exact opposite of the truth: LIQUIDCASE, NIFTYBEES,
+GOLDBEES and ten other funds are absent from equity constituent lists <em>because they are not
+companies</em>, and the largest is where idle cash is parked by design.</li>
+</ul>
+
+<h2>The number to quote</h2>
+<p>For 13 April to 13 October 2026, over 131 traded positions on a book that was 11% invested:
+<strong>+9.38% returned against &minus;4.70% for the Nifty 50 and +16.02% for the Smallcap 100</strong>,
+at a standard deviation of 11.30%, an 8.24% maximum drawdown and a Sharpe of 1.18. It beat the index it
+does not resemble and lost to the one it does.</p>
+</main></body></html>
