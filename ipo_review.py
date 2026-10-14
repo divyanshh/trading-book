@@ -2494,6 +2494,184 @@ def _for_13() -> list[IPO]:
 IPOS_2026_10_13 = _for_13()
 
 
+LEAD_14 = (
+    "Wednesday 14 October, written at 10:05. "
+    "<strong>Tonbo Imaging&rsquo;s accounts are in, and they are the opposite of what a 69% "
+    "grey-market premium implies.</strong> Revenue fell 22.7% in FY26, profit fell 30%, "
+    "operating cash flow was negative in both FY25 and FY26 <em>while the company reported "
+    "profits</em>, working capital stretched from 152 days to 517, and Q1 FY27 closed with a "
+    "&#8377;17.74 Cr loss. At &#8377;700 that is about <strong>79 times earnings that are "
+    "going backwards</strong>. This page owed these numbers today and they arrive as a "
+    "refusal. "
+    "<strong>HD Fire&rsquo;s first real book is also in</strong>, and it is good: "
+    "<strong>4.62&times; on day one</strong>, with HNI at 11.38&times; and retail at "
+    "3.78&times;. It closes tomorrow. "
+    "<strong>Fusion CX opened today</strong> &mdash; its dates moved from 15&ndash;19 to "
+    "14&ndash;16 October, so the window is live now rather than next week. "
+    "<strong>Held:</strong> nothing in equities."
+)
+
+FOOTNOTE_14 = (
+    "<strong>The two issues on this page are the same structure and opposite businesses, and "
+    "the grey market has them the wrong way round.</strong> Both are 100% offers for sale by "
+    "existing holders; neither company receives a rupee. HD Fire earns 30% on equity and 40% "
+    "on capital, converts its profit into cash, and asks 40.7&times; for 6.4% growth &mdash; "
+    "expensive, which is why this page says sell it on listing rather than hold it. Tonbo "
+    "asks roughly 79&times; for earnings that fell 30%, having burned cash in both of the "
+    "last two years and with a quarter of losses already on the board. The premium on the "
+    "second is more than double the premium on the first. "
+    "<strong>That is what a theme does to a price.</strong> Defence has been the thing to own "
+    "since Goodluck India was named sole supplier of 155&nbsp;mm shells and Zen Technologies "
+    "went after a &#8377;20,000 Cr tender, and Tonbo is the only listed-adjacent way to buy "
+    "it this week. None of that is in the accounts. "
+    "<strong>Four days ago this page wrote that a premium moving 58% in a session is "
+    "information about sentiment and not about the company.</strong> The accounts have now "
+    "confirmed which of the two it was."
+)
+
+
+def _for_14() -> list[IPO]:
+    """Tonbo's accounts arrive and refuse it; HD Fire's book opens strong."""
+    return [
+        IPO(
+            name="Tonbo Imaging India", call="AVOID — 79× for earnings falling 30%",
+            tone="bad",
+            dates="15–19 Oct", band="₹665–700", size="₹852.18 Cr",
+            split="100% OFS — 1,21,74,046 shares. The company receives nothing.",
+            gmp="₹485", gmp_pct=69.3, expected="not a forecast — see note",
+            apply_as="Do not apply.",
+            horizon="No horizon. The accounts refuse it at any holding period.",
+            book="opens 15 Oct",
+            flags=(("revenue −22.7% in FY26", "fail"),
+                   ("PAT −30% in FY26", "fail"),
+                   ("Q1 FY27 a ₹17.74 Cr LOSS", "fail"),
+                   ("negative operating cash flow FY25 AND FY26", "fail"),
+                   ("working capital 152 → 280 → 517 days", "fail"),
+                   ("~79× FY26 earnings", "fail"),
+                   ("78.6% of FY26 revenue in H2", "warn"),
+                   ("gross margin 51.05%", "pass")),
+            stats=(("FY25 revenue", "₹469.08 Cr"), ("FY26 revenue", "₹362.65 Cr"),
+                   ("FY25 PAT", "₹72.76 Cr"), ("FY26 PAT", "₹50.88 Cr"),
+                   ("FY26 EBITDA", "₹104.62 Cr"), ("EBITDA margin", "28.85%"),
+                   ("WC days FY26", "517"), ("Q1 FY27", "−₹17.74 Cr"),
+                   ("diluted EPS FY26", "₹8.88"), ("P/E at ₹700", "~79×"),
+                   ("GMP", "₹485 · 69.3%")),
+            note=(
+                "<strong>This page said on 13 October that no call belonged on Tonbo until "
+                "the revenue, the profit and the multiple were read, and that a 61% premium "
+                "was a reason to hurry that rather than skip it. Here they are, and they are "
+                "bad in every line that matters.</strong> "
+                "Revenue did not slow, it <em>fell</em>: &#8377;469.08 Cr to &#8377;362.65 Cr, "
+                "down 22.7%. Profit fell 30%, from &#8377;72.76 Cr to &#8377;50.88 Cr. "
+                "<strong>Q1 FY27 is already a loss of &#8377;17.74 Cr</strong>, so the "
+                "decline is continuing into the year being sold. "
+                "<strong>The cash tells the sharper story.</strong> Operating cash flow was "
+                "negative in <em>both</em> FY25 and FY26 while the company reported profits "
+                "in both &mdash; profit that does not become cash &mdash; and working-capital "
+                "days went 152, then 280, then 517. A business taking seventeen months to "
+                "convert working capital is financing its customers, and 78.6% of FY26 "
+                "revenue landing in the second half says the order flow is lumpy as well. "
+                "<strong>At &#8377;700 the multiple is about 79 times earnings that are going "
+                "backwards</strong>, for a &#8377;4,010 Cr valuation, in an issue where every "
+                "rupee of the &#8377;852 Cr goes to existing holders and none to the company. "
+                "The grey market is bidding +69%. The accounts and the premium are telling "
+                "opposite stories and only one of them is audited."
+            ),
+        ),
+        IPO(
+            name="HD Fire Protect", call="BOOK IS STRONG — closes tomorrow, call stands",
+            tone="good",
+            dates="13–15 Oct · closes tomorrow · lists 21 Oct",
+            band="₹258–271", size="₹712.31 Cr, entirely OFS",
+            split="100% OFS — 2,62,84,500 shares, both sellers are the promoters",
+            gmp="₹91", gmp_pct=33.6, expected="~+31%",
+            apply_as="Retail — ₹14,905 at 55 shares. One lot.",
+            horizon="Listing-day sell, unchanged.",
+            book="day 1: 4.62× · QIB 1.04× · HNI 11.38× · retail 3.78×",
+            flags=(("day-1 book 4.62× overall", "pass"),
+                   ("HNI 11.38× on day one", "pass"),
+                   ("anchor FULL at the top band, 71.88% domestic MFs", "pass"),
+                   ("RoE 30.17%, RoCE 40.33%", "pass"),
+                   ("40.7× for 6.4% PAT growth", "fail"),
+                   ("100% OFS", "fail"),
+                   ("QIB only 1.04× so far", "warn")),
+            stats=(("subscribed day 1", "4.62×"), ("QIB", "1.04×"),
+                   ("HNI", "11.38×"), ("retail", "3.78×"),
+                   ("anchor", "₹213.11 Cr at ₹271"), ("GMP", "₹91 · 33.6%"),
+                   ("P/E post", "40.7×"), ("closes", "15 Oct")),
+            note=(
+                "<strong>The exchange book is the half that can be verified, and day one came "
+                "in at 4.62&times;.</strong> HNI at 11.38&times; is the number doing the work; "
+                "retail at 3.78&times; on the first day of a three-day window is comfortable. "
+                "QIB at 1.04&times; looks thin but is not: institutions routinely bid on the "
+                "final day, and the anchor book &mdash; &#8377;213.11 Cr placed at the top of "
+                "the band, 71.88% of it with domestic mutual funds &mdash; already showed up. "
+                "<strong>Nothing changes in the call.</strong> It is still 40.7 times for 6.4% "
+                "profit growth, still entirely a promoter exit, and the business underneath "
+                "it is still genuinely good: 30% on equity, 40% on capital, and profit that "
+                "becomes cash &mdash; which, set beside Tonbo on this same page, is worth "
+                "saying out loud. One lot, retail, sold on listing. The window shuts tomorrow."
+            ),
+        ),
+        IPO(
+            name="Fusion CX", call="OPENED TODAY — dates moved forward",
+            tone="warn",
+            dates="14–16 Oct (was 15–19)", band="₹289", size="to confirm",
+            split="to confirm", gmp="₹34", gmp_pct=11.8, expected="~+9%",
+            apply_as="Undecided — accounts not read",
+            horizon="—",
+            book="open now",
+            flags=(("dates moved 15–19 → 14–16 Oct", "warn"),
+                   ("GMP 20 → 34 overnight", "pass"),
+                   ("lowest premium on the board", "warn"),
+                   ("accounts not read", "fail")),
+            stats=(("band", "289"), ("GMP 13 Oct", "₹20 · 6.9%"),
+                   ("GMP today", "₹34 · 11.8%"), ("window", "14–16 Oct")),
+            note=(
+                "<strong>Flagged because the dates moved and this page had it down for next "
+                "week.</strong> It opened this morning, not on the 15th, so the window is "
+                "live now and shuts on Friday. Its premium rose from &#8377;20 to &#8377;34 "
+                "overnight along with everything else on the board, which followed "
+                "yesterday&rsquo;s 1.60% move in the Nifty rather than anything "
+                "company-specific. <strong>No call: the accounts have not been read</strong>, "
+                "and with Tonbo having just demonstrated what a premium can conceal, a number "
+                "going up is not a reason to apply."
+            ),
+        ),
+        IPO(
+            name="Jio Platform", call="FIRMING — anchors Monday",
+            tone="warn",
+            dates="21–23 Oct · anchors 19 Oct · lists 28 Oct",
+            band="₹1,065–1,119", size="~₹30,213 Cr",
+            split="100% fresh, no OFS",
+            gmp="₹218", gmp_pct=19.5, expected="~+17%",
+            apply_as="Retail — 13 shares, ₹14,547",
+            horizon="Decide on the anchor book, 19 October",
+            book="anchors 19 Oct",
+            flags=(("GMP 172 → 182 → 218 over three sessions", "pass"),
+                   ("no OFS — the only one on the board", "pass"),
+                   ("35% retail quota", "pass"),
+                   ("₹27,500 Cr of it repays debt", "warn")),
+            stats=(("band", "₹1,065–1,119"), ("GMP 12 Oct", "₹172 · 15.4%"),
+                   ("GMP 13 Oct", "₹182 · 16.3%"), ("GMP today", "₹218 · 19.5%"),
+                   ("lot", "13 sh · ₹14,547"), ("anchors", "19 Oct")),
+            note=(
+                "Three sessions of a rising premium &mdash; &#8377;172, &#8377;182, "
+                "&#8377;218 &mdash; on a &#8377;30,213 Cr issue, which takes far more money to "
+                "move than any other name here. <strong>It remains the only issue on the "
+                "board raising fresh capital rather than paying an existing holder.</strong> "
+                "That it also spends &#8377;27,500 Cr of the raise repaying borrowings is the "
+                "standing caveat, and a deleveraging earns a lower multiple than a growth "
+                "raise, not a higher one. The anchor book prints Monday 19 October, and on "
+                "the evidence of HD Fire this week that is the number worth waiting for."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_14 = _for_14()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -2514,6 +2692,7 @@ BY_DAY = {
     "2026-10-09": (IPOS_2026_10_09, LEAD_09, FOOTNOTE_09),
     "2026-10-12": (IPOS_2026_10_12, LEAD_12, FOOTNOTE_12),
     "2026-10-13": (IPOS_2026_10_13, LEAD_13, FOOTNOTE_13),
+    "2026-10-14": (IPOS_2026_10_14, LEAD_14, FOOTNOTE_14),
 }
 
 
