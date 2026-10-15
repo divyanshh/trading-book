@@ -2672,6 +2672,204 @@ def _for_14() -> list[IPO]:
 IPOS_2026_10_14 = _for_14()
 
 
+LEAD_15 = (
+    "Thursday 15 October, written at 11:20. "
+    "<strong>Four issues opened this morning, HD Fire closes tonight, and with every "
+    "prospectus now read the grey market has the cluster ranked almost exactly upside "
+    "down.</strong> The highest premium on the board, Tonbo at 71.4%, belongs to the only "
+    "company here whose revenue and profit both <em>fell</em>. The best set of accounts "
+    "&mdash; Bonfiglioli, growing 29%, debt-free, 34% on capital &mdash; carries 30%. The "
+    "loss-making one carries 15%. "
+    "<strong>HD Fire is 16.51&times; subscribed with one session left</strong>, NII at "
+    "48.71&times; and retail at 11.36&times;, which is a strong book and also means retail "
+    "allotment is now roughly a one-in-twelve lottery. "
+    "<strong>Held:</strong> nothing in equities."
+)
+
+FOOTNOTE_15 = (
+    "<strong>Four prospectuses, one pattern.</strong> Ranked by what the accounts say, the "
+    "order is Bonfiglioli, then Sahajanand, then Tonbo and Zetwerk nowhere. Ranked by what "
+    "the grey market will pay, it is Tonbo, then Bonfiglioli, then Zetwerk, then Sahajanand. "
+    "The only name the two orderings agree on is Bonfiglioli, and it is the one with no "
+    "story attached &mdash; an Italian parent selling down a gearbox manufacturer. "
+    "<strong>Tonbo is the live test of this page&rsquo;s judgement and it is going the wrong "
+    "way so far.</strong> The premium was 38.6% when the accounts were still unread, 61% "
+    "when this page said no call belonged on it, 69.3% when the accounts arrived and the "
+    "call became avoid, and 71.4% this morning. Nothing in the filings has changed: revenue "
+    "down 22.7%, profit down 30%, a &#8377;17.74 Cr loss in Q1 FY27, operating cash flow "
+    "negative in both of the last two years while profits were reported, and working capital "
+    "out to 517 days. The call stands on those numbers and will be wrong if it lists well. "
+    "Recording that now, before the print, is the only way the record is worth anything."
+)
+
+
+def _for_15() -> list[IPO]:
+    """Four open, HD Fire closes, and the premiums invert the accounts."""
+    return [
+        IPO(
+            name="HD Fire Protect", call="FINAL DAY — book strong, allotment now a lottery",
+            tone="good",
+            dates="13–15 Oct · CLOSES TODAY · allotment 16 Oct · lists 21 Oct",
+            band="₹258–271", size="₹712.31 Cr, entirely OFS",
+            split="100% OFS — both sellers are the promoters",
+            gmp="₹89", gmp_pct=32.8, expected="~+31%",
+            apply_as="Retail — ₹14,905 at 55 shares. One lot, today.",
+            horizon="Listing-day sell. Unchanged since the anchor book.",
+            book="day 2: 16.51× · QIB 1.49× · NII 48.71× · retail 11.36×",
+            flags=(("16.51× with a session still to run", "pass"),
+                   ("NII 48.71×", "pass"),
+                   ("anchor FULL at the top band, 71.88% domestic MFs", "pass"),
+                   ("RoE 30.17%, RoCE 40.33%", "pass"),
+                   ("retail 11.36× — allotment ~1 in 12", "warn"),
+                   ("QIB only 1.49× going into the last day", "warn"),
+                   ("40.7× for 6.4% PAT growth", "fail")),
+            stats=(("day 1", "4.62×"), ("day 2", "16.51×"),
+                   ("QIB", "1.49×"), ("NII", "48.71×"), ("retail", "11.36×"),
+                   ("anchor", "₹213.11 Cr at ₹271"), ("GMP", "₹89 · 32.8%"),
+                   ("P/E post", "40.7×")),
+            note=(
+                "<strong>The book more than tripled on day two</strong>, 4.62&times; to "
+                "16.51&times;, with NII doing the lifting at 48.71&times;. Retail at "
+                "11.36&times; is the number that changes what applying means: a single lot is "
+                "now roughly a one-in-twelve draw, and it will lengthen again today. That is "
+                "not a reason to skip &mdash; the expected value of a free option on a 33% "
+                "premium is still positive &mdash; but it is a reason not to plan around "
+                "receiving shares. "
+                "<strong>QIB at 1.49&times; with one session left is the only soft spot</strong>, "
+                "and institutions overwhelmingly bid on the final day, so tonight's number is "
+                "the one worth reading. The anchor book already answered the question in "
+                "advance: &#8377;213.11 Cr placed at the top of the band, 71.88% with domestic "
+                "mutual funds. Nothing in the accounts has moved &mdash; 40.7 times for 6.4% "
+                "growth, entirely a promoter exit &mdash; so the call is unchanged. One lot, "
+                "retail, sold on listing."
+            ),
+        ),
+        IPO(
+            name="Bonfiglioli Transmissions", call="THE BEST ACCOUNTS ON THE BOARD",
+            tone="good",
+            dates="15–19 Oct · opened today",
+            band="₹558–586", size="~₹2,534 Cr", split="100% OFS by the Italian parent",
+            gmp="₹178", gmp_pct=30.4, expected="~+26%",
+            apply_as="Retail — 25 shares, ₹14,650. Retail quota 35%.",
+            horizon="Worth a hold case, which nothing else here earns.",
+            book="opened today",
+            flags=(("PAT +29.2% to ₹148.58 Cr", "pass"),
+                   ("revenue +17.9% to ₹1,139.17 Cr", "pass"),
+                   ("DEBT-FREE, no borrowings since CY24", "pass"),
+                   ("ROCE 24.53% → 34.05%", "pass"),
+                   ("H1 FY27 EBITDA ₹223.87 Cr vs ₹176.43 Cr", "pass"),
+                   ("~46.3× at the upper band", "warn"),
+                   ("100% OFS — the parent is selling", "fail")),
+            stats=(("band", "₹558–586"), ("size", "~₹2,534 Cr"),
+                   ("market cap", "~₹11,017 Cr"), ("FY26 revenue", "₹1,139.17 Cr"),
+                   ("FY26 PAT", "₹148.58 Cr"), ("PAT growth", "+29.2%"),
+                   ("ROCE", "34.05%"), ("P/E upper", "~46.3×"),
+                   ("GMP", "₹178 · 30.4%"), ("lot", "25 sh · ₹14,650")),
+            note=(
+                "<strong>Set beside the other three, this is the only one that reads like a "
+                "business rather than a theme.</strong> Profit up 29.2%, revenue up 17.9%, "
+                "<em>no borrowings at all since CY24</em>, and return on capital employed that "
+                "went from 24.53% to 34.05% &mdash; a company earning more on less. H1 FY27 "
+                "EBITDA is already &#8377;223.87 Cr against &#8377;176.43 Cr a year earlier, so "
+                "the growth is continuing into the year being sold, which is precisely what "
+                "Tonbo cannot say. "
+                "<strong>It is not cheap and it is still a full exit.</strong> 46.3 times at "
+                "the top is a growth multiple, not a bargain, and every rupee of the "
+                "&#8377;2,534 Cr goes to Bonfiglioli S.p.A. rather than into the company. "
+                "A parent selling a profitable subsidiary at 46&times; is doing something "
+                "rational for itself. "
+                "But a 29% grower with no debt and 34% on capital is the only name on this "
+                "board where holding past the listing is an argument rather than a hope, and "
+                "it is carrying less than half Tonbo&rsquo;s premium."
+            ),
+        ),
+        IPO(
+            name="Tonbo Imaging India", call="AVOID — the premium is rising, the accounts are not",
+            tone="bad",
+            dates="15–19 Oct · opened today", band="₹665–700", size="₹852.18 Cr",
+            split="100% OFS — the company receives nothing",
+            gmp="₹500", gmp_pct=71.4, expected="~+61% implied",
+            apply_as="Do not apply.",
+            horizon="None.",
+            book="opened today",
+            flags=(("revenue −22.7% in FY26", "fail"),
+                   ("PAT −30% in FY26", "fail"),
+                   ("Q1 FY27 a ₹17.74 Cr LOSS", "fail"),
+                   ("negative operating cash flow FY25 AND FY26", "fail"),
+                   ("working capital 152 → 280 → 517 days", "fail"),
+                   ("~79× earnings that are falling", "fail"),
+                   ("highest premium on the board", "warn")),
+            stats=(("GMP 12 Oct", "38.6%"), ("GMP 13 Oct", "61.0%"),
+                   ("GMP 14 Oct", "69.3%"), ("GMP today", "71.4%"),
+                   ("FY26 revenue", "₹362.65 Cr (−22.7%)"),
+                   ("FY26 PAT", "₹50.88 Cr (−30%)"),
+                   ("Q1 FY27", "−₹17.74 Cr"), ("WC days", "517"),
+                   ("P/E at ₹700", "~79×")),
+            note=(
+                "<strong>The premium has gone 38.6%, 61%, 69.3%, 71.4% across four sessions "
+                "and not one line of the accounts has changed in that time.</strong> Revenue "
+                "fell 22.7%. Profit fell 30%. The first quarter of the year being sold is "
+                "already a &#8377;17.74 Cr loss. Operating cash flow was negative in both FY25 "
+                "and FY26 while the company reported profits in both, and working capital "
+                "stretched from 152 days to 517 &mdash; seventeen months to turn stock and "
+                "receivables back into cash. "
+                "<strong>What is being bought is the word defence</strong>, in the week "
+                "Goodluck India was named sole supplier of 155&nbsp;mm shells and Zen "
+                "Technologies went after a &#8377;20,000 Cr tender. Nothing in the filings "
+                "participates in that. At &#8377;700 the multiple is roughly 79 times earnings "
+                "that are going backwards, for a &#8377;4,010 Cr valuation, in an issue where "
+                "every rupee of the &#8377;852 Cr goes to existing holders. "
+                "<strong>This call will be wrong if it lists at +60%, and it is recorded "
+                "before the print rather than after.</strong>"
+            ),
+        ),
+        IPO(
+            name="Zetwerk & Sahajanand", call="ZETWERK LOSS-MAKING · SAHAJANAND EXPENSIVE BUT IMPROVING",
+            tone="warn",
+            dates="15–19 Oct · both opened today",
+            band="Zetwerk ₹151 · Sahajanand ₹344",
+            size="Zetwerk ~₹5,000 Cr · Sahajanand to confirm",
+            split="Zetwerk ₹2,600 Cr fresh + 9.68 Cr OFS · Sahajanand OFS",
+            gmp="₹23 / ₹42", gmp_pct=15.2, expected="~+13% / +12%",
+            apply_as="Zetwerk: no. Sahajanand: thin edge at best.",
+            horizon="Neither earns a hold.",
+            book="opened today",
+            flags=(("Zetwerk FY26 LOSS of ₹1,606.17 Cr", "fail"),
+                   ("Zetwerk is the only fresh capital on the board", "pass"),
+                   ("Zetwerk order book ₹13,062 Cr, 1.39× revenue", "pass"),
+                   ("Sahajanand PAT ₹25.15 Cr → ₹69.08 Cr", "pass"),
+                   ("Sahajanand ~53× FY26 diluted", "warn"),
+                   ("Sahajanand 73.87% of revenue from outside India", "warn")),
+            stats=(("Zetwerk FY26 income", "₹16,100.63 Cr"),
+                   ("Zetwerk FY26 result", "−₹1,606.17 Cr"),
+                   ("Zetwerk order book", "₹13,062.40 Cr"),
+                   ("Zetwerk mfg EBITDA margin", "6.56% Q1FY27 vs 4.83%"),
+                   ("Sahajanand FY26 revenue", "₹1,210.50 Cr (+18.11%)"),
+                   ("Sahajanand FY26 PAT", "₹69.08 Cr (was ₹25.15 Cr)"),
+                   ("Sahajanand P/E", "~53×")),
+            note=(
+                "<strong>Zetwerk is the only issue on this board raising real money and the "
+                "only one losing it.</strong> &#8377;16,100.63 Cr of income for a loss of "
+                "&#8377;1,606.17 Cr &mdash; a tenth of revenue, burned. The order book at "
+                "&#8377;13,062 Cr is genuine and manufacturing EBITDA margin improved to 6.56% "
+                "from 4.83%, so the direction is right; the distance is enormous. A business "
+                "that must triple its margin to break even is not a listing-day trade and is "
+                "not yet an investment. The grey market agrees for once, at 15.2%. "
+                "<strong>Sahajanand is the more interesting of the two.</strong> Revenue up "
+                "18.11% to &#8377;1,210.50 Cr and profit from &#8377;25.15 Cr to "
+                "&#8377;69.08 Cr &mdash; nearly tripled. Cardiac implants sold into 77 "
+                "countries, with 73.87% of revenue earned outside India, which is both the "
+                "strength and the currency risk. At roughly 53 times it is priced for that "
+                "tripling to continue. The 12.2% premium is the lowest on the board, which is "
+                "the market saying it does not believe it will."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_15 = _for_15()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -2693,6 +2891,7 @@ BY_DAY = {
     "2026-10-12": (IPOS_2026_10_12, LEAD_12, FOOTNOTE_12),
     "2026-10-13": (IPOS_2026_10_13, LEAD_13, FOOTNOTE_13),
     "2026-10-14": (IPOS_2026_10_14, LEAD_14, FOOTNOTE_14),
+    "2026-10-15": (IPOS_2026_10_15, LEAD_15, FOOTNOTE_15),
 }
 
 
