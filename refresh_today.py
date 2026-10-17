@@ -98,17 +98,21 @@ def refresh(day: str) -> int:
         print(f"refresh {day}: {len(page)} bytes is a stub; left as is")
         return 0
 
-    before = target.read_text(encoding="utf-8") if target.exists() else ""
-    if before == page:
-        print(f"refresh {day}: already current ({len(page):,} bytes)")
-        return 0
-
+    # **No staleness check, deliberately.** The obvious one -- compare the
+    # fetched report with the published file and skip when equal -- cannot
+    # work here: the published page is the report *plus* the spliced review, so
+    # the two are never equal on exactly the days this runs for, and the check
+    # would announce a rescue on every run. A line that cries wolf every time
+    # is worse than no line, because the one run that mattered looks identical.
+    #
+    # So it simply re-fetches, every time, and says what it did. The work is
+    # idempotent: the splice puts the review back, mirror.py rewrites the same
+    # bytes, and the commit step skips when nothing actually changed.
+    before = len(target.read_text(encoding="utf-8")) if target.exists() else 0
     target.write_text(page, encoding="utf-8")
-    # Said loudly: this line is the evidence that an override had gone stale,
-    # and the sizes say by how much.
     print(
-        f"refresh {day}: REPLACED a stale published copy — "
-        f"{len(before):,} bytes on disk, {len(page):,} bytes from the service"
+        f"refresh {day}: re-fetched {len(page):,} bytes from the service "
+        f"over a published copy of {before:,}; the splice rebuilds the review"
     )
     return 0
 
