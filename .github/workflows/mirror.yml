@@ -42,6 +42,29 @@ jobs:
       # stocks/reports, and one of those was published AS a report on 1 October.
       # And the whole step is best-effort -- a failed splice must not lose the
       # mirror that already succeeded.
+      # **An override is the source of its own replacement, and that is a bug.**
+      # mirror.py fetches a report only when the file is missing, then copies
+      # every override over the published copy unconditionally. The splice
+      # below then rebuilds the day's override FROM the published copy. So once
+      # an override exists, the service can rebuild that report all it likes and
+      # the site keeps serving the version the override was first cut from --
+      # through `--refresh` too, which re-fetches and is then overwritten a few
+      # lines later inside mirror.py.
+      #
+      # On 2026-10-16 that swallowed three separate rebuilds, and each one was
+      # only noticed because someone looked at the page.
+      #
+      # refresh_today.py re-fetches the day's report over the published copy,
+      # AFTER the mirror has applied the old override and BEFORE the splice
+      # cuts a new one. Order is the whole of it: run before the mirror and the
+      # override pass simply overwrites the fresh copy again.
+      #
+      # It refuses any day ipo_review.py cannot rebuild, because the service's
+      # copy is the report alone and the published page is report-plus-review.
+      - name: re-fetch today so a stale override cannot serve itself
+        continue-on-error: true
+        run: python3 refresh_today.py
+
       - name: splice the hand-written IPO review
         continue-on-error: true
         run: |
