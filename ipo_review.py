@@ -3179,8 +3179,10 @@ IPOS_2026_10_16 = _for_16()
 
 
 LEAD_19 = (
-    "Monday 19 October, written Saturday evening on the board as it stood at the close "
-    "of Friday. "
+    "Monday 19 October, written Saturday evening and <strong>refreshed at 11:00 Monday "
+    "with live grey-market quotes</strong>. The subscription columns are still Friday's "
+    "close &mdash; the exchange only aggregates today's bids this evening, and today is "
+    "the last session for four of these. "
     "<strong>Four issues close tonight and the inversion this page has tracked all week "
     "got wider, not narrower.</strong> Tonbo &mdash; revenue down 22.7%, profit down 30%, "
     "a &#8377;17.74 Cr loss in Q1 &mdash; is now <strong>7.78&times; subscribed</strong> "
@@ -3264,7 +3266,7 @@ def _for_19() -> list[IPO]:
             dates="15\u201319 Oct \u00b7 CLOSES TODAY", band="\u20b9665\u2013700",
             size="\u20b9852.18 Cr",
             split="100% OFS \u2014 the company receives nothing",
-            gmp="\u20b9516", gmp_pct=73.7, expected="~+71% implied",
+            gmp="\u20b9520", gmp_pct=74.3, expected="~+72% implied",
             apply_as="Do not apply.",
             horizon="None.",
             book="day 3 \u00b7 7.78\u00d7 \u00b7 QIB 3.95\u00d7 \u00b7 NII 14.35\u00d7 \u00b7 retail 7.13\u00d7",
@@ -3278,7 +3280,7 @@ def _for_19() -> list[IPO]:
                    ("working capital 152 \u2192 280 \u2192 517 days", "fail"),
                    ("~79\u00d7 earnings that are falling", "fail")),
             stats=(("GMP 12 Oct", "38.6%"), ("GMP 15 Oct", "71.4%"),
-                   ("GMP today", "73.7%"),
+                   ("GMP today", "74.3%"),
                    ("day 2 book", "4\u00d7"), ("day 3 book", "7.78\u00d7"),
                    ("QIB", "3.95\u00d7"), ("NII", "14.35\u00d7"),
                    ("FY26 revenue", "\u20b9362.65 Cr (\u221222.7%)"),
@@ -3333,18 +3335,18 @@ def _for_19() -> list[IPO]:
             dates="15\u201319 Oct \u00b7 CLOSES TODAY", band="\u20b9151",
             size="~\u20b95,000 Cr",
             split="\u20b92,600 Cr fresh + 9.68 Cr OFS",
-            gmp="\u20b97", gmp_pct=4.6, expected="~+2%",
+            gmp="\u20b95", gmp_pct=3.3, expected="~+1%",
             apply_as="Do not apply.",
             horizon="None.",
             book="no exchange book matched",
-            flags=(("GMP 15.2% \u2192 9.9% \u2192 4.6% in four sessions", "fail"),
-                   ("~+2% after the measured overstatement", "fail"),
+            flags=(("GMP 15.2% \u2192 9.9% \u2192 4.6% \u2192 3.3%", "fail"),
+                   ("under +1% after the measured overstatement", "fail"),
                    ("FY26 LOSS of \u20b91,606.17 Cr", "fail"),
                    ("the only issue raising real money", "pass"),
                    ("order book \u20b913,062 Cr, 1.39\u00d7 revenue", "pass"),
                    ("no exchange book \u2014 demand unverified", "warn")),
             stats=(("GMP 15 Oct", "15.2%"), ("GMP 16 Oct", "9.9%"),
-                   ("GMP today", "4.6%"),
+                   ("GMP today", "3.3%"),
                    ("FY26 income", "\u20b916,100.63 Cr"),
                    ("FY26 result", "\u2212\u20b91,606.17 Cr"),
                    ("order book", "\u20b913,062.40 Cr")),
@@ -3365,20 +3367,20 @@ def _for_19() -> list[IPO]:
             tone="warn",
             dates="15\u201319 Oct \u00b7 CLOSES TODAY", band="\u20b9344",
             size="OFS", split="OFS",
-            gmp="\u20b935", gmp_pct=10.2, expected="~+8%",
+            gmp="\u20b925", gmp_pct=7.3, expected="~+5%",
             apply_as="Thin edge at best.",
             horizon="Does not earn a hold.",
             book="no exchange book matched",
             flags=(("PAT \u20b925.15 Cr \u2192 \u20b969.08 Cr", "pass"),
                    ("revenue +18.11% to \u20b91,210.50 Cr", "pass"),
-                   ("GMP 13.1% \u2192 10.2%", "warn"),
+                   ("GMP 13.1% \u2192 10.2% \u2192 7.3%", "warn"),
                    ("~53\u00d7 FY26 diluted", "warn"),
                    ("73.87% of revenue earned outside India", "warn"),
                    ("no exchange book \u2014 demand unverified", "warn")),
             stats=(("FY26 revenue", "\u20b91,210.50 Cr (+18.11%)"),
                    ("FY26 PAT", "\u20b969.08 Cr (was \u20b925.15 Cr)"),
                    ("P/E", "~53\u00d7"), ("GMP 16 Oct", "13.1%"),
-                   ("GMP today", "10.2%")),
+                   ("GMP today", "7.3%")),
             note=(
                 "<strong>The better business of the two closing quietly tonight, and the "
                 "market is not paying for it.</strong> Profit from &#8377;25.15 Cr to "
@@ -3397,17 +3399,17 @@ def _for_19() -> list[IPO]:
             dates="21\u201323 Oct \u00b7 lists 28 Oct",
             band="\u20b91,065\u20131,119", size="~\u20b930,000 Cr (27 Cr fresh shares)",
             split="Fresh issue",
-            gmp="\u20b9225", gmp_pct=20.1, expected="~+18%",
+            gmp="\u20b9250", gmp_pct=22.3, expected="~+20%",
             apply_as="Retail \u2014 12 shares, \u20b913,428 at the top band.",
             horizon="Decide by Tuesday night.",
             book="opens 21 Oct",
             flags=(("the largest IPO this market has listed", "warn"),
                    ("fresh issue \u2014 the money goes into the company", "pass"),
-                   ("GMP steady at ~20% for a week", "pass"),
+                   ("GMP firming, 20.6% \u2192 20.1% \u2192 22.3%", "pass"),
                    ("size alone makes a large pop unlikely", "warn")),
             stats=(("band", "\u20b91,065\u20131,119"), ("size", "~\u20b930,000 Cr"),
                    ("lot", "12 sh \u00b7 \u20b913,428"),
-                   ("GMP 16 Oct", "20.6%"), ("GMP today", "20.1%"),
+                   ("GMP 16 Oct", "20.6%"), ("GMP today", "22.3%"),
                    ("opens", "21 Oct"), ("lists", "28 Oct")),
             note=(
                 "<strong>Still no call, and the prospectus gets read before there is "
