@@ -3456,6 +3456,193 @@ def _for_19() -> list[IPO]:
 IPOS_2026_10_19 = _for_19()
 
 
+LEAD_21 = (
+    "Wednesday 21 October, written at 10:15. "
+    "<strong>Jio opens today at &#8377;30,213 Cr, the largest issue this market has ever "
+    "run, and its premium is the only one that has risen every session this week</strong> "
+    "&mdash; 20.6%, 20.1%, 22.3%, now 25.0%. "
+    "<strong>The detail that decides how to read it: &#8377;27,500 Cr of the proceeds go to "
+    "repaying debt.</strong> It is a fresh issue, so the money does reach the company, but "
+    "nine rupees in ten are deleveraging rather than expansion. "
+    "<strong>Paras opened beside it and the market marked it down on the day</strong>, "
+    "13.7% to 7.2%. "
+    "<strong>HD Fire lists today</strong> on a final book of QIB 256.65&times;. The four "
+    "that closed Monday price their books tonight. "
+    "<strong>Held:</strong> nothing in equities; breadth has collapsed to 22.38% against a "
+    "33.93% mean and the gate is shut by a wide margin."
+)
+
+FOOTNOTE_21 = (
+    "<strong>Two scorecards, one settled and one still open.</strong> HD Fire is the settled "
+    "one and it went as written: this page called QIB 1.49&times; the only soft spot on 15 "
+    "October, said institutions bid last, recorded on the 16th that the worry had been "
+    "wrong when the book closed at 256.65&times;, and the plan has been sell-on-listing "
+    "throughout. Today is the listing. "
+    "<strong>The open one is Bonfiglioli against Tonbo, and tonight&rsquo;s final books "
+    "settle the first half of it.</strong> On Saturday this page staked the Bonfiglioli "
+    "read on a falsifiable claim &mdash; that QIB at 0.16&times; on a Friday was not a "
+    "verdict, because HD Fire had gone 1.49&times; to 256.65&times; on its own final "
+    "session. If Bonfiglioli closed near 1&times; with institutions still absent, that "
+    "claim was wrong and the weak book was about the company rather than about Jio draining "
+    "the room. Tonbo&rsquo;s avoid, made on 13 October at a 61% premium and restated three "
+    "times since at 71.4%, 73.7% and 74.3%, settles on its listing. "
+    "<strong>Neither is being revised now that the result is close.</strong>"
+)
+
+
+def _for_21() -> list[IPO]:
+    """Jio and Paras open, HD Fire lists, Monday's four price tonight."""
+    return [
+        IPO(
+            name="Jio Platforms", call="APPLY \u2014 one lot, retail, sell on listing",
+            tone="good",
+            dates="21\u201323 Oct \u00b7 OPENS TODAY \u00b7 allotment 26 Oct \u00b7 lists 28 Oct",
+            band="\u20b91,065\u20131,119", size="\u20b930,213 Cr \u2014 the largest ever here",
+            split="100% FRESH ISSUE, 27 Cr shares, no OFS",
+            gmp="\u20b9280", gmp_pct=25.0, expected="~+22%",
+            apply_as="Retail \u2014 12 shares, \u20b913,428 at the top band. One lot.",
+            horizon="Listing-day sell on 28 October.",
+            book="opens today \u00b7 anchors bid 19 Oct",
+            flags=(("100% fresh issue \u2014 nobody is cashing out", "pass"),
+                   ("the only premium that rose every session this week", "pass"),
+                   ("20.6% \u2192 20.1% \u2192 22.3% \u2192 25.0%", "pass"),
+                   ("retail quota on \u20b930,213 Cr is large in absolute terms", "pass"),
+                   ("\u20b927,500 Cr of proceeds repays DEBT, not growth", "warn"),
+                   ("size makes a violent listing pop unlikely", "warn")),
+            stats=(("band", "\u20b91,065\u20131,119"), ("size", "\u20b930,213 Cr"),
+                   ("fresh shares", "27 Cr"), ("lot", "12 sh \u00b7 \u20b913,428"),
+                   ("for debt repayment", "\u20b927,500 Cr"),
+                   ("GMP 16 Oct", "20.6%"), ("GMP 19 Oct", "22.3%"),
+                   ("GMP today", "25.0%"), ("lists", "28 Oct")),
+            note=(
+                "<strong>The call this page owed before the open, and it is apply.</strong> "
+                "Three things carry it. It is <em>entirely</em> fresh capital &mdash; alone "
+                "on this month&rsquo;s board in that, where Bonfiglioli, Tonbo and HD Fire "
+                "were all full or partial exits and the money left the company. The premium "
+                "has risen every single session for a week while every other issue on the "
+                "board except Tonbo was marked down, which is the one direction that matters "
+                "going into an open. And the retail quota of a &#8377;30,213 Cr issue is "
+                "enormous in absolute terms, so allotment is a better bet here than on a "
+                "small hot issue &mdash; the inverse of HD Fire&rsquo;s one-in-thirty. "
+                "<strong>The caveat is what the money does, and it is not small.</strong> "
+                "&#8377;27,500 Cr of the &#8377;30,213 Cr repays debt. That is real and it "
+                "is good for the company &mdash; interest cost comes down, the balance sheet "
+                "improves &mdash; but anyone buying this as a growth issue should know that "
+                "nine rupees in ten are retiring borrowings rather than building anything. "
+                "<strong>And size cuts the upside.</strong> An issue this large is hard to "
+                "squeeze, so the listing is likely to be more orderly than a 25% premium "
+                "implies; ~+22% after the overstatement this page applies is the expectation, "
+                "not a floor. One lot, retail, sold into the listing on 28 October. "
+                "<strong>No hold case is being made</strong> &mdash; that needs the "
+                "prospectus financials read properly, and this is a call about an "
+                "application closing Friday."
+            ),
+        ),
+        IPO(
+            name="Paras Healthcare", call="SKIP \u2014 marked down on its own opening day",
+            tone="bad",
+            dates="21\u201323 Oct \u00b7 OPENS TODAY",
+            band="up to \u20b9693", size="\u20b91,800 Cr",
+            split="\u20b9500 Cr fresh + \u20b91,300 Cr OFS",
+            gmp="\u20b950", gmp_pct=7.2, expected="~+5%",
+            apply_as="Do not apply.",
+            horizon="None.",
+            book="opens today",
+            flags=(("GMP 14.4% \u2192 13.7% \u2192 7.2% \u2014 halved on the open", "fail"),
+                   ("~+5% after the measured overstatement", "fail"),
+                   ("\u20b91,300 Cr of \u20b91,800 Cr is a seller exiting", "fail"),
+                   ("opens against a \u20b930,213 Cr issue", "fail"),
+                   ("\u20b9500 Cr is fresh capital", "pass")),
+            stats=(("band", "up to \u20b9693"), ("size", "\u20b91,800 Cr"),
+                   ("OFS share", "72%"),
+                   ("GMP 16 Oct", "14.4%"), ("GMP 19 Oct", "13.7%"),
+                   ("GMP today", "7.2%")),
+            note=(
+                "<strong>The premium halved on the morning it opened</strong>, 13.7% to 7.2%, "
+                "which after the 2.6-point overstatement leaves about five per cent. A grey "
+                "market that marks an issue down <em>as it opens</em> is saying something "
+                "about the book it expects. "
+                "<strong>Seventy-two per cent of the raise is a shareholder leaving.</strong> "
+                "&#8377;1,300 Cr of &#8377;1,800 Cr goes to the selling holder and "
+                "&#8377;500 Cr to the company. Set against the issue opening the same "
+                "morning &mdash; wholly fresh capital, premium rising &mdash; this is the "
+                "worse of the two in every respect that can be checked before a book exists. "
+                "<strong>Skip.</strong> The prospectus work this page promised is moot: the "
+                "market answered first and the structure was never attractive."
+            ),
+        ),
+        IPO(
+            name="HD Fire Protect", call="LISTS TODAY \u2014 sell into it",
+            tone="good",
+            dates="13\u201315 Oct \u00b7 LISTING TODAY, 21 Oct",
+            band="\u20b9258\u2013271", size="\u20b9712.31 Cr, entirely OFS",
+            split="100% OFS \u2014 both sellers are the promoters",
+            gmp="\u20b985", gmp_pct=31.4, expected="~+29%",
+            apply_as="Allotted or not \u2014 nothing further to apply for.",
+            horizon="Sell on the listing. Unchanged since 15 October.",
+            book="FINAL \u00b7 QIB 256.65\u00d7 \u00b7 NII 203.21\u00d7 \u00b7 retail 30.49\u00d7",
+            flags=(("QIB closed at 256.65\u00d7", "pass"),
+                   ("anchor FULL at the top band, 71.88% domestic MFs", "pass"),
+                   ("RoE 30.17%, RoCE 40.33%", "pass"),
+                   ("retail 30.49\u00d7 \u2014 most applicants hold nothing", "warn"),
+                   ("40.7\u00d7 for 6.4% PAT growth", "fail")),
+            stats=(("QIB", "256.65\u00d7"), ("NII", "203.21\u00d7"),
+                   ("retail", "30.49\u00d7"), ("GMP", "\u20b985 \u00b7 31.4%"),
+                   ("P/E post", "40.7\u00d7"), ("lists", "today")),
+            note=(
+                "<strong>The one call on this month&rsquo;s board that has gone exactly as "
+                "written, start to finish.</strong> Apply one lot, retail, sell on listing "
+                "&mdash; said on 15 October and unchanged through a day-2 QIB scare this "
+                "page called wrong in public on the 16th, before the final book settled it at "
+                "256.65&times;. "
+                "Nothing in the accounts moved: 40.7 times for 6.4% profit growth, every "
+                "rupee of &#8377;712.31 Cr to the promoters. The premium implies about +29%. "
+                "<strong>Sell into the listing.</strong> And note what the book means for "
+                "most people reading this: retail at 30.49&times; made it roughly a "
+                "one-in-thirty draw, so the likeliest position today is no position at all."
+            ),
+        ),
+        IPO(
+            name="Bonfiglioli, Tonbo, Zetwerk, Sahajanand", call="CLOSED MONDAY \u2014 final books price tonight",
+            tone="warn",
+            dates="15\u201319 Oct \u00b7 all four closed",
+            band="see each", size="\u20b92,534 / \u20b9852 / ~\u20b95,000 / OFS Cr",
+            split="three exits, one fresh (Zetwerk)",
+            gmp="last seen 22.2 / 74.3 / 3.3 / 7.3%", gmp_pct=74.3,
+            expected="settles on listing",
+            apply_as="Closed. Nothing to do.",
+            horizon="Tonbo's avoid and Bonfiglioli's apply both settle here.",
+            book="final figures not yet published",
+            flags=(("Bonfiglioli last seen 0.99\u00d7, QIB 0.16\u00d7", "warn"),
+                   ("Tonbo last seen 7.78\u00d7, QIB 3.95\u00d7", "warn"),
+                   ("Zetwerk GMP fell 15.2% \u2192 3.3%", "fail"),
+                   ("Sahajanand GMP fell 13.1% \u2192 7.3%", "fail"),
+                   ("final books not yet in the public record", "warn")),
+            stats=(("Bonfiglioli day 2", "0.99\u00d7"), ("its QIB", "0.16\u00d7"),
+                   ("Tonbo day 2", "7.78\u00d7"), ("its QIB", "3.95\u00d7"),
+                   ("Zetwerk GMP", "3.3%"), ("Sahajanand GMP", "7.3%")),
+            note=(
+                "<strong>All four closed Monday and the closing books are not in the public "
+                "record yet.</strong> This entry exists so the page does not quietly skip the "
+                "session its own calls turn on. "
+                "<strong>What is being waited for, precisely.</strong> Bonfiglioli&rsquo;s "
+                "final QIB: this page argued on Saturday that 0.16&times; on a Friday was not "
+                "a verdict, because HD Fire had gone from 1.49&times; to 256.65&times; on its "
+                "own last session. If Bonfiglioli closed near 1&times; with institutions still "
+                "away, that argument was wrong and the empty book was about the company, not "
+                "about Jio taking the room. And Tonbo&rsquo;s listing, which settles an avoid "
+                "made at a 61% premium and restated at 71.4%, 73.7% and 74.3% without "
+                "revision. "
+                "<strong>Both are written down before the answer arrives, which is the only "
+                "arrangement under which either is worth anything.</strong>"
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_21 = _for_21()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -3480,6 +3667,7 @@ BY_DAY = {
     "2026-10-15": (IPOS_2026_10_15, LEAD_15, FOOTNOTE_15),
     "2026-10-16": (IPOS_2026_10_16, LEAD_16, FOOTNOTE_16),
     "2026-10-19": (IPOS_2026_10_19, LEAD_19, FOOTNOTE_19),
+    "2026-10-21": (IPOS_2026_10_21, LEAD_21, FOOTNOTE_21),
 }
 
 
