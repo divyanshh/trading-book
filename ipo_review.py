@@ -3643,6 +3643,193 @@ def _for_21() -> list[IPO]:
 IPOS_2026_10_21 = _for_21()
 
 
+LEAD_22 = (
+    "Thursday 22 October, written at 09:30. "
+    "<strong>Both calls this page staked last weekend have answers, and they split.</strong> "
+    "HD Fire listed at &#8377;335 against a &#8377;271 issue price, <strong>+23.62%</strong>, "
+    "on a final book of 131.70&times;. The call was apply one lot and sell into the listing, "
+    "made on 15 October and never changed. "
+    "<strong>Bonfiglioli closed at 46.04&times; with QIB at 120.78&times;</strong> &mdash; "
+    "from 0.16&times; with one session to run. The argument that Friday&rsquo;s empty book "
+    "was not a verdict because institutions bid last was right, and the margin was not "
+    "close. "
+    "<strong>One sub-claim inside it was wrong and is corrected below.</strong> "
+    "Tonbo closed at 135.90&times;, QIB 293.56&times;, and lists tomorrow &mdash; the avoid "
+    "settles then, and it is not going to settle well. "
+    "<strong>Held:</strong> nothing. The regime read bear this morning, breadth 12.05% "
+    "against a 31.66% mean, 322 stocks at 52-week lows."
+)
+
+FOOTNOTE_22 = (
+    "<strong>What the two results actually teach, separately from whether they felt "
+    "good.</strong> "
+    "<strong>One: the GMP model overstated by three times its historical margin.</strong> "
+    "This page applies a 2.6-point haircut to every grey-market premium, measured over 295 "
+    "listings. HD Fire quoted 31.4% and listed at 23.62% &mdash; an overstatement of 7.8 "
+    "points. The call was still right and the direction was still right, but anyone sizing "
+    "on &ldquo;~+29%&rdquo; got three quarters of it. One listing is not a reason to change "
+    "the haircut; it is a reason to write the miss down and watch whether it repeats, "
+    "because a model that is wrong in the same direction twice is a model with a bias "
+    "rather than noise. "
+    "<strong>Two: a weak book on day two says almost nothing.</strong> Bonfiglioli went "
+    "0.16&times; to 120.78&times; on QIB in one session, which is the second time this month "
+    "the same pattern printed &mdash; HD Fire went 1.49&times; to 256.65&times;. Two for two "
+    "is not proof, but it is now the base case here, and a page that reads Friday&rsquo;s "
+    "institutional number as a verdict will keep being wrong in the same direction. "
+    "<strong>And the correction.</strong> The 19 October entry said retail allotment was "
+    "&ldquo;near-certain&rdquo; because retail sat at 1.16&times;. It closed at 5.89&times;. "
+    "That is roughly one lot in six, not a near-certainty, and the error was treating a "
+    "day-two retail figure as settled while arguing in the very same entry that a day-two "
+    "QIB figure was not. The argument was right; it simply was not applied to both columns."
+)
+
+
+def _for_22() -> list[IPO]:
+    """HD Fire listed, Bonfiglioli's book settled the argument, Tonbo lists tomorrow."""
+    return [
+        IPO(
+            name="HD Fire Protect", call="LISTED +23.62% \u2014 the call went as written",
+            tone="good",
+            dates="13\u201315 Oct \u00b7 LISTED 21 Oct at \u20b9335",
+            band="\u20b9258\u2013271", size="\u20b9712.31 Cr, entirely OFS",
+            split="100% OFS \u2014 both sellers are the promoters",
+            gmp="was \u20b985", gmp_pct=31.4, expected="predicted ~+29%, got +23.62%",
+            apply_as="Done. Sold into the listing.",
+            horizon="Closed.",
+            book="FINAL 131.70\u00d7 \u00b7 QIB 256.65\u00d7 \u00b7 NII 203.21\u00d7 \u00b7 retail 30.49\u00d7",
+            flags=(("listed \u20b9335 vs \u20b9271 \u2014 +23.62%", "pass"),
+                   ("call unchanged from 15 Oct", "pass"),
+                   ("the day-2 QIB worry was called wrong in public, and was", "pass"),
+                   ("GMP implied ~+29%, actual +23.62%", "warn"),
+                   ("retail 30.49\u00d7 \u2014 most applicants held nothing", "warn")),
+            stats=(("issue price", "\u20b9271"), ("listed at", "\u20b9335"),
+                   ("gain", "+23.62%"), ("predicted", "~+29%"),
+                   ("miss", "5.4 points"),
+                   ("final book", "131.70\u00d7"), ("QIB", "256.65\u00d7"),
+                   ("retail", "30.49\u00d7")),
+            note=(
+                "<strong>Listed at &#8377;335 on the NSE against a &#8377;271 issue price, a "
+                "premium of 23.62%.</strong> One lot of 55 shares went from &#8377;14,905 to "
+                "&#8377;18,425. The call was made on 15 October &mdash; apply one lot retail, "
+                "sell into the listing &mdash; and was never revised, including through a "
+                "day-two QIB reading this page flagged as the issue&rsquo;s only soft spot "
+                "and then recorded as wrong on the 16th when the book closed at 256.65&times;. "
+                "<strong>The part worth keeping is the miss, not the win.</strong> The "
+                "premium implied about +29% after this page&rsquo;s standard 2.6-point "
+                "haircut. It listed at +23.62%. The haircut was three times too small on this "
+                "issue. The direction was right and the trade was right; the number was not, "
+                "and the footnote says what that does and does not justify changing."
+            ),
+        ),
+        IPO(
+            name="Bonfiglioli Transmissions", call="CLOSED 46.04\u00d7 \u2014 QIB went 0.16\u00d7 to 120.78\u00d7",
+            tone="good",
+            dates="15\u201319 Oct \u00b7 closed \u00b7 listing shortly",
+            band="\u20b9558\u2013586", size="~\u20b92,534 Cr",
+            split="100% OFS by the Italian parent",
+            gmp="was \u20b9130", gmp_pct=22.2, expected="~+20% at the close",
+            apply_as="Applied. Retail closed at 5.89\u00d7 \u2014 about one lot in six.",
+            horizon="The hold case stands or falls on the listing.",
+            book="FINAL 46.04\u00d7 \u00b7 QIB 120.78\u00d7 \u00b7 NII 40.38\u00d7 \u00b7 retail 5.89\u00d7",
+            flags=(("QIB 0.16\u00d7 \u2192 120.78\u00d7 in one session", "pass"),
+                   ("46.04\u00d7 overall, from 0.99\u00d7", "pass"),
+                   ("the refund risk never materialised", "pass"),
+                   ("PAT +29.2%, debt-free, ROCE 34.05%", "pass"),
+                   ("retail 5.89\u00d7 \u2014 NOT the near-certainty claimed", "fail"),
+                   ("100% OFS \u2014 the parent is selling", "fail")),
+            stats=(("day 2", "0.99\u00d7"), ("FINAL", "46.04\u00d7"),
+                   ("QIB day 2", "0.16\u00d7"), ("QIB final", "120.78\u00d7"),
+                   ("NII", "40.38\u00d7"), ("retail", "5.89\u00d7"),
+                   ("bids", "139.43 Cr shares"), ("offered", "3.03 Cr shares")),
+            note=(
+                "<strong>The book went from 0.99&times; to 46.04&times; on its final session, "
+                "and institutions from 0.16&times; to 120.78&times;.</strong> On Saturday this "
+                "page argued, against the obvious reading, that an empty Friday book was not a "
+                "verdict &mdash; because HD Fire had gone 1.49&times; to 256.65&times; on its "
+                "own last day and institutions bid late. That argument was right and it was "
+                "not close. The refund risk the entry warned about never arrived. "
+                "<strong>The sub-claim was wrong and it is the useful part.</strong> The same "
+                "entry said retail allotment was &ldquo;near-certain&rdquo; on the strength of "
+                "retail sitting at 1.16&times;. Retail closed at 5.89&times; &mdash; roughly "
+                "one lot in six. The mistake was treating a day-two retail figure as settled "
+                "in the very paragraph that refused to treat a day-two QIB figure as settled. "
+                "The reasoning was sound and was applied to one column only."
+            ),
+        ),
+        IPO(
+            name="Tonbo Imaging India", call="AVOID \u2014 settles tomorrow, and settles badly",
+            tone="bad",
+            dates="15\u201319 Oct \u00b7 closed \u00b7 LISTS 23 OCT",
+            band="\u20b9665\u2013700", size="\u20b9852.18 Cr",
+            split="100% OFS \u2014 the company receives nothing",
+            gmp="was \u20b9520", gmp_pct=74.3, expected="~+72% implied",
+            apply_as="Did not apply.",
+            horizon="None. The call is on the record and the record is about to judge it.",
+            book="FINAL 135.90\u00d7 \u00b7 QIB 293.56\u00d7 \u00b7 NII 170.94\u00d7 \u00b7 retail 31.07\u00d7",
+            flags=(("135.90\u00d7 final \u2014 the market wanted it badly", "warn"),
+                   ("QIB 293.56\u00d7", "warn"),
+                   ("premium held above 70% to the close", "warn"),
+                   ("revenue \u221222.7%, PAT \u221230% in FY26", "fail"),
+                   ("Q1 FY27 a \u20b917.74 Cr LOSS", "fail"),
+                   ("negative operating cash flow FY25 AND FY26", "fail"),
+                   ("working capital 517 days", "fail")),
+            stats=(("day 2", "7.78\u00d7"), ("FINAL", "135.90\u00d7"),
+                   ("QIB", "293.56\u00d7"), ("NII", "170.94\u00d7"),
+                   ("retail", "31.07\u00d7"),
+                   ("GMP at close", "74.3%"), ("lists", "23 Oct")),
+            note=(
+                "<strong>135.90&times; subscribed, institutions at 293.56&times;, and it "
+                "lists tomorrow.</strong> This page called avoid on 13 October at a 61% "
+                "premium and restated it four times without revision &mdash; 71.4%, 73.7%, "
+                "74.3% &mdash; against accounts that have not moved: revenue down 22.7%, "
+                "profit down 30%, a &#8377;17.74 Cr loss in Q1 FY27, operating cash flow "
+                "negative in both FY25 and FY26 while profits were reported, working capital "
+                "at 517 days, and the company receiving none of the &#8377;852 Cr. "
+                "<strong>A book of 135.90&times; and a 74% premium do not list badly very "
+                "often.</strong> The call is almost certainly about to be wrong, it is not "
+                "being revised the day before the print, and tomorrow&rsquo;s entry will say "
+                "so in whatever terms the result deserves. That was the arrangement when it "
+                "was made at 61% and it does not change now that the answer is visible."
+            ),
+        ),
+        IPO(
+            name="Jio Platforms", call="APPLY STANDS \u2014 day 2 of 3",
+            tone="good",
+            dates="21\u201323 Oct \u00b7 day 2 \u00b7 allotment 26 Oct \u00b7 lists 28 Oct",
+            band="\u20b91,065\u20131,119", size="\u20b930,213 Cr \u2014 the largest ever here",
+            split="100% FRESH ISSUE, 27 Cr shares",
+            gmp="\u20b9280", gmp_pct=25.0, expected="~+22%, and see the footnote on that",
+            apply_as="Retail \u2014 12 shares, \u20b913,428. Closes tomorrow.",
+            horizon="Listing-day sell on 28 October.",
+            book="day 2 \u00b7 figures not yet published",
+            flags=(("100% fresh issue", "pass"),
+                   ("premium rose every session of the week before it opened", "pass"),
+                   ("\u20b927,500 Cr of proceeds repays DEBT", "warn"),
+                   ("size makes a violent pop unlikely", "warn"),
+                   ("the GMP haircut just proved too small on HD Fire", "warn")),
+            stats=(("band", "\u20b91,065\u20131,119"), ("size", "\u20b930,213 Cr"),
+                   ("lot", "12 sh \u00b7 \u20b913,428"),
+                   ("for debt", "\u20b927,500 Cr"),
+                   ("GMP today", "25.0%"), ("closes", "23 Oct")),
+            note=(
+                "<strong>The call is unchanged: one lot, retail, sold into the listing.</strong> "
+                "Entirely fresh capital, a premium that rose every session of the week before "
+                "it opened, and a retail quota large enough in absolute terms that allotment "
+                "is a better bet than on a small hot issue. "
+                "<strong>Two caveats carried forward, one of them new.</strong> "
+                "&#8377;27,500 Cr of the &#8377;30,213 Cr repays debt rather than building "
+                "anything &mdash; stated when the call was made and still the main thing a "
+                "buyer should know. And HD Fire listed 7.8 points below what its premium "
+                "implied, three times this page&rsquo;s standard haircut, so &ldquo;~+22%&rdquo; "
+                "here should be read as the top of a range rather than a target."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_22 = _for_22()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -3668,6 +3855,7 @@ BY_DAY = {
     "2026-10-16": (IPOS_2026_10_16, LEAD_16, FOOTNOTE_16),
     "2026-10-19": (IPOS_2026_10_19, LEAD_19, FOOTNOTE_19),
     "2026-10-21": (IPOS_2026_10_21, LEAD_21, FOOTNOTE_21),
+    "2026-10-22": (IPOS_2026_10_22, LEAD_22, FOOTNOTE_22),
 }
 
 
