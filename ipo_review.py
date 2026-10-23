@@ -3830,6 +3830,156 @@ def _for_22() -> list[IPO]:
 IPOS_2026_10_22 = _for_22()
 
 
+LEAD_23 = (
+    "Friday 23 October, written at 11:00. "
+    "<strong>Tonbo listed at &#8377;1,162 against a &#8377;700 issue price. A 66% "
+    "premium. This page said avoid, four times, and was wrong.</strong> The entry below "
+    "says why in the terms the result deserves, because that was the arrangement when the "
+    "call was made at 61% and it does not get softened now. "
+    "<strong>Jio closes today</strong> at 5.81&times; with QIB 13.31&times; and retail "
+    "1.67&times;; the apply stands. "
+    "<strong>Paras closes today at 0.34&times; with QIB at 0.06&times;</strong> and a "
+    "premium down to 2.2% &mdash; the skip stands and barely needed saying. "
+    "<strong>Held:</strong> breadth 10.07% against a 26.81% mean, regime bear, entries "
+    "blocked for a fourth week."
+)
+
+FOOTNOTE_23 = (
+    "<strong>The Tonbo call was not unlucky. It answered the wrong question, and this page "
+    "can prove it answered the right one eight days earlier.</strong> "
+    "On 15 October it wrote of HD Fire: <em>40.7 times for 6.4% growth, entirely a promoter "
+    "exit</em> &mdash; and said apply one lot and sell on listing anyway, because the book "
+    "and the premium said it would list well. That was right, +23.62%. "
+    "On Tonbo it had the same two signals pointing the same way, harder &mdash; a "
+    "135.90&times; book, QIB 293.56&times;, a premium above 70% for five sessions &mdash; "
+    "and overrode them with the accounts. Same evidence structure, opposite conclusion, and "
+    "the only difference was that Tonbo&rsquo;s accounts were worse. "
+    "<strong>For a listing-day trade the accounts are not the evidence.</strong> &ldquo;Is "
+    "this a good business at this price&rdquo; and &ldquo;will this open above &#8377;700 on "
+    "Friday&rdquo; are different questions, and a 517-day working-capital cycle answers the "
+    "first and says almost nothing about the second. The accounts earn their place on a "
+    "HOLD, where this page never proposed to be. "
+    "<strong>The GMP model had a good day and that is worth recording against "
+    "Wednesday&rsquo;s bad one.</strong> It implied 64% and Tonbo listed at 66% &mdash; "
+    "understated by two points, where HD Fire was overstated by 7.8. Two misses in opposite "
+    "directions in one week is noise around the published 2.6-point haircut, not a bias in "
+    "it, and the haircut stays."
+)
+
+
+def _for_23() -> list[IPO]:
+    """Tonbo lists at +66% and the avoid was wrong; Jio and Paras close."""
+    return [
+        IPO(
+            name="Tonbo Imaging India", call="LISTED +66% \u2014 THE AVOID WAS WRONG",
+            tone="bad",
+            dates="15\u201319 Oct \u00b7 LISTED TODAY at \u20b91,162",
+            band="\u20b9665\u2013700", size="\u20b9852.18 Cr",
+            split="100% OFS \u2014 the company received nothing",
+            gmp="was \u20b9520", gmp_pct=74.3, expected="GMP implied +64%, listed +66%",
+            apply_as="This page said do not apply. That cost the trade.",
+            horizon="Closed, and recorded as a loss for the page rather than the book.",
+            book="FINAL 135.90\u00d7 \u00b7 QIB 293.56\u00d7 \u00b7 NII 170.94\u00d7 \u00b7 retail 31.07\u00d7",
+            flags=(("listed \u20b91,162 vs \u20b9700 \u2014 +66%", "fail"),
+                   ("avoid called 13 Oct at 61%, restated four times", "fail"),
+                   ("a 135.90\u00d7 book was the signal and was overridden", "fail"),
+                   ("QIB 293.56\u00d7 was the signal and was overridden", "fail"),
+                   ("the accounts were accurate and were the wrong question", "warn"),
+                   ("retail 31.07\u00d7 \u2014 roughly one lot in thirty either way", "warn")),
+            stats=(("issue price", "\u20b9700"), ("listed BSE", "\u20b91,162"),
+                   ("listed NSE", "\u20b91,160"), ("premium", "+66%"),
+                   ("GMP implied", "+64%"), ("final book", "135.90\u00d7"),
+                   ("QIB", "293.56\u00d7"), ("this page said", "AVOID")),
+            note=(
+                "<strong>&#8377;1,162 against &#8377;700. Sixty-six per cent. The call was "
+                "avoid and it was wrong.</strong> It was made on 13 October at a 61% premium "
+                "and restated on the 16th, 19th, 21st and 22nd at 71.4%, 73.7%, 74.3% and "
+                "again &mdash; every time with the book getting larger and the premium "
+                "holding. "
+                "<strong>The accounts quoted in support of it were all true and none of them "
+                "mattered.</strong> Revenue did fall 22.7%. Profit did fall 30%. Q1 FY27 was "
+                "a &#8377;17.74 Cr loss, operating cash flow was negative in FY25 and FY26 "
+                "while profits were reported, working capital did run to 517 days, and the "
+                "company did receive none of the &#8377;852 Cr. All of that describes a "
+                "business. None of it describes what a stock does on its first morning when "
+                "135.90&times; of money wants it. "
+                "<strong>The footnote sets out the actual error</strong>, which is that this "
+                "page applied one standard to HD Fire on 15 October and the opposite to Tonbo "
+                "with the same signals in front of it."
+            ),
+        ),
+        IPO(
+            name="Jio Platforms", call="APPLY \u2014 closes today, book is strong",
+            tone="good",
+            dates="21\u201323 Oct \u00b7 CLOSES TODAY \u00b7 allotment 26 Oct \u00b7 lists 28 Oct",
+            band="\u20b91,065\u20131,119", size="\u20b930,213 Cr \u2014 the largest ever here",
+            split="100% FRESH ISSUE, 27 Cr shares",
+            gmp="\u20b9245", gmp_pct=21.9, expected="~+19%, and read it as a range",
+            apply_as="Retail \u2014 12 shares, \u20b913,428. Today or not at all.",
+            horizon="Listing-day sell on 28 October.",
+            book="day 3 \u00b7 5.81\u00d7 \u00b7 QIB 13.31\u00d7 \u00b7 NII 6.72\u00d7 \u00b7 retail 1.67\u00d7",
+            flags=(("QIB 13.31\u00d7 and institutions bid last", "pass"),
+                   ("100% fresh issue \u2014 nobody is cashing out", "pass"),
+                   ("book 3.74\u00d7 \u2192 5.81\u00d7 overnight", "pass"),
+                   ("retail 1.67\u00d7 and RISING \u2014 not a near-certainty", "warn"),
+                   ("\u20b927,500 Cr of proceeds repays DEBT", "warn"),
+                   ("GMP eased 25.0% \u2192 21.9% across two sessions", "warn")),
+            stats=(("day 2", "3.74\u00d7"), ("day 3", "5.81\u00d7"),
+                   ("QIB", "13.31\u00d7"), ("NII", "6.72\u00d7"),
+                   ("retail", "1.67\u00d7"),
+                   ("for debt", "\u20b927,500 Cr"),
+                   ("GMP today", "21.9%"), ("lists", "28 Oct")),
+            note=(
+                "<strong>The call is unchanged and today is the last day to act on it.</strong> "
+                "Institutions are at 13.31&times; and bid latest of all, the book has gone "
+                "3.74&times; to 5.81&times; overnight, and it is the only wholly fresh issue "
+                "of the month. "
+                "<strong>Retail at 1.67&times; is rising and this page is not calling "
+                "allotment likely.</strong> It made exactly that mistake on Bonfiglioli at "
+                "1.16&times;, which closed at 5.89&times;. Apply expecting a draw. "
+                "<strong>Two caveats carried from the day the call was made.</strong> "
+                "&#8377;27,500 Cr of &#8377;30,213 Cr repays debt rather than building "
+                "anything, and the premium has eased from 25.0% to 21.9% over two sessions. "
+                "Treat ~+19% as the top of a range."
+            ),
+        ),
+        IPO(
+            name="Paras Healthcare", call="SKIP \u2014 closes today at 0.34\u00d7",
+            tone="bad",
+            dates="21\u201323 Oct \u00b7 CLOSES TODAY",
+            band="up to \u20b9693", size="\u20b91,800 Cr",
+            split="\u20b9500 Cr fresh + \u20b91,300 Cr OFS",
+            gmp="\u20b915", gmp_pct=2.2, expected="nothing after the haircut",
+            apply_as="Do not apply.",
+            horizon="None.",
+            book="day 3 \u00b7 0.34\u00d7 \u00b7 QIB 0.06\u00d7 \u00b7 NII 0.25\u00d7 \u00b7 retail 1.31\u00d7",
+            flags=(("0.34\u00d7 on the final day", "fail"),
+                   ("QIB 0.06\u00d7 \u2014 institutions have not come", "fail"),
+                   ("GMP 14.4% \u2192 2.2% in seven sessions", "fail"),
+                   ("nothing left after the 2.6-point haircut", "fail"),
+                   ("72% of the raise is a seller exiting", "fail")),
+            stats=(("day 2", "0.23\u00d7"), ("day 3", "0.34\u00d7"),
+                   ("QIB", "0.06\u00d7"), ("retail", "1.31\u00d7"),
+                   ("GMP 16 Oct", "14.4%"), ("GMP today", "2.2%")),
+            note=(
+                "<strong>0.34&times; on its final day with institutions at "
+                "0.06&times;.</strong> The premium has fallen 14.4% to 2.2% in seven "
+                "sessions, which after the haircut this page applies is nothing at all. "
+                "<strong>And the Tonbo lesson cuts the other way here, which is worth being "
+                "explicit about.</strong> The argument that a weak book is not a verdict "
+                "because institutions bid last is real &mdash; Bonfiglioli went 0.16&times; "
+                "to 120.78&times; on its last session. So this book may yet fill. It does not "
+                "change the call, because the reason to apply was never the book: it was the "
+                "expected gain, and at 2.2% there is none to have even if every institution "
+                "in the country arrives this afternoon."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_23 = _for_23()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -3856,6 +4006,7 @@ BY_DAY = {
     "2026-10-19": (IPOS_2026_10_19, LEAD_19, FOOTNOTE_19),
     "2026-10-21": (IPOS_2026_10_21, LEAD_21, FOOTNOTE_21),
     "2026-10-22": (IPOS_2026_10_22, LEAD_22, FOOTNOTE_22),
+    "2026-10-23": (IPOS_2026_10_23, LEAD_23, FOOTNOTE_23),
 }
 
 
