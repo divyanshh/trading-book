@@ -3980,6 +3980,159 @@ def _for_23() -> list[IPO]:
 IPOS_2026_10_23 = _for_23()
 
 
+LEAD_26 = (
+    "Monday 26 October, written at 11:45. "
+    "<strong>Jio&rsquo;s allotment is finalised today and it lists Wednesday the 28th</strong> "
+    "&mdash; the apply call made on the 21st settles then, on a book that closed 5.81&times; "
+    "with QIB at 13.31&times;. "
+    "<strong>Four new issues arrive this week and the exchange book is unavailable for all "
+    "of them</strong>: Trendlyne returned 405 this morning, so the only figure on the board "
+    "is the grey-market premium, which is the weaker half of the pair and the half this page "
+    "trusts least. "
+    "<strong>EAAA India Alternatives opened today at a 3.0% premium.</strong> BLS Polymers "
+    "opens tomorrow at 25.3%, the strongest quote of the five. "
+    "<strong>Held:</strong> breadth 7.78% against a 21.16% mean, regime bear, 11 of 28 "
+    "sectors with not one name above its own 20-day average."
+)
+
+FOOTNOTE_26 = (
+    "<strong>No call is being made on any of the four new issues today, and the reason is "
+    "the missing column rather than caution.</strong> Trendlyne did not answer, so there is "
+    "no subscription book for any of them &mdash; and the two lessons this month both came "
+    "from that column, not from the premium. Bonfiglioli&rsquo;s QIB went 0.16&times; to "
+    "120.78&times; on its final session, which is why an empty early book is not a verdict. "
+    "Tonbo closed at 135.90&times; with QIB 293.56&times; and listed +66% against this "
+    "page&rsquo;s avoid, which is why the book outranks the accounts for a listing-day trade. "
+    "Both of those are facts about subscription, and today there is none. "
+    "<strong>A premium alone has been wrong in both directions inside ten days</strong> "
+    "&mdash; HD Fire quoted 31.4% and listed at 23.62%, Tonbo quoted 74.3% and listed at 66% "
+    "after a page-long argument that it should not have. Quoting a GMP and calling it "
+    "analysis would be the same mistake with better manners. "
+    "<strong>The calls come when the books open.</strong> BLS at 25.3% is the one worth "
+    "reading the prospectus for before tomorrow."
+)
+
+
+def _for_26() -> list[IPO]:
+    """Jio allots today; four new issues open with no subscription data."""
+    return [
+        IPO(
+            name="Jio Platforms", call="ALLOTMENT TODAY \u2014 lists Wednesday, sell into it",
+            tone="good",
+            dates="21\u201323 Oct \u00b7 allotment TODAY \u00b7 LISTS 28 OCT",
+            band="\u20b91,065\u20131,119", size="\u20b930,213 Cr \u2014 the largest ever here",
+            split="100% FRESH ISSUE, 27 Cr shares",
+            gmp="last \u20b9245", gmp_pct=21.9, expected="~+19%, read as the top of a range",
+            apply_as="Closed. Check allotment; nothing further to do until Wednesday.",
+            horizon="Listing-day sell on 28 October.",
+            book="FINAL \u00b7 5.81\u00d7 \u00b7 QIB 13.31\u00d7 \u00b7 NII 6.72\u00d7 \u00b7 retail 1.67\u00d7",
+            flags=(("QIB 13.31\u00d7 \u2014 institutions came", "pass"),
+                   ("100% fresh issue", "pass"),
+                   ("\u20b927,500 Cr of proceeds repays DEBT", "warn"),
+                   ("retail 1.67\u00d7 \u2014 a draw, not a delivery", "warn"),
+                   ("GMP eased 25.0% \u2192 21.9% over the final two sessions", "warn")),
+            stats=(("final book", "5.81\u00d7"), ("QIB", "13.31\u00d7"),
+                   ("retail", "1.67\u00d7"), ("for debt", "\u20b927,500 Cr"),
+                   ("GMP at close", "21.9%"), ("lists", "28 Oct")),
+            note=(
+                "<strong>The call settles on Wednesday and it is unchanged: sell into the "
+                "listing.</strong> The book finished 5.81&times; with institutions at "
+                "13.31&times;, which is the signal this page has learned to weight above "
+                "everything else, twice, the hard way. "
+                "<strong>Two things to carry into Wednesday.</strong> The premium eased from "
+                "25.0% to 21.9% over the last two sessions, which is the wrong direction "
+                "going into a listing. And &#8377;27,500 Cr of the &#8377;30,213 Cr repays "
+                "debt rather than building anything &mdash; that was stated when the call was "
+                "made and it has not stopped being true. After HD Fire listed 7.8 points "
+                "below what its premium implied, ~+19% here is the top of a range."
+            ),
+        ),
+        IPO(
+            name="EAAA India Alternatives", call="NO CALL \u2014 opened today, 3.0% and no book",
+            tone="warn",
+            dates="26\u201328 Oct \u00b7 OPENED TODAY",
+            band="\u20b91,665", size="to confirm", split="to confirm",
+            gmp="\u20b950", gmp_pct=3.0, expected="nothing meaningful after the haircut",
+            apply_as="No call.",
+            horizon="None yet.",
+            book="exchange book unavailable \u2014 Trendlyne returned 405",
+            flags=(("3.0% premium \u2014 under the 2.6pt haircut, near zero", "fail"),
+                   ("no subscription data at all", "warn"),
+                   ("quoted 0.0% as recently as 23 Oct", "warn")),
+            stats=(("band", "\u20b91,665"), ("GMP 21 Oct", "0.0%"),
+                   ("GMP 23 Oct", "0.0%"), ("GMP today", "3.0%"),
+                   ("book", "unavailable")),
+            note=(
+                "<strong>A 3.0% premium on an issue that quoted zero as recently as "
+                "Friday.</strong> After the 2.6-point haircut this page applies to every GMP "
+                "there is essentially nothing left, and there is no exchange book to check it "
+                "against. "
+                "That is not a verdict &mdash; a quiet premium on day one says little, as "
+                "Bonfiglioli proved &mdash; but there is no case to make either. The "
+                "prospectus gets read if the book shows institutional interest when the "
+                "subscription feed returns."
+            ),
+        ),
+        IPO(
+            name="BLS Polymers", call="OPENS TOMORROW \u2014 the one worth reading tonight",
+            tone="warn",
+            dates="27\u201329 Oct", band="\u20b9150", size="to confirm", split="to confirm",
+            gmp="\u20b938", gmp_pct=25.3, expected="~+23% implied, unverified",
+            apply_as="No call until the prospectus is read.",
+            horizon="Decide before tomorrow's open.",
+            book="opens 27 Oct",
+            flags=(("25.3% \u2014 the strongest quote on the board", "pass"),
+                   ("premium FIRMED 20.0% \u2192 25.3% over the weekend", "pass"),
+                   ("no subscription data yet", "warn"),
+                   ("a small issue: a premium moves easily on little volume", "warn")),
+            stats=(("band", "\u20b9150"), ("GMP 21 Oct", "20.0%"),
+                   ("GMP 23 Oct", "25.3%"), ("GMP today", "25.3%"),
+                   ("opens", "27 Oct")),
+            note=(
+                "<strong>The only one of the five with a premium worth the reading time, and "
+                "it firmed over the weekend</strong> &mdash; 20.0% to 25.3% &mdash; where "
+                "every other issue this month has faded into its open. "
+                "<strong>The caution is size.</strong> On a &#8377;150 band this is a small "
+                "issue, and a grey-market quote on a small issue moves on very little money; "
+                "it is a thinner signal than the same number on a &#8377;2,500 Cr book. "
+                "The prospectus gets read tonight and the call goes on this page before the "
+                "book opens, not after."
+            ),
+        ),
+        IPO(
+            name="SFC Environmental, M.K.Sons, Bombay Coated", call="QUEUED \u2014 nothing to decide yet",
+            tone="warn",
+            dates="SFC 27\u201329 \u00b7 M.K.Sons 28\u201330 \u00b7 Bombay Coated 29\u20132 Nov",
+            band="\u20b9330 \u00b7 \u20b9162 \u00b7 \u20b982",
+            size="to confirm", split="to confirm",
+            gmp="9.7% \u00b7 4.9% \u00b7 9.8%", gmp_pct=9.8,
+            expected="~+7% at best on the measured haircut",
+            apply_as="No calls.",
+            horizon="Read in order of opening.",
+            book="none open yet",
+            flags=(("SFC eased 9.1% \u2192 6.4% \u2192 9.7%", "warn"),
+                   ("M.K.Sons 4.9% \u2014 thin", "warn"),
+                   ("Bombay Coated 9.8% on an \u20b982 band", "warn"),
+                   ("no subscription data for any of them", "warn")),
+            stats=(("SFC GMP", "9.7%"), ("M.K.Sons GMP", "4.9%"),
+                   ("Bombay Coated GMP", "9.8%"),
+                   ("SFC opens", "27 Oct"), ("M.K.Sons opens", "28 Oct"),
+                   ("Bombay Coated opens", "29 Oct")),
+            note=(
+                "<strong>Three issues in single digits, none open, no books.</strong> At "
+                "these premiums the measured 2.6-point haircut leaves about seven per cent at "
+                "best, which is not enough to carry an application on its own &mdash; and all "
+                "three are small enough that the quote is thin. "
+                "They are listed here so the week&rsquo;s calendar is on the page rather than "
+                "discovered on the morning each opens. Each gets read before its own open."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_26 = _for_26()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -4007,6 +4160,7 @@ BY_DAY = {
     "2026-10-21": (IPOS_2026_10_21, LEAD_21, FOOTNOTE_21),
     "2026-10-22": (IPOS_2026_10_22, LEAD_22, FOOTNOTE_22),
     "2026-10-23": (IPOS_2026_10_23, LEAD_23, FOOTNOTE_23),
+    "2026-10-26": (IPOS_2026_10_26, LEAD_26, FOOTNOTE_26),
 }
 
 
