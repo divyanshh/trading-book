@@ -4133,6 +4133,156 @@ def _for_26() -> list[IPO]:
 IPOS_2026_10_26 = _for_26()
 
 
+LEAD_27 = (
+    "Tuesday 27 October, written at 09:40. "
+    "<strong>BLS Polymers opened this morning and this page owed a call before it did. "
+    "It is late, and the call is apply.</strong> &#8377;255 Cr, every rupee of it fresh, "
+    "&#8377;77.56 Cr of that into plant capacity &mdash; the only issue this month whose "
+    "money buys something rather than repaying a lender or paying a seller. "
+    "<strong>Jio lists tomorrow</strong> on a final book of 5.81&times;, QIB 13.31&times;; "
+    "the apply made on the 21st settles then. "
+    "<strong>The exchange book has been unavailable for a second day</strong> &mdash; "
+    "Trendlyne returned 405 again &mdash; so every figure below except the terms is a "
+    "grey-market quote, and this month has shown a quote alone wrong in both directions. "
+    "<strong>Held:</strong> breadth 8.97% against a 16.99% mean. It rose for the first time "
+    "in five weeks and the gate is still shut."
+)
+
+FOOTNOTE_27 = (
+    "<strong>The BLS call is made on structure, not on the premium, and the distinction "
+    "matters after this month.</strong> What is checkable: &#8377;255 Cr entirely fresh, "
+    "1.70 Cr shares, a stated use of proceeds that puts &#8377;77.56 Cr into plant capacity "
+    "and &#8377;89.50 Cr into working capital, and roughly 25 times FY26 diluted earnings of "
+    "&#8377;5.99 at the top of the band. Those are facts from the terms. "
+    "<strong>What is not checkable, and is said rather than hidden:</strong> no revenue, "
+    "profit or margin figures could be read this morning, and there is no subscription book "
+    "for a second day. So this is a call on how the issue is built and what the money does, "
+    "with two of the three columns missing. "
+    "<strong>It is also late.</strong> On the 26th this page wrote that the prospectus would "
+    "be read overnight and the call would go up <em>before</em> the book opened. It did not. "
+    "The issue runs to Thursday so the application is still live, but the commitment was "
+    "missed and saying so is cheaper than pretending the timing was always Tuesday."
+)
+
+
+def _for_27() -> list[IPO]:
+    """BLS opens and gets its call; Jio lists tomorrow."""
+    return [
+        IPO(
+            name="BLS Polymers", call="APPLY \u2014 one lot, the only issue whose money builds something",
+            tone="good",
+            dates="27\u201329 Oct \u00b7 OPEN \u00b7 allotment 30 Oct \u00b7 lists 3 Nov",
+            band="\u20b9142\u2013150", size="\u20b9255 Cr",
+            split="100% FRESH ISSUE \u2014 1.70 Cr shares, no OFS",
+            gmp="\u20b940", gmp_pct=26.7, expected="~+24% implied, unverified",
+            apply_as="Retail \u2014 100 shares, \u20b915,000 at the top band. Closes Thursday.",
+            horizon="Listing-day sell on 3 November.",
+            book="no exchange book \u2014 Trendlyne 405 for a second day",
+            flags=(("100% fresh issue, no seller taking money out", "pass"),
+                   ("\u20b977.56 Cr into PLANT CAPACITY \u2014 real capex", "pass"),
+                   ("~25\u00d7 FY26 diluted EPS of \u20b95.99", "pass"),
+                   ("premium FIRMED 20.0% \u2192 25.3% \u2192 26.7% while others faded", "pass"),
+                   ("\u20b989.50 Cr is working capital, not growth", "warn"),
+                   ("no revenue, profit or margin figures readable", "warn"),
+                   ("no subscription book, second day", "warn"),
+                   ("\u20b9255 Cr is small \u2014 a quote moves on little money", "warn")),
+            stats=(("band", "\u20b9142\u2013150"), ("size", "\u20b9255 Cr"),
+                   ("fresh shares", "1.70 Cr"), ("lot", "100 sh \u00b7 \u20b915,000"),
+                   ("plant capacity", "\u20b977.56 Cr"),
+                   ("working capital", "\u20b989.50 Cr"),
+                   ("FY26 diluted EPS", "\u20b95.99"), ("P/E at \u20b9150", "~25\u00d7"),
+                   ("GMP today", "26.7%"), ("lists", "3 Nov")),
+            note=(
+                "<strong>Set against everything else this month, the structure is the "
+                "argument.</strong> HD Fire was a full promoter exit. Tonbo was a full exit "
+                "where the company received nothing. Bonfiglioli was a full exit by an "
+                "Italian parent. Jio is fresh but nine rupees in ten repay debt. This is "
+                "&#8377;255 Cr entirely fresh with &#8377;77.56 Cr going into plant capacity "
+                "&mdash; the only issue on the month&rsquo;s board where a meaningful share "
+                "of the money buys productive assets. "
+                "<strong>And it is not expensive.</strong> About 25 times FY26 diluted "
+                "earnings of &#8377;5.99 at the top of the band, against Tonbo&rsquo;s 79 "
+                "times falling earnings and HD Fire&rsquo;s 40.7 times for 6.4% growth. "
+                "<strong>What is missing is said plainly.</strong> No revenue, profit or "
+                "margin figures could be read this morning, and there is no subscription "
+                "book for a second day &mdash; which is the column this month taught twice "
+                "is the one that matters for a listing. &#8377;89.50 Cr of the raise is "
+                "working capital, which for a compounder funds inventory and receivables "
+                "rather than growth. "
+                "<strong>One lot, retail, &#8377;15,000, sold into the 3 November "
+                "listing.</strong> If the book appears and institutions are absent at the "
+                "close on Thursday, that is a reason to revisit before the money moves."
+            ),
+        ),
+        IPO(
+            name="Jio Platforms", call="LISTS TOMORROW \u2014 sell into it",
+            tone="good",
+            dates="21\u201323 Oct \u00b7 allotted \u00b7 LISTS 28 OCT",
+            band="\u20b91,065\u20131,119", size="\u20b930,213 Cr",
+            split="100% FRESH ISSUE, 27 Cr shares",
+            gmp="last \u20b9245", gmp_pct=21.9, expected="~+19%, the top of a range",
+            apply_as="Closed and allotted. Nothing to do until tomorrow.",
+            horizon="Listing-day sell, 28 October.",
+            book="FINAL \u00b7 5.81\u00d7 \u00b7 QIB 13.31\u00d7 \u00b7 NII 6.72\u00d7 \u00b7 retail 1.67\u00d7",
+            flags=(("QIB 13.31\u00d7 \u2014 institutions came", "pass"),
+                   ("100% fresh issue", "pass"),
+                   ("\u20b927,500 Cr of proceeds repays DEBT", "warn"),
+                   ("premium eased 25.0% \u2192 21.9% into the close", "warn"),
+                   ("retail 1.67\u00d7 \u2014 a draw", "warn")),
+            stats=(("final book", "5.81\u00d7"), ("QIB", "13.31\u00d7"),
+                   ("retail", "1.67\u00d7"), ("for debt", "\u20b927,500 Cr"),
+                   ("GMP at close", "21.9%"), ("lists", "28 Oct")),
+            note=(
+                "<strong>The call settles tomorrow and does not change tonight.</strong> "
+                "Sell into the listing. The book finished 5.81&times; with institutions at "
+                "13.31&times;, which after Tonbo is the number this page weights above the "
+                "accounts for a listing-day trade. "
+                "<strong>Two things that argue for selling rather than holding.</strong> The "
+                "premium eased from 25.0% to 21.9% over the final two sessions, which is the "
+                "wrong direction into a listing; and &#8377;27,500 Cr of the &#8377;30,213 Cr "
+                "repays debt, so the balance sheet improves but nothing gets built. "
+                "After HD Fire listed 7.8 points below what its premium implied, ~+19% is "
+                "the top of a range rather than a target."
+            ),
+        ),
+        IPO(
+            name="SFC Environmental, EAAA, M.K.Sons, Bombay Coated", call="NO \u2014 premiums too thin to carry an application",
+            tone="bad",
+            dates="SFC + EAAA open \u00b7 M.K.Sons 28\u201330 \u00b7 Bombay Coated 29\u20132 Nov",
+            band="\u20b9330 \u00b7 \u20b91,665 \u00b7 \u20b9162 \u00b7 \u20b982",
+            size="to confirm", split="to confirm",
+            gmp="6.7% \u00b7 1.2% \u00b7 4.9% \u00b7 11.0%", gmp_pct=11.0,
+            expected="~+8% at the very best, mostly nothing",
+            apply_as="Do not apply to any of them.",
+            horizon="None.",
+            book="no exchange book for any \u2014 Trendlyne 405",
+            flags=(("EAAA 3.0% \u2192 1.2% on its second day", "fail"),
+                   ("SFC 9.7% \u2192 6.7% as it opened", "fail"),
+                   ("M.K.Sons 4.9% \u2014 nothing after the haircut", "fail"),
+                   ("Bombay Coated 11.0% but does not open until Thursday", "warn"),
+                   ("no subscription data for any of the four", "warn")),
+            stats=(("SFC GMP 26 Oct", "9.7%"), ("SFC today", "6.7%"),
+                   ("EAAA 26 Oct", "3.0%"), ("EAAA today", "1.2%"),
+                   ("M.K.Sons", "4.9%"), ("Bombay Coated", "11.0%")),
+            note=(
+                "<strong>Both issues that opened this week faded as they opened.</strong> "
+                "EAAA has gone 3.0% to 1.2% on its second day and SFC 9.7% to 6.7% on its "
+                "first. After the 2.6-point haircut this page applies to every quote, EAAA "
+                "is negative and SFC is about four per cent. "
+                "A premium that falls into its own open is the one pattern this month that "
+                "has been reliable &mdash; Paras went 14.4% to 2.2% and closed at "
+                "0.34&times; with institutions at 0.06&times;. "
+                "<strong>Bombay Coated at 11.0% is the only one of the four worth looking at "
+                "again</strong>, and it does not open until Thursday, so there is time to do "
+                "it properly rather than from a price band."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_27 = _for_27()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -4161,6 +4311,7 @@ BY_DAY = {
     "2026-10-22": (IPOS_2026_10_22, LEAD_22, FOOTNOTE_22),
     "2026-10-23": (IPOS_2026_10_23, LEAD_23, FOOTNOTE_23),
     "2026-10-26": (IPOS_2026_10_26, LEAD_26, FOOTNOTE_26),
+    "2026-10-27": (IPOS_2026_10_27, LEAD_27, FOOTNOTE_27),
 }
 
 
