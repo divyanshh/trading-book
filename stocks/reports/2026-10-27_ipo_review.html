@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IPO review — 2026-10-27</title><style>/* Trading Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+/* Breadth charts carry their own aspect ratio in the viewBox: the market one
+   spans the grid, the sector multiples fill one cell, and both are drawn from
+   a viewBox matching that width so their text renders at the same size. */
+.fig svg.breadth{display:block;width:100%;height:auto}
+.fig--wide{grid-column:1/-1}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html.dark{color-scheme:dark;--canvas:#0f172a;--card:#111827;--head:#172033;--line:#293548;--line-strong:#475569;--ink:#f8fafc;--ink-2:#cbd5e1;--muted:#94a3b8;--faint:#64748b;--blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#172554;--blue-100:#1e3a8a;--green:#34d399;--green-50:#052e2b;--green-100:#064e3b;--green-line:#065f46;--red:#fb7185;--red-50:#450a0a;--red-100:#7f1d1d;--red-line:#991b1b;--amber:#fbbf24;--amber-50:#422006;--amber-100:#713f12;--amber-line:#92400e;--canvas-fade:rgba(15,23,42,0);--shadow:none}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(520px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(37,99,235,.10),transparent 68%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%);transition:background .45s ease-out}
+body::before{display:none}.dark body{background-image:radial-gradient(560px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(96,165,250,.15),transparent 68%),radial-gradient(circle at 85% 22%,rgba(167,139,250,.07),transparent 22%)}.wrap{max-width:none;width:100%;padding:22px 32px 80px}.mb-nav{box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:9px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}.mb-theme{margin-left:auto;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:17px;cursor:pointer}.mb-theme:hover{background:var(--blue-50);color:var(--blue)}body>.mb-nav{min-height:64px;margin-bottom:28px;padding:13px 38px 14px}header.top{position:relative;overflow:hidden;margin:0 0 28px;padding:30px 32px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--blue-50) 88%,var(--card)),var(--card) 62%,color-mix(in srgb,var(--blue) 8%,var(--card)));box-shadow:var(--shadow)}header.top::after{content:"";position:absolute;width:310px;height:310px;right:-100px;top:-180px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 18%,transparent),transparent 68%);pointer-events:none}header.top>*{position:relative;z-index:1}.wrap>.eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--blue-50);border:1px solid var(--blue-100)}.wrap>.eyebrow+h1{margin-top:12px}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+/* Institutional presentation: information hierarchy over decoration. */
+html.dark{--canvas:#0d0d0c;--card:#171715;--head:#1d1c19;--line:#35332d;--line-strong:#514b3c;--ink:#f4f0e7;--ink-2:#d0c7b8;--muted:#9f9686;--faint:#70695e;--blue:#d7a84e;--blue-ink:#f1ca7a;--blue-50:#272114;--blue-100:#46371d;--green:#72c98c;--green-50:#142419;--green-100:#1c3825;--green-line:#31553a;--red:#ec7d70;--red-50:#321816;--red-100:#51231f;--red-line:#74342c;--amber:#e4b759;--amber-50:#302713;--amber-100:#4b3c1c;--amber-line:#70571f}.dark body{background-color:#0d0d0c;background-image:linear-gradient(rgba(216,168,78,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,168,78,.035) 1px,transparent 1px),radial-gradient(700px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(216,168,78,.12),transparent 66%)}.dark .mb-nav{border-bottom-color:#35332d}.dark .mb-nav b{border-radius:6px;background:#f4f0e7;color:#171715}.dark .mb-theme{border-color:#514b3c}.dark header.top{border-color:#514b3c;background:linear-gradient(135deg,#1b1a17,#151512 68%,#241e14)}.dark .glance>div,.dark .card,.dark figure,.dark .tbl-scroll,.dark .stat,.dark .act,.dark .mrow,.dark .scroll{border-color:#35332d;background:#171715}.dark nav.toc a{border-radius:5px;box-shadow:none}.dark h1,.dark h2,.dark h3{letter-spacing:-.035em}.dark .plate{border-radius:8px}.dark .plate,.dark .plate.open{box-shadow:none}.dark .wrap>.eyebrow{border-radius:4px}.dark td,.dark .prose p,.dark p{color:#d0c7b8}.dark .stamp,.dark .lede{color:#9f9686}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}body>.mb-nav{min-height:58px;padding:10px 16px 11px}h1{font-size:30px}}
+</style></head><body><nav class="mb-nav" aria-label="Trading Book"><a href="../../"><b aria-hidden="true">↗</b><span>Trading Book</span></a><button class="mb-theme" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button></nav><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',function(e){document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px')},{passive:true});var b=document.querySelector('.mb-theme');if(!b)return;function s(){var d=document.documentElement.classList.contains('dark');b.textContent=d?'☀':'◐';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')}s();b.addEventListener('click',function(){document.documentElement.classList.toggle('dark');try{localStorage.setItem('trading-book-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}s()})})();</script><div class="wrap"><p class="eyebrow">equity-service · cortex · 2026-10-27</p><h2 id="ipo-review">IPO review — apply, skip, avoid</h2><p class="lead">Tuesday 27 October, written at 09:40. <strong>BLS Polymers opened this morning and this page owed a call before it did. It is late, and the call is apply.</strong> &#8377;255 Cr, every rupee of it fresh, &#8377;77.56 Cr of that into plant capacity &mdash; the only issue this month whose money buys something rather than repaying a lender or paying a seller. <strong>Jio lists tomorrow</strong> on a final book of 5.81&times;, QIB 13.31&times;; the apply made on the 21st settles then. <strong>The exchange book has been unavailable for a second day</strong> &mdash; Trendlyne returned 405 again &mdash; so every figure below except the terms is a grey-market quote, and this month has shown a quote alone wrong in both directions. <strong>Held:</strong> breadth 8.97% against a 16.99% mean. It rose for the first time in five weeks and the gate is still shut.</p><div class="scroll"><table><thead><tr><th class="l">IPO</th><th class="l">call</th><th>GMP</th><th>GMP %</th><th>expected listing</th><th class="l">apply as</th><th class="l">horizon</th><th class="l">book</th></tr></thead><tbody><tr><td class="l">BLS Polymers</td><td class="good l"><span>APPLY — one lot, the only issue whose money builds something</span></td><td>₹40</td><td class="good"><span class="cellbar" style="--w:76%">+26.7%</span></td><td class="good">~+24% implied, unverified</td><td class="l">Retail — 100 shares, ₹15,000 at the top band. Closes Thursday.</td><td class="l">Listing-day sell on 3 November.</td><td class="l">no exchange book — Trendlyne 405 for a second day</td></tr><tr><td class="l">Jio Platforms</td><td class="good l"><span>LISTS TOMORROW — sell into it</span></td><td>last ₹245</td><td class="good"><span class="cellbar" style="--w:62%">+21.9%</span></td><td class="good">~+19%, the top of a range</td><td class="l">Closed and allotted. Nothing to do until tomorrow.</td><td class="l">Listing-day sell, 28 October.</td><td class="l">FINAL · 5.81× · QIB 13.31× · NII 6.72× · retail 1.67×</td></tr><tr><td class="l">SFC Environmental, EAAA, M.K.Sons, Bombay Coated</td><td class="bad l"><span>NO — premiums too thin to carry an application</span></td><td>6.7% · 1.2% · 4.9% · 11.0%</td><td class="bad"><span class="cellbar" style="--w:31%">+11.0%</span></td><td class="bad">~+8% at the very best, mostly nothing</td><td class="l">Do not apply to any of them.</td><td class="l">None.</td><td class="l">no exchange book for any — Trendlyne 405</td></tr></tbody></table></div><p class="sub"><strong>The BLS call is made on structure, not on the premium, and the distinction matters after this month.</strong> What is checkable: &#8377;255 Cr entirely fresh, 1.70 Cr shares, a stated use of proceeds that puts &#8377;77.56 Cr into plant capacity and &#8377;89.50 Cr into working capital, and roughly 25 times FY26 diluted earnings of &#8377;5.99 at the top of the band. Those are facts from the terms. <strong>What is not checkable, and is said rather than hidden:</strong> no revenue, profit or margin figures could be read this morning, and there is no subscription book for a second day. So this is a call on how the issue is built and what the money does, with two of the three columns missing. <strong>It is also late.</strong> On the 26th this page wrote that the prospectus would be read overnight and the call would go up <em>before</em> the book opened. It did not. The issue runs to Thursday so the application is still live, but the commitment was missed and saying so is cheaper than pretending the timing was always Tuesday.</p><div class="cards"><article class="card"><header><h3>BLS Polymers</h3><span class="badge good">APPLY — one lot, the only issue whose money builds something</span></header><p class="meta">27–29 Oct · OPEN · allotment 30 Oct · lists 3 Nov · band ₹142–150 · ₹255 Cr · 100% FRESH ISSUE — 1.70 Cr shares, no OFS</p><div class="dots"><span class="dot pass">100% fresh issue, no seller taking money out</span><span class="dot pass">₹77.56 Cr into PLANT CAPACITY — real capex</span><span class="dot pass">~25× FY26 diluted EPS of ₹5.99</span><span class="dot pass">premium FIRMED 20.0% → 25.3% → 26.7% while others faded</span><span class="dot warn">₹89.50 Cr is working capital, not growth</span><span class="dot warn">no revenue, profit or margin figures readable</span><span class="dot warn">no subscription book, second day</span><span class="dot warn">₹255 Cr is small — a quote moves on little money</span></div><div class="bar"><div class="barhead"><span>expected listing</span><b class="good">~+24% implied, unverified</b></div><div class="track"><div class="fill good" style="width:76%"></div></div><div class="barfoot"><span>GMP ₹40 · +26.7% · less the 2.6 pt overstatement</span></div></div><dl class="stats"><div><dt>band</dt><dd>₹142–150</dd></div><div><dt>size</dt><dd>₹255 Cr</dd></div><div><dt>fresh shares</dt><dd>1.70 Cr</dd></div><div><dt>lot</dt><dd>100 sh · ₹15,000</dd></div><div><dt>plant capacity</dt><dd>₹77.56 Cr</dd></div><div><dt>working capital</dt><dd>₹89.50 Cr</dd></div><div><dt>FY26 diluted EPS</dt><dd>₹5.99</dd></div><div><dt>P/E at ₹150</dt><dd>~25×</dd></div><div><dt>GMP today</dt><dd>26.7%</dd></div><div><dt>lists</dt><dd>3 Nov</dd></div></dl><p class="cardnote">&lt;strong&gt;Set against everything else this month, the structure is the argument.&lt;/strong&gt; HD Fire was a full promoter exit. Tonbo was a full exit where the company received nothing. Bonfiglioli was a full exit by an Italian parent. Jio is fresh but nine rupees in ten repay debt. This is &amp;#8377;255 Cr entirely fresh with &amp;#8377;77.56 Cr going into plant capacity &amp;mdash; the only issue on the month&amp;rsquo;s board where a meaningful share of the money buys productive assets. &lt;strong&gt;And it is not expensive.&lt;/strong&gt; About 25 times FY26 diluted earnings of &amp;#8377;5.99 at the top of the band, against Tonbo&amp;rsquo;s 79 times falling earnings and HD Fire&amp;rsquo;s 40.7 times for 6.4% growth. &lt;strong&gt;What is missing is said plainly.&lt;/strong&gt; No revenue, profit or margin figures could be read this morning, and there is no subscription book for a second day &amp;mdash; which is the column this month taught twice is the one that matters for a listing. &amp;#8377;89.50 Cr of the raise is working capital, which for a compounder funds inventory and receivables rather than growth. &lt;strong&gt;One lot, retail, &amp;#8377;15,000, sold into the 3 November listing.&lt;/strong&gt; If the book appears and institutions are absent at the close on Thursday, that is a reason to revisit before the money moves.</p></article><article class="card"><header><h3>Jio Platforms</h3><span class="badge good">LISTS TOMORROW — sell into it</span></header><p class="meta">21–23 Oct · allotted · LISTS 28 OCT · band ₹1,065–1,119 · ₹30,213 Cr · 100% FRESH ISSUE, 27 Cr shares</p><div class="dots"><span class="dot pass">QIB 13.31× — institutions came</span><span class="dot pass">100% fresh issue</span><span class="dot warn">₹27,500 Cr of proceeds repays DEBT</span><span class="dot warn">premium eased 25.0% → 21.9% into the close</span><span class="dot warn">retail 1.67× — a draw</span></div><div class="bar"><div class="barhead"><span>expected listing</span><b class="good">~+19%, the top of a range</b></div><div class="track"><div class="fill good" style="width:62%"></div></div><div class="barfoot"><span>GMP last ₹245 · +21.9% · less the 2.6 pt overstatement</span></div></div><dl class="stats"><div><dt>final book</dt><dd>5.81×</dd></div><div><dt>QIB</dt><dd>13.31×</dd></div><div><dt>retail</dt><dd>1.67×</dd></div><div><dt>for debt</dt><dd>₹27,500 Cr</dd></div><div><dt>GMP at close</dt><dd>21.9%</dd></div><div><dt>lists</dt><dd>28 Oct</dd></div></dl><p class="cardnote">&lt;strong&gt;The call settles tomorrow and does not change tonight.&lt;/strong&gt; Sell into the listing. The book finished 5.81&amp;times; with institutions at 13.31&amp;times;, which after Tonbo is the number this page weights above the accounts for a listing-day trade. &lt;strong&gt;Two things that argue for selling rather than holding.&lt;/strong&gt; The premium eased from 25.0% to 21.9% over the final two sessions, which is the wrong direction into a listing; and &amp;#8377;27,500 Cr of the &amp;#8377;30,213 Cr repays debt, so the balance sheet improves but nothing gets built. After HD Fire listed 7.8 points below what its premium implied, ~+19% is the top of a range rather than a target.</p></article><article class="card"><header><h3>SFC Environmental, EAAA, M.K.Sons, Bombay Coated</h3><span class="badge bad">NO — premiums too thin to carry an application</span></header><p class="meta">SFC + EAAA open · M.K.Sons 28–30 · Bombay Coated 29–2 Nov · band ₹330 · ₹1,665 · ₹162 · ₹82 · to confirm · to confirm</p><div class="dots"><span class="dot fail">EAAA 3.0% → 1.2% on its second day</span><span class="dot fail">SFC 9.7% → 6.7% as it opened</span><span class="dot fail">M.K.Sons 4.9% — nothing after the haircut</span><span class="dot warn">Bombay Coated 11.0% but does not open until Thursday</span><span class="dot warn">no subscription data for any of the four</span></div><div class="bar"><div class="barhead"><span>expected listing</span><b class="bad">~+8% at the very best, mostly nothing</b></div><div class="track"><div class="fill bad" style="width:31%"></div></div><div class="barfoot"><span>GMP 6.7% · 1.2% · 4.9% · 11.0% · +11.0% · less the 2.6 pt overstatement</span></div></div><dl class="stats"><div><dt>SFC GMP 26 Oct</dt><dd>9.7%</dd></div><div><dt>SFC today</dt><dd>6.7%</dd></div><div><dt>EAAA 26 Oct</dt><dd>3.0%</dd></div><div><dt>EAAA today</dt><dd>1.2%</dd></div><div><dt>M.K.Sons</dt><dd>4.9%</dd></div><div><dt>Bombay Coated</dt><dd>11.0%</dd></div></dl><p class="cardnote">&lt;strong&gt;Both issues that opened this week faded as they opened.&lt;/strong&gt; EAAA has gone 3.0% to 1.2% on its second day and SFC 9.7% to 6.7% on its first. After the 2.6-point haircut this page applies to every quote, EAAA is negative and SFC is about four per cent. A premium that falls into its own open is the one pattern this month that has been reliable &amp;mdash; Paras went 14.4% to 2.2% and closed at 0.34&amp;times; with institutions at 0.06&amp;times;. &lt;strong&gt;Bombay Coated at 11.0% is the only one of the four worth looking at again&lt;/strong&gt;, and it does not open until Thursday, so there is time to do it properly rather than from a price band.</p></article></div><footer>Hand-written under <code>cortex/checklists/ipo_checklist.md</code>. Also a section of <a href="2026-10-27.html#ipo-review">the day's report</a>.</footer></div></body></html>
