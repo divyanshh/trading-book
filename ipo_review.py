@@ -4283,6 +4283,223 @@ def _for_27() -> list[IPO]:
 IPOS_2026_10_27 = _for_27()
 
 
+LEAD_OCT_28 = (
+    "Wednesday 28 October, written at 09:50. "
+    "<strong>Correction first, because it is on the column this page said matters most. "
+    "The Jio book printed here yesterday as FINAL was not final.</strong> It read "
+    "5.81&times; overall, QIB 13.31&times;, retail 1.67&times;. The exchange&rsquo;s close "
+    "on the 23rd was <strong>22.19&times; overall, QIB 70.55&times;, NII 14.00&times;, "
+    "retail 2.72&times;</strong> &mdash; and a shareholders&rsquo; quota at 7.60&times;. "
+    "An intraday snapshot was published as a close. "
+    "<strong>Jio lists at 10:00 today</strong> at &#8377;1,119 with a grey-market quote of "
+    "&#8377;247, about 22%. The broker account shows no Jio shares at 09:41, so on the "
+    "evidence we have there was no allotment at retail 2.72&times;. "
+    "<strong>BLS Polymers finally has a book</strong> and it is good: 9.62&times;, QIB "
+    "12.03&times;, retail 6.76&times;, premium firmed to 29.3%. The apply stands. "
+    "<strong>Bombay Coated has been read properly</strong>, as this page promised on the "
+    "27th, and reading it changed the answer. "
+    "<strong>And the gate is open:</strong> breadth 17.81% against a 12.27% mean, the first "
+    "time in five weeks."
+)
+
+FOOTNOTE_OCT_28 = (
+    "<strong>How the Jio number went wrong, since the mechanism matters more than the "
+    "apology.</strong> The figures were taken from the subscription tracker during the "
+    "evening of the 23rd and written down as the close. They were a 6-ish PM snapshot: "
+    "institutions bid in the last hour, which is the exact behaviour this page has argued "
+    "twice this month &mdash; Bonfiglioli went 0.16&times; to 120.78&times; on its final day "
+    "&mdash; and then failed to allow for in its own record. "
+    "<strong>The direction of the error is the uncomfortable part.</strong> After Tonbo, "
+    "this page wrote that for a listing-day trade the book is the evidence and the accounts "
+    "are not. It then under-recorded that evidence by a factor of five on QIB. The call "
+    "&mdash; apply, sell into the listing &mdash; is unchanged and was right; the number "
+    "under it was wrong, and a right call on a wrong number is luck. "
+    "<strong>The shareholders&rsquo; quota, 7.60&times;, is worth recording too.</strong> "
+    "It existed, it was contested, and it is the reason a single Reliance share was worth "
+    "holding into the 23rd. That inference was correct."
+)
+
+
+def _for_oct_28() -> list[IPO]:
+    """Jio lists, BLS confirms on the book, Bombay Coated gets its real read."""
+    return [
+        IPO(
+            name="Jio Platforms", call="LISTS TODAY — sell into it if allotted",
+            tone="good",
+            dates="21–23 Oct · allotted 26 Oct · LISTS 10:00 TODAY",
+            band="₹1,065–1,119", size="₹30,213 Cr",
+            split="100% FRESH ISSUE, 27 Cr shares",
+            gmp="₹247", gmp_pct=22.1, expected="~+19% after the 2.6pt haircut",
+            apply_as="Closed. No Jio shares in the account at 09:41 — on the evidence, no allotment.",
+            horizon="Listing-day sell, today, if the shares are there.",
+            book="FINAL (corrected) · 22.19× · QIB 70.55× · NII 14.00× · retail 2.72× · shareholders 7.60×",
+            flags=(("QIB 70.55× — institutions came hard", "pass"),
+                   ("100% fresh issue", "pass"),
+                   ("premium held ₹247 into the listing", "pass"),
+                   ("YESTERDAY'S BOOK ON THIS PAGE WAS WRONG — 5.81× was a snapshot", "fail"),
+                   ("₹27,500 Cr of proceeds repays DEBT", "warn"),
+                   ("retail 2.72× — a draw, and it looks lost", "warn")),
+            stats=(("final book", "22.19×"), ("QIB", "70.55×"),
+                   ("NII", "14.00×"), ("retail", "2.72×"),
+                   ("shareholders", "7.60×"),
+                   ("published here", "5.81× — wrong"),
+                   ("issue price", "₹1,119"), ("GMP", "22.1%")),
+            note=(
+                "<strong>The call does not change on listing morning and the plan is "
+                "sell.</strong> QIB at 70.55&times; is the strongest institutional book of "
+                "the month by a wide margin, which after Tonbo is the figure this page "
+                "weights above the accounts for a listing-day trade. The premium held at "
+                "&#8377;247 into the open rather than fading, which is the opposite of what "
+                "Jio&rsquo;s own quote did over the 22nd&ndash;23rd and the opposite of "
+                "what Paras did. "
+                "<strong>Why sell rather than hold.</strong> &#8377;27,500 Cr of the "
+                "&#8377;30,213 Cr repays debt. The balance sheet improves and nothing gets "
+                "built, so the listing pop is the trade and the business is somebody "
+                "else&rsquo;s thesis. "
+                "<strong>Whether there is anything to sell is not yet settled.</strong> The "
+                "broker shows LIQUIDCASE and NIFTYBEES and nothing else at 09:41. Retail was "
+                "a 2.72&times; draw, so roughly one application in three. If the shares "
+                "appear when the registrar settles, sell into the first hour; if they do not, "
+                "the apply cost nothing but the blocked funds."
+            ),
+        ),
+        IPO(
+            name="BLS Polymers", call="APPLY — stands, and the book now agrees",
+            tone="good",
+            dates="27–29 Oct · OPEN, closes tomorrow · allotment 30 Oct · lists 3 Nov",
+            band="₹142–150", size="₹255 Cr",
+            split="100% FRESH ISSUE — 1.70 Cr shares, no OFS",
+            gmp="₹44", gmp_pct=29.3, expected="~+27% after the haircut",
+            apply_as="Retail — 100 shares, ₹15,000 at the top band. Last day tomorrow.",
+            horizon="Listing-day sell on 3 November.",
+            book="DAY 2 · 9.62× · QIB 12.03× · NII 12.99× · retail 6.76×",
+            flags=(("the book appeared and institutions are IN at 12.03×", "pass"),
+                   ("100% fresh issue, no seller taking money out", "pass"),
+                   ("₹77.56 Cr into PLANT CAPACITY — real capex", "pass"),
+                   ("~25× FY26 diluted EPS of ₹5.99", "pass"),
+                   ("premium 20.0% → 25.3% → 26.7% → 29.3%, still firming", "pass"),
+                   ("retail already 6.76× — about one lot in seven", "warn"),
+                   ("₹89.50 Cr is working capital, not growth", "warn"),
+                   ("revenue, profit and margin still unread", "warn")),
+            stats=(("day-2 book", "9.62×"), ("QIB", "12.03×"),
+                   ("NII", "12.99×"), ("retail", "6.76×"),
+                   ("GMP today", "29.3%"), ("lot", "100 sh · ₹15,000"),
+                   ("plant capacity", "₹77.56 Cr"),
+                   ("P/E at ₹150", "~25×"), ("lists", "3 Nov")),
+            note=(
+                "<strong>Yesterday this call was made on structure with two of the three "
+                "columns missing, and it said so. The missing column has now arrived and it "
+                "agrees.</strong> QIB 12.03&times; on day two is institutions present and "
+                "buying, which is the condition this page named yesterday as the thing that "
+                "would make it revisit if absent. It is not absent. "
+                "<strong>The premium is the other half and it has firmed every single "
+                "session</strong> &mdash; 20.0% to 25.3% to 26.7% to 29.3% &mdash; while "
+                "EAAA and SFC faded into their own opens. A quote that rises through the "
+                "book is a different animal from a quote that is quoted before one exists. "
+                "<strong>Retail at 6.76&times; is the cost of being right.</strong> One lot "
+                "in roughly seven. That is worse than the 1.16&times; this page once called "
+                "near-certain on Bonfiglioli and was wrong about, so it is said as odds "
+                "rather than as an expectation. "
+                "<strong>One lot, retail, &#8377;15,000, sold into the 3 November "
+                "listing.</strong> Tomorrow is the last day."
+            ),
+        ),
+        IPO(
+            name="Bombay Coated and Special Steels", call="DECIDE ON THE BOOK — not on day one",
+            tone="warn",
+            dates="29 Oct–2 Nov · opens tomorrow · allotment 3 Nov · lists 5 Nov",
+            band="₹78–82", size="₹183.06 Cr",
+            split="100% FRESH ISSUE — but ₹125 Cr of it repays borrowings",
+            gmp="₹9", gmp_pct=11.0, expected="~+8.4% after the haircut",
+            apply_as="Nothing tomorrow. Read the day-2 book on Friday, then decide.",
+            horizon="Listing-day only, 5 November, if it is taken at all.",
+            book="none yet — opens tomorrow",
+            flags=(("100% fresh, no promoter taking money out", "pass"),
+                   ("16.87× FY26 earnings — cheap against this month's board", "pass"),
+                   ("three-year average RoNW 30.55%", "pass"),
+                   ("₹125 Cr of ₹183 Cr REPAYS DEBT — fresh in form only", "fail"),
+                   ("PAT +6.5% on revenue +20% — margins compressing", "fail"),
+                   ("net margin 2.4% on ₹1,266.8 Cr of revenue", "fail"),
+                   ("debt-equity 2.00 as of 30 June 2026", "warn"),
+                   ("the ₹15.77 Cr of capex buys kit it already leases", "warn")),
+            stats=(("size", "₹183.06 Cr"), ("band", "₹78–82"),
+                   ("lot", "182 sh · ₹14,924"),
+                   ("FY26 revenue", "₹1,266.8 Cr"), ("FY26 PAT", "₹30.54 Cr"),
+                   ("PAT growth", "+6.5%"), ("net margin", "2.4%"),
+                   ("P/E FY26", "16.87×"), ("P/BV", "2.43"),
+                   ("debt/equity", "2.00"), ("3yr avg RoNW", "30.55%"),
+                   ("to repay debt", "₹125 Cr"), ("GMP", "11.0%")),
+            note=(
+                "<strong>This page promised on the 27th to read this one properly rather "
+                "than off a price band. Reading it moved the answer, and not upward.</strong> "
+                "It is called a 100% fresh issue, and it is &mdash; but &#8377;125 Cr of the "
+                "&#8377;183.06 Cr repays borrowings against &#8377;302.4 Cr outstanding, and "
+                "&#8377;15.77 Cr buys capital equipment the company already operates under "
+                "lease from Siemens Financial Services. So roughly nine per cent of the raise "
+                "touches productive capacity and none of it adds any. That is the Jio shape, "
+                "at one two-hundredth of the size. "
+                "<strong>The accounts are the real objection.</strong> Revenue "
+                "&#8377;1,266.8 Cr, up about 20%; profit &#8377;30.54 Cr against "
+                "&#8377;28.67 Cr, up 6.5%. Twenty per cent more revenue for six per cent more "
+                "profit is margin going the wrong way, on a net margin of 2.4% that has no "
+                "room to give. Debt-equity 2.00. The 30.55% three-year RoNW is real and is "
+                "largely what leverage does to a thin-margin processor. "
+                "<strong>What stops this being a flat no is Tonbo.</strong> On Tonbo this "
+                "page called avoid four times on exactly this kind of reasoning and the stock "
+                "listed 66% up, because the book said something the accounts could not. There "
+                "is no book here yet. So the honest position is not <em>no</em>, it is "
+                "<em>not yet</em>: nothing goes in tomorrow, and Friday&rsquo;s day-2 numbers "
+                "decide it. <strong>The condition is named in advance so it cannot be "
+                "rewritten afterwards: QIB above 3&times; by Friday evening with the premium "
+                "still at or above 10% makes it one lot; anything less and it is skipped.</strong>"
+            ),
+        ),
+        IPO(
+            name="EAAA India Alternatives, SFC Environmental, M.K.Sons", call="NO — and EAAA is now a closed case",
+            tone="bad",
+            dates="EAAA closes TODAY · SFC 27–29 · M.K.Sons 28–30",
+            band="₹1,665 · ₹330 · ₹162",
+            size="₹1,200 Cr · ₹668 Cr · to confirm",
+            split="EAAA 100% OFS · others to confirm",
+            gmp="0.7% · 5.5% · 6.2%", gmp_pct=6.2,
+            expected="negative to ~+3.6% after the haircut",
+            apply_as="None of them.",
+            horizon="None.",
+            book="EAAA ~0.14× on its final day · SFC ~0.10× after day 1 · M.K.Sons none",
+            flags=(("EAAA at ~0.14× ON ITS LAST DAY — it will struggle to close", "fail"),
+                   ("EAAA premium 3.0% → 1.2% → 0.7%, a straight line down", "fail"),
+                   ("EAAA is 100% offer for sale — the company gets nothing", "fail"),
+                   ("SFC ~0.10× after a full day, premium 9.7% → 5.5%", "fail"),
+                   ("M.K.Sons 6.2% is 3.6% after the haircut", "fail"),
+                   ("every one of the three is below the Paras line", "fail")),
+            stats=(("EAAA book", "~0.14×"), ("EAAA QIB", "~0.08×"),
+                   ("EAAA GMP", "0.7%"), ("SFC book", "~0.10×"),
+                   ("SFC GMP", "5.5%"), ("M.K.Sons GMP", "6.2%"),
+                   ("Paras closed at", "0.34×")),
+            note=(
+                "<strong>EAAA is the cleanest refusal this page has made and it can now be "
+                "closed out.</strong> It is on its final day at roughly 0.14&times; with "
+                "institutions at about 0.08&times;, and the premium has walked 3.0% to 1.2% "
+                "to 0.7%. That is below where Paras was when it closed at 0.34&times; with "
+                "QIB at 0.06%. A &#8377;1,200 Cr issue that is 100% offer for sale and cannot "
+                "fill its own book on the last day is not a pricing problem, it is a demand "
+                "problem. "
+                "<strong>SFC is the same shape one day behind</strong> &mdash; about "
+                "0.10&times; after a full session and a premium that went 9.7% to 5.5% as it "
+                "opened. The pattern of a quote falling into its own open has been the single "
+                "most reliable signal on this board all month. "
+                "<strong>M.K.Sons opens today at 6.2%</strong>, which is 3.6% after the "
+                "2.6-point haircut this page applies to every quote, and there is no book to "
+                "argue against that. Nothing here is worth an application while BLS is open "
+                "at 29.3% with institutions at 12.03&times;."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_28 = _for_oct_28()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -4312,6 +4529,7 @@ BY_DAY = {
     "2026-10-23": (IPOS_2026_10_23, LEAD_23, FOOTNOTE_23),
     "2026-10-26": (IPOS_2026_10_26, LEAD_26, FOOTNOTE_26),
     "2026-10-27": (IPOS_2026_10_27, LEAD_27, FOOTNOTE_27),
+    "2026-10-28": (IPOS_2026_10_28, LEAD_OCT_28, FOOTNOTE_OCT_28),
 }
 
 
