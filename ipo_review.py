@@ -4500,6 +4500,208 @@ def _for_oct_28() -> list[IPO]:
 IPOS_2026_10_28 = _for_oct_28()
 
 
+LEAD_OCT_29 = (
+    "Thursday 29 October, written at 09:55. "
+    "<strong>BLS Polymers closes today and the book has gone from absent to emphatic:</strong> "
+    "11.85&times; overall, QIB 12.04&times;, NII 18.76&times;, retail 8.78&times;, and the "
+    "premium has firmed for a fifth straight session to 34.0%. The apply made on Tuesday "
+    "stands and the evidence has only moved one way. "
+    "<strong>Jio settled, and not the way this page called the day.</strong> It listed at "
+    "&#8377;1,358 and <em>closed</em> day one about 27% above the &#8377;1,119 issue price. "
+    "The advice given here yesterday morning &mdash; take the listing gain &mdash; was worth "
+    "about 21%, and the session paid 27%. That is written up below rather than left out. "
+    "<strong>Bombay Coated opened this morning</strong> and the condition set in advance on "
+    "the 28th governs it: nothing today, decide on Friday&rsquo;s book. "
+    "<strong>Trendlyne has now refused the exchange book for a fourth day</strong>, so every "
+    "subscription figure here is read from public trackers rather than our own source. "
+    "<strong>Held:</strong> breadth 21.37% against an 11.35% mean, rising for a third session "
+    "&mdash; and entries still blocked, because the follow-through gate is the other one."
+)
+
+FOOTNOTE_OCT_29 = (
+    "<strong>The Jio sell call, and what was actually wrong with it.</strong> It was given at "
+    "about 10:30 with the stock at &#8377;1,357, the low of its range at that point, and the "
+    "reasoning leaned on exactly that: listed 1,358, high 1,374.5, back at 1,357, supply "
+    "meeting the open. The stock then closed around &#8377;1,421. "
+    "<strong>The structural half of the argument still holds</strong> &mdash; &#8377;27,500 Cr "
+    "of the raise repays debt, a day-one listing has no derivable stop, and our own gate was "
+    "shut. Selling a listing pop remains the policy and it is not being rewritten after one "
+    "session. <strong>What was wrong was the evidence used to time it:</strong> a "
+    "sixty-minute range read as distribution. An hour of tape on a listing day is noise, and "
+    "quoting it as though it were a signal dressed a policy decision up as a market read. "
+    "The call should have been made on the policy alone, which would have reached the same "
+    "answer without claiming to know what the afternoon would do. "
+    "<strong>The GMP record, now three listings deep:</strong> HD Fire implied +29% and paid "
+    "+23.62%, Tonbo implied +64% and paid +66%, Jio implied +22.1% and paid +21.4% at the "
+    "open and +27% at the close. The 2.6-point haircut is a mean correction being used as a "
+    "point forecast, and the spread around it is wider than the haircut itself."
+)
+
+
+def _for_oct_29() -> list[IPO]:
+    """BLS closes, Bombay Coated opens, Jio is settled and the call is graded."""
+    return [
+        IPO(
+            name="BLS Polymers", call="APPLY — last day, and the book now carries it",
+            tone="good",
+            dates="27–29 Oct · CLOSES 17:00 TODAY · allotment 30 Oct · lists 3 Nov",
+            band="₹142–150", size="₹255 Cr",
+            split="100% FRESH ISSUE — 1.70 Cr shares, no OFS",
+            gmp="₹51", gmp_pct=34.0, expected="~+31% after the haircut",
+            apply_as="Retail — 100 shares, ₹15,000 at the top band. Bids close 17:00.",
+            horizon="Listing-day sell on 3 November.",
+            book="DAY 2 · 11.85× · QIB 12.04× · NII 18.76× · retail 8.78×",
+            flags=(("QIB 12.04× — institutions in, and they bid last", "pass"),
+                   ("premium firmed FIVE sessions: 20.0 → 25.3 → 26.7 → 29.3 → 34.0%", "pass"),
+                   ("100% fresh issue, no seller taking money out", "pass"),
+                   ("₹77.56 Cr into PLANT CAPACITY — real capex", "pass"),
+                   ("~25× FY26 diluted EPS of ₹5.99", "pass"),
+                   ("retail 8.78× — about one lot in nine", "warn"),
+                   ("₹89.50 Cr is working capital, not growth", "warn"),
+                   ("revenue, profit and margin never became readable", "warn")),
+            stats=(("day-2 book", "11.85×"), ("QIB", "12.04×"),
+                   ("NII", "18.76×"), ("retail", "8.78×"),
+                   ("GMP today", "34.0%"), ("GMP on the 27th", "26.7%"),
+                   ("lot", "100 sh · ₹15,000"),
+                   ("plant capacity", "₹77.56 Cr"), ("lists", "3 Nov")),
+            note=(
+                "<strong>This is the first call this month where the thing that was missing "
+                "arrived and agreed.</strong> On Tuesday the apply was made on structure "
+                "alone, with no book and no readable accounts, and it said so. The book is "
+                "now 11.85&times; with institutions at 12.04&times; and the quote has firmed "
+                "every session since. The condition named on Tuesday &mdash; revisit if "
+                "institutions are absent at the close &mdash; has resolved the other way. "
+                "<strong>The premium behaviour is the tell.</strong> Everything else on this "
+                "month&rsquo;s board that faded, faded <em>into</em> its own open: EAAA 3.0 "
+                "to 0.7, SFC 9.7 to 3.6, Paras 14.4 to 2.2. BLS has gone the opposite "
+                "direction through a live book, which is a quote being marked against real "
+                "demand rather than against hope. "
+                "<strong>The cost of being right is the allotment.</strong> Retail at "
+                "8.78&times; is roughly one lot in nine, said as odds rather than as an "
+                "expectation &mdash; the Bonfiglioli lesson, where 1.16&times; was called "
+                "near-certain and closed at 5.89&times;. "
+                "<strong>One lot, retail, &#8377;15,000, bids in before 17:00 today, sold "
+                "into the 3 November listing.</strong>"
+            ),
+        ),
+        IPO(
+            name="Jio Platforms", call="SETTLED — listed +21.4%, closed +27%, we held none",
+            tone="warn",
+            dates="21–23 Oct · allotted 26 Oct · listed 28 Oct",
+            band="₹1,065–1,119", size="₹30,213 Cr",
+            split="100% FRESH ISSUE, 27 Cr shares",
+            gmp="was ₹247", gmp_pct=22.1, expected="implied +22.1%, paid +27% on the close",
+            apply_as="Closed. No allotment — the account held no JPL on listing morning.",
+            horizon="Done.",
+            book="FINAL · 22.19× · QIB 70.55× · NII 14.00× · retail 2.72× · shareholders 7.60×",
+            flags=(("the apply was right — +27% on day one", "pass"),
+                   ("QIB 70.55× was the correct thing to weight", "pass"),
+                   ("retail 2.72× was a draw and we lost it", "warn"),
+                   ("the sell-at-the-open timing was argued from one hour of tape", "fail"),
+                   ("this page published a wrong book as FINAL on the 27th", "fail")),
+            stats=(("issue price", "₹1,119"), ("listed at", "₹1,358"),
+                   ("listing gain", "+21.4%"), ("day-one close", "~+27%"),
+                   ("GMP implied", "+22.1%"), ("final book", "22.19×"),
+                   ("QIB", "70.55×"), ("retail", "2.72×"),
+                   ("our allotment", "none")),
+            note=(
+                "<strong>The apply was right and the account did not get it.</strong> Retail "
+                "finished a 2.72&times; draw, roughly one application in three, and ours was "
+                "not drawn. One lot was 12 shares at &#8377;1,119; the gain we did not "
+                "collect was about &#8377;3,600 on the close. "
+                "<strong>Two things went wrong on this page and neither is the call.</strong> "
+                "On the 27th the book was printed as FINAL at 5.81&times; with QIB "
+                "13.31&times; &mdash; an evening snapshot, against an actual close of "
+                "22.19&times; and QIB 70.55&times;. And on the 28th the sell advice was "
+                "timed off an hour of listing-day tape. "
+                "<strong>The policy is unchanged.</strong> Sell the listing pop: "
+                "&#8377;27,500 Cr of the &#8377;30,213 Cr repays debt, there is no derivable "
+                "stop on a day-one listing, and this book cannot size undefined risk. A "
+                "policy that is right on average will be wrong on individual days, and the "
+                "fix is to stop pretending the individual day was forecast."
+            ),
+        ),
+        IPO(
+            name="Bombay Coated and Special Steels", call="WAIT — the condition was set on the 28th and it holds",
+            tone="warn",
+            dates="29 Oct–2 Nov · OPENS TODAY · allotment 3 Nov · lists 5 Nov",
+            band="₹78–82", size="₹183.06 Cr",
+            split="100% FRESH ISSUE — but ₹125 Cr of it repays borrowings",
+            gmp="₹9", gmp_pct=11.0, expected="~+8.4% after the haircut",
+            apply_as="Nothing today. Read Friday's book, then decide.",
+            horizon="Listing-day only, 5 November, if it is taken at all.",
+            book="none yet — day one",
+            flags=(("GMP has held ₹9 for four days — steady, not fading", "pass"),
+                   ("100% fresh, no promoter taking money out", "pass"),
+                   ("16.87× FY26 earnings", "pass"),
+                   ("₹125 Cr of ₹183 Cr REPAYS DEBT — fresh in form only", "fail"),
+                   ("PAT +6.5% on revenue +20% — margins compressing", "fail"),
+                   ("net margin 2.4% on ₹1,266.8 Cr", "fail"),
+                   ("debt-equity 2.00 at 30 June 2026", "warn")),
+            stats=(("size", "₹183.06 Cr"), ("band", "₹78–82"),
+                   ("lot", "182 sh · ₹14,924"),
+                   ("FY26 revenue", "₹1,266.8 Cr"), ("FY26 PAT", "₹30.54 Cr"),
+                   ("PAT growth", "+6.5%"), ("net margin", "2.4%"),
+                   ("P/E FY26", "16.87×"), ("debt/equity", "2.00"),
+                   ("to repay debt", "₹125 Cr"), ("GMP", "11.0%")),
+            note=(
+                "<strong>The condition was written down on the 28th precisely so it could "
+                "not be rewritten today, and it is not being rewritten: QIB above 3&times; "
+                "by Friday evening with the premium at or above 10% makes it one lot, "
+                "anything less and it is skipped.</strong> "
+                "Day one has no book, so there is nothing to test it against yet. The one "
+                "thing that has moved is that the quote has <em>not</em> moved &mdash; "
+                "&#8377;9 for four days running, where SFC and EAAA both bled out over the "
+                "same window. Steady is mildly encouraging and is not a book. "
+                "<strong>The objections stand and are worth restating.</strong> It is called "
+                "fresh and is: &#8377;125 Cr of &#8377;183.06 Cr repays borrowings against "
+                "&#8377;302.4 Cr outstanding, and the &#8377;15.77 Cr of capital equipment "
+                "is kit already operated under lease. Twenty per cent more revenue produced "
+                "six and a half per cent more profit, on a 2.4% net margin with debt-equity "
+                "at 2.00. "
+                "<strong>Tomorrow decides it.</strong>"
+            ),
+        ),
+        IPO(
+            name="SFC Environmental, M.K.Sons Fine Jewels", call="NO — SFC closes today having faded all week",
+            tone="bad",
+            dates="SFC closes TODAY · M.K.Sons 28–30 Oct",
+            band="₹330 · ₹162", size="₹668 Cr · to confirm",
+            split="to confirm",
+            gmp="3.6% · 9.3%", gmp_pct=9.3,
+            expected="~+1.0% and ~+6.7% after the haircut",
+            apply_as="Neither.",
+            horizon="None.",
+            book="no exchange book — Trendlyne 405 for a fourth day",
+            flags=(("SFC 9.7 → 6.7 → 5.5 → 3.6% across its own window", "fail"),
+                   ("SFC is ~1.0% after the haircut, on its closing day", "fail"),
+                   ("M.K.Sons 4.9 → 6.2 → 9.3% — rising, but off a low base", "warn"),
+                   ("no subscription book for either", "warn")),
+            stats=(("SFC GMP 26 Oct", "9.7%"), ("SFC today", "3.6%"),
+                   ("M.K.Sons 27 Oct", "4.9%"), ("M.K.Sons today", "9.3%"),
+                   ("EAAA closed at", "~0.14×")),
+            note=(
+                "<strong>SFC closes today having done the one thing this board has punished "
+                "every time.</strong> Its premium fell through its entire subscription window "
+                "&mdash; 9.7% to 6.7% to 5.5% to 3.6% &mdash; which after the haircut is "
+                "about one per cent. EAAA, the other issue that behaved this way, closed "
+                "yesterday at roughly 0.14&times; with institutions at 0.08&times;. "
+                "<strong>M.K.Sons is the honest footnote: it is going the other way</strong>, "
+                "4.9% to 6.2% to 9.3%, and it closes tomorrow. That is the same shape as BLS "
+                "in miniature and it would be dishonest not to say so. It is still refused, "
+                "on two grounds: 6.7% after the haircut is thin for a lottery, and there is "
+                "no book behind the quote &mdash; which is exactly the gap that made the "
+                "Tuesday BLS call a structural one rather than a confident one. With "
+                "&#8377;15,000 going into BLS at 34.0% with QIB at 12.04&times;, this does "
+                "not compete for the same money."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_29 = _for_oct_29()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -4529,7 +4731,7 @@ BY_DAY = {
     "2026-10-23": (IPOS_2026_10_23, LEAD_23, FOOTNOTE_23),
     "2026-10-26": (IPOS_2026_10_26, LEAD_26, FOOTNOTE_26),
     "2026-10-27": (IPOS_2026_10_27, LEAD_27, FOOTNOTE_27),
-    "2026-10-28": (IPOS_2026_10_28, LEAD_OCT_28, FOOTNOTE_OCT_28),
+    "2026-10-28": (IPOS_2026_10_28, LEAD_OCT_28, FOOTNOTE_OCT_28),    "2026-10-29": (IPOS_2026_10_29, LEAD_OCT_29, FOOTNOTE_OCT_29),
 }
 
 
