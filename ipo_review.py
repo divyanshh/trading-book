@@ -4702,6 +4702,142 @@ def _for_oct_29() -> list[IPO]:
 IPOS_2026_10_29 = _for_oct_29()
 
 
+# ── 30 October 2026 ─────────────────────────────────────────────────────────
+# Sources: dyno IPO board 09:32 (GMP only — Trendlyne 405 for a fifth day),
+# IPO Watch GMP board and issue pages (30 Oct), InvestorGain M.K.Sons page
+# (7-day GMP history), Kotak Neo / Chola / ScanX / HDFC Sky / Groww
+# subscription snapshots for 29 Oct. Every book below is a DAY-END or
+# INTRADAY snapshot of a previous session from a public tracker, and the
+# trackers disagree with each other; none of them is a final book.
+LEAD_OCT_30 = (
+    "Friday 30 October, written at 09:45, fifteen minutes into the session. "
+    "<strong>Nothing on this page is a final book.</strong> Bombay Coated is in day two of "
+    "four and M.K.Sons closes at 17:00 today; every subscription figure below is a "
+    "29 October snapshot from a public tracker, the trackers disagree with each other by "
+    "as much as 3&times;, and Trendlyne has refused the exchange book for a fifth day. "
+    "<strong>Bombay Coated:</strong> the condition written on the 28th &mdash; QIB above "
+    "3&times; by Friday evening with the premium at or above 10% &mdash; is provisionally "
+    "met on day-one numbers (QIB 6.55&times; on the Kotak Neo 20:15 snapshot, GMP "
+    "&#8377;9 = 11.0%), but one tracker shows QIB at only 2.82&times;, which is the wrong "
+    "side of the line. The test is tonight&rsquo;s book, as written. "
+    "<strong>M.K.Sons:</strong> the one argument for it yesterday was a rising premium. "
+    "It peaked at &#8377;15 on the 28th and is &#8377;12&ndash;12.5 today. The refusal stands "
+    "and now has nothing against it. "
+    "<strong>Held:</strong> breadth 27.37% against a 13.18% mean, OPEN for a fourth "
+    "session; entries still BLOCKED by the follow-through gate."
+)
+
+FOOTNOTE_OCT_30 = (
+    "<strong>The haircut, applied and said.</strong> Expected listing is GMP% minus "
+    "2.6 points: Bombay Coated 11.0% &rarr; ~8.4%, M.K.Sons 7.4&ndash;7.7% &rarr; ~4.8&ndash;5.1%. "
+    "The three graded listings this month missed their haircut-adjusted figure by "
+    "&minus;3, +4.6 and +7.5 points (HD Fire, Tonbo, Jio at the close) &mdash; the spread is "
+    "wider than the haircut, so a ~5% expectation is not distinguishable from zero and an "
+    "~8% one only barely is. <strong>Two numbers from yesterday&rsquo;s Bombay Coated card "
+    "do not reconcile with today&rsquo;s sources:</strong> it printed 16.87&times; FY26 "
+    "earnings and debt-equity 2.00 at 30 June; IPO Watch prints basic EPS &#8377;7.64 "
+    "(about 10.7&times; at &#8377;82, pre-issue) and debt-equity 2.78 labelled FY2026. "
+    "The likeliest reading is post-issue dilution versus pre-issue, and a 30 June versus "
+    "31 March balance sheet, but that is not confirmed; neither moves the call. "
+    "<strong>BLS Polymers</strong> allots today; whether the one retail lot was drawn is "
+    "not known at the time of writing."
+)
+
+
+def _for_oct_30() -> list[IPO]:
+    """Bombay Coated against its own pre-set condition; M.K.Sons closes having faded."""
+    return [
+        IPO(
+            name="Bombay Coated and Special Steels",
+            call="CONDITIONAL APPLY — one retail lot if tonight's book holds QIB > 3×",
+            tone="warn",
+            dates="29 Oct–2 Nov · DAY 2 of 4 · allotment 3 Nov · lists 5 Nov",
+            band="₹78–82", size="₹183.06 Cr",
+            split="100% FRESH ISSUE — but ₹125 Cr of it repays borrowings",
+            gmp="₹9", gmp_pct=11.0, expected="~+8.4% after the haircut",
+            apply_as="Retail only — 1 lot, 182 sh, ₹14,924. Not sHNI, not bHNI.",
+            horizon="Listing-day sell on 5 November.",
+            book="DAY-1 SNAPSHOTS, NOT FINAL · 2.20–2.65× · QIB 6.55× (one tracker 2.82×) · "
+                 "NII 0.25–0.7× · retail 0.49–1.21×",
+            flags=(("GMP ₹9 for a fifth day — steady, not fading", "pass"),
+                   ("QIB 6.55× on the 20:15 day-1 snapshot", "pass"),
+                   ("but one tracker has QIB 2.82× — under the 3× line", "warn"),
+                   ("NII 0.25–0.7× — HNI money is not there", "warn"),
+                   ("₹125 Cr of ₹183 Cr REPAYS DEBT", "fail"),
+                   ("PAT +6.5% on revenue +20%, net margin 2.4%", "fail"),
+                   ("debt-equity 2.00–2.78 depending on source", "fail")),
+            stats=(("GMP today", "₹9 · 11.0%"), ("after haircut", "~+8.4%"),
+                   ("odds above issue", "about 3 in 4"),
+                   ("QIB day 1", "6.55× / 2.82×"), ("retail day 1", "0.49–1.21×"),
+                   ("lot", "182 sh · ₹14,924"), ("FY26 PAT", "₹30.54 Cr"),
+                   ("to repay debt", "₹125 Cr"), ("lists", "5 Nov")),
+            note=(
+                "The condition was set on the 28th so it could not be rewritten on the "
+                "morning it was tested, and it is not being rewritten now: QIB above 3× by "
+                "Friday evening with the premium at or above 10% makes it one retail lot; "
+                "anything less and it is skipped. On day-one numbers it is provisionally met "
+                "— QIB 6.55× on the Kotak Neo 20:15 snapshot and GMP ₹9, 11.0% — but those "
+                "are mid-window figures from a tracker, not the exchange, and another tracker "
+                "has QIB at 2.82×. So the decision is tonight's, on tonight's book, and bids "
+                "stay open until Monday 2 November. "
+                "Odds, said as odds: about 3 in 4 that it lists above ₹82, which is a "
+                "judgement from an ~8.4% haircut-adjusted premium and not a measured rate. "
+                "The expected gain on one lot is roughly ₹1,250, and the spread around it is "
+                "wider than the haircut. "
+                "Why retail and not sHNI: NII is barely subscribed, so an sHNI bid of about "
+                "₹2.09 L would very likely be allotted in full — about fourteen times the "
+                "exposure to a 2.4%-margin, heavily geared steel processor for the same "
+                "~8% expectation. That is size this book should not take on a grey-market quote."
+            ),
+        ),
+        IPO(
+            name="M.K.Sons Fine Jewels",
+            call="NO — closes today, and the premium peaked on the 28th",
+            tone="fail",
+            dates="28–30 Oct · CLOSES 17:00 TODAY · allotment 2 Nov · lists 4 Nov",
+            band="₹153–162", size="₹275.40 Cr",
+            split="₹220.32 Cr fresh · ₹55.08 Cr OFS (20%)",
+            gmp="₹12–12.5", gmp_pct=7.6, expected="~+5% after the haircut",
+            apply_as="None.",
+            horizon="None.",
+            book="DAY-2 SNAPSHOTS, NOT FINAL · 0.70–1.16× · QIB 0.62–0.99× · "
+                 "NII 1.32–2.18× · retail 0.41–0.83×",
+            flags=(("GMP ₹7 → 8 → 10 → 15 → 12.5 → 12.5 — peaked and faded", "fail"),
+                   ("~5% after the haircut — inside the spread", "fail"),
+                   ("QIB under 1× going into the last day", "warn"),
+                   ("20% of the issue is promoters selling", "warn"),
+                   ("Jewellery sector WEAKENING on our RRG", "warn"),
+                   ("FY26 PAT ₹51.8 Cr, +123%; revenue +53%", "pass"),
+                   ("~16.1× post-issue earnings", "pass")),
+            stats=(("GMP today", "₹12–12.5 · 7.4–7.7%"), ("GMP 28 Oct", "₹15 · 9.3%"),
+                   ("after haircut", "~+5%"), ("odds above issue", "about 2 in 3"),
+                   ("QIB day 2", "0.62–0.99×"), ("retail day 2", "0.41–0.83×"),
+                   ("lot", "91 sh · ₹14,742"), ("P/E post-issue", "16.1×"),
+                   ("lists", "4 Nov")),
+            note=(
+                "Yesterday this was refused with one honest objection against the refusal: "
+                "its premium was rising, the BLS shape in miniature. That objection has "
+                "gone. InvestorGain's own history runs ₹7, ₹7, ₹8, ₹10, ₹15 on the 28th, "
+                "then ₹12.5 and ₹12.5 — a peak and a fade into the closing day, the pattern "
+                "SFC, EAAA and Paras all showed on this board this month. "
+                "The day-2 book is between 0.70× and 1.16× depending on which tracker and "
+                "which hour; every one of them has QIB under 1×. Those are mid-window "
+                "numbers and the last day is when institutions usually bid, so the final "
+                "book may well look better — but the call cannot wait for it, because the "
+                "issue closes at 17:00. "
+                "Odds, said as odds: about 2 in 3 that it lists above ₹162, with an "
+                "expected gain near 5% that the measured spread cannot tell from zero. "
+                "The business is genuinely growing — profit more than doubled in FY26 — and "
+                "16× is not dear against listed jewellers at 9.5–27.8×. This is a listing "
+                "call, not a verdict on the company."
+            ),
+        ),
+    ]
+
+
+IPOS_2026_10_30 = _for_oct_30()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -4732,6 +4868,7 @@ BY_DAY = {
     "2026-10-26": (IPOS_2026_10_26, LEAD_26, FOOTNOTE_26),
     "2026-10-27": (IPOS_2026_10_27, LEAD_27, FOOTNOTE_27),
     "2026-10-28": (IPOS_2026_10_28, LEAD_OCT_28, FOOTNOTE_OCT_28),    "2026-10-29": (IPOS_2026_10_29, LEAD_OCT_29, FOOTNOTE_OCT_29),
+    "2026-10-30": (IPOS_2026_10_30, LEAD_OCT_30, FOOTNOTE_OCT_30),
 }
 
 
