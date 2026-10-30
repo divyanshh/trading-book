@@ -4838,6 +4838,160 @@ def _for_oct_30() -> list[IPO]:
 IPOS_2026_10_30 = _for_oct_30()
 
 
+# ── 30 October 2026, 10:00 pass ─────────────────────────────────────────────
+# Refresh of the 09:45 page above, which is left intact. Sources read 10:00–10:10
+# IST: InvestorGain GMP pages (Bombay Coated 09:02, M.K.Sons 09:37) and its live
+# subscription table (29 Oct 17:06), IPO Watch (Bombay Coated day 1; M.K.Sons
+# day 2 and GMP 09:20), IPOPlatform (Bombay Coated 29 Oct 17:05, with shares
+# offered per category), IPOji (M.K.Sons GMP 09:30, book 29 Oct 17:06),
+# Chittorgarh (M.K.Sons 29 Oct 17:06), Chola (Bombay Coated, labelled 30 Oct
+# 09:48). Chittorgarh's Bombay Coated page 404'd and ipopremium 403'd. The dyno
+# board at 10:03 still had no book (Trendlyne 405, a sixth day). No source had
+# a figure for today's bidding yet.
+LEAD_OCT_30_1000 = (
+    "Friday 30 October. <strong>Updated at 10:10 IST</strong>; the 09:45 version said "
+    "the Bombay Coated condition was in doubt on QIB, and it is not. "
+    "<strong>Nothing on this page is a final book.</strong> Every subscription figure is a "
+    "<em>previous-session close</em> (29 Oct, 17:05&ndash;17:06), because no tracker had "
+    "printed today&rsquo;s bidding when this was written. Bombay Coated is on day two of "
+    "<strong>three</strong>, not four as the 09:45 version said: 29 Oct, 30 Oct and Mon 2 Nov. "
+    "M.K.Sons closes at 17:00 today. "
+    "<strong>Bombay Coated:</strong> the &ldquo;QIB 2.82&times;&rdquo; that put the QIB leg "
+    "in doubt at 09:45 is almost certainly the <em>overall</em> figure. Three trackers that "
+    "agree on the day-1 close have overall 2.81&times; and QIB 6.89&times;. QIB is cumulative "
+    "and cannot fall, so the QIB-above-3&times; leg of the 28 Oct condition is met. "
+    "The condition now turns on GMP alone, and that has almost no headroom. "
+    "&#8377;9 is 10.98%, and the 10% line is &#8377;8.20, so a one-rupee slip to &#8377;8 "
+    "fails it. The call is unchanged: CONDITIONAL APPLY, one retail lot. "
+    "<strong>M.K.Sons:</strong> the call stays NO. A third tracker (IPOji, 09:30) now has GMP "
+    "at &#8377;9, under the &#8377;12&ndash;12.5 the other two show. "
+    "<strong>New on this version:</strong> allotment odds per category, each against the "
+    "capital that category blocks. bHNI is out for both issues on the Rs 5 L deploy cap alone."
+)
+
+FOOTNOTE_OCT_30_1000 = (
+    "<strong>How the allotment odds are worked.</strong> In an oversubscribed retail or "
+    "NII category, every allottee gets the category&rsquo;s minimum application, chosen by "
+    "lottery. The odds for one minimum application are therefore no worse than "
+    "1 &divide; (subscription multiple). They are better when applicants bid above the "
+    "minimum, and no source here prints application counts per category. "
+    "An undersubscribed category is filled in full, at whatever size was bid. "
+    "Bidding above the minimum in sHNI blocks more capital and does not improve the odds. "
+    "All multiples are 29 Oct closes and will rise through today; the odds can only shorten. "
+    "<strong>Minimum applications at the cap price:</strong> "
+    "Bombay Coated: retail 1 lot &#8377;14,924; sHNI 14 lots &#8377;2,08,936; "
+    "bHNI 68 lots &#8377;10,14,832. "
+    "M.K.Sons: retail 1 lot &#8377;14,742; sHNI 14 lots &#8377;2,06,388; "
+    "bHNI 68 lots &#8377;10,02,456. "
+    "Both bHNI minimums are above the &#8377;5,00,000 per-trade deploy cap, so bHNI is "
+    "breached before any view on the issue. "
+    "Against the &#8377;20,000 flat risk, an sHNI allotment of Bombay Coated uses the whole "
+    "budget if it lists about 9.6% below issue (&#8377;20,000 &divide; 2,548 shares = "
+    "&#8377;7.85 a share). "
+    "<strong>The haircut, applied:</strong> GMP% minus 2.6 points, and the spread around it "
+    "is wider than the haircut (&minus;3 to +7.5 points on the last three graded listings). "
+    "The 09:45 footnote&rsquo;s P/E and debt-equity reconciliation for Bombay Coated still "
+    "stands, unconfirmed. BLS Polymers&rsquo; allotment result was not checked on this pass."
+)
+
+
+def _for_oct_30_1000() -> list[IPO]:
+    """The 09:45 cards with the 10:00 book, GMP and per-category allotment odds."""
+    bombay, mksons = _for_oct_30()
+    bombay = replace(
+        bombay,
+        call="CONDITIONAL APPLY — one retail lot; QIB leg met, now turns on GMP ≥ ₹8.20 tonight",
+        dates="29 Oct–2 Nov · DAY 2 of 3 · allotment 3 Nov · lists 5 Nov",
+        gmp="₹9 (InvestorGain 30 Oct 09:02)",
+        expected="~+8.4% after the haircut",
+        apply_as="Retail only — 1 lot, 182 sh, ₹14,924. Not sHNI. bHNI breaches the ₹5 L cap.",
+        book="29 OCT 17:05 CLOSE (day 1), NOT FINAL · 2.81× · QIB 6.89× · "
+             "NII 0.76× (sHNI 1.25×, bHNI 0.51×) · retail 1.31× · no day-2 print at 10:10",
+        flags=(("QIB 6.89× at the day-1 close on three trackers — the > 3× leg is met", "pass"),
+               ("the 09:45 '2.82×' was the overall figure, not QIB", "pass"),
+               ("GMP ₹9 = 10.98% — ₹0.80 above the 10% line", "warn"),
+               ("NII 0.76× — HNI money is still thin", "warn"),
+               ("₹125 Cr of ₹183 Cr REPAYS DEBT", "fail"),
+               ("PAT +6.5% on revenue +20%, net margin 2.4%", "fail"),
+               ("debt-equity 2.00–2.78 depending on source", "fail")),
+        stats=(("GMP 30 Oct 09:02", "₹9 · 10.98%"), ("after haircut", "~+8.4%"),
+               ("odds above issue", "about 3 in 4"),
+               ("retail odds (₹14,924)", "about 3 in 4 or better"),
+               ("sHNI odds (₹2,08,936)", "about 4 in 5 or better"),
+               ("bHNI (₹10,14,832)", "breaches ₹5 L cap"),
+               ("QIB 29 Oct 17:05", "6.89×"), ("retail 29 Oct 17:05", "1.31×"),
+               ("lists", "5 Nov")),
+        note=(
+            "Updated 10:10 IST. The condition set on the 28th is QIB above 3× by Friday "
+            "evening and the premium at or above 10%. At 09:45 the QIB leg was in doubt "
+            "because one tracker showed 2.82×. Read again at 10:05, that figure matches the "
+            "overall subscription (2.81×), not QIB. IPOPlatform, InvestorGain and IPO Watch "
+            "agree on the 29 Oct 17:05–17:06 close: QIB 6.89× on 45.6 lakh shares offered. "
+            "Chola, labelled 30 Oct 09:48, prints a lower 6.55×, which looks like an earlier "
+            "day-1 snapshot carried forward. QIB bids accumulate, so the QIB leg is met. "
+            "The GMP leg is still live and tight. ₹9 has printed for six days (InvestorGain, "
+            "last 30 Oct 09:02), and the 10% line on ₹82 is ₹8.20. ₹8 tonight fails it, "
+            "₹9 passes it, and the decision is still tonight's. "
+            "Allotment odds, each against the capital the category blocks, on the 29 Oct "
+            "close. Retail, 1 lot, ₹14,924: about 3 in 4 or better at 1.31× (42,930 "
+            "minimum lots on offer). sHNI, 14 lots, ₹2,08,936: about 4 in 5 or better at "
+            "1.25× (438 allottees). That is inside the ₹5 L cap but about fourteen times the "
+            "retail exposure, and a listing about 9.6% under issue would use the whole "
+            "₹20,000 risk. bHNI, 68 lots, ₹10,14,832: breaches the ₹5 L deploy cap "
+            "outright, and at 0.51× it would be allotted in full. "
+            "These odds can only shorten as today's and Monday's bids arrive. "
+            "Odds of listing above ₹82 are unchanged at about 3 in 4, as a judgement and "
+            "not a measured rate. The expected gain on one retail lot is about ₹1,250."
+        ),
+    )
+    mksons = replace(
+        mksons,
+        gmp="₹9–12.5 (30 Oct 09:20–09:37)",
+        gmp_pct=7.7,
+        expected="~+3–5% after the haircut",
+        apply_as="None. bHNI would breach the ₹5 L cap in any case.",
+        book="29 OCT 17:06 CLOSE (day 2), NOT FINAL · 1.18× · QIB 0.99× · "
+             "NII 2.20× (sHNI 1.56×, bHNI 2.52×) · retail 0.85× · no day-3 print at 10:10",
+        flags=(("GMP ₹9 / ₹12 / ₹12.5 on three trackers this morning", "fail"),
+               ("~3–5% after the haircut — inside the spread", "fail"),
+               ("QIB 0.99× at the day-2 close, going into the last day", "warn"),
+               ("20% of the issue is promoters selling", "warn"),
+               ("Jewellery sector WEAKENING on our RRG", "warn"),
+               ("FY26 PAT ₹51.8 Cr, +123%; revenue +53%", "pass"),
+               ("~16.1× post-issue earnings", "pass")),
+        stats=(("GMP 30 Oct", "₹12.5 IG 09:37 · ₹12 IPOW 09:20 · ₹9 IPOji 09:30"),
+               ("GMP peak", "₹16 · IG 28 Oct 21:02"),
+               ("after haircut", "~+3–5%"), ("odds above issue", "about 2 in 3"),
+               ("retail odds (₹14,742)", "about 1 in 1 at 0.85×"),
+               ("sHNI odds (₹2,06,388)", "about 2 in 3 or better"),
+               ("bHNI (₹10,02,456)", "breaches ₹5 L cap"),
+               ("QIB 29 Oct 17:06", "0.99×"), ("lists", "4 Nov")),
+        note=(
+            "Updated 10:10 IST. The call is unchanged and still NO, and nothing read at 10:00 "
+            "argues the other way. The day-2 book now agrees across IPOji, IPO Watch and "
+            "Chittorgarh at the 29 Oct 17:06 close. It is 1.18× overall, QIB 0.99×, NII "
+            "2.20× (bHNI 2.52×, sHNI 1.56×) and retail 0.85×, which replaces the 0.70–1.16× "
+            "range at 09:45. It is still not final: day-3 bids run to 17:00 and no tracker "
+            "had printed them at 10:10. "
+            "GMP this morning is ₹12.5 on InvestorGain (09:37), ₹12 on IPO Watch (09:20) "
+            "and ₹9 on IPOji (09:30), which is 5.6–7.7%, or roughly 3–5% after the "
+            "haircut. InvestorGain's intraday history peaks at ₹16 on the 28th (21:02), not "
+            "₹15 as written at 09:45. The shape is the same either way: a peak, then a fade. "
+            "Allotment odds, each against the capital the category blocks, for the record. "
+            "Retail, 1 lot, ₹14,742: about 1 in 1 while retail is under 1×. sHNI, 14 "
+            "lots, ₹2,06,388: about 2 in 3 or better at 1.56× (667 allottees). bHNI, 68 "
+            "lots, ₹10,02,456: about 2 in 5 at 2.52×, but it breaches the ₹5 L deploy cap "
+            "outright. Easy allotment is not a reason to apply when the expected gain cannot "
+            "be told from zero. "
+            "Odds of listing above ₹162: about 2 in 3."
+        ),
+    )
+    return [bombay, mksons]
+
+
+IPOS_2026_10_30_1000 = _for_oct_30_1000()
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -4868,7 +5022,8 @@ BY_DAY = {
     "2026-10-26": (IPOS_2026_10_26, LEAD_26, FOOTNOTE_26),
     "2026-10-27": (IPOS_2026_10_27, LEAD_27, FOOTNOTE_27),
     "2026-10-28": (IPOS_2026_10_28, LEAD_OCT_28, FOOTNOTE_OCT_28),    "2026-10-29": (IPOS_2026_10_29, LEAD_OCT_29, FOOTNOTE_OCT_29),
-    "2026-10-30": (IPOS_2026_10_30, LEAD_OCT_30, FOOTNOTE_OCT_30),
+    # 10:00 pass supersedes the 09:45 page; IPOS_2026_10_30 / LEAD_OCT_30 stay above.
+    "2026-10-30": (IPOS_2026_10_30_1000, LEAD_OCT_30_1000, FOOTNOTE_OCT_30_1000),
 }
 
 
