@@ -100,7 +100,7 @@ def row(ipo: IPO) -> str:
     )
 
 
-def section(ipos: list[IPO], lead: str, footnote: str) -> str:
+def section(ipos: list[IPO], lead: str, footnote: str, addendum: str = "") -> str:
     head = (
         '<tr><th class="l">IPO</th><th class="l">call</th><th>GMP</th><th>GMP %</th>'
         '<th>expected listing</th><th class="l">apply as</th><th class="l">horizon</th>'
@@ -114,6 +114,7 @@ def section(ipos: list[IPO], lead: str, footnote: str) -> str:
         + "</tbody></table></div>"
         f'<p class="sub">{footnote}</p>'
         '<div class="cards">' + "".join(card(i) for i in ipos) + "</div>"
+        + addendum
     )
 
 
@@ -4992,6 +4993,94 @@ def _for_oct_30_1000() -> list[IPO]:
 IPOS_2026_10_30_1000 = _for_oct_30_1000()
 
 
+# ── Addenda ─────────────────────────────────────────────────────────────────
+# Blocks appended to a day's page *after* it was first published: corrections,
+# and pre-set conditions read at their deadline. They live here rather than in
+# the published HTML because mirror.py regenerates every page in
+# stocks/reports/ from this module — a correction hand-edited into the
+# published file is reverted the next time the mirror runs, silently. That
+# happened on 30 October: the BLS correction below was published at 15:10 and
+# gone by 16:20. Anything meant to survive belongs in this file.
+
+ADDENDUM_OCT_29_BLS = (
+    '<section class="plate" style="margin-top:26px">'
+    '<p class="eyebrow">Correction &middot; added 30 October</p>'
+    '<p style="margin:0"><strong>The retail odds on this page are wrong.</strong> '
+    '&ldquo;Retail 8.78&times; &mdash; about one lot in nine&rdquo; was an intraday day-two '
+    'snapshot published as a book. Day two closed at retail 29.85&times;; the issue closed on '
+    '29 October at <strong>overall ~241&times;, QIB 200.25&times;, NII ~558&times;, '
+    'retail ~122&ndash;128&times;</strong>. Real retail odds were about <strong>1 in 125</strong>, '
+    'not 1 in 9 &mdash; overstated roughly fourteenfold. The apply call stands; the odds '
+    'statement does not. Full note on '
+    '<a href="2026-10-30_ipo_review.html">the 30 October page</a>.</p>'
+    '</section>'
+)
+
+ADDENDUM_OCT_30 = (
+    '<section class="plate" style="margin-top:26px">'
+    '<p class="eyebrow">Correction &middot; 30 October</p>'
+    '<h3 style="margin:0 0 8px;font-size:18px;font-weight:800">BLS Polymers &mdash; the retail '
+    'odds on the 29 October page were wrong by about fourteen times</h3>'
+    '<p style="margin:0 0 10px">Yesterday&rsquo;s page said <em>&ldquo;retail 8.78&times; &mdash; '
+    'about one lot in nine&rdquo;</em>. That 8.78&times; was an <strong>intraday snapshot taken '
+    'during day two</strong>, published as though it were a book. It was not. Day two <em>closed</em> '
+    'at retail 29.85&times;, QIB 12.20&times;, NII 78.81&times;, overall 35.3&times;. The issue then '
+    'closed on 29 October at <strong>overall ~241&times;, QIB 200.25&times;, NII ~558&times;, '
+    'retail ~122&ndash;128&times;</strong> &mdash; institutions and the NII book did almost all of '
+    'it on the final day.</p>'
+    '<dl class="stats">'
+    '<div><dt>published odds</dt><dd>1 in 9</dd></div>'
+    '<div><dt>actual retail book</dt><dd>~125&times;</dd></div>'
+    '<div><dt>actual odds</dt><dd>about 1 in 125</dd></div>'
+    '<div><dt>overstated by</dt><dd>~14&times;</dd></div>'
+    '<div><dt>GMP when written</dt><dd>&#8377;50 &middot; 33%</dd></div>'
+    '<div><dt>GMP today</dt><dd>&#8377;68&ndash;74 &middot; 45&ndash;49%</dd></div>'
+    '<div><dt>lists</dt><dd>3 Nov</dd></div></dl>'
+    '<p style="margin:10px 0 0"><strong>The call is not what was wrong.</strong> One retail lot at '
+    '&#8377;15,000 into a 45% premium is still the right side of this. What was wrong is the number '
+    'this page exists to state honestly: the chance of getting any of it. <strong>The rule that '
+    'follows:</strong> a subscription figure is only usable with the hour it was read, a mid-window '
+    'figure is never the basis of an odds statement, and the last day is when institutions bid '
+    '&mdash; so any book quoted before the close is a floor, not a measurement.</p>'
+    '</section>'
+    '<section class="plate" style="margin-top:26px">'
+    '<p class="eyebrow">Condition resolved &middot; 30 October, 17:05</p>'
+    '<h3 style="margin:0 0 8px;font-size:18px;font-weight:800">Bombay Coated &mdash; the condition '
+    'fails on the GMP leg. <span style="color:var(--red)">Skip.</span></h3>'
+    '<p style="margin:0 0 10px">The condition written on 28 October was <em>QIB above 3&times; by '
+    'Friday <strong>and</strong> GMP at or above 10%</em>. Read at the close, the two legs have gone '
+    'opposite ways from where they stood this morning.</p>'
+    '<dl class="stats">'
+    '<div><dt>QIB leg</dt><dd>6.89&times; &mdash; met</dd></div>'
+    '<div><dt>GMP leg</dt><dd>&#8377;7 &middot; 8.5% &mdash; failed</dd></div>'
+    '<div><dt>GMP this morning</dt><dd>&#8377;9 &middot; 11.0%</dd></div>'
+    '<div><dt>GMP 15:25</dt><dd>&#8377;8.5 &middot; 10.4%</dd></div>'
+    '<div><dt>GMP 17:05</dt><dd>&#8377;7 &middot; 8.5%</dd></div>'
+    '<div><dt>after haircut</dt><dd>~5.9%</dd></div>'
+    '<div><dt>book at 17:05</dt><dd>3.81&times; &middot; NII 1.65&times; &middot; retail 2.95&times;</dd></div>'
+    '<div><dt>bids close</dt><dd>Mon 2 Nov 17:00</dd></div></dl>'
+    '<p style="margin:10px 0 0">This morning the QIB leg looked like the blocker, at 2.82&times; on one '
+    'tracker against 6.55&times; on another. It was never the blocker: the institutional book was always '
+    'above 3&times; and the two trackers now agree at 6.89&times;. The leg that failed is the one that had '
+    'been flat at &#8377;9 since 26 October and came off today &mdash; &#8377;9 this morning, &#8377;8.5 '
+    'at 15:25, &#8377;7 at the close, both trackers agreeing on the last figure. <strong>That is the '
+    'fade-into-the-close shape that M.K.Sons, SFC, EAAA and Paras all showed on this board this '
+    'month</strong>, and the condition was written in advance precisely so that this reading, not a fresh '
+    'opinion, would make the call.</p>'
+    '<p style="margin:10px 0 0"><strong>Bids are open until 17:00 on Monday 2 November</strong>, so the '
+    'issue is not closed to us; the condition is. It said Friday, it has been read on Friday, and it says '
+    'skip. Nothing has been applied for. Re-opening this on Monday would mean writing a new condition '
+    'after seeing the answer to the old one, which is the one thing a pre-set condition exists to '
+    'prevent.</p>'
+    '</section>'
+)
+
+ADDENDA = {
+    "2026-10-29": ADDENDUM_OCT_29_BLS,
+    "2026-10-30": ADDENDUM_OCT_30,
+}
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -5034,7 +5123,7 @@ def main() -> int:
         return 1
     issues, lead, footnote = BY_DAY[day]
     print(f"{day}: {len(issues)} issues")
-    write(day, section(issues, lead, footnote))
+    write(day, section(issues, lead, footnote, ADDENDA.get(day, "")))
     return 0
 
 
