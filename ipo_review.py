@@ -5077,7 +5077,7 @@ ADDENDUM_OCT_30 = (
 
 
 LEAD_NOV_02 = (
-    "Monday 2 November, written at 10:30 IST. "
+    "Monday 2 November, written at 09:25 IST, before bidding opens for the day. "
     "<strong>Bombay Coated closes at 17:00 today and the pre-set condition has already "
     "failed, so the call is SKIP.</strong> The condition written on 28 October was QIB "
     "above 3&times; by Friday <em>and</em> GMP at or above 10%. The QIB leg was met and is "
@@ -5087,7 +5087,7 @@ LEAD_NOV_02 = (
     "&#8377;8.20. "
     "<strong>No subscription figure on this page is a final book.</strong> The multiples "
     "below are the 30 October day-2 close; bidding runs again from 10:00 to 17:00 today and "
-    "no tracker had printed a day-3 figure when this was written. "
+    "day-3 bidding had not opened when this was written. "
     "<strong>M.K.Sons allots today</strong> and lists 4 November; the NO stands and its "
     "premium has since collapsed from &#8377;12.5 to &#8377;5. "
     "<strong>BLS Polymers lists tomorrow</strong> at a grey-market premium of about 45%, "
@@ -5099,8 +5099,8 @@ LEAD_NOV_02 = (
 )
 
 FOOTNOTE_NOV_02 = (
-    "<strong>Why the condition is not being rewritten.</strong> Bids are open for another "
-    "six and a half hours, so the issue is open and the condition is not. It was set on 28 "
+    "<strong>Why the condition is not being rewritten.</strong> Bidding opens at 10:00 and "
+    "runs to 17:00, so the issue is open and the condition is not. It was set on 28 "
     "October, read at Friday&rsquo;s close, and it said skip. Re-opening it today, after "
     "seeing the answer, would be writing a new condition to get a different one &mdash; "
     "which is the single thing a pre-set condition exists to prevent. If it is to be "
@@ -5135,7 +5135,7 @@ def _for_nov_02() -> list[IPO]:
         horizon="Not held. Had it been applied for, the horizon was sell on listing day, 5 Nov.",
         book="30 OCT 17:00 CLOSE (day 2), NOT FINAL · 3.98× · QIB 6.89× · "
              "NII 1.89× · retail 3.17× (IPOji) · Kotak Neo 20:15 reads 3.74× / "
-             "6.56× / 1.75× / 2.95× · no day-3 print at 10:30",
+             "6.56× / 1.75× / 2.95× · day-3 bidding not yet open at 09:25",
         flags=(("QIB 6.89× — the > 3× leg was met", "pass"),
                ("GMP ₹7 = 8.5% at Friday 17:05 — the ≥ 10% leg FAILED", "fail"),
                ("₹8 today = 9.76%, still under the ₹8.20 line", "fail"),
@@ -5166,8 +5166,8 @@ def _for_nov_02() -> list[IPO]:
             "days stale and is not used here. After the 2.6 point haircut, 9.76 percent is "
             "about 7.2 percent expected, which sits inside the spread the haircut itself "
             "carries, so the premium is not distinguishable from a flat listing. "
-            "The book is day two and not final. Bidding runs to 17:00 today and the day-3 "
-            "figures are not printed yet. At the 30 October close IPOji has 3.98 times "
+            "The book is day two and not final. Bidding opens at 10:00 and runs to 17:00 "
+            "today, so no day-3 figure exists yet. At the 30 October close IPOji has 3.98 times "
             "overall, QIB 6.89, NII 1.89, retail 3.17. Kotak Neo, stamped 20:15 the same "
             "evening, has 3.74 overall, QIB 6.56, NII 1.75, retail 2.95. Retail at about 3 "
             "times means roughly one application in three gets a lot, which is better odds "
