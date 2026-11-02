@@ -105,3 +105,16 @@ jobs:
           git add -A reports index.html latest.html stocks crypto analysis extras overrides
           git diff --cached --quiet || git commit -m "mirror $(date -u +%F)"
           git push
+      # A green mirror has never meant a published page. On 2 November the
+      # workflow succeeded, the Pages build succeeded, and the live URL served
+      # the *previous* version of the report for several minutes with a 200 --
+      # while three earlier reads of the same URL had returned 404 against a
+      # build that had already finished. Status codes lied in both directions
+      # inside twenty minutes.
+      #
+      # So the run does not end until the bytes at the public URL are the bytes
+      # it just committed. This step is NOT continue-on-error: a mirror that
+      # did not reach the site is a failed mirror, and the only thing worse
+      # than an unpublished page is an unpublished page behind a green tick.
+      - name: verify the site serves what we just committed
+        run: python3 verify_published.py "$(TZ=Asia/Kolkata date +%F)"
