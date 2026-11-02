@@ -5075,6 +5075,195 @@ ADDENDUM_OCT_30 = (
     '</section>'
 )
 
+
+LEAD_NOV_02 = (
+    "Monday 2 November, written at 10:30 IST. "
+    "<strong>Bombay Coated closes at 17:00 today and the pre-set condition has already "
+    "failed, so the call is SKIP.</strong> The condition written on 28 October was QIB "
+    "above 3&times; by Friday <em>and</em> GMP at or above 10%. The QIB leg was met and is "
+    "not in doubt: 6.89&times; at the 30 October close. The GMP leg failed on Friday at "
+    "&#8377;7, 8.5%, read on two trackers at 17:05, and it has not recovered past the line "
+    "since &mdash; &#8377;8 this morning is 9.76%, and the 10% line on a &#8377;82 cap is "
+    "&#8377;8.20. "
+    "<strong>No subscription figure on this page is a final book.</strong> The multiples "
+    "below are the 30 October day-2 close; bidding runs again from 10:00 to 17:00 today and "
+    "no tracker had printed a day-3 figure when this was written. "
+    "<strong>M.K.Sons allots today</strong> and lists 4 November; the NO stands and its "
+    "premium has since collapsed from &#8377;12.5 to &#8377;5. "
+    "<strong>BLS Polymers lists tomorrow</strong> at a grey-market premium of about 45%, "
+    "and its allotment result has still not been checked on any pass. "
+    "Expected listing is the GMP percentage less 2.6 points, the overstatement "
+    "<code>backtest_gmp</code> measured over 295 listings (r&nbsp;=&nbsp;0.87). "
+    "<strong>Applied:</strong> nothing on Bombay Coated and nothing on M.K.Sons. "
+    "Whether a BLS application was placed is his own record and is not in this service."
+)
+
+FOOTNOTE_NOV_02 = (
+    "<strong>Why the condition is not being rewritten.</strong> Bids are open for another "
+    "six and a half hours, so the issue is open and the condition is not. It was set on 28 "
+    "October, read at Friday&rsquo;s close, and it said skip. Re-opening it today, after "
+    "seeing the answer, would be writing a new condition to get a different one &mdash; "
+    "which is the single thing a pre-set condition exists to prevent. If it is to be "
+    "re-opened, that is his call made knowingly, not a drift in the paperwork. "
+    "<strong>The trackers still disagree, and by more than the decision needs.</strong> At "
+    "the 30 October close IPOji reads 3.98&times; overall with QIB 6.89&times;, NII "
+    "1.89&times; and retail 3.17&times;; Kotak Neo, stamped 20:15 the same evening, reads "
+    "3.74&times; with QIB 6.56&times;, NII 1.75&times; and retail 2.95&times;. Neither "
+    "changes the GMP leg, which is the one that failed. "
+    "<strong>The haircut, applied:</strong> GMP% minus 2.6 points, and the spread around it "
+    "is wider than the haircut &mdash; &minus;3 to +7.5 points on the last three graded "
+    "listings. A 9.76% premium is therefore about 7.2% expected, inside the spread. "
+    "<strong>A date to hold on to:</strong> the lesson taken from BLS Polymers on 30 October "
+    "is that a subscription figure is only usable with the hour it was read, and a book "
+    "quoted before the close is a floor, not a measurement. Every multiple on this page "
+    "carries its timestamp for that reason."
+)
+
+
+def _for_nov_02() -> list[IPO]:
+    """Bombay Coated’s last day, M.K.Sons’ allotment day, BLS’ listing eve."""
+    bombay = IPO(
+        name="Bombay Coated and Special Steels",
+        call="SKIP — the condition failed on GMP; nothing applied for",
+        tone="fail",
+        dates="29 Oct–2 Nov · DAY 3 of 3, closes 17:00 today · allotment 3 Nov · lists 5 Nov",
+        band="₹78–82", size="~₹183 Cr", split="100% fresh issue",
+        gmp="₹8 (IPOji, 2 Nov 06:45)",
+        gmp_pct=9.8,
+        expected="~+7.2% after the haircut",
+        apply_as="None. Retail would have been 1 lot, 182 sh, ₹14,924; bHNI breaches the ₹5 L cap at ₹10,14,832.",
+        horizon="Not held. Had it been applied for, the horizon was sell on listing day, 5 Nov.",
+        book="30 OCT 17:00 CLOSE (day 2), NOT FINAL · 3.98× · QIB 6.89× · "
+             "NII 1.89× · retail 3.17× (IPOji) · Kotak Neo 20:15 reads 3.74× / "
+             "6.56× / 1.75× / 2.95× · no day-3 print at 10:30",
+        flags=(("QIB 6.89× — the > 3× leg was met", "pass"),
+               ("GMP ₹7 = 8.5% at Friday 17:05 — the ≥ 10% leg FAILED", "fail"),
+               ("₹8 today = 9.76%, still under the ₹8.20 line", "fail"),
+               ("~7.2% after the haircut, inside the −3 to +7.5 pt spread", "fail"),
+               ("₹125 Cr of ₹183 Cr repays debt", "fail"),
+               ("PAT +6.5% on revenue +20%, net margin 2.4%", "fail"),
+               ("trackers disagree: 3.98× vs 3.74× on the same close", "warn")),
+        stats=(("GMP 2 Nov 06:45", "₹8 · 9.76%"),
+               ("GMP Fri 30 Oct 17:05", "₹7 · 8.5%"),
+               ("the 10% line on ₹82", "₹8.20"),
+               ("after haircut", "~+7.2%"),
+               ("odds above issue", "about 2 in 3"),
+               ("retail odds at 3.17×", "about 1 in 3"),
+               ("QIB 30 Oct 17:00", "6.89×"),
+               ("condition set 28 Oct", "QIB > 3× AND GMP ≥ 10%"),
+               ("lists", "5 Nov")),
+        note=(
+            "The condition is the whole decision, so it is worth stating plainly. On 28 "
+            "October the test was written as: QIB above 3 times by Friday, and GMP at or "
+            "above 10 percent. Read at Friday's 17:05 close, QIB was 6.89 times on both "
+            "trackers that print a category split, so that leg passed and is not arguable. "
+            "GMP was 7 rupees, which on an 82 rupee cap is 8.5 percent, and both trackers "
+            "agreed on it. The 10 percent line is 8.20 rupees. The leg failed. "
+            "The premium has moved since without clearing the line: 9 rupees through most "
+            "of last week, 8.5 at 15:25 on Friday, 7 at 17:05, and 8 this morning at 06:45 "
+            "on IPOji, which is 9.76 percent. InvestorGain still displays 9 rupees, but the "
+            "page carries a last-updated stamp of 29 October 23:40, so that figure is three "
+            "days stale and is not used here. After the 2.6 point haircut, 9.76 percent is "
+            "about 7.2 percent expected, which sits inside the spread the haircut itself "
+            "carries, so the premium is not distinguishable from a flat listing. "
+            "The book is day two and not final. Bidding runs to 17:00 today and the day-3 "
+            "figures are not printed yet. At the 30 October close IPOji has 3.98 times "
+            "overall, QIB 6.89, NII 1.89, retail 3.17. Kotak Neo, stamped 20:15 the same "
+            "evening, has 3.74 overall, QIB 6.56, NII 1.75, retail 2.95. Retail at about 3 "
+            "times means roughly one application in three gets a lot, which is better odds "
+            "than the issue deserves on its merits. "
+            "On the merits nothing has improved. 125 crore of the 183 crore raised repays "
+            "debt rather than building anything. Profit grew 6.5 percent on revenue up 20 "
+            "percent, a net margin of 2.4 percent, and debt to equity reads between 2.00 "
+            "and 2.78 depending on the source. The call is SKIP and nothing has been "
+            "applied for."
+        ),
+    )
+    mksons = IPO(
+        name="M.K.Sons Fine Jewels",
+        call="NO — stands; allotment is today, the premium has collapsed",
+        tone="fail",
+        dates="28–30 Oct · CLOSED · allotment today 2 Nov · lists 4 Nov",
+        band="₹154–162", size="to confirm", split="80% fresh / 20% OFS",
+        gmp="₹5 (IPO Watch, 2 Nov)",
+        gmp_pct=3.1,
+        expected="~+0.5% after the haircut — indistinguishable from flat",
+        apply_as="None.",
+        horizon="Not held.",
+        book="FINAL · about 1.06–1.18× depending on tracker · QIB under 1× "
+             "on every day-2 and day-3 snapshot read",
+        flags=(("GMP ₹12.5 on Friday morning, ₹5 today — a 60% fade", "fail"),
+               ("~0.5% after the haircut", "fail"),
+               ("QIB never cleared 1×", "fail"),
+               ("20% of the issue is promoters selling", "warn"),
+               ("jewellery sector WEAKENING on our RRG", "warn"),
+               ("FY26 PAT ₹51.8 Cr, +123%; revenue +53%", "pass")),
+        stats=(("GMP 2 Nov", "₹5 · 3.1%"),
+               ("GMP 30 Oct 09:37", "₹12.5 · 7.7%"),
+               ("GMP peak 28 Oct 21:02", "₹16"),
+               ("after haircut", "~+0.5%"),
+               ("final book", "~1.06–1.18×"),
+               ("allotment", "today, 2 Nov"),
+               ("lists", "4 Nov")),
+        note=(
+            "The call was NO on every pass and it is now paid for rather than argued. The "
+            "premium peaked at 16 rupees on 28 October, was 12.5 on InvestorGain on Friday "
+            "morning, and is 5 rupees today on IPO Watch. On a 162 rupee cap that is 3.1 "
+            "percent, or about half a percent after the haircut, which cannot be told from "
+            "a flat listing. The final book came in around 1.06 to 1.18 times depending on "
+            "which tracker is read, with QIB never clearing 1 time on any snapshot we saw. "
+            "An issue that institutions declined and that the grey market has marked down 60 "
+            "percent in two sessions is the shape the NO was written for. Allotment is "
+            "today and it lists on 4 November; there is nothing for us in either event."
+        ),
+    )
+    bls = IPO(
+        name="BLS Polymers",
+        call="APPLY was the call — LISTS TOMORROW, 3 Nov; the allotment result is still unchecked",
+        tone="warn",
+        dates="27–29 Oct · CLOSED · allotment 30 Oct · LISTS 3 NOV",
+        band="₹142–150", size="₹255 Cr", split="100% FRESH ISSUE — 1.70 Cr shares, no OFS",
+        gmp="₹68–70 (IPO Watch / GMP IPO Watch, 2 Nov)",
+        gmp_pct=45.3,
+        expected="~+43% after the haircut",
+        apply_as="Retail was the call, 1 lot. Whether an application was placed is his own record.",
+        horizon="If allotted: the call was sell on listing day. That decision lands tomorrow.",
+        book="FINAL 29 Oct · about 241× overall · QIB 200.25× · NII ~558× · "
+             "retail ~122–128× (two trackers agree at 237.78–241.22× overall)",
+        flags=(("GMP ~45% and firm into the listing", "pass"),
+               ("100% fresh issue, no promoter selling", "pass"),
+               ("final retail 122–128× — about 1 lot in 125", "warn"),
+               ("allotment result NOT CHECKED on any pass since 30 Oct", "fail")),
+        stats=(("GMP 2 Nov", "₹68–70 · ~45%"),
+               ("after haircut", "~+43%"),
+               ("final overall", "~241×"),
+               ("final QIB", "200.25×"),
+               ("final retail", "~122–128×"),
+               ("real retail odds", "about 1 in 125"),
+               ("lists", "3 Nov")),
+        note=(
+            "This card exists because of the correction made on 30 October, and because a "
+            "decision lands tomorrow. The 29 October page said retail was 8.78 times and "
+            "called it about one lot in nine. That was an intraday day-2 snapshot published "
+            "as though it were a book. The real final figures, read on 30 October, are about "
+            "241 times overall, QIB 200.25, NII about 558 and retail about 122 to 128 times "
+            "— so the true retail odds were about one in 125, not one in nine, and the page "
+            "overstated them by roughly fourteen times. That correction is published on the "
+            "29 and 30 October pages and is repeated here rather than left behind. "
+            "What matters now is forward-looking. The premium is 68 to 70 rupees on a 150 "
+            "rupee cap, about 45 percent, and it has held there since allotment, which is "
+            "the firmest mark on the board by a wide margin. The call was APPLY for one "
+            "retail lot and the horizon was sell on listing day. The allotment result was "
+            "flagged as unchecked in the 30 October footnote and is still unchecked: this "
+            "service cannot see his demat or his application. If a lot was allotted, the "
+            "sell-at-open decision is tomorrow morning and it should not be met cold."
+        ),
+    )
+    return [bombay, mksons, bls]
+
+
+IPOS_2026_11_02 = _for_nov_02()
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -5113,6 +5302,7 @@ BY_DAY = {
     "2026-10-28": (IPOS_2026_10_28, LEAD_OCT_28, FOOTNOTE_OCT_28),    "2026-10-29": (IPOS_2026_10_29, LEAD_OCT_29, FOOTNOTE_OCT_29),
     # 10:00 pass supersedes the 09:45 page; IPOS_2026_10_30 / LEAD_OCT_30 stay above.
     "2026-10-30": (IPOS_2026_10_30_1000, LEAD_OCT_30_1000, FOOTNOTE_OCT_30_1000),
+    "2026-11-02": (IPOS_2026_11_02, LEAD_NOV_02, FOOTNOTE_NOV_02),
 }
 
 
