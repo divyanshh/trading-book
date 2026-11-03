@@ -5491,6 +5491,188 @@ def _for_nov_03() -> list[IPO]:
 
 IPOS_2026_11_03 = _for_nov_03()
 
+
+# ── 4 November 2026 ─────────────────────────────────────────────────────────
+# Written 01:30–02:10 IST, hours before the open, on the previous evening's
+# marks. Nothing opens; the whole board is listings and one allotment. The
+# page's real work today is the two grades the 3 November footnote promised,
+# and they are the worst pair of grades this board has produced: BLS and SFC
+# BOTH listed far above the haircut, one of them after we had said NO.
+
+LEAD_NOV_04 = (
+    "Wednesday 4 November, written at <strong>01:30 IST</strong> &mdash; hours before the "
+    "open, on Tuesday evening&rsquo;s grey-market marks. Every forward figure here is a "
+    "mark, not a result, and the overnight board can move before 09:15. "
+    "<strong>No mainboard IPO is open, and none opens this week</strong>; the only new "
+    "issues of 2&ndash;6 November are SMEs, which this board excludes. "
+    "<strong>M.K.Sons lists today</strong> at &#8377;5&ndash;7 on a &#8377;162 cap "
+    "(3.1&ndash;4.3%); the NO stands, with a caveat the next paragraph is about. "
+    "<strong>Bombay Coated allotted yesterday</strong>, credits today and "
+    "<strong>lists 5 November</strong> at &#8377;8&ndash;9 (9.8&ndash;11.0%); the call was "
+    "SKIP. The other two cards are <strong>grades</strong>, not calls. "
+    "<strong>Applied by this service:</strong> nothing. Whether an application was placed "
+    "in his own name is his record and is not in this service."
+)
+
+FOOTNOTE_NOV_04 = (
+    "<strong>The haircut failed twice yesterday, and in the direction it is not supposed "
+    "to fail.</strong> The rule is GMP% minus 2.6 points, the overstatement "
+    "<code>backtest_gmp</code> measured over 295 listings (r&nbsp;=&nbsp;0.87). On 3 "
+    "November both listings came in <em>above</em> their raw GMP, so subtracting made the "
+    "estimate worse, not better. BLS Polymers: GMP 46.7%, expected +39 to +44% after the "
+    "haircut, <strong>listed +65.33%</strong> &mdash; the estimate was short by 21 to 26 "
+    "points. SFC Environmental: GMP 4.5%, expected about +1.9%, <strong>listed "
+    "+7.61%</strong> and traded to +29.1% intraday &mdash; short by 5.7 points at the open "
+    "and by 27 at the high. Two listings is not a sample and this does not retire the "
+    "haircut; the measured spread around it was already &minus;3 to +7.5 points, and "
+    "+21 is outside even that. What it does mean is that <strong>today&rsquo;s small "
+    "premiums cannot be read as &lsquo;flat listing&rsquo; with any confidence</strong>. "
+    "M.K.Sons at 3&ndash;4% and Bombay Coated at 10&ndash;11% are being estimated by a rule "
+    "that was just wrong by more than either number. "
+    "<strong>Subscription figures.</strong> Bombay Coated&rsquo;s trackers still do not "
+    "agree, and the spread has widened rather than settled: 63.89&times;, 32.68&times; and "
+    "3.78&times; are all in print for the same closed book. The 63.89&times; figure appears "
+    "on more than one page and matches IPOji&rsquo;s 2 November 17:00 stamp, so it is the "
+    "one carried on the card &mdash; but a 17&times; disagreement between trackers is "
+    "itself the finding, and no exchange consolidated figure has been read on this pass. "
+    "M.K.Sons closed at about 5.09&times;, which is the only figure any tracker prints. "
+    "<strong>Grading:</strong> BLS and SFC are graded below at their 3 November listing. "
+    "M.K.Sons is graded on tomorrow&rsquo;s page, Bombay Coated on 5 November&rsquo;s."
+)
+
+
+def _for_nov_04() -> list[IPO]:
+    """M.K.Sons lists; Bombay Coated allots and lists tomorrow; BLS and SFC graded."""
+    mksons = IPO(
+        name="M.K.Sons Fine Jewels",
+        call="NO was the call — LISTS TODAY; the NO stands, but held with less confidence than yesterday",
+        tone="fail",
+        dates="28–30 Oct · CLOSED · allotted 2 Nov · credited 3 Nov · LISTS TODAY 4 Nov (BSE, NSE)",
+        band="₹153–162", size="₹275.40 Cr", split="fresh issue",
+        gmp="₹5 (IPOji, latest) · ₹5.5 (2 Nov) · ₹7 (IPO Watch, no hour) · ₹10.25 earlier in the week",
+        gmp_pct=4.3,
+        expected="~+0.5% to +1.7% after the haircut — but see the footnote; the haircut was short by 21 points yesterday",
+        apply_as="Nobody. Retail was never worth a lot at 5.09×, and sHNI/bHNI never had a case.",
+        horizon="Listing day — today. Nothing to do; this service applied for none of it.",
+        book="FINAL 30 Oct close · ~5.09× overall · the weakest book of the four issues this board has carried",
+        flags=(("GMP decayed through the week: ₹10.25 → ₹7 → ₹5.5 → ₹5", "fail"),
+               ("5.09× overall — institutions never took their quota on any snapshot read", "fail"),
+               ("jewellery sat at WEAKENING on the RRG with 14.3% of names above their 20MA", "fail"),
+               ("a decaying GMP is a different signal from a small one, and this is the decaying kind", "fail")),
+        note=(
+            "The NO stands on its own evidence: a book that never cleared institutional "
+            "demand, a premium that halved across four days, and a sector the report put "
+            "at WEAKENING. None of that changed overnight. What changed is the confidence "
+            "attached to the <em>expected listing</em> figure beside it. Yesterday both "
+            "listings beat their GMP outright, so a 3 to 4 percent premium on a 162 rupee "
+            "cap should not be read as a guaranteed flat open. It is still a NO — but it "
+            "is a NO on the book and the sector, not on the arithmetic, and that "
+            "distinction was not drawn clearly enough on yesterday&rsquo;s page."
+        ),
+    )
+    bombay = IPO(
+        name="Bombay Coated & Special Steels",
+        call="SKIP was the call — ALLOTTED, credits today, lists tomorrow",
+        tone="warn",
+        dates="29 Oct–2 Nov · CLOSED · allotted 3 Nov · credit/refund 4 Nov · lists 5 Nov (BSE, NSE)",
+        band="₹78–82", size="₹183.05 Cr", split="fresh issue · lot 182 shares",
+        gmp="₹8.5 (IPOji 3 Nov 21:37) · ₹8 (IPO Watch) · ₹9 (ipopremium)",
+        gmp_pct=11.0,
+        expected="~+7.2% to +8.4% after the haircut — and the haircut is the thing the footnote distrusts today",
+        apply_as="Nobody — it was a SKIP, and bidding is closed. There is no action available on this card.",
+        horizon="Lists 5 November. The grade goes on that day's page.",
+        book="CLOSED 2 Nov 17:00 · trackers disagree 17-fold: 63.89× / 32.68× (QIB 16.43×, NII 82.31×, retail 20.91×) / 3.78×",
+        flags=(("GMP held overnight at ₹8–9 rather than decaying — unlike M.K.Sons", "pass"),
+               ("63.89× against 3.78× for the same closed book is a tracker failure, not a range", "fail"),
+               ("no exchange consolidated figure read on this pass", "warn"),
+               ("SKIP was called on the book, and bidding closed before the call could change", "warn")),
+        note=(
+            "Nothing here is actionable and the card exists to carry the number forward to "
+            "tomorrow&rsquo;s grade. Two things are worth writing down. The premium held "
+            "overnight at 8 to 9 rupees instead of decaying, which is the opposite of what "
+            "M.K.Sons did and is the more encouraging of the two shapes. And the "
+            "subscription figures are not merely imprecise &mdash; 63.89 times and 3.78 "
+            "times cannot both describe the same closed book, so one tracker is simply "
+            "wrong and we do not know which. That is worth more caution than a disagreement "
+            "at the second decimal place."
+        ),
+    )
+    bls = IPO(
+        name="BLS Polymers — GRADE",
+        call="APPLY was the call — RIGHT, and by a wider margin than we estimated",
+        tone="pass",
+        dates="27–29 Oct · listed 3 Nov at ₹248 (NSE) and ₹244.10 (BSE) against a ₹150 issue",
+        band="₹142–150", size="₹255 Cr", split="100% fresh issue, no OFS",
+        gmp="₹63–70 going in (42–46.7%)",
+        gmp_pct=46.7,
+        expected="we said +39% to +44% · it listed at +65.33%",
+        apply_as="Retail, 1 lot, was the call, and it was the right one.",
+        horizon="Closed. Sell-on-listing was the stated plan; this service held none of it.",
+        book="FINAL 29 Oct · ~241.22× overall · QIB 200.25× · NII ~558× · retail ~122–128×",
+        stats=(("call", "APPLY — correct"),
+               ("expected after haircut", "+39% to +44%"),
+               ("listed (NSE)", "₹248 · +65.33%"),
+               ("listed (BSE)", "₹244.10 · +62.73%"),
+               ("intraday high", "₹258.60–259 · about +72%"),
+               ("estimate error", "short by 21 to 26 points")),
+        flags=(("the call was right — this is the board's best outcome to date", "pass"),
+               ("the haircut was wrong by 21–26 points, in the understating direction", "fail"),
+               ("one tracker reports a fade to ₹236.30 intraday, still about +57.5% on issue", "warn")),
+        note=(
+            "Graded as promised on yesterday&rsquo;s page. The call was right and the "
+            "sizing advice &mdash; retail one lot, never sHNI or bHNI at 558 times on the "
+            "NII book &mdash; was right too. The honest part of this grade is the second "
+            "line: <strong>the number we published was 21 to 26 points short of what "
+            "happened</strong>. A 46.7 percent GMP became a 65.33 percent listing, and our "
+            "rule subtracted 2.6 points from it on the way. Being wrong in the direction "
+            "that costs nothing is still being wrong, and if the haircut is going to be "
+            "quoted to the tenth of a point it has to be answerable for a miss this size. "
+            "The closing price for 3 November has not been read from the exchange on this "
+            "pass; only one source gives an intraday level and it is unconfirmed."
+        ),
+    )
+    sfc = IPO(
+        name="SFC Environmental Technologies — GRADE",
+        call="NO was the call — WRONG. It listed +7.61% and traded to +29.1%.",
+        tone="fail",
+        dates="27–29 Oct · listed 3 Nov at ₹355.10 (NSE) and ₹354.05 (BSE) against a ₹330 issue",
+        band="₹313–330", size="₹667.53 Cr", split="fresh issue with OFS",
+        gmp="₹15–15.50 going in (4.5–4.7%)",
+        gmp_pct=4.7,
+        expected="we said about +1.9% and called it indistinguishable from flat · it listed at +7.61%",
+        apply_as="We said nobody. On the outcome, retail would have made money.",
+        horizon="Closed. Nothing was applied for.",
+        book="FINAL 29 Oct · 9.47× overall · strong QIB and NII demand",
+        stats=(("call", "NO — wrong"),
+               ("expected after haircut", "about +1.9%"),
+               ("listed (NSE)", "₹355.10 · +7.61%"),
+               ("listed (BSE)", "₹354.05 · +7.29%"),
+               ("intraday high", "₹426.10 · +29.12%"),
+               ("estimate error", "short by 5.7 points at the open, 27 at the high")),
+        flags=(("the call was wrong — a NO on an issue that opened +7.6% and ran +29%", "fail"),
+               ("it was also left off the 2 November page entirely, which is its own failure", "fail"),
+               ("the 9.47× book was read as weak; it was not weak enough to justify a NO", "fail"),
+               ("GMP was 'falling' on our read and the listing beat it anyway", "warn")),
+        note=(
+            "This is the grade that matters and it is a bad one. We called NO on a 4.5 "
+            "percent premium, described it as falling, and said the expected listing was "
+            "not distinguishable from flat. It opened 7.61 percent up and touched 29.12 "
+            "percent intraday. Three separate things went wrong and they should be named "
+            "separately. The issue was <strong>omitted from the 2 November page</strong> "
+            "and only restored on the 3rd. Its 9.47 times book was treated as weak demand "
+            "when it carried strong QIB and NII participation. And the GMP, which we read "
+            "as decaying, understated the open rather than overstating it &mdash; the same "
+            "failure as BLS on the same day, which makes two out of two. A rule that is "
+            "zero for two on the only day it was tested in public is not a rule to quote "
+            "confidently on today&rsquo;s cards, and the footnote says so."
+        ),
+    )
+    return [mksons, bombay, bls, sfc]
+
+
+IPOS_2026_11_04 = _for_nov_04()
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -5531,6 +5713,7 @@ BY_DAY = {
     "2026-10-30": (IPOS_2026_10_30_1000, LEAD_OCT_30_1000, FOOTNOTE_OCT_30_1000),
     "2026-11-02": (IPOS_2026_11_02, LEAD_NOV_02, FOOTNOTE_NOV_02),
     "2026-11-03": (IPOS_2026_11_03, LEAD_NOV_03, FOOTNOTE_NOV_03),
+    "2026-11-04": (IPOS_2026_11_04, LEAD_NOV_04, FOOTNOTE_NOV_04),
 }
 
 
