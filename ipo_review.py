@@ -118,6 +118,24 @@ def section(ipos: list[IPO], lead: str, footnote: str, addendum: str = "") -> st
     )
 
 
+def _anchor(page: str, slug: str) -> int:
+    """Where a section with this id begins, whatever element carries it.
+
+    The renderer opens a section with ``<h2 id="...">`` normally and with
+    ``<details class="folded" id="...">`` when the section is collapsed. This
+    splice looked for the ``<h2>`` form alone, so the day Exchange filings
+    became a fold, ``ipo_review.py`` exited 1 and the hand-written review
+    silently stopped being published -- behind a green mirror, because the
+    splice step is continue-on-error.
+
+    Matched on the id rather than on the element, which is the thing that is
+    actually stable: the slug comes from the section's title and the tag around
+    it is a presentation decision.
+    """
+    match = re.search(rf'<(?:h2|details)[^>]*\bid="{re.escape(slug)}"', page)
+    return match.start() if match else -1
+
+
 def _style(day: str) -> str:
     """The report's own stylesheet, so the standalone page is not a different site.
 
@@ -170,10 +188,13 @@ def write(day: str, markup: str) -> None:
         )
         return
     page = override.read_text(encoding="utf-8")
-    start = page.find('<h2 id="ipo-review">')
-    end = page.find('<h2 id="exchange-filings">')
+    start = _anchor(page, "ipo-review")
+    end = _anchor(page, "exchange-filings")
     if end < 0:
-        raise SystemExit("no exchange-filings anchor in the override")
+        raise SystemExit(
+            "no exchange-filings anchor in the override; the renderer's section "
+            "markup has changed and the review has nowhere to go"
+        )
     page = (page[:start] if start >= 0 else page[:end]) + markup + page[end:]
     if 'href="#ipo-review"' not in page:
         page = page.replace(
