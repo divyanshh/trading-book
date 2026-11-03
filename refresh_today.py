@@ -108,6 +108,21 @@ def refresh(day: str) -> int:
     # So it simply re-fetches, every time, and says what it did. The work is
     # idempotent: the splice puts the review back, mirror.py rewrites the same
     # bytes, and the commit step skips when nothing actually changed.
+    # **The service's copy is not a publishable page.** It carries the
+    # renderer's own stylesheet and nothing else: no shared token layer, no
+    # book nav, no theme toggle. `mirror.restyle` adds all three to every
+    # archived page -- but it runs inside mirror.py, which has already
+    # finished by the time this does, so writing the raw fetch straight to
+    # disk published a report in the renderer's blue against a site that has
+    # been warm-toned since. On 2026-11-03 that was the only page on the book
+    # wearing a different palette, and it looked like somebody had changed the
+    # theme.
+    #
+    # Applied here rather than by re-running the mirror, because the mirror is
+    # what cannot run again at this point in the job without undoing the
+    # refresh it just performed.
+    page = publishable(page, target)
+
     before = len(target.read_text(encoding="utf-8")) if target.exists() else 0
     target.write_text(page, encoding="utf-8")
     print(
@@ -115,6 +130,25 @@ def refresh(day: str) -> int:
         f"over a published copy of {before:,}; the splice rebuilds the review"
     )
     return 0
+
+
+def publishable(page: str, target: Path) -> str:
+    """The service's report, dressed as the rest of the book.
+
+    Exactly what ``mirror.restyle`` does to an archived page, applied to a page
+    that arrives after it has run. The transforms live in ``mirror`` and are
+    called rather than copied: a shared theme maintained in two files is one
+    that will differ by a release, and the whole point of this layer is that
+    every page looks like every other.
+
+    The page's own ``<style>`` is the newest by construction -- it came from
+    the service a moment ago -- so there is nothing to fetch to find it.
+    """
+    match = mirror.STYLE.search(page)
+    if match is not None:
+        styled = mirror.themed_style(match.group(0))
+        page = mirror.STYLE.sub(lambda _m: styled, page, count=1)
+    return mirror.add_book_nav(page, target)
 
 
 def main() -> int:
