@@ -421,7 +421,17 @@ def restyle(style: str) -> int:
 
     The renderer only ever changes CSS against stable class names, so a page
     stored under an older theme re-skins cleanly. Without this the archive
-    would be a museum of every theme the report has had."""
+    would be a museum of every theme the report has had.
+
+    **The audits belong here too, and were missed on the first pass.** They
+    are rendered by the same service renderer, so they arrive with its raw
+    stylesheet — but what makes a page look like this book is the shared theme
+    layer `themed_style` adds on top, plus the nav. Published without it, the
+    first three audit pages came out in the renderer's own colours against
+    reports wearing the book's, and the difference was visible immediately.
+    Their glob is `*.html` and not `20*.html`: an audit is named for its
+    symbol, not for a date.
+    """
     style = themed_style(style)
     n = 0
     for page in [
@@ -429,6 +439,7 @@ def restyle(style: str) -> int:
         *OVERRIDES.glob("20*.html"),
         *EXTRAS.glob("20*.html"),
         *CRYPTO_REPORTS.glob("20*.html"),
+        *AUDITS.glob("*.html"),
     ]:
         text = page.read_text(encoding="utf-8")
         updated = STYLE.sub(lambda _m: style, text, count=1) if STYLE.search(text) else text
