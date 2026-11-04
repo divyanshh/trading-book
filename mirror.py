@@ -64,6 +64,10 @@ first. Every old `/reports/<name>` is a meta-refresh onto the new path; those
 URLs have been shared and an archive that breaks its own links to look tidier
 has made itself worse."""
 ANALYSIS = STOCKS / "analysis"
+AUDITS = STOCKS / "audits"
+"""One page per stock we have ordered, so a report row can link to the
+evidence that was read before the order. Written by the service's
+`audit_stock --store` and mirrored here; see `write_audits`."""
 """Standing analyses — the six-month retrospective and its successors. Not a
 day's page: they are written once, listed separately on the index, and
 re-skinned with the rest whenever the renderer's theme moves. ``_bridge.css``
@@ -197,6 +201,50 @@ def write_market_trend(themed: str) -> None:
         encoding="utf-8",
     )
 
+
+
+AUDIT_INDEX = BASE.replace("/reports/", "/audits/")
+
+
+def write_audits() -> int:
+    """Mirror every stored stock audit into `stocks/audits/<SYMBOL>.html`.
+
+    **Always refetched, never skipped on existence.** The report pages are
+    keyed by date and a past day never changes, so the loop above skips any
+    file it already holds. An audit is keyed by *symbol* and is replaced each
+    time the service re-reads MarketSmith — ownership moves each quarter, the
+    flags change, an earnings date arrives — so skipping an existing file would
+    pin every audit to the first day it was taken and publish stale evidence
+    under a current-looking page.
+
+    Best-effort as a whole: the audits are an affordance on the report rows,
+    and a service that cannot answer must not cost the book its reports.
+    """
+    try:
+        rows = json.loads(fetch(AUDIT_INDEX))
+    except Exception as exc:  # noqa: BLE001
+        print(f"audits unavailable: {exc}", file=sys.stderr)
+        return 0
+    AUDITS.mkdir(parents=True, exist_ok=True)
+    written = 0
+    for row in rows:
+        symbol = str(row.get("symbol") or "").strip().upper()
+        if not symbol or not symbol.isalnum():
+            # The symbol becomes a filename. Anything that is not a plain
+            # ticker does not get to choose a path on this site.
+            print(f"skip audit {symbol!r}: not a plain symbol", file=sys.stderr)
+            continue
+        try:
+            page = fetch(f"{AUDIT_INDEX}{symbol}.html")
+        except Exception as exc:  # noqa: BLE001
+            print(f"skip audit {symbol}: {exc}", file=sys.stderr)
+            continue
+        if not re.match(r"<!doctype html>", page, re.I):
+            print(f"skip audit {symbol}: not html", file=sys.stderr)
+            continue
+        (AUDITS / f"{symbol}.html").write_text(page, encoding="utf-8")
+        written += 1
+    return written
 
 def fetch_index() -> list[dict]:
     return json.loads(fetch(BASE))
@@ -907,7 +955,7 @@ SECTION = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta na
 def main() -> int:
     refresh = "--refresh" in sys.argv
     rows = fetch_index()
-    for folder in (REPORTS, STOCKS, CRYPTO, CRYPTO_REPORTS):
+    for folder in (REPORTS, STOCKS, CRYPTO, CRYPTO_REPORTS, AUDITS):
         folder.mkdir(parents=True, exist_ok=True)
     fetched = 0
     for r in rows:
@@ -929,6 +977,7 @@ def main() -> int:
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
     for page in EXTRAS.glob("20*.html"):
         (REPORTS / page.name).write_text(page.read_text(encoding="utf-8"), encoding="utf-8")
+    audited = write_audits()
     restyled = restyle(style) + restyle_analysis(style)
     redirects = write_redirects()
     build_site(rows, style or STYLE_FALLBACK)
@@ -937,7 +986,7 @@ def main() -> int:
         f"{len(list(CRYPTO_REPORTS.glob('20*.html')))} crypto days, "
         f"{len(list(OVERRIDES.glob('20*.html')))} overridden, "
         f"{len(list(EXTRAS.glob('20*.html')))} extras, {restyled} restyled, "
-        f"{redirects} redirects"
+        f"{audited} audits, {redirects} redirects"
     )
     return 0
 
