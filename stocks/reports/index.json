@@ -1,5 +1,12 @@
 [
  {
+  "as_of": "2026-11-08",
+  "generated_at": "2026-11-08T09:47:17.296941+00:00",
+  "bytes": 524003,
+  "summary": "Entries permitted\nstate BULL \u00b7 breadth 54.21% vs prior-5 mean 41.45% [breadth gate OPEN] \u00b7 follow-through gate OPEN \u00b7 Nifty +7.92% vs 20MA \u00b7 2 distribution days per MarketSmith \u00b7 follow-through confirmed \u00b7 MarketSmith CONFIRMED_UPTREND \u00b7 prices through 2026-11-06 \u2014 TODAY'S SESSION IS NOT IN THIS SCAN \u00b7 read at 2026-11-06 18:45 IST.\nMarket breadth: The last ten readings 10 shown\nInstitutional flows: 30 session(s), from moneycontrol:fii-dii-data, nse:fiidiiTradeReact. NSE publishes the latest session only and carries all four legs; the history behind it is backfilled from a source that publishes nets alone, which is why the buy and sell columns stop. 30 shown\nTIS setups: SWING 11 shown, WEEKLY 8 shown, ETF 0 shown, ETF_WEEKLY 0 shown\nOther scanners: STRIKE 6 shown, REVERSAL 0 shown\nWhat ran: 230 names moved 3% or more; showing 15. 15 shown, Themes: sectors with two or more of the 230 movers. This is what the list is read for 45 shown\nRegime by index: Broad indices 4 shown, Sectors 13 shown\nWhat the gate refused: never triggered 13 \u00b7 stopped 19 \u00b7 open 61 \u00b7 no bars yet 4 93 shown\nWhat is holding up: \nAt their 52-week highs: Showing 40 of 246. 'in scan' is tonight's verdict from whichever scanner saw it first; 'not seen' means no scanner derived levels. 40 shown\nNews: \nOpen trades: 8 open, 4 with a stop that has moved. 'locked' is where the stop sits relative to entry in units of the original risk 8 shown\nHow the market opened: \nMarketSmith: MarketSmith's Buy Watchlist. Our universe holds tickers and the mail publishes company names, so a blank 'in our universe' is an unmatched name, not an absent one 94 shown, Model portfolio moves 13 shown\nIPOs \u2014 mainboard: \nExchange filings: \nBroker coverage: ",
+  "path": "/api/v1/reports/2026-11-08.html"
+ },
+ {
   "as_of": "2026-11-06",
   "generated_at": "2026-11-06T12:35:21.281953+00:00",
   "bytes": 523630,
