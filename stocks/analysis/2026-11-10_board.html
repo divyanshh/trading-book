@@ -1,0 +1,341 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="The 9 November scan read with the sector pass, on the holiday before Wednesday reopens: four names past every binding gate, why a G5 block is not a block, and the gap between where the board points and where the leadership is."><title>The board Wednesday opens against</title><style>/* Trading Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  /* Chart series. Categorical slots, deliberately separate from the semantic
+     accents: a chart that paints its series with --blue and --amber inherits
+     whatever those two mean in the current theme, and the public book's own
+     theme maps --blue onto its gold -- which put two near-identical golds on a
+     two-series chart (dE 4.4, against a floor of 15). A series colour's only
+     job is to be told apart from the next one, so it gets its own token.
+     Validated on this canvas: dE 33.0 normal, 29.9 protan. */
+  --series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#b9c4d6;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* folded sections: reference material, open on demand */
+/* The heading's margin moves onto the <details> so the summary is a single
+   flex line: left on the h2 it pushes the row down and the count pill floats
+   above the title it belongs to. */
+details.folded{scroll-margin-top:64px;margin:34px 0 6px}
+details.folded>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded>summary::-webkit-details-marker{display:none}
+details.folded>summary h2{margin:0}
+details.folded>summary h2::after{content:"\25B8";display:inline-block;margin-left:10px;font-size:14px;
+  color:var(--muted);transition:transform .15s ease;transform-origin:center}
+details.folded[open]>summary h2::after{transform:rotate(90deg)}
+.folded-hint{color:var(--muted);font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+details.folded>summary:hover h2{color:var(--blue-ink)}
+details.folded>summary:hover h2::after{color:var(--blue)}
+details.folded>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+/* Printing and find-on-page must not depend on somebody having clicked. An
+   archived page that hides rows the reader cannot reach is a page that lost
+   them. */
+@media print{details.folded>summary h2::after{display:none}
+  details.folded:not([open])>*{display:block}}
+/* a folded table inside an open section: the caption is the control */
+details.folded-table{margin:16px 0 8px}
+details.folded-table>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded-table>summary::-webkit-details-marker{display:none}
+details.folded-table>summary .sub{margin:0}
+details.folded-table>summary .sub::after{content:"\25B8";display:inline-block;margin-left:8px;
+  font-size:12px;color:var(--muted);transition:transform .15s ease}
+details.folded-table[open]>summary .sub::after{transform:rotate(90deg)}
+details.folded-table>summary:hover .sub{color:var(--blue-ink)}
+details.folded-table>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+details.folded-table>.scroll,details.folded-table>.cards{margin-top:8px}
+@media print{details.folded-table>summary .sub::after{display:none}
+  details.folded-table:not([open])>*{display:block}}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+/* Breadth charts carry their own aspect ratio in the viewBox: the market one
+   spans the grid, the sector multiples fill one cell, and both are drawn from
+   a viewBox matching that width so their text renders at the same size. */
+.fig svg.breadth{display:block;width:100%;height:auto}
+.fig--wide{grid-column:1/-1}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--series-1:#2563eb;--series-2:#b45309;--series-neutral:#334155;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html.dark{color-scheme:dark;--canvas:#0f172a;--card:#111827;--head:#172033;--line:#293548;--line-strong:#475569;--ink:#f8fafc;--ink-2:#cbd5e1;--muted:#94a3b8;--faint:#64748b;--blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#172554;--blue-100:#1e3a8a;--green:#34d399;--green-50:#052e2b;--green-100:#064e3b;--green-line:#065f46;--red:#fb7185;--red-50:#450a0a;--red-100:#7f1d1d;--red-line:#991b1b;--amber:#fbbf24;--amber-50:#422006;--amber-100:#713f12;--amber-line:#92400e;--series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#cbd5e1;--canvas-fade:rgba(15,23,42,0);--shadow:none}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(520px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(37,99,235,.10),transparent 68%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%);transition:background .45s ease-out}
+body::before{display:none}.dark body{background-image:radial-gradient(560px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(96,165,250,.15),transparent 68%),radial-gradient(circle at 85% 22%,rgba(167,139,250,.07),transparent 22%)}.wrap{max-width:none;width:100%;padding:22px 32px 80px}.mb-nav{box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:9px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}.mb-theme{margin-left:auto;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:17px;cursor:pointer}.mb-theme:hover{background:var(--blue-50);color:var(--blue)}body>.mb-nav{min-height:64px;margin-bottom:28px;padding:13px 38px 14px}header.top{position:relative;overflow:hidden;margin:0 0 28px;padding:30px 32px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--blue-50) 88%,var(--card)),var(--card) 62%,color-mix(in srgb,var(--blue) 8%,var(--card)));box-shadow:var(--shadow)}header.top::after{content:"";position:absolute;width:310px;height:310px;right:-100px;top:-180px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 18%,transparent),transparent 68%);pointer-events:none}header.top>*{position:relative;z-index:1}.wrap>.eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--blue-50);border:1px solid var(--blue-100)}.wrap>.eyebrow+h1{margin-top:12px}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+/* Institutional presentation: information hierarchy over decoration. */
+html.dark{--canvas:#0d0d0c;--card:#171715;--head:#1d1c19;--line:#35332d;--line-strong:#514b3c;--ink:#f4f0e7;--ink-2:#d0c7b8;--muted:#9f9686;--faint:#70695e;--blue:#d7a84e;--blue-ink:#f1ca7a;--blue-50:#272114;--blue-100:#46371d;--green:#72c98c;--green-50:#142419;--green-100:#1c3825;--green-line:#31553a;--red:#ec7d70;--red-50:#321816;--red-100:#51231f;--red-line:#74342c;--amber:#e4b759;--amber-50:#302713;--amber-100:#4b3c1c;--amber-line:#70571f;--series-1:#d7a84e;--series-2:#8fb8e8;--series-neutral:#d0c7b8}.dark body{background-color:#0d0d0c;background-image:linear-gradient(rgba(216,168,78,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,168,78,.035) 1px,transparent 1px),radial-gradient(700px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(216,168,78,.12),transparent 66%)}.dark .mb-nav{border-bottom-color:#35332d}.dark .mb-nav b{border-radius:6px;background:#f4f0e7;color:#171715}.dark .mb-theme{border-color:#514b3c}.dark header.top{border-color:#514b3c;background:linear-gradient(135deg,#1b1a17,#151512 68%,#241e14)}.dark .glance>div,.dark .card,.dark figure,.dark .tbl-scroll,.dark .stat,.dark .act,.dark .mrow,.dark .scroll{border-color:#35332d;background:#171715}.dark nav.toc a{border-radius:5px;box-shadow:none}.dark h1,.dark h2,.dark h3{letter-spacing:-.035em}.dark .plate{border-radius:8px}.dark .plate,.dark .plate.open{box-shadow:none}.dark .wrap>.eyebrow{border-radius:4px}.dark td,.dark .prose p,.dark p{color:#d0c7b8}.dark .stamp,.dark .lede{color:#9f9686}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}body>.mb-nav{min-height:58px;padding:10px 16px 11px}h1{font-size:30px}}
+</style></head><body><div class="wrap">
+<p class="eyebrow">equity-service · cortex · 2026-11-10</p>
+<h1>The board Wednesday opens against</h1>
+<p class="lead"><strong>10 November is a trading holiday</strong> — Diwali Balipratipada, cash and
+derivatives both shut, trading resumes Wednesday 11 November at 09:15. There is no 10 November
+report and there will not be one, so <strong>the 9 November scan is the live board</strong> and it
+is what Wednesday opens against. Scan times: SWING 9 Nov 17:30 IST, WEEKLY 02:51, ETF and
+ETF_WEEKLY 03:37, STRIKE 03:20, REVERSAL 03:31.</p>
+<p class="sub"><strong>Re-read this after the 09:30 build on 11 November before placing anything.</strong>
+The <em>to entry</em> distances below are how far the trigger sat above the last price the scan saw
+on 9 November; by Wednesday's open they are two sessions stale. Nothing on this page is an
+instruction and nothing here was placed.</p>
+
+<h2 id="gate-count">Reading the gate count</h2>
+<p><code>TOTAL_GATES</code> is <strong>8, not 9</strong>. Nine gates are evaluated; <strong>G5
+(sector rotation) is non-binding</strong> — it is measured, recorded and printed, and it decides
+nothing. It was de-gated on 2026-09-16 after <code>backtest_rotation</code> computed the quadrant
+for every session from 2024-01-01 and measured the following month's return: the quadrants G5
+passed returned <strong>0.16pp less</strong> than the ones it refused across the universe,
+<strong>1.53pp less</strong> over the strongest decile — the population it actually rules on — and
+the two halves of the window disagreed in sign. Thirty-one of forty parameter combinations were
+negative and none reached significance in a stable region.</p>
+<p class="sub">That is not evidence the doctrine is wrong. It is the absence of evidence for it, and
+a gate needs affirmative evidence to refuse a trade. So the reading is surfaced for a human and the
+scanner is not allowed to act on it. <strong>The consequence for reading this board: a row at 8/8
+whose &lsquo;blocked by&rsquo; column says G5 alone is not blocked.</strong> It has passed every
+gate that decides.</p>
+
+<h2 id="eight">Four at 8/8 — SWING, the placeable list</h2>
+<p>1,061 scanned, 723 with a stop derived, 33 at seven or more of eight, 28 actionable.</p>
+<div class="scroll"><table><thead><tr><th class='l'>symbol</th><th class='l'>sector</th><th class='l'>RRG</th><th>rank</th><th>MS rank</th><th class='l'>sector breadth</th><th>RS</th><th>A/D</th><th>ADR</th><th>entry</th><th>SL</th><th>stop%</th><th>to entry</th><th>qty</th><th>deploy</th><th class='l'>note</th></tr></thead><tbody><tr><td class="l"><b>CUPID</b></td><td class="l">Cosmetics/Personal Care</td><td class="l">WEAKENING</td><td>4</td><td><b>111</b></td><td class="l">not drawn</td><td>99</td><td>A+</td><td>4.2%</td><td>345.69</td><td>329.60</td><td>4.7%</td><td>+0.8%</td><td>1,243</td><td>4,29,693</td><td class="l">resting as an ATO in all three accounts · reports Q2 on 11 Nov</td></tr><tr><td class="l"><b>SONACOMS</b></td><td class="l">Auto/Truck-Original Eqp</td><td class="l">LAGGING</td><td>41</td><td>52</td><td class="l">74%</td><td>92</td><td>A</td><td>3.2%</td><td>925.85</td><td>877.95</td><td>5.2%</td><td>+0.2%</td><td>—</td><td>—</td><td class="l">already held, 187 + 21 · MarketSmith model portfolio, +1.52%</td></tr><tr><td class="l"><b>DIACABS</b></td><td class="l">Electrical-Power/Equipmt</td><td class="l">LAGGING</td><td>51</td><td>95</td><td class="l">50%</td><td>97</td><td>A</td><td>4.8%</td><td>388.22</td><td>365.40</td><td>5.9%</td><td>+4.5%</td><td>876</td><td>3,40,081</td><td class="l">weakest sector context of the four</td></tr><tr><td class="l"><b>TFCILTD</b></td><td class="l">Financial Svcs-Specialty</td><td class="l">WEAKENING</td><td>5</td><td><b>78</b></td><td class="l">75%</td><td>97</td><td>A+</td><td>3.9%</td><td>172.34</td><td>162.01</td><td>6.0%</td><td>+2.3%</td><td>1,936</td><td>3,33,650</td><td class="l">one of the three names the 4 Nov rank audit caught</td></tr></tbody></table></div>
+<p class="sub"><strong>The rank column is ours, not MarketSmith's</strong>, and the report's own
+warning applies to two of these names. Ours is an equal-weighted constituent-return rank this
+service computes; <code>record_industry_ranks</code> exists only because MarketSmith's arrives with
+no history, and its docstring calls theirs the better measure. Measured on 4 November against three
+names we held or nearly bought, ours was optimistic every time — GCSL 12 against their 73, SBC 11
+against 56, TFCILTD 4 against 78 — and all three fail O'Neil's ceiling of 40 on their number.
+<strong>CUPID fails it at 111 and TFCILTD at 78.</strong> Run <code>audit_stock</code> before acting
+on either. CUPID's sector is not drawn at all because fewer than eight of its names are priced, and
+below that one stock moving is larger than the move the breadth gate turns on.</p>
+
+<h2 id="disagreement">Where we disagree with MarketSmith</h2>
+<p>Their Buy Watchlist on the 9 November Big Picture is three names: Krishana Phoschem, Garware
+Hi-Tech Films and <strong>ACUTAAS</strong>. The first two are not in our universe. ACUTAAS is, at
+7/8 — Chemicals-Specialty, LAGGING, rank 33 against their 54, sector breadth 43%, RS 94, ADR 5.0%,
+entry 3,966.92, stop 3,782.50. Its blocking gates print as G3 and G5, and <strong>since G5 does not
+bind, the real block is G3 alone</strong> — the momentum window.</p>
+<p class="sub">That is a disagreement worth recording rather than a signal to act on. They publish it
+as a buy; we decline it on one gate whose own measurement admits 4.4% of the population for
++0.34pp at p = 0.43, with a U-shaped relationship between momentum and return and a Spearman of
+&minus;0.079 that sign-flips between periods. Neither side of this is strong evidence. Worth noting
+the parser printed this watchlist as nineteen names by swallowing the earnings block; the real list
+is three, and that is why the mail is read as prose.</p>
+
+<h2 id="watch">The 7/8 rows, by what is actually refusing them</h2>
+<div class="scroll"><table><thead><tr><th class="l">binding gate</th><th class="l">names</th></tr></thead><tbody>
+<tr><td class="l"><b>G8 — daily range</b></td><td class="l">SHUKRAPHAR <i>(held; ADR 6.5% against a 3–5% band)</i>, SAMBHV, GCSL, UTTAMSUGAR, RATNAVEER, SHREEPUSHK, OPTIEMUS, SGMART, SKYGOLD, TAMBOLIIN</td></tr><tr><td class="l"><b>G7 — relative strength</b></td><td class="l">PTCIL, BIL, PAYTM, LENSKART, AARTIPHARM, ASKAUTOLTD, ISFT, EMAMIPAP</td></tr><tr><td class="l"><b>G3 — momentum window</b></td><td class="l">ACUTAAS, NITINSPIN</td></tr><tr><td class="l"><b>G6 — EPS QoQ growth</b></td><td class="l">GLOBAL</td></tr>
+</tbody></table></div>
+<p class="sub"><strong>G8 and G7 are doing almost all of the refusing.</strong> G5 has been stripped
+from every row above, because listing a non-binding gate beside a binding one invites reading a
+sector quadrant as a refusal — which is exactly the error the 2026-09-16 measurement removed from
+the scanner and should not be reintroduced by a column heading.</p>
+
+<h2 id="other">The other four scans</h2>
+<p><strong>WEEKLY — zero actionable, and structurally so.</strong> 1,061 scanned, 464 with a stop, 7
+at seven or more, and every one blocked by G4, stop width, at <strong>13.6% to 18.2%</strong>
+against a 5% cap for stocks: KINGFA, SOTL, MARKSANS, RAMRAT, QUESS, CENTUM. All six show
+<em>no base</em>. Nothing to act on either way, but a weekly scan returning only no-base rows with
+stops at three times the cap is worth a glance against the contraction-stop fault fixed in
+<code>3430895</code>, where the stop was a min-close of a fixed ten-bar window rather than a
+contraction.</p>
+<p><strong>ETF</strong> — 23 scanned, 18 with a stop derived, nothing at seven or more and nothing
+within one gate of it. <strong>ETF_WEEKLY</strong> — 23 scanned, 22 with a stop, the same.</p>
+<p><strong>STRIKE and REVERSAL are not placeable.</strong> <code>TRADED_STRATEGIES</code> excludes
+both; STRIKE is intraday and everything placed here is CNC, so these rows are read by hand. STRIKE
+had 18 at seven or more and 8 actionable — CUPID and DIACABS again at 8/8, plus PVRINOX (LEADING,
+rank 3, a 52-week high on a record Q2), GHCLTEXTIL, LALITHAA, and SBC and LAURUSLABS which we
+already hold. REVERSAL returned nothing.</p>
+
+<h2 id="sectors">The sector context underneath all of it</h2>
+<div class="cols">
+<div><h3>Strongest</h3><div class="scroll"><table><tbody>
+<tr><td class="l">Banks-Money Center</td><td><b>95%</b></td></tr><tr><td class="l">Medical-Generic Drugs</td><td><b>89%</b></td></tr><tr><td class="l">Medical-Hospitals</td><td><b>88%</b></td></tr><tr><td class="l">Finance-Investment Mgmt</td><td><b>88%</b></td></tr><tr><td class="l">Finance-Invest Bnk/Bkrs</td><td><b>88%</b></td></tr>
+</tbody></table></div></div>
+<div><h3>Weakest</h3><div class="scroll"><table><tbody>
+<tr><td class="l">Chemicals-Agricultural</td><td><b>22%</b></td></tr><tr><td class="l">Metal Proc & Fabrication</td><td><b>22%</b></td></tr><tr><td class="l">Steel-Specialty Alloys</td><td><b>33%</b></td></tr><tr><td class="l">Chemicals-Specialty</td><td><b>43%</b></td></tr>
+</tbody></table></div></div>
+</div>
+<p class="sub">Share of each sector's names closing above their own 20-day average, on the same
+definition the entry gate uses for the market as a whole. Thirty sectors are drawn; a sector needs
+at least eight priced names to be drawn at all.</p>
+<p><strong>None of the four 8/8 names sits in a top-five sector, and three of the four are RRG
+WEAKENING or LAGGING.</strong> MarketSmith's own leadership read on 9 November is pharma and
+financials — Divi's, Aurobindo, Gland, Sai Life and Emcure all at 52-week highs, ICICI, Kotak, Karur
+Vysya and MCX alongside them — and the sectors above agree: Banks-Money Center at 95%, Medical-Generic
+Drugs at 89%, Medical-Hospitals at 88%. <strong>Our board is not pointing there.</strong></p>
+<p class="sub">That gap is the most useful thing on this page and it is not resolved here. It has two
+readings and they lead opposite ways. Either the scanner is finding names the leadership has not
+reached yet, which is what an early-stage base is supposed to look like; or it is finding what is
+left over once the leadership has been bid away, which is the laggard trap MarketSmith's own
+9 November learning article spends two thousand words on. The board cannot tell which, and neither
+can this page. What it can do is say that the question exists before a trigger fires rather than
+after.</p>
+
+<h2 id="caveat">What this page is not</h2>
+<p>It is a read of a scan, not a recommendation and not an audit. Every row is the scan's own record
+rather than a recomputation, and the full-page audit each entry requires — MarketSmith's checklist,
+surveillance flags, the next earnings date, three years of operating cash flow, share count,
+ownership and bulk deals — has not been done for any name here. The scanner's columns are the
+thinnest slice of that. <strong>One name on this board, CUPID, reports Q2 on 11 November</strong>,
+the session it would next be live; its forward indicators are bullish, which under the rule permits
+a pre-earnings entry, but the date should be seen before the decision rather than after it.</p>
+<footer>Hand-written on the 10 November holiday, off the 2026-11-09 scan. Re-read against the 11 November 09:30 build before acting on any row.</footer></div></body></html>
