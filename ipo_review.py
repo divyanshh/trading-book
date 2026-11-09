@@ -5834,6 +5834,258 @@ def _for_nov_09() -> list[IPO]:
 IPOS_2026_11_09 = _for_nov_09()
 
 
+LEAD_NOV_10 = (
+    "Tuesday 10 November, written at <strong>04:45 IST</strong>, before the open that "
+    "will not come: <strong>the exchanges are shut today for Diwali Balipratipada</strong> "
+    "and trading resumes Wednesday 11 November at 09:15. A closed session is not a reason "
+    "to skip this page &mdash; a holiday is exactly when the next open gets decided "
+    "&mdash; and this one earns its place twice over. <strong>The pipeline grew.</strong> "
+    "Two mainboard names appear on the board that were not on the 9 November page: "
+    "<strong>Avaada Electro at ~&#8377;7,600 Cr</strong>, which is seven times the size of "
+    "anything else queued, and Crystal Crop Protection. Both are TBA-TBA, as are Milestone "
+    "Gears and Mahanadi Coalfields for a fourth consecutive session. <strong>And the 9 "
+    "November Bombay Coated card was wrong.</strong> Its horizon field said the debut gain "
+    "had held at &#8377;90.07; &#8377;90.07 was the <em>6 November</em> close, two sessions "
+    "stale when it was written. The stock has since fallen about 5% on each of the two "
+    "sessions after it and closed 9 November at <strong>&#8377;81.30, below its &#8377;82 "
+    "issue price</strong>. That is corrected in its card below. <strong>Nothing is open for "
+    "subscription, nothing has an announced window for 11&ndash;21 November, and nothing "
+    "lists in that span.</strong> Applied by this service: nothing, and nothing was "
+    "available to apply for."
+)
+
+FOOTNOTE_NOV_10 = (
+    "<strong>The whole fortnight, re-scored on the position rather than the print.</strong> "
+    "Five mainboard debuts closed 9 November at: EAAA &#8377;1,695.50 (<strong>+1.83%</strong> "
+    "on its &#8377;1,665 issue), BLS Polymers &#8377;237.45 (<strong>+58.3%</strong> on "
+    "&#8377;150), SFC Environmental &#8377;409.30 (<strong>+24.0%</strong> on &#8377;330), "
+    "M.K.Sons &#8377;154.56 (<strong>&minus;4.59%</strong> on &#8377;162) and Bombay Coated "
+    "&#8377;81.30 (<strong>&minus;0.85%</strong> on &#8377;82). Every figure is the 9 "
+    "November close, read from four independent quote pages that agree to the paisa; the "
+    "lone figure here that is not is Crystal Crop&rsquo;s presence on the board, which one "
+    "aggregator carries and three do not. <strong>So the lesson of the 9 November footnote "
+    "survives on the print and inverts on the position.</strong> On the listing print the "
+    "2.6-point haircut was short four times out of five and that stands unchanged &mdash; "
+    "the premium was a floor, not a ceiling. On where the money actually is four to seven "
+    "sessions later, <strong>two of the five are under water</strong>, and they are the two "
+    "the haircut was blamed for under-calling. Bombay Coated listed +10.98% and is now "
+    "&minus;0.85%; M.K.Sons listed +5.56% and is now &minus;4.59%. The 9 November page said "
+    "of the Bombay Coated SKIP that &lsquo;there is no reading of that which makes the SKIP "
+    "right&rsquo;. There is one, and it took three sessions to arrive: <strong>the position "
+    "is below issue</strong>. <strong>The correction is the finding, not the embarrassment."
+    "</strong> The card was wrong because a price was quoted as &lsquo;now&rsquo; when it "
+    "was two sessions old, and the two sessions it missed were a Muhurat session and a "
+    "holiday-shortened week &mdash; precisely the stretch where a quote page goes stale "
+    "without looking stale. <strong>Any price written on this board from here carries the "
+    "date it is a close for.</strong> <code>backtest_gmp</code> is still owed a re-run, and "
+    "it should now be re-run against the five-session mark as well as the debut print, "
+    "because those two numbers have disagreed in sign on 40% of this fortnight&rsquo;s "
+    "board. <strong><code>show_ipos</code> is broken for a fourth session</strong> &mdash; "
+    "&lsquo;the page answered but carries no Current Mainboard IPO table at all&rsquo; "
+    "&mdash; so an empty parse and an empty board still render identically and this page is "
+    "still hand-read from live sources."
+)
+
+
+def _for_nov_10() -> list[IPO]:
+    """A holiday, a pipeline that grew by two large names, and a grade corrected."""
+    avaada = IPO(
+        name="Avaada Electro",
+        call="WATCH — new to this board; no band, no dates, no GMP",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · UDRHP filed 25 Aug 2026 · SEBI approval 15 Apr 2026, valid 18 months",
+        band="To be announced",
+        size="~₹7,600 Cr — ₹1,600 Cr fresh + ₹6,000 Cr OFS by promoter Avaada Ventures",
+        split="21% fresh / 79% OFS",
+        gmp="none — no quote exists, there is no price to quote against",
+        gmp_pct=0.0,
+        expected="not estimable; no band",
+        apply_as="Nobody yet. Nothing can be sized without a band and a lot.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("NEW — not on the 9 November board", "warn"),
+               ("~₹7,600 Cr: seven times the next-largest name queued", "warn"),
+               ("79% OFS — most of the money leaves rather than enters", "fail"),
+               ("aggregators quote ₹9,000–10,000 Cr against the ₹7,600 Cr filed", "warn")),
+        stats=(("FY26 revenue", "₹5,303.52 Cr"), ("FY26 EBITDA", "₹1,258.86 Cr"),
+               ("FY26 PAT", "₹888.74 Cr"), ("EBITDA margin", "23.7%"),
+               ("net margin", "16.8%"), ("BRLM", "ICICI Securities")),
+        note=(
+            "The one genuinely new fact on the board today, and the largest name in the "
+            "pipeline by a factor of seven. Solar cell and module manufacturing. The "
+            "structure is the thing to read before the band lands: <strong>₹6,000 Cr of "
+            "₹7,600 Cr is an offer for sale by the promoter</strong>, so only ₹1,600 Cr "
+            "reaches the company, and ₹1,200 Cr of that is earmarked to repay SBI "
+            "borrowings raised for the plants. On the published intent, roughly ₹400 Cr "
+            "of a ₹7,600 Cr issue is new money for the business. That is the opposite of "
+            "the SRIT structure this board called out on 26 September, where no OFS meant "
+            "every rupee went into the company and could not be dressed up. FY26 numbers "
+            "are genuinely strong — ₹5,304 Cr revenue, 23.7% EBITDA margin, ₹889 Cr PAT — "
+            "and none of that is in question. The question the band will answer is what "
+            "multiple is being asked for a business whose promoter is selling four rupees "
+            "for every one it raises. <strong>No call is possible and none is made.</strong> "
+            "Carried here so the first time this name needs a decision is not the first "
+            "time it has been looked at."
+        ),
+    )
+    crystal = IPO(
+        name="Crystal Crop Protection",
+        call="WATCH — one source only; treat as unconfirmed",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · carried as Current on one aggregator",
+        band="To be announced",
+        size="₹600 Cr fresh + 70 lakh shares OFS — the OFS has no rupee value without a band",
+        split="not fully published",
+        gmp="none",
+        gmp_pct=0.0,
+        expected="not estimable",
+        apply_as="Nobody yet.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("NEW — not on the 9 November board", "warn"),
+               ("carried by ONE aggregator; three others do not list it", "fail"),
+               ("an agrochemical issue has been attempted before and withdrawn", "warn"),
+               ("no band, so the OFS share count cannot be priced", "warn")),
+        note=(
+            "Agrochemicals. Listed as a current mainboard issue by a single aggregator and "
+            "absent from the other three read this morning, one of which states flatly that "
+            "there are no upcoming mainboard IPOs at all. <strong>One source is not a "
+            "board.</strong> It is recorded here because a name that appears and then "
+            "vanishes is itself worth having written down, and because this company filed "
+            "for roughly ₹1,000 Cr in 2018 and never came to market — a second attempt "
+            "would be the story, if it is one. Nothing here is firm enough to act on or "
+            "even to research properly; the next session either confirms it on a second "
+            "source or it comes off the board."
+        ),
+    )
+    milestone = IPO(
+        name="Milestone Gears",
+        call="WATCH — fourth session; no band, no dates, no GMP",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · status Upcoming (BSE, NSE)",
+        band="To be announced", size="~₹1,100 Cr (page says ‘approx’)", split="not published",
+        gmp="none — no quote available",
+        gmp_pct=0.0,
+        expected="not estimable; there is no price to take a premium against",
+        apply_as="Nobody yet.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("fourth consecutive session showing Current with TBA-TBA", "warn"),
+               ("no longer the largest name queued — Avaada Electro is 7x it", "warn"),
+               ("no GMP quote at all — not a weak premium, an absent one", "warn"),
+               ("the page carries no last-updated stamp, so ‘TBA’ is of unknown age", "warn")),
+        note=(
+            "Unchanged from the 9 November card in every particular, which after four "
+            "sessions is itself the observation: a ~₹1,100 Cr mainboard issue sitting at "
+            "TBA-TBA for four sessions is either close to pricing or stalled, and the page "
+            "cannot tell us which because it carries no timestamp. <strong>The one thing "
+            "that did change is relative:</strong> it was the large name on this board "
+            "yesterday and today it is the second-largest by a wide margin."
+        ),
+    )
+    mahanadi = IPO(
+        name="Mahanadi Coalfields",
+        call="WATCH — fourth session; no band, no dates, no GMP",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · status Upcoming (BSE, NSE)",
+        band="To be announced",
+        size="66,18,36,300 shares at ₹2 face value — no rupee size published, because there is no band",
+        split="not published · 35% retail portion",
+        gmp="none — no recorded quote",
+        gmp_pct=0.0,
+        expected="not estimable",
+        apply_as="Nobody yet.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("fourth consecutive session at TBA-TBA", "warn"),
+               ("66.18 crore shares — a very large offer by share count", "warn"),
+               ("a Coal India subsidiary: state divestment pricing, not market pricing", "warn"),
+               ("35% retail portion is published while the band is not", "warn")),
+        note=(
+            "Unchanged. The share count is published and the price is not, so the issue "
+            "size cannot be stated in rupees and no allotment arithmetic is possible — the "
+            "odds calculation this board normally does needs a lot size, and there isn't "
+            "one. The 35% retail portion remains the single structural fact available and "
+            "is generous relative to a standard book; it is the number to re-read the day "
+            "a band lands, because a generous retail slice on a state divestment priced to "
+            "clear is the one combination on this board that has historically been worth "
+            "applying into."
+        ),
+    )
+    bombay = IPO(
+        name="Bombay Coated & Special Steels",
+        call="SKIP — REGRADED: the call was right after all; it is now BELOW issue",
+        tone="pass",
+        dates="closed 2 Nov · allotted 3 Nov · LISTED 5 Nov · re-graded 10 Nov on the 9 Nov close",
+        band="₹82 cap", size="₹82 issue price · ₹183.06 Cr · lot 182", split="see the 2–4 Nov cards",
+        gmp="₹8 final (investorgain, stamped 5 Nov 09:37 and now stale)",
+        gmp_pct=9.8,
+        expected="was ~+7.2% after the haircut — listed +10.98% NSE (₹91.00) / +12.22% BSE (₹92.02)",
+        apply_as="Nobody. A listing-day flip would have paid +10.98%; anyone who held is down.",
+        horizon="CORRECTED: ₹81.30 at the 9 Nov close — 0.85% BELOW the ₹82 issue. The pop is gone.",
+        book="63.89× overall — the figure carried on the 4 Nov card, against trackers printing 32.68× and 3.78×",
+        flags=(("the 9 Nov card said ‘held at ₹90.07’ — that was the 6 Nov close, 2 sessions stale", "fail"),
+               ("90.07 (6 Nov) → 85.57 (8 Nov Muhurat) → 81.30 (9 Nov): about −5% on each", "fail"),
+               ("9 Nov range was 81.30–81.30 — it opened at the floor and never left it", "fail"),
+               ("four independent quote pages agree on ₹81.30 / −4.99%", "pass")),
+        stats=(("9 Nov close (NSE)", "₹81.30"), ("9 Nov close (BSE)", "₹81.13"),
+               ("vs ₹82 issue", "−0.85%"), ("from the ₹91.00 debut", "−10.7%"),
+               ("9 Nov volume", "1,98,115"), ("market cap", "₹511 Cr")),
+        note=(
+            "<strong>This card replaces yesterday's, which was wrong, and the way it was "
+            "wrong is the lesson.</strong> The 9 November page graded the SKIP as a clear "
+            "miss and wrote in its horizon field that the debut gain &lsquo;has HELD: "
+            "₹90.07 now, +9.84% on issue, four sessions later&rsquo;. ₹90.07 was not now. "
+            "It was the 6 November close, and between it and the moment that sentence was "
+            "written sat the 8 November Muhurat session (₹85.57) — so the number was two "
+            "sessions old and read as current. By that evening the stock closed ₹81.30, a "
+            "third consecutive fall of about five percent, with a 9 November range of "
+            "₹81.30 to ₹81.30: it opened at the floor and did not trade off it. "
+            "<strong>So the SKIP is right where it counts.</strong> Anyone who flipped on "
+            "listing day made +10.98%; anyone who held the position is now down on a ₹82 "
+            "issue. That is the identical shape to M.K.Sons, and it is now the second of "
+            "the fortnight's five debuts to give the whole pop back. The honest statement "
+            "of the record: <strong>the haircut under-called the print and the call "
+            "out-lived the print</strong>, and yesterday's page conflated the two because "
+            "it was reading a stale quote."
+        ),
+    )
+    mksons = IPO(
+        name="M.K.Sons Fine Jewels",
+        call="NO — stands, and the gap has widened",
+        tone="pass",
+        dates="closed 30 Oct · allotted 2 Nov · LISTED 4 Nov · re-read 10 Nov on the 9 Nov close",
+        band="₹153–162", size="₹275.40 Cr · lot 91", split="fresh issue",
+        gmp="₹11 final (investorgain) · ₹12.5 (niftytrader) — publishers disagreed",
+        gmp_pct=6.8,
+        expected="was ~+4.2% after the haircut — listed +5.56% (₹171.00)",
+        apply_as="Nobody. That stands.",
+        horizon="₹154.56 at the 9 Nov close — 4.59% BELOW the ₹162 issue, wider than the 2.42% quoted yesterday.",
+        book="~5.09× overall — the weakest book of the fortnight",
+        flags=(("below issue and still falling: −2.42% yesterday, −4.59% at the 9 Nov close", "pass"),
+               ("the listing-day +5.56% is fully gone and then some", "pass"),
+               ("5.09× — institutions never took their quota on any snapshot", "pass"),
+               ("a listing-day flip would still have paid; the position did not", "warn")),
+        stats=(("9 Nov close", "₹154.56"), ("9 Nov change", "−2.13%"),
+               ("vs ₹162 issue", "−4.59%"), ("from the ₹171.00 debut", "−9.6%"),
+               ("9 Nov range", "₹152.65–₹158.68"), ("book", "5.09×")),
+        note=(
+            "Carried forward with one number changed and it moved the right way. The "
+            "9 November card put it at ₹158.08 and −2.42%; the 9 November <em>close</em> "
+            "was ₹154.56 and −4.59%, so the figure on that card was also mid-session rather "
+            "than a close. <strong>The reasoning has not changed and did not need to:</strong> "
+            "a premium decaying ₹10.25 → ₹7 → ₹5.5 → ₹5 on a 5.09× book said the demand was "
+            "not real, and five sessions after listing the price agrees. This is the card "
+            "that makes the case for grading on the position: awarded on listing day it was "
+            "a miss, and it has been right every session since."
+        ),
+    )
+    return [avaada, crystal, milestone, mahanadi, bombay, mksons]
+
+
+IPOS_2026_11_10 = _for_nov_10()
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -5881,6 +6133,11 @@ BY_DAY = {
     # its lead. A page dated as though written at the time would be a lie about
     # when the work happened.
     "2026-11-09": (IPOS_2026_11_09, LEAD_NOV_09, FOOTNOTE_NOV_09),
+    # A trading holiday (Diwali Balipratipada). The page is written anyway:
+    # two new names appeared on the board overnight, and the 9 November
+    # Bombay Coated card quoted a two-session-old price as current and is
+    # corrected here rather than edited, so the error stays in the record.
+    "2026-11-10": (IPOS_2026_11_10, LEAD_NOV_10, FOOTNOTE_NOV_10),
 }
 
 
