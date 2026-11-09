@@ -5673,6 +5673,167 @@ def _for_nov_04() -> list[IPO]:
 IPOS_2026_11_04 = _for_nov_04()
 
 
+LEAD_NOV_09 = (
+    "Monday 9 November, written at <strong>11:55 IST</strong>, mid-session &mdash; and "
+    "written late, which is part of the record: <strong>no review was written for 5, 6 or "
+    "8 November</strong>, and the two gradings the 4 November page promised &mdash; "
+    "M.K.Sons and Bombay Coated &mdash; were owed on 5 November and are delivered here "
+    "instead. <strong>The mainboard pipeline is empty.</strong> Nothing is open for "
+    "subscription today, nothing has an announced window for 10&ndash;13 November (the "
+    "10th is a holiday), and no mainboard issue lists in that span. Five independent live "
+    "pages agree, including <strong>Zerodha&rsquo;s own bidding screen, which simply says "
+    "&lsquo;No live IPOs available&rsquo;</strong> &mdash; a broker&rsquo;s live book "
+    "being the strongest single evidence that there is nothing to apply for. "
+    "<strong>Applied by this service:</strong> nothing, and nothing was available to "
+    "apply for. The four cards below are <strong>grades</strong>, not calls."
+)
+
+FOOTNOTE_NOV_09 = (
+    "<strong>The haircut has now been short four listings out of five, and that is no "
+    "longer two listings and a shrug.</strong> The rule subtracts 2.6 points from GMP%, "
+    "the overstatement <code>backtest_gmp</code> measured across 295 listings "
+    "(r&nbsp;=&nbsp;0.87). Against the five mainboard debuts of 2&ndash;5 November it "
+    "under-called four and nailed one: BLS Polymers short by 21&ndash;26 points, SFC "
+    "Environmental short by 5.7, <strong>Bombay Coated short by 3.8</strong> (GMP 9.8% "
+    "&rarr; expected ~7.2%, <strong>listed +10.98%</strong>), <strong>M.K.Sons short by "
+    "1.4</strong> (GMP 6.8% &rarr; expected ~4.2%, <strong>listed +5.56%</strong>), and "
+    "EAAA exact (GMP 3.2% &rarr; expected ~0.6%, listed +0.63%). Four misses in one "
+    "direction across a single fortnight is a regime the calibration does not describe. "
+    "It does not retire a 295-listing measurement on five prints &mdash; but any premium "
+    "quoted on this board for the next issue should be read as a <em>floor</em> rather "
+    "than a ceiling, and <code>backtest_gmp</code> is owed a re-run before the next call. "
+    "<strong>The listing gain is not the trade.</strong> M.K.Sons listed +5.56% and now "
+    "trades at &#8377;158.08, <strong>2.42% BELOW its &#8377;162 issue price</strong>: the "
+    "entire debut pop is gone and then some. SFC went the other way, +7.61% on debut and "
+    "+25.20% now. Same fortnight, same board, opposite outcomes after day one &mdash; "
+    "which is the whole argument for the horizon field carrying a condition rather than a "
+    "date. <strong>GMP publishers still do not agree.</strong> niftytrader and "
+    "investorgain print different final premiums on all five names, and on BLS (&#8377;44 "
+    "vs &#8377;69) and EAAA (&#8377;11 vs &#8377;54) the gap is large enough to change the "
+    "call. Direction agreed in all five cases; the level is soft and should be quoted as a "
+    "range. <strong>Freshness, stated plainly:</strong> ipoji, chittorgarh, Zerodha and "
+    "niftytrader carry <em>no</em> last-updated stamp; only investorgain stamps per row, "
+    "newest 9 Nov 08:02, and every mainboard row there is last-stamped 5 Nov. The NSE "
+    "upcoming-issues page timed out at 60s and BSE was not reached, so a band announced in "
+    "the last few hours would not necessarily show here. This is what the aggregators and a "
+    "live broker book say now, not an exchange confirmation."
+)
+
+
+def _for_nov_09() -> list[IPO]:
+    """An empty board, two large names stuck at TBA, and four debuts graded."""
+    milestone = IPO(
+        name="Milestone Gears",
+        call="WATCH — cannot be called; no band, no dates, no GMP",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · status Upcoming (BSE, NSE)",
+        band="To be announced", size="~₹1,100 Cr (page says ‘approx’)", split="not published",
+        gmp="none — the page states explicitly that no GMP quote is currently available",
+        gmp_pct=0.0,
+        expected="not estimable; there is no price to take a premium against",
+        apply_as="Nobody yet. Nothing can be sized without a band and a lot.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("~₹1,100 Cr is a large mainboard issue, not a quiet one", "warn"),
+               ("third consecutive session showing Current with TBA-TBA", "warn"),
+               ("no GMP quote at all — not a weak premium, an absent one", "warn"),
+               ("the page carries no last-updated stamp, so ‘TBA’ is of unknown age", "warn")),
+        note=(
+            "Carried here only so the board does not report an empty pipeline as an empty "
+            "<em>future</em>. The daily report's generated section says ‘No mainboard IPO "
+            "is open or upcoming’, and for this name that is wrong in the second half: it "
+            "is upcoming, it is large, and it has simply not priced. Worth noting that "
+            "<code>show_ipos</code> has been broken for three sessions — ‘the page answered "
+            "but carries no Current Mainboard IPO table at all’ — so the service cannot "
+            "see this name either way, and an empty parse renders identically to an empty "
+            "board. That is the reason this review is hand-read from live pages."
+        ),
+    )
+    mahanadi = IPO(
+        name="Mahanadi Coalfields",
+        call="WATCH — cannot be called; no band, no dates, no GMP",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · status Upcoming (BSE, NSE)",
+        band="To be announced",
+        size="66,18,36,300 shares at ₹2 face value — no rupee size published, because there is no band",
+        split="not published · 35% retail portion",
+        gmp="none — no recorded quote",
+        gmp_pct=0.0,
+        expected="not estimable",
+        apply_as="Nobody yet.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("66.18 crore shares — a very large offer by share count", "warn"),
+               ("a Coal India subsidiary: state divestment pricing, not market pricing", "warn"),
+               ("35% retail portion is published while the band is not", "warn"),
+               ("third consecutive session at TBA-TBA", "warn")),
+        note=(
+            "The share count is published and the price is not, so the issue size cannot "
+            "be stated in rupees and no allotment arithmetic is possible — the odds "
+            "calculation this board normally does needs a lot size, and there isn't one. "
+            "The 35% retail portion is the one structural fact available and it is worth "
+            "remembering when the band lands, because it is generous relative to a "
+            "standard book."
+        ),
+    )
+    bombay = IPO(
+        name="Bombay Coated & Special Steels",
+        call="SKIP was the call — GRADED: the call was WRONG, it listed +10.98%",
+        tone="fail",
+        dates="closed 2 Nov · allotted 3 Nov · LISTED 5 Nov (BSE, NSE) — graded four days late",
+        band="₹82 cap", size="₹82 issue price", split="see the 2–4 Nov cards",
+        gmp="₹8 final (investorgain) · ₹8–9 range quoted on the 4 Nov card",
+        gmp_pct=9.8,
+        expected="was ~+7.2% after the haircut — ACTUAL +10.98% on NSE (₹91.00), +12.22% on BSE (₹92.02)",
+        apply_as="Retail one lot would have paid. The SKIP cost the gain.",
+        horizon="Debut gain has HELD: ₹90.07 now, +9.84% on issue, four sessions later.",
+        book="63.89× overall — the figure carried on the 4 Nov card, against trackers printing 32.68× and 3.78×",
+        flags=(("the SKIP was wrong and the premium was right", "fail"),
+               ("haircut short by 3.8 points — the third miss in the same direction", "fail"),
+               ("two different debut prints, ₹91 NSE and ₹92.02 BSE, both correct", "warn"),
+               ("the gain held four sessions rather than fading", "pass")),
+        note=(
+            "This grading was due on 5 November and the 4 November footnote said so in "
+            "terms. It is being written on the 9th because no review was written on the "
+            "5th, 6th or 8th. The call itself: SKIP against a 9.8% premium on a 63.89× "
+            "book, and it listed +10.98% and has held +9.84%. There is no reading of that "
+            "which makes the SKIP right, and the honest lesson is that a premium near 10% "
+            "on a heavily subscribed small issue was being discounted too hard — the same "
+            "error the footnote is now measuring four times over."
+        ),
+    )
+    mksons = IPO(
+        name="M.K.Sons Fine Jewels",
+        call="NO was the call — GRADED: right on the trade, wrong on the debut",
+        tone="pass",
+        dates="closed 30 Oct · allotted 2 Nov · LISTED 4 Nov (BSE, NSE) — graded five days late",
+        band="₹153–162", size="₹275.40 Cr", split="fresh issue",
+        gmp="₹11 final (investorgain) · ₹12.5 (niftytrader) — publishers disagree",
+        gmp_pct=6.8,
+        expected="was ~+4.2% after the haircut — ACTUAL +5.56% (₹171.00)",
+        apply_as="Nobody. That stands.",
+        horizon="VINDICATED: ₹158.08 now — 2.42% BELOW the ₹162 issue price. The debut pop is fully gone.",
+        book="~5.09× overall — the weakest book of the fortnight",
+        flags=(("now trades BELOW issue — the NO was right where it counted", "pass"),
+               ("but it did list +5.56%, so a listing-day flip would have paid", "warn"),
+               ("GMP decayed ₹10.25 → ₹7 → ₹5.5 → ₹5 before closing at ₹11 on another tracker", "warn"),
+               ("5.09× — institutions never took their quota on any snapshot", "pass")),
+        note=(
+            "The most useful card on this page, because the call and the debut disagree "
+            "and the call still won. A decaying premium on a 5.09× book said the demand "
+            "was not real; it listed +5.56% anyway, and then gave the whole thing back "
+            "and more within three sessions. A grade awarded on listing day would have "
+            "recorded this as a miss. The horizon field is what decided it, not the call "
+            "field — which is the argument for grading on the position rather than the "
+            "print."
+        ),
+    )
+    return [milestone, mahanadi, bombay, mksons]
+
+
+IPOS_2026_11_09 = _for_nov_09()
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -5714,6 +5875,12 @@ BY_DAY = {
     "2026-11-02": (IPOS_2026_11_02, LEAD_NOV_02, FOOTNOTE_NOV_02),
     "2026-11-03": (IPOS_2026_11_03, LEAD_NOV_03, FOOTNOTE_NOV_03),
     "2026-11-04": (IPOS_2026_11_04, LEAD_NOV_04, FOOTNOTE_NOV_04),
+    # 5, 6 and 8 November carry no review -- the board was empty on all three and
+    # nothing was written. Rather than invent three retrospective pages, the two
+    # gradings those days owed are delivered on the 9th and the gap is stated in
+    # its lead. A page dated as though written at the time would be a lie about
+    # when the work happened.
+    "2026-11-09": (IPOS_2026_11_09, LEAD_NOV_09, FOOTNOTE_NOV_09),
 }
 
 
