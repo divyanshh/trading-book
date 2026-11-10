@@ -120,6 +120,11 @@ def main(argv: list[str]) -> int:
     paths = [
         f"stocks/reports/{day}.html",
         f"stocks/reports/{day}_ipo_review.html",
+        # The crypto book publishes here too, and until 2026-11-10 this script
+        # did not look. Its page had not reached the site since 7 October and
+        # nothing noticed for thirty-four days, because the one command whose
+        # job is proving a publish landed only ever asked about equity.
+        f"crypto/reports/{day}.html",
         "index.html",
     ]
     # Absent from HEAD is not this script's failure to report. The claim here
@@ -133,7 +138,15 @@ def main(argv: list[str]) -> int:
     # A report that should exist and does not is a different fault, and it has
     # its own owner: the checklist's `report` step, which after 09:45 asks
     # whether build-daily-report-morning stamped a success today.
-    optional = {f"stocks/reports/{day}.html", f"stocks/reports/{day}_ipo_review.html"}
+    optional = {
+        f"stocks/reports/{day}.html",
+        f"stocks/reports/{day}_ipo_review.html",
+        # Optional for the same reason as the equity report, and a different
+        # one: the crypto pass runs seven days a week while this script is
+        # also called by the weekday equity mirror, which has no crypto page
+        # to prove on a day the crypto pass has not run yet.
+        f"crypto/reports/{day}.html",
+    }
 
     print(f"verifying {day} against HEAD")
     bad = []
