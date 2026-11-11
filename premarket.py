@@ -186,11 +186,36 @@ the full audit before an order, not the rank shown here.</p>
 
 <h3 class="sub">The sector pass, name by name</h3>
 <div class="scroll"><table><thead><tr><th class="l">symbol</th><th class="l">quadrant</th><th>sector breadth</th><th class="l">sector regime</th><th>dist</th><th class="l">read</th></tr></thead><tbody>
-<tr><td class="l">TFCILTD</td><td class="l">LEADING</td><td class="pass">92%</td><td class="l">Nifty Financial Services — Confirmed Uptrend</td><td>0</td><td class="l">Strongest of the four on every column. Sector breadth went 17% → 92% in thirty sessions.</td></tr>
+<tr><td class="l">TFCILTD</td><td class="l">LEADING</td><td class="pass">92%</td><td class="l">Nifty Financial Services — Confirmed Uptrend</td><td>0</td><td class="l">Sector breadth went 17% → 92% in thirty sessions. <strong>An earlier version of this page called it the strongest of the four on every column; the audit below withdraws that.</strong></td></tr>
 <tr><td class="l">SONACOMS</td><td class="l">IMPROVING</td><td class="pass">76%</td><td class="l">Nifty Auto — Confirmed Uptrend</td><td>0</td><td class="l">Clean sector. Already held, so this is an add rather than a new name.</td></tr>
 <tr><td class="l">LOTUSDEV</td><td class="l">IMPROVING</td><td>67%</td><td class="l">Nifty Realty — Confirmed Uptrend</td><td>0</td><td class="l">Sector confirmed 3 November; breadth up from 44%.</td></tr>
 <tr><td class="l">MLKFOOD</td><td class="l">LEADING</td><td class="warn">&mdash;</td><td class="l">Nifty FMCG — Confirmed Uptrend</td><td>3</td><td class="l">Food-Dairy carries too few priced names to draw a sector breadth at all, so one column of the pass cannot be answered.</td></tr>
 </tbody></table></div>
+
+<h3 class="sub">The audit, and what it did to this list</h3>
+<p>Ten names were put through the full MarketSmith page before any order — ratings, surveillance,
+cash flow against reported profit, ownership, board, bulk deals and the NSE earnings date. <strong>The
+scanner's gate count and the audit disagree almost everywhere</strong>, and where they do, the audit
+is the source with a history behind it.</p>
+<div class="scroll"><table><thead><tr><th class="l">symbol</th><th>blockers</th><th>MS group rank</th><th class="l">what the page says</th></tr></thead><tbody>
+<tr><td class="l">LENSKART</td><td class="pass">0</td><td class="pass">2</td><td class="l">The only clean page. Operating cash above pre-tax profit four years running. But nine block SELLs — a pre-IPO trust sold 35,000,000 shares at 683.02 on 21 Sep, below where it is bought.</td></tr>
+<tr><td class="l">AARTIPHARM</td><td class="warn">1</td><td class="pass">5</td><td class="l">Mar-22: −₹43.7 Cr operating cash on +₹155.4 Cr pre-tax. Promoters −3.44pp. Six block sells.</td></tr>
+<tr><td class="l">CPPLUS</td><td class="warn">1</td><td class="pass">33</td><td class="l">Best fundamentals here — EPS rank 99, and the only name with real institutions. Five straight years of profit not becoming cash.</td></tr>
+<tr><td class="l">ISFT</td><td class="warn">1</td><td class="pass">20</td><td class="l">Four surveillance flags, including the <strong>trade-to-trade segment</strong>.</td></tr>
+<tr><td class="l">SSWL</td><td class="fail">2</td><td class="fail">45</td><td class="l">ASM list, no institutions.</td></tr>
+<tr><td class="l">ROSSTECH</td><td class="fail">2</td><td class="fail">69</td><td class="l">Cash negative in 2 of 3 years; promoters −4.90pp.</td></tr>
+<tr><td class="l">PAYTM</td><td class="fail">2</td><td class="fail">73</td><td class="l">The year profit arrived is the year cash left: −₹743 Cr on +₹582 Cr pre-tax.</td></tr>
+<tr><td class="l">RATNAVEER</td><td class="fail">2</td><td class="fail">79</td><td class="l">500,000 shares through at 364.15 on <strong>9 November</strong>, just under the trigger.</td></tr>
+<tr><td class="l">BMWVENTLTD</td><td class="fail">2</td><td class="fail">131</td><td class="l">Worst rank in the batch; low liquidity.</td></tr>
+<tr><td class="l">TFCILTD</td><td class="fail">3</td><td class="fail">71</td><td class="l"><strong>ASM list, no institutional holding, promoters hold 3.85%.</strong> Bulk tape is prop desks churning both sides. Mar-21: −₹171 Cr operating cash.</td></tr>
+</tbody></table></div>
+<p class="note"><strong>TFCILTD is the correction this page owes.</strong> It scored 8 of 8 with
+nothing blocking, and the first version of this read called it the strongest name on the board.
+Its page carries three blockers. A clean gate count said nothing whatever about an ASM listing,
+an absent institutional base or a 3.85% promoter holding — which is the whole argument for the
+audit being a separate step, and the reason it is never skipped.</p>
+<p class="note">Every name above has its own page under <code>stocks/audits/</code>, carrying the
+evidence and a written read.</p>
 
 <h3 class="sub">News, on every live name</h3>
 <div class="scroll"><table><thead><tr><th class="l">symbol</th><th class="l">what the search returned</th></tr></thead><tbody>
