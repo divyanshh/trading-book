@@ -83,6 +83,36 @@ jobs:
           cp "$REPORT" "overrides/$DAY.html"
           python3 ipo_review.py "$DAY"
           python3 mirror.py
+      # The hand-written pre-session read, spliced the same way and for the same
+      # reason. It is written the evening before, so on most mornings the day's
+      # report does not exist yet when it is composed and this is the step that
+      # finally puts it on the page.
+      #
+      # Same three guards as the review above: a day with no BY_DAY entry is
+      # skipped, a report under 50 KB is a stub and is skipped, and the whole
+      # step is best-effort so a failed splice cannot lose a mirror that has
+      # already succeeded. It runs AFTER the review's step because both end in
+      # `mirror.py` and the last one to run is the one whose output ships; the
+      # order between them is otherwise immaterial, since each replaces only
+      # its own section.
+      - name: splice the hand-written pre-session read
+        continue-on-error: true
+        run: |
+          DAY=$(TZ=Asia/Kolkata date +%F)
+          REPORT="stocks/reports/$DAY.html"
+          if ! grep -q "\"$DAY\":" premarket.py; then
+            echo "no pre-session read for $DAY"; exit 0
+          fi
+          if [ ! -f "$REPORT" ]; then
+            echo "no report at $REPORT yet"; exit 0
+          fi
+          SIZE=$(wc -c < "$REPORT")
+          if [ "$SIZE" -lt 50000 ]; then
+            echo "$REPORT is $SIZE bytes — a stub, not splicing"; exit 0
+          fi
+          cp "$REPORT" "overrides/$DAY.html"
+          python3 premarket.py "$DAY"
+          python3 mirror.py
       # **After the splice, not before it.** The step above ends with a second
       # `mirror.py`, and for two days nothing restored the hub after that one:
       # the guard had been attached to the first call site rather than to the

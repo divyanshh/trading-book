@@ -32,12 +32,13 @@ that already succeeded must not be turned into a failure by this, and a
 300-byte redirect stub has been published as a report once already.
 
 **It also refuses any day it cannot put back together.** The service's copy is
-the report alone; the published page is that report *plus* the hand-written IPO
-review spliced into it, which is why the stale file is the larger of the two.
-Replacing it is only safe because the splice runs immediately afterwards and
-rebuilds the section from ``ipo_review.py``. For a day with no ``BY_DAY``
-entry, nothing would rebuild it, and a refresh would quietly delete
-hand-written work -- so those days are left alone whatever state they are in.
+the report alone; the published page is that report *plus* whatever hand-written
+sections are spliced into it -- the IPO review, the pre-session read -- which is
+why the stale file is the larger of the two. Replacing it is only safe because
+those splices run immediately afterwards and rebuild their sections from
+``ipo_review.py`` and ``premarket.py``. For a day no splicer carries, nothing
+would rebuild it, and a refresh would quietly delete hand-written work -- so
+those days are left alone whatever state they are in.
 
     python3 refresh_today.py [YYYY-MM-DD]
 """
@@ -62,20 +63,38 @@ a 300-byte stub went out as a report with every section missing.
 """
 
 
+SPLICERS = ("ipo_review", "premarket")
+"""Every module that splices hand-written work into a published report.
+
+Each exposes ``BY_DAY``, and each has a step in the mirror workflow that runs
+after this one. A splicer that is listed here but not run afterwards would turn
+this from a rescue into a deletion, so the two lists move together.
+"""
+
+
 def regenerable(day: str) -> bool:
     """Can the hand-written part of this day's page be rebuilt from the repo?
 
-    Only true when ``ipo_review.py`` carries the day, because that is the one
-    thing spliced into a published report that does not come from the service.
-    Read from the module rather than grepped so a renamed table cannot make
+    True when any splicer carries the day. Those are the only things in a
+    published report that do not come from the service, so a day no splicer
+    knows about has nothing here that a re-fetch could destroy — and a day one
+    of them does know about is safe to overwrite precisely because its step
+    rebuilds the section immediately afterwards.
+
+    Read from the modules rather than grepped so a renamed table cannot make
     this quietly answer "yes" for every day.
     """
-    try:
-        import ipo_review
-    except Exception as exc:  # noqa: BLE001 — unreadable means "do not touch"
-        print(f"ipo_review unreadable ({type(exc).__name__}); refusing to refresh")
-        return False
-    return day in ipo_review.BY_DAY
+    import importlib
+
+    for name in SPLICERS:
+        try:
+            module = importlib.import_module(name)
+        except Exception as exc:  # noqa: BLE001 — unreadable means "do not touch"
+            print(f"{name} unreadable ({type(exc).__name__}); refusing to refresh")
+            return False
+        if day in module.BY_DAY:
+            return True
+    return False
 
 
 def refresh(day: str) -> int:
