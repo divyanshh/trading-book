@@ -6086,6 +6086,111 @@ def _for_nov_10() -> list[IPO]:
 IPOS_2026_11_10 = _for_nov_10()
 
 
+LEAD_NOV_11 = (
+    "Wednesday 11 November, written at about <strong>10:00 IST</strong>, forty-five minutes "
+    "into the first session after the Diwali Balipratipada holiday. <strong>Nothing is open "
+    "for subscription, nothing has an announced window, and nothing lists today.</strong> "
+    "Every mainboard row on investorgain&rsquo;s live board is an issue that has already "
+    "listed; the only live rows are SME (Antala Industries, BSE SME, listing today) and are "
+    "out of scope. Chittorgarh&rsquo;s mainboard list fetched as raw HTML reads "
+    "&lsquo;Total Records: 0&rsquo; even for the whole of 2026, so it is a page that "
+    "renders in the browser, not an empty board, and is not counted as a source this "
+    "morning. <strong>One thing moved:</strong> MarketSmith&rsquo;s 11 November pre-market "
+    "mail, citing Business Today, says Mahanadi Coalfields is now SEBI-approved and plans "
+    "&#8377;8,500&ndash;10,000 Cr, entirely offer for sale. That is the first rupee size this "
+    "board has had for it. There is still no band, no dates and no GMP. Applied by this "
+    "service: nothing, and nothing was available to apply for."
+)
+
+FOOTNOTE_NOV_11 = (
+    "<strong>No GMP haircut was applied today, because there is no GMP to apply it to.</strong> "
+    "The 2.6-point overstatement is a correction to a quote, and none of the four queued "
+    "names has one. A blank field on these cards means nothing is quoted. It does not mean "
+    "zero, and the measured &minus;6.6% average for a zero GMP does not apply. "
+    "<strong>No debut is re-graded today.</strong> The last prices on this board are the "
+    "9 November closes carried on the 10 November page; 10 November had no session, and "
+    "today&rsquo;s has not closed. Re-grading Bombay Coated or M.K.Sons on a mid-session "
+    "quote is the mistake the 9 November page made, so the grades stand as written until a "
+    "close exists. Crystal Crop Protection was not re-checked against a second source this "
+    "morning and stays unconfirmed. <code>show_ipos</code> is still broken, so this page "
+    "was again read by hand from live sources."
+)
+
+
+def _for_nov_11() -> list[IPO]:
+    """First session after the holiday: an empty window, and Mahanadi gets a size."""
+    mahanadi = IPO(
+        name="Mahanadi Coalfields",
+        call="WATCH — now reported SEBI-approved; still no band, no dates, no GMP",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · Coal India reportedly targeting Nov–Dec",
+        band="To be announced",
+        size="~₹8,500–10,000 Cr reported (MarketSmith 11 Nov, citing Business Today) · 66,18,36,300 shares OFS, ₹2 FV",
+        split="100% OFS — Coal India sells; the company raises nothing",
+        gmp="none — no recorded quote",
+        gmp_pct=0.0,
+        expected="not estimable; no band, no GMP",
+        apply_as="Nobody yet. If a band lands, retail is the first slot to look at, because of the 35% retail portion.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("first rupee size: ₹8,500–10,000 Cr, reported, not from an RHP", "warn"),
+               ("entirely OFS — divestment pricing, not a capital raise", "warn"),
+               ("35% retail portion published; band still not", "warn"),
+               ("fifth session at TBA-TBA", "warn")),
+        note=(
+            "The one card that changed. Until today the board had a share count and no "
+            "price. Now it has a reported range of ₹8,500–10,000 Cr, which puts the implied "
+            "price at roughly ₹128–151 a share on the 66.18 crore shares filed. That is my "
+            "arithmetic on a reported figure. It is not a band. "
+            "<strong>Odds, said as odds:</strong> a state-divestment OFS of this size "
+            "usually comes priced to clear. A 35% retail slice on an issue this large "
+            "would put retail allotment closer to likely than to lottery, but that cannot "
+            "be stated as a number until a lot size exists. No call is made."
+        ),
+    )
+    avaada = IPO(
+        name="Avaada Electro",
+        call="WATCH — unchanged; no band, no dates, no GMP",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA · UDRHP 25 Aug 2026",
+        band="To be announced",
+        size="~₹7,600 Cr — ₹1,600 Cr fresh + ₹6,000 Cr OFS",
+        split="21% fresh / 79% OFS",
+        gmp="none",
+        gmp_pct=0.0,
+        expected="not estimable",
+        apply_as="Nobody yet.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("unchanged since 10 Nov", "warn"),
+               ("79% OFS; about ₹400 Cr is new money for the business", "fail")),
+        note=(
+            "Nothing new on any source read this morning; every aggregator still shows "
+            "the band and dates as to be announced. The 10 November card's reading stands: "
+            "the promoter sells about four rupees for every one rupee the company raises."
+        ),
+    )
+    milestone = IPO(
+        name="Milestone Gears",
+        call="WATCH — fifth session at TBA-TBA",
+        tone="warn",
+        dates="open TBA · close TBA · allotment TBA · listing TBA",
+        band="To be announced", size="~₹1,100 Cr", split="not published",
+        gmp="none",
+        gmp_pct=0.0,
+        expected="not estimable",
+        apply_as="Nobody yet.",
+        horizon="n/a until dates exist",
+        book="not open",
+        flags=(("fifth consecutive session with no dates", "warn"),),
+        note="Unchanged. Not re-researched beyond confirming it is still not open or dated.",
+    )
+    return [mahanadi, avaada, milestone]
+
+
+IPOS_2026_11_11 = _for_nov_11()
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -6138,6 +6243,8 @@ BY_DAY = {
     # Bombay Coated card quoted a two-session-old price as current and is
     # corrected here rather than edited, so the error stays in the record.
     "2026-11-10": (IPOS_2026_11_10, LEAD_NOV_10, FOOTNOTE_NOV_10),
+    # First session after the holiday. Empty window; Mahanadi gets a reported size.
+    "2026-11-11": (IPOS_2026_11_11, LEAD_NOV_11, FOOTNOTE_NOV_11),
 }
 
 
