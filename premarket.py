@@ -74,7 +74,7 @@ def write(day: str, markup: str) -> None:
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         f"<title>Pre-session read — {day}</title>{_style(day)}</head><body>"
         f'<div class="wrap"><p class="eyebrow">equity-service · cortex · {day}</p>'
-        f"{markup}"
+        f"{markup.strip()}"
         "<footer>Written by hand the evening before, against that evening's build "
         "and a live read of the brokers. Also a section of "
         f'<a href="{day}.html#{SLUG}">the day\'s report</a>.'
@@ -100,10 +100,18 @@ def write(day: str, markup: str) -> None:
             f"no {ANCHOR} anchor in the override; the renderer's section markup "
             "has changed and the pre-session read has nowhere to go"
         )
-    # Replace an existing section rather than stacking a second copy: this is
-    # run again on every mirror of the day, and `refresh_today.py` hands it a
-    # clean report each time, so both paths have to be idempotent.
-    page = (page[:start] if start >= 0 else page[:end]) + markup + page[end:]
+    # Replace an existing section rather than stacking a second copy: this runs
+    # again on every mirror of the day, and `refresh_today.py` hands it a clean
+    # report each time, so both paths have to be idempotent.
+    #
+    # **The whitespace is why it was not.** An anchor points at `<h2`, not at
+    # the newline in front of it, so a markup string with a leading blank line
+    # left that line behind in `page[:start]` and then added its own -- one
+    # extra newline per run, for as long as the day keeps being mirrored. The
+    # section count stayed right and the bytes drifted, which is the kind of
+    # defect that is only ever found by hashing the output twice.
+    head = (page[:start] if start >= 0 else page[:end]).rstrip()
+    page = head + "\n" + markup.strip() + "\n" + page[end:]
     if f'href="#{SLUG}"' not in page:
         page = page.replace(
             f'<a href="#{ANCHOR}">',
