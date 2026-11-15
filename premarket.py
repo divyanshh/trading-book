@@ -278,8 +278,107 @@ up</strong> — but the empty board is now a verified fact rather than a parser'
 brokers at 19:30. Prices are 11 November closes.</p>
 """
 
+
+# ── 16 November 2026 ────────────────────────────────────────────
+# Built Friday 13 Nov 18:00 IST against that evening's build and a live broker
+# read; revised Sunday 15 Nov after the MarketSmith weekend mail. Prices are
+# Friday closes, which are still the last traded prices on Monday morning.
+
+PREMARKET_2026_11_16 = """
+<h2 id="pre-session-read">Pre-session read</h2>
+<p class="lead">Monday opens with <strong>seven entries resting across three accounts</strong> and
+the gates open: the Nifty is in a confirmed uptrend carrying two distribution days, and breadth is
+<strong>75.98% of the universe above its own 20-day average</strong>. The question Monday actually
+decides is not which name to buy. It is <strong>whether a trigger can pay for itself when it
+fires.</strong></p>
+<p class="sub"><strong>Nothing here is an instruction and nothing here was placed.</strong> Closes
+are Friday 13 November’s. Gaps are from that close to the resting trigger.</p>
+
+<h3 class="sub">Can the book pay for what it has already ordered?</h3>
+<div class="scroll"><table><thead><tr><th class="l">account</th><th>free cash</th><th>parking it can sell</th><th>resting orders</th><th class="l">covered?</th></tr></thead><tbody>
+<tr><td class="l">t-default</td><td>2,02,497</td><td>33,65,021</td><td>14,83,387</td><td class="l warn"><span>only by selling parking</span></td></tr>
+<tr><td class="l">akul</td><td>28,703</td><td>3,46,638</td><td>1,58,840</td><td class="l warn"><span>only by selling parking</span></td></tr>
+<tr><td class="l">t-ramprasad</td><td>6,273</td><td>&mdash; none</td><td>2,32,689</td><td class="l fail"><span>NO &mdash; short 2,26,416</span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>t-ramprasad cannot fill a single one of its seven orders.</strong> The
+smallest is ₹26,137 against ₹6,273 of cash and no parking fund. Every trigger that fires there on
+Monday is rejected. t-default and akul can cover everything, but only <em>reactively</em> — the
+order is refused first, parking is sold, then it is re-placed, by which time the price has moved.
+<strong>That is exactly how MCX, GCSL and SGMART were missed on Friday.</strong></p>
+
+<h3 class="sub">What is resting, and how far it has to travel</h3>
+<div class="scroll"><table><thead><tr><th class="l">symbol</th><th>Fri close</th><th>trigger</th><th>gap</th><th>t-default</th><th>akul</th><th>t-ramprasad</th><th>all three</th></tr></thead><tbody>
+<tr><td class="l">GLAND</td><td>3,334.10</td><td>3,377.24</td><td class="pass">+1.29%</td><td>2,33,030</td><td>23,641</td><td>37,150</td><td>2,93,821</td></tr>
+<tr><td class="l">LTTS</td><td>4,247.20</td><td>4,356.09</td><td>+2.56%</td><td>1,69,888</td><td>17,424</td><td>26,137</td><td>2,13,449</td></tr>
+<tr><td class="l">RATNAVEER</td><td>364.35</td><td>380.36</td><td>+4.39%</td><td>2,06,916</td><td>23,202</td><td>33,091</td><td>2,63,209</td></tr>
+<tr><td class="l">CPPLUS</td><td>4,148.00</td><td>4,338.66</td><td>+4.60%</td><td>2,55,981</td><td>26,032</td><td>39,048</td><td>3,21,061</td></tr>
+<tr><td class="l">TFCILTD</td><td>163.95</td><td>172.34</td><td>+5.12%</td><td>1,66,825</td><td>18,613</td><td>26,540</td><td>2,11,978</td></tr>
+<tr><td class="l">RUBICON</td><td>1,677.20</td><td>1,777.45</td><td>+5.98%</td><td>2,41,733</td><td>26,662</td><td>37,326</td><td>3,05,721</td></tr>
+<tr><td class="l">LALITHAA</td><td>349.40</td><td>375.25</td><td>+7.40%</td><td>2,09,014</td><td>23,266</td><td>33,397</td><td>2,65,677</td></tr>
+<tr><td class="l"><b>Total</b></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>14,83,387</b></td><td><b>1,58,840</b></td><td><b>2,32,689</b></td><td><b>18,74,916</b></td></tr>
+</tbody></table></div>
+<p><strong>GLAND is the live one</strong> — 1.3% away, the only name that could plausibly fire on
+the open, and the only clean 8/8 in the queue.</p>
+
+<h3 class="sub">What MarketSmith said over the weekend</h3>
+<p>The 15 November mail makes a group argument rather than a name argument: O’Neil’s finding that
+leaders travel in packs, and two packs at 52-week highs right now.</p>
+<div class="scroll"><table><thead><tr><th class="l">pack</th><th class="l">names at new highs</th><th class="l">our exposure</th></tr></thead><tbody>
+<tr><td class="l">Pharma</td><td class="l">Divi’s, Aurobindo, <b>Gland Pharma</b>, Sai Life, Emcure &mdash; Nifty Pharma +1.2% Friday</td><td class="l pass"><span>GLAND resting, all three accounts</span></td></tr>
+<tr><td class="l">Banks &amp; financials</td><td class="l">ICICI, Kotak, Karur Vysya, <b>MCX</b></td><td class="l pass"><span>MCX filled Friday; TFCILTD resting</span></td></tr>
+</tbody></table></div>
+<p class="note">Both names were picked by our own scanners on their own evidence; the mail is
+confirmation that institutions are buying the <em>groups</em> around them, not a new signal. It
+changes nothing that is resting. <strong>It is worth saying plainly that this arrived as a link in
+the mail body and our parser recorded the message as “nothing recognised”</strong> — the body was
+read by hand, which is the standing rule, and the parser is what missed it.</p>
+
+<h3 class="sub">The diary</h3>
+<p>Checked against NSE board-meeting filings: <strong>no company we hold or have resting reports
+next week.</strong> KRISHANA, which is unplaced, is the single filing.</p>
+<div class="scroll"><table><thead><tr><th class="l">when</th><th class="l">event</th><th class="l">why it matters</th></tr></thead><tbody>
+<tr><td class="l">Sat 14 Nov</td><td class="l">KRISHANA board meeting</td><td class="l">The only filing on any name we hold, want or have resting. KRISHANA is 8/8 and unplaced, held back for exactly this.</td></tr>
+<tr><td class="l">Mon 16 Nov</td><td class="l">GLAND &mdash; new CEO takes charge</td><td class="l">Deepak Sapra (ex Dr Reddy’s) starts the day our entry rests 1.3% above the close. Q2 behind the setup is strong (PAT +58%), but a chief-executive handover sits across the trigger.</td></tr>
+<tr><td class="l">Tue 17 Nov</td><td class="l">LALITHAA &mdash; second anchor lock-in expires</td><td class="l">Releases the remaining anchor tranche into a stock already &minus;6% over a month. Our trigger sits 7.4% above Friday’s close, so it is unlikely to fire before the unlock &mdash; but if it does, supply arrives the next day.</td></tr>
+<tr><td class="l">18&ndash;20 Nov</td><td class="l">Crystal Crop Protection IPO</td><td class="l">Mainboard, ~₹439&ndash;600 Cr, dates still flagged tentative and the band TBA. The IPO review is due the moment the band prints.</td></tr>
+</tbody></table></div>
+
+<h3 class="sub">Stops going into Monday</h3>
+<p><strong>BMWVENTLTD is 1.9% above its stop</strong> in akul (382 sh) and t-ramprasad (546 sh) —
+the closest thing in the book to being taken out. If it goes it costs ₹1,146 and ₹1,638. LENSKART
+(3.5%) and SHUKRAPHAR (3.6%) are next, and like BMWVENTLTD they are the losing positions: a loser
+sitting near its stop is the stop working.</p>
+<p class="note"><strong>15 of 41 positions cannot trail.</strong> AARTIPHARM, LENSKART, PAYTM,
+PVRINOX, ROSSTECH and SSWL have their whole holding booked on the add leg with an empty base, so
+the trail computes a zero quantity and the broker rejects it. They are protected at their current
+level; those levels simply cannot rise. Nothing is due to trail before Monday, so there is time to
+fix it first. Everything else is correctly unchanged — only CUPID is past +8%, and its stop is
+already at cost in all three accounts.</p>
+
+<h3 class="sub">Waiting on a decision</h3>
+<ul>
+<li><strong>Fund t-ramprasad, or stand its orders down.</strong> ₹2,32,690 of triggers against
+₹6,273 and no parking fund. Not one of the seven can fill.</li>
+<li><strong>Raise the position ceiling 20 → 24.</strong> t-default is 21/20 and akul 22/20 because
+<code>adopt_holding</code> does not test the cap. No further fanout placement works in either until
+it moves. Blocks KINGFA, BMWVENTLTD and KRISHANA.</li>
+<li><strong>Fix the frozen trails.</strong> Data relabel or a code fallback in
+<code>_base_quantity</code>; both need your word.</li>
+<li><strong>The five weekly names</strong> — MARKSANS, FCL, CHENNPETRO, RAMRAT, SYRMA — sit at
+15&ndash;19% stops, above the hardcoded 10% ceiling. KINGFA is the one that is placeable, as a daily
+setup at 4.3%.</li>
+<li><strong>Parking policy against the resting book.</strong> ₹14.8L resting in t-default against
+₹2.02L cash. Reactive funding means rejections on a fast open.</li>
+</ul>
+<p class="note">Built Friday 13 November 2026, 18:00 IST from the service’s records, a live broker
+read and NSE filings; revised Sunday 15 November after the MarketSmith weekend mail. Closes are
+Friday’s. Nothing here places an order.</p>
+"""
+
+
 BY_DAY: dict[str, str] = {
     "2026-11-12": PREMARKET_2026_11_12,
+    "2026-11-16": PREMARKET_2026_11_16,
 }
 
 
