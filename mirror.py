@@ -464,15 +464,59 @@ def days_with_only_extras(rows: list[dict]) -> list[dict]:
     """
     known = {r["as_of"] for r in rows}
     days = {p.stem[:10] for p in EXTRAS.glob("20*.html")} - known
-    return [
-        {
-            "as_of": day,
-            "summary": "",
-            "bytes": sum(p.stat().st_size for p in EXTRAS.glob(f"{day}_*.html")),
-            "no_report": True,
-        }
-        for day in sorted(days, reverse=True)
-    ]
+    out: list[dict] = []
+    for day in sorted(days, reverse=True):
+        override = OVERRIDES / f"{day}.html"
+        if override.exists():
+            # **A day the service has no report for can still have a book.**
+            # An override IS the day's report -- it is copied into `reports/`
+            # a few lines below and `primary_page` already points the row at
+            # it. Until 2026-11-15 the row went on saying "no book yet" and
+            # printing the extras' size, so a 723 KB report with 125 charts
+            # advertised itself as 44 KB of pre-session notes and there was no
+            # reason on the page to click it. The link was never broken; the
+            # label was, which is worse, because a wrong label is read and
+            # believed.
+            out.append(
+                {
+                    "as_of": day,
+                    "summary": override_summary(override),
+                    "bytes": override.stat().st_size,
+                }
+            )
+            continue
+        out.append(
+            {
+                "as_of": day,
+                "summary": "",
+                "bytes": sum(p.stat().st_size for p in EXTRAS.glob(f"{day}_*.html")),
+                "no_report": True,
+            }
+        )
+    return out
+
+
+OVERRIDE_VERDICT = re.compile(r"Entries (permitted|BLOCKED)", re.I)
+OVERRIDE_STATE = re.compile(r"(state [A-Z_]+ .*?)(?:</|$)", re.S)
+
+
+def override_summary(page: Path) -> str:
+    """A summary line for an override, in the shape the index rows expect.
+
+    The service hands every other row a summary whose first line is the
+    verdict and whose next lines describe the day; an override has no such
+    record, so it is read back off the rendered page. Falls back to a bare
+    verdict rather than inventing one: a row that says less is better than a
+    row that says something untrue.
+    """
+    text = page.read_text(encoding="utf-8", errors="replace")
+    flat = re.sub(r"<[^>]+>", " ", text[:400_000])
+    flat = html.unescape(" ".join(flat.split()))
+    found = OVERRIDE_VERDICT.search(flat)
+    head = f"Entries {found.group(1)}" if found else "—"
+    state = OVERRIDE_STATE.search(flat)
+    detail = " ".join(state.group(1).split())[:220] if state else ""
+    return f"{head}\n{detail}" if detail else head
 
 
 def primary_page(day: str) -> str | None:
