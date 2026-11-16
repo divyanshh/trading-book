@@ -6191,6 +6191,120 @@ def _for_nov_11() -> list[IPO]:
 IPOS_2026_11_11 = _for_nov_11()
 
 
+LEAD_NOV_16 = (
+    "Monday 16 November, written at about <strong>10:00 IST</strong>, forty-five minutes "
+    "into the session. <strong>Nothing is open, in allotment or listing today. Two mainboard "
+    "issues open this week</strong>: Crystal Crop Protection (18&ndash;20 Nov) and "
+    "<strong>Mahanadi Coalfields (19&ndash;23 Nov), which the 15 November checklist note "
+    "missed</strong> &mdash; it said the board was empty apart from Crystal Crop. "
+    "Investorgain&rsquo;s live board, stamped 16-Nov 08:37, carries Mahanadi with a band, "
+    "dates and a quote, and Chittorgarh&rsquo;s detail page agrees on all three. "
+    "<strong>Every subscription figure on this page is &lsquo;not open&rsquo;</strong>, so "
+    "there is no intraday number to mistake for a final one. Applied by this service: nothing."
+)
+
+FOOTNOTE_NOV_16 = (
+    "<strong>Haircut applied, and said:</strong> both expected-listing figures are the "
+    "quoted GMP% less the 2.6-point overstatement our backtest measured &mdash; Crystal "
+    "5.5% &rarr; ~+2.9%, Mahanadi 5.1% &rarr; ~+2.5%. The spread of that error is wider "
+    "than the haircut itself, so <strong>both expected figures sit inside the noise</strong> "
+    "and neither is evidence of a listing gain. GMPs are investorgain, 16-Nov 08:37 IST, "
+    "pre-open quotes on issues that have not opened. <strong>One correction to the record:</strong> "
+    "on 15 November the sources disagreed on Crystal Crop&rsquo;s promoters (Chittorgarh: "
+    "Watrana family; investorgain: Aggarwal family). Chittorgarh&rsquo;s page now names "
+    "Nand Kishore, Ankur and Komal Aggarwal and the Ankur Aggarwal KNK Family Trust, with "
+    "Ankur Aggarwal the sole OFS seller (37,02,694 shares, &#8377;100.71 Cr). The two now "
+    "agree. The Watrana name is very probably a cross-wire with Watrana Rentals, an NSE SME "
+    "issue on the same week&rsquo;s board &mdash; that is an inference, not a confirmed cause. "
+    "Avaada Electro and Milestone Gears were not re-researched; neither appears on this "
+    "morning&rsquo;s board with dates."
+)
+
+
+def _for_nov_16() -> list[IPO]:
+    """Two issues open this week; Mahanadi gets a band and dates, Crystal's GMP holds at 15."""
+    crystal = IPO(
+        name="Crystal Crop Protection",
+        call="AVOID — unchanged from 15 Nov",
+        tone="fail",
+        dates="open 18 Nov · close 20 Nov · allotment 23 Nov · listing 26 Nov",
+        band="₹259–272",
+        size="₹455.49 Cr",
+        split="₹354.77 Cr fresh (78%) / ₹100.71 Cr OFS (22%)",
+        gmp="₹15 (investorgain 16-Nov 08:37; range ₹15–40)",
+        gmp_pct=5.5,
+        expected="~+2.9%",
+        apply_as="None. If he wants the lottery anyway: retail, one lot (55 sh, ₹14,960). Not sHNI (from ₹2,09,440), not bHNI (from ₹10,02,320).",
+        horizon="Listing-day exit only, if allotted",
+        book="not open",
+        flags=(("GMP ₹40 → ₹27 → ₹15 → ₹15: fell 62%, then stopped", "fail"),
+               ("8.2x headline P/E is a seasonal quarter ×4; ~30.6x on FY26", "fail"),
+               ("litigation ₹341.95 Cr = 16.8% of net worth", "fail"),
+               ("promoter discrepancy resolved: Aggarwal family", "pass")),
+        stats=(("P/E post, FY26", "~30.6x"), ("peer median", "~19.9x"),
+               ("ROE", "7.94%"), ("D/E", "0.41"), ("retail slice", "≥35%"),
+               ("employee discount", "₹25")),
+        note=(
+            "The GMP that fell from ₹40 on 13 Nov to ₹15 on 15 Nov did not fall further "
+            "overnight: ₹15 again at 08:37 today, with investorgain’s range showing "
+            "₹40 as the high and ₹15 as the low. A stop in the slide is not a recovery. "
+            "Nothing else in the 15 November case has changed: priced above the listed-peer median "
+            "on real full-year earnings while marketed at 8x, litigation large against net worth, "
+            "and ₹270 Cr of the fresh money repaying borrowings that rose from ₹820 Cr to "
+            "₹952 Cr in a quarter. Odds, said as odds: retail is at least 35% "
+            "of the issue, so a one-lot application has fair allotment odds — better than one "
+            "in three unless retail demand runs well past 3x. The question is what the allotment is "
+            "worth: at an expected +2.9% after the haircut, a one-lot win is worth about ₹430, "
+            "and the error band on that figure is wider than the figure. Roughly even odds of "
+            "listing within a few percent of issue either way."
+        ),
+    )
+    mahanadi = IPO(
+        name="Mahanadi Coalfields",
+        call="SKIP as a trade — retail one lot only if he wants a PSU coal dividend holding",
+        tone="warn",
+        dates="open 19 Nov · close 23 Nov · allotment 25 Nov · listing 27 Nov",
+        band="₹129–136",
+        size="₹8,981.12 Cr at the top",
+        split="100% OFS — Coal India sells 66,18,36,300 shares; the company raises nothing",
+        gmp="₹7 (investorgain 16-Nov 08:37; range ₹7–9.25)",
+        gmp_pct=5.1,
+        expected="~+2.5%",
+        apply_as="Retail one lot (110 sh, ₹14,960) at cut-off if anything. Coal India shareholders on the RHP date also have a ₹2L shareholder quota. Not sHNI, not bHNI.",
+        horizon="Listing-day exit for a trade; there is no growth case, only a dividend case",
+        book="not open",
+        flags=(("PAT down three years running", "fail"),
+               ("100% OFS — divestment pricing", "warn"),
+               ("debt-free: borrowings ₹2.76 Cr", "pass"),
+               ("₹90,010 Cr market cap: will not move like a small issue", "warn")),
+        stats=(("P/E pre / post", "8.42x / 9.22x"), ("P/B", "4.21x"),
+               ("EBITDA margin H1", "43.6%"), ("RoNW FY26", "53.9%"),
+               ("PAT FY24→FY26", "₹11,842 → 10,698 Cr"), ("employee discount", "₹6")),
+        note=(
+            "The card that changed most since 11 November: it now has a band, dates, a lot and a "
+            "quote. India’s largest coal producer by volume, Talcher and Ib Valley in Odisha, "
+            "wholly owned by Coal India. The numbers are big and shrinking: PAT ₹11,842 Cr "
+            "(FY24) → ₹10,825 Cr (FY25) → ₹10,698 Cr (FY26), and H1 FY27 "
+            "₹4,881 Cr annualises to about ₹9,760 Cr, a further ~9% lower. The post-issue "
+            "P/E of 9.2x is on that annualised half, so it is the honest one. Margins are excellent "
+            "(EBITDA 43.6%) and the balance sheet carries no debt; what is for sale is a cash "
+            "machine whose earnings are drifting down, priced by a seller that wants the issue to "
+            "clear. Odds, said as odds: the retail slice is at least 35% of the net "
+            "offer — on the order of nineteen lakh minimum lots by my arithmetic on the share "
+            "count, before reservations are netted out, which is an estimate and not a published "
+            "figure. Unless retail applications run far past that, a one-lot application is closer "
+            "to likely than to lottery — something like one in two. The expected listing of "
+            "+2.5% after the haircut is about ₹375 on a lot and is smaller than the spread "
+            "of our own GMP error, so a listing at or below issue is a live outcome: call it one "
+            "in three, a judgement, not a measured figure."
+        ),
+    )
+    return [mahanadi, crystal]
+
+
+IPOS_2026_11_16 = _for_nov_16()
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -6245,6 +6359,8 @@ BY_DAY = {
     "2026-11-10": (IPOS_2026_11_10, LEAD_NOV_10, FOOTNOTE_NOV_10),
     # First session after the holiday. Empty window; Mahanadi gets a reported size.
     "2026-11-11": (IPOS_2026_11_11, LEAD_NOV_11, FOOTNOTE_NOV_11),
+    # Two issues open this week. Mahanadi was missed by the 15 Nov checklist note.
+    "2026-11-16": (IPOS_2026_11_16, LEAD_NOV_16, FOOTNOTE_NOV_16),
 }
 
 
