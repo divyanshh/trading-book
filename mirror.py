@@ -734,10 +734,28 @@ def build_site(rows: list[dict], style: str) -> None:
         ),
         encoding="utf-8",
     )
+    # **"Latest" means the newest page worth reading, not the newest report.**
+    # The pre-session read for tomorrow is written the evening before, hours
+    # before that day's report can exist -- the report is built from that
+    # day's own close. Pointing `latest.html` at the newest *report* therefore
+    # sent every visitor to yesterday on exactly the nights when something
+    # newer had just been published, and the book looked a day stale while the
+    # new page sat at a live URL nothing led to. Prefer a newer extras-only
+    # day when one exists; fall back to the newest report otherwise.
+    latest_day, latest_href = newest, f"stocks/reports/{newest}.html"
+    for extra in days_with_only_extras(rows):
+        day = extra["as_of"]
+        if day <= newest:
+            continue
+        for suffix in ("_premarket", "_ipo_review"):
+            if (EXTRAS / f"{day}{suffix}.html").exists():
+                latest_day, latest_href = day, f"stocks/reports/{day}{suffix}.html"
+                break
+        break
     (ROOT / "latest.html").write_text(
-        f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=stocks/reports/{newest}.html">'
+        f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={latest_href}">'
         f'<title>Trading Book — latest</title>'
-        f'<a href="stocks/reports/{newest}.html">{newest}</a>',
+        f'<a href="{latest_href}">{latest_day}</a>',
         encoding="utf-8",
     )
     (REPORTS / "index.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
