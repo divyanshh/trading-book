@@ -6305,6 +6305,95 @@ def _for_nov_16() -> list[IPO]:
 IPOS_2026_11_16 = _for_nov_16()
 
 
+
+def _for_nov_17() -> list[IPO]:
+    """Same two issues, both quoted lower. Derived from 16 Nov rather than copied:
+    every static fact — band, dates, split, P/E, litigation — lives in one place,
+    and only what actually moved overnight is overridden here."""
+    mahanadi_16, crystal_16 = _for_nov_16()
+    crystal = replace(
+        crystal_16,
+        call="AVOID — unchanged, and the premium has halved again",
+        dates="anchor 17 Nov · open 18 Nov · close 20 Nov · allotment 23 Nov · listing 26 Nov",
+        gmp="₹13 (ipomarket 16-Nov 17:32; was ₹15 at 08:37, high ₹40 on 13 Nov)",
+        gmp_pct=4.8,
+        expected="~+2.2%",
+        flags=(("GMP ₹40 (13 Nov) → ₹15 → ₹13: the slide resumed", "fail"),
+               ("8.2x headline P/E is a seasonal quarter ×4; ~30.6x on FY26", "fail"),
+               ("litigation ₹341.95 Cr = 16.8% of net worth", "fail"),
+               ("anchor book opens 17 Nov — the first honest demand read", "warn")),
+        note=(
+            "Yesterday the slide had stopped at ₹15; today it resumed, to ₹13 by the "
+            "close of 16 November. From ₹40 on 13 November that is a 68% fall in three "
+            "sessions, and it now sits at the bottom of its own recorded range. Nothing in "
+            "the 15 November case has changed — priced above the listed-peer median on real "
+            "full-year earnings while marketed at 8x, litigation large against net worth, and "
+            "₹270 Cr of the fresh money repaying borrowings that rose from ₹820 Cr to ₹952 Cr "
+            "in a quarter. <strong>The anchor book opens tomorrow, 17 November</strong>, and "
+            "that is the first demand figure on this deal that is not a grey-market rumour: "
+            "worth reading before the retail window opens on the 18th. Odds, said as odds: "
+            "retail is at least 35% of the issue, so a one-lot application still has fair "
+            "allotment odds. At an expected +2.2% after the haircut a one-lot win is worth "
+            "about ₹330, and the error band on that is wider than the figure itself."
+        ),
+    )
+    mahanadi = replace(
+        mahanadi_16,
+        call="SKIP as a trade — the dividend case is the only case left",
+        gmp="₹4.6 (investorgain 16-Nov 18:02; ₹7 at 08:37, ₹5.75 at 15:40, high ₹25 on 13 Nov)",
+        gmp_pct=3.4,
+        expected="~+0.8%",
+        flags=(("GMP ₹25 (13 Nov) → ₹10 → ₹7 → ₹4.6: down 82% in three sessions", "fail"),
+               ("PAT down three years running", "fail"),
+               ("100% OFS — divestment pricing", "warn"),
+               ("debt-free: borrowings ₹2.76 Cr", "pass")),
+        note=(
+            "The premium collapsed through 16 November — ₹7 at 08:37, ₹5.75 by mid-afternoon, "
+            "₹4.6 by 18:02, against ₹25 on 13 November. That is an 82% fall in three sessions "
+            "on an issue that has not opened. <strong>At 3.4% quoted, less our measured 2.6-point "
+            "overstatement, the expected listing is about +0.8% — roughly ₹120 on a lot, which "
+            "is indistinguishable from zero.</strong> The business case is unchanged and was never "
+            "the trade: India's largest coal producer by volume, debt-free, EBITDA margin 43.6%, "
+            "and PAT drifting down ₹11,842 Cr (FY24) → ₹10,825 Cr → ₹10,698 Cr with H1 FY27 "
+            "annualising ~9% lower again. A cash machine with shrinking earnings, sold by a "
+            "government seller that wants the book to clear. If he wants it, he wants the "
+            "dividend, not the listing."
+        ),
+    )
+    return [mahanadi, crystal]
+
+
+IPOS_2026_11_17 = _for_nov_17()
+
+LEAD_NOV_17 = (
+    "Tuesday 17 November, written the evening before from the 16 November close. "
+    "<strong>Nothing is open, in allotment or listing today.</strong> The two mainboard "
+    "issues are both still ahead: <strong>Crystal Crop Protection anchors tomorrow "
+    "(18&ndash;20 Nov for everyone else)</strong> and Mahanadi Coalfields opens 19 November. "
+    "<strong>Both grey-market premiums have roughly halved again since Thursday</strong> "
+    "&mdash; Crystal ₹40 &rarr; ₹13, Mahanadi ₹25 &rarr; ₹4.6 &mdash; which is the same "
+    "risk-off the equity tape showed all Monday. Every subscription figure here is "
+    "&lsquo;not open&rsquo;. Applied by this service: nothing. "
+    "<strong>One tooling note, said plainly:</strong> <code>show_ipos</code> could not read "
+    "its source tonight &mdash; the page answered but carried no mainboard table at all &mdash; "
+    "so this board was rebuilt by hand from the web and should be treated as such."
+)
+
+FOOTNOTE_NOV_17 = (
+    "<strong>Haircut applied, and said:</strong> both expected-listing figures are the quoted "
+    "GMP% less the 2.6-point overstatement our backtest measured &mdash; Crystal 4.8% &rarr; "
+    "~+2.2%, Mahanadi 3.4% &rarr; ~+0.8%. <strong>The spread of that error is wider than either "
+    "figure</strong>, so neither is evidence of a listing gain; Mahanadi&rsquo;s in particular is "
+    "indistinguishable from zero. <strong>Every quote carries the date and time it was read</strong> "
+    "&mdash; Crystal ₹13 from ipomarket at 16-Nov 17:32, Mahanadi ₹4.6 from investorgain at "
+    "16-Nov 18:02 &mdash; because a premium without its timestamp is not a number. Sources "
+    "disagreed on Mahanadi during the day (ipoji ₹4, ipowatch ₹10 stamped 15 Nov); the figure "
+    "used is the latest-stamped one. Static facts &mdash; bands, dates, splits, P/E, litigation "
+    "&mdash; are carried from the 16 November cards rather than re-entered, so a correction to "
+    "one corrects both."
+)
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -6361,6 +6450,7 @@ BY_DAY = {
     "2026-11-11": (IPOS_2026_11_11, LEAD_NOV_11, FOOTNOTE_NOV_11),
     # Two issues open this week. Mahanadi was missed by the 15 Nov checklist note.
     "2026-11-16": (IPOS_2026_11_16, LEAD_NOV_16, FOOTNOTE_NOV_16),
+    "2026-11-17": (IPOS_2026_11_17, LEAD_NOV_17, FOOTNOTE_NOV_17),
 }
 
 

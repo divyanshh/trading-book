@@ -419,9 +419,136 @@ Friday’s. Nothing here places an order.</p>
 """
 
 
+PREMARKET_2026_11_17 = """
+<h2 id="pre-session-read">Pre-session read</h2>
+<p class="lead">Tuesday opens with <strong>our own gates shut on both legs</strong>. Breadth is
+<strong>65.11% of the universe above its own 20-day average against a prior-five mean of
+69.42%</strong> — falling, so the breadth gate is shut — and the computed status reads
+<strong>DOWNTREND</strong> on six distribution days with no follow-through since. A buy needs both
+open. <strong>None of tonight&rsquo;s twenty-six actionable names may be placed tomorrow, however
+good they look.</strong></p>
+<p class="sub"><strong>Nothing here is an instruction and nothing here was placed.</strong> Closes
+are Monday 16 November&rsquo;s. The scan was run by hand tonight against them — SWING run 458.</p>
+
+<h3 class="sub" id="pre-gates">The two gates, and who disagrees</h3>
+<div class="scroll"><table><thead><tr><th class="l">reading</th><th class="l">value</th><th class="l">verdict</th></tr></thead><tbody>
+<tr><td class="l">Breadth vs its prior-5 mean</td><td class="l">65.11% against 69.42%, falling</td><td class="l fail"><span>SHUT</span></td></tr>
+<tr><td class="l">Our computed status</td><td class="l">DOWNTREND &mdash; 6 distribution days counted, no follow-through day since</td><td class="l fail"><span>SHUT</span></td></tr>
+<tr><td class="l">MarketSmith&rsquo;s status</td><td class="l">CONFIRMED_UPTREND, 2 distribution days</td><td class="l pass"><span>open</span></td></tr>
+<tr><td class="l">Nifty vs its 20MA</td><td class="l">+5.91%</td><td class="l"><span>extended</span></td></tr>
+</tbody></table></div>
+<p class="note">The divergence is the read, and it is not new information — it is the same market
+described twice. MarketSmith&rsquo;s own weekly, <em>&ldquo;Few Leaders, One Flying Index&rdquo;</em>,
+says <strong>only 20 of the top 500 stocks are doing the lifting</strong>, that large companies grew
+profits <strong>36% against 6%</strong> for smaller ones, that the market is extended and that
+waiting for a pullback is the smarter move. Their headline status says buy; their own research says
+wait. <strong>Our gates say wait in numbers.</strong></p>
+
+<h3 class="sub" id="pre-today">What Monday actually did</h3>
+<div class="scroll"><table><thead><tr><th class="l">name</th><th class="l">what happened</th><th class="l">where it ended</th></tr></thead><tbody>
+<tr><td class="l">KRISHANA</td><td class="l">Gapped through its 251.31 trigger to 254 on the open and filled in t-default (745 @ 253.98) and akul (83 @ 254.25)</td><td class="l fail"><span>back under its own pivot at ~243</span></td></tr>
+<tr><td class="l">GLAND</td><td class="l">ATO rejected for cash in all three; parking sold to the shortfall and re-bought 69 and 7 @ 3,392, 25 @ 3,385 in Ram&rsquo;s</td><td class="l pass"><span>held, stopped, all three</span></td></tr>
+<tr><td class="l">GCSL</td><td class="l">Rejected for cash in Ram&rsquo;s, re-bought 48 @ 833.90 at the chase ceiling</td><td class="l pass"><span>held, stopped</span></td></tr>
+<tr><td class="l">LAURUSLABS</td><td class="l">Stop fired 13:17 in all three &mdash; 78 / 8 / 12 at ~2,251.5 against a 2,252.40 stop</td><td class="l fail"><span>&minus;₹12,708, slippage under ₹1</span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>KRISHANA is the day in one name.</strong> Ram&rsquo;s retry filled at
+<strong>243.35 &mdash; below the trigger</strong>, which is a better price only because the breakout
+had already failed. The two accounts that filled at the open are underwater on it, and it has since
+<strong>dropped off the actionable list entirely</strong>. Last night it was a clean 8/8.</p>
+
+<h3 class="sub" id="pre-scan">The scan &mdash; 26 actionable, none of them placeable</h3>
+<p>Run by hand tonight against Monday&rsquo;s closes. <strong>SWING run 458: 570 candidates, 26
+actionable, seven of them a clean 8/8.</strong> Every other scanner returned <strong>zero</strong> —
+WEEKLY (533 candidates), ETF (21), ETF_WEEKLY (22) and REVERSAL (385). STRIKE returns the identical
+26 and is not a traded strategy.</p>
+<p class="sub">That the weekly book is empty while the daily list is full is itself the tape: these
+are one- and two-day breakouts in a market with no sustained leadership underneath them.</p>
+<div class="scroll"><table><thead><tr><th class="l">symbol</th><th>gates</th><th>RS</th><th>A/D</th><th>chop</th><th>ADR</th><th>entry</th><th>SL</th><th>stop%</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>RATNAVEER</b></td><td class="pass">8/8</td><td>97</td><td>A+</td><td>86%</td><td>4.8%</td><td>375.95</td><td>356.50</td><td>5.2%</td><td class="l">resting, all three</td></tr>
+<tr><td class="l"><b>SHADOWFAX</b></td><td class="pass">8/8</td><td>96</td><td>B+</td><td>66%</td><td>4.8%</td><td>298.40</td><td>281.35</td><td>5.7%</td><td class="l">new</td></tr>
+<tr><td class="l"><b>KSHINTL</b></td><td class="pass">8/8</td><td>95</td><td>D&minus;</td><td>59%</td><td>4.6%</td><td>1,052.10</td><td>1,016.50</td><td>3.4%</td><td class="l">new &mdash; A/D D&minus; is distribution</td></tr>
+<tr><td class="l"><b>SHIVAUM</b></td><td class="pass">8/8</td><td>92</td><td>B&minus;</td><td>83%</td><td>4.1%</td><td>567.13</td><td>550.00</td><td>3.0%</td><td class="l">new</td></tr>
+<tr><td class="l"><b>GLAND</b></td><td class="pass">8/8</td><td>92</td><td>B+</td><td>81%</td><td>3.5%</td><td>3,435.86</td><td>3,307.20</td><td>3.7%</td><td class="l">held &mdash; re-derived again tonight</td></tr>
+<tr><td class="l"><b>SONACOMS</b></td><td class="pass">8/8</td><td>92</td><td>A</td><td>75%</td><td>3.2%</td><td>936.77</td><td>888.20</td><td>5.2%</td><td class="l">held</td></tr>
+<tr><td class="l"><b>LOTUSDEV</b></td><td class="pass">8/8</td><td>91</td><td>A&minus;</td><td>72%</td><td>4.8%</td><td>235.37</td><td>221.80</td><td>5.8%</td><td class="l">new</td></tr>
+<tr><td class="l"><b>SHUKRAPHAR</b></td><td>7/8</td><td>98</td><td>A+</td><td>80%</td><td>6.3%</td><td>84.97</td><td>81.06</td><td>4.6%</td><td class="l">held</td></tr>
+<tr><td class="l"><b>SSWL</b></td><td>7/8</td><td>97</td><td>A</td><td>90%</td><td>6.4%</td><td>578.40</td><td>561.20</td><td>3.0%</td><td class="l">held</td></tr>
+<tr><td class="l"><b>SBC</b></td><td>7/8</td><td>97</td><td>A+</td><td>75%</td><td>2.9%</td><td>71.43</td><td>67.80</td><td>5.1%</td><td class="l">held</td></tr>
+<tr><td class="l"><b>TAMBOLIIN</b></td><td>7/8</td><td>95</td><td>D+</td><td>80%</td><td>8.2%</td><td>337.82</td><td>320.00</td><td>5.3%</td><td class="l">new &mdash; 8.2% ADR is wild</td></tr>
+<tr><td class="l"><b>WELSPUNLIV</b></td><td>7/8</td><td>95</td><td>A+</td><td>72%</td><td>5.3%</td><td>254.16</td><td>243.36</td><td>4.2%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l"><b>PVRINOX</b></td><td>7/8</td><td>89</td><td>A</td><td>90%</td><td>3.6%</td><td>1,678.35</td><td>1,620.20</td><td>3.5%</td><td class="l">held &middot; trail frozen</td></tr>
+<tr><td class="l"><b>LENSKART</b></td><td>7/8</td><td>89</td><td>B+</td><td>80%</td><td>3.4%</td><td>747.49</td><td>716.30</td><td>4.2%</td><td class="l">held &middot; MS buy watchlist</td></tr>
+<tr><td class="l"><b>PAYTM</b></td><td>7/8</td><td>89</td><td>B+</td><td>75%</td><td>3.6%</td><td>1,963.92</td><td>1,872.20</td><td>4.7%</td><td class="l">held</td></tr>
+<tr><td class="l"><b>SHYAMMETL</b></td><td>7/8</td><td>87</td><td>A&minus;</td><td>64%</td><td>3.7%</td><td>1,356.01</td><td>1,292.90</td><td>4.7%</td><td class="l">resting, all three</td></tr>
+<tr><td class="l"><b>ALGOQUANT</b></td><td>7/8</td><td>83</td><td>B</td><td>70%</td><td>4.5%</td><td>85.67</td><td>81.65</td><td>4.7%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l"><b>AARTIPHARM</b></td><td>7/8</td><td>83</td><td>B</td><td>66%</td><td>4.9%</td><td>1,025.85</td><td>979.65</td><td>4.5%</td><td class="l">held</td></tr>
+<tr><td class="l"><b>LTTS</b></td><td>7/8</td><td>79</td><td>A</td><td>58%</td><td>3.5%</td><td>4,328.24</td><td>4,105.00</td><td>5.2%</td><td class="l">resting &mdash; back on the list</td></tr>
+<tr><td class="l"><b>GRAPHITE</b></td><td>7/8</td><td>78</td><td>A&minus;</td><td>56%</td><td>4.0%</td><td>805.61</td><td>764.15</td><td>5.1%</td><td class="l">new</td></tr>
+<tr><td class="l"><b>ARIHANTCAP</b></td><td>7/8</td><td>74</td><td>B+</td><td>75%</td><td>4.7%</td><td>95.58</td><td>91.35</td><td>4.4%</td><td class="l">new &mdash; RS 74, below the band</td></tr>
+<tr><td class="l"><b>BMWVENTLTD</b></td><td>7/8</td><td>72</td><td>B</td><td>34%</td><td>3.9%</td><td>66.96</td><td>63.50</td><td>5.2%</td><td class="l">held &mdash; RS 72, chop 34%</td></tr>
+</tbody></table></div>
+<p class="note">Four of the twenty-six &mdash; GLOBAL, PTCIL, BSE and PRINCEPIPE &mdash; are
+actionable but did not render a full row in tonight&rsquo;s build, so their levels are not repeated
+here rather than estimated. <strong>Charts, the sector pass and the RS columns for all of them are
+in the day&rsquo;s report.</strong> Every one still needs the full audit before anything is placed,
+and with both gates shut nothing can be.</p>
+<p class="note"><strong>Two names answer open questions.</strong> <b>LTTS</b> is back on the list,
+which closes last night&rsquo;s finding that its resting 4,356.09 trigger had no current scan
+evidence behind it &mdash; tonight&rsquo;s entry is 4,328.24 on the same 4,105.00 stop.
+<b>RUBICON</b> is still absent for the second night running, while MarketSmith names it one of five
+leaders to watch and carries it on the buy watchlist. That disagreement is unresolved and the
+position rests at 1,777.45 in both accounts.</p>
+
+<h3 class="sub" id="pre-funding">Can the book pay for what it has already ordered?</h3>
+<div class="scroll"><table><thead><tr><th class="l">account</th><th>held</th><th>free cash</th><th>parking it can sell</th><th>resting orders</th><th class="l">covered?</th></tr></thead><tbody>
+<tr><td class="l">t-default</td><td>59,34,806</td><td>1,87,863</td><td>26,785 units &asymp; 31,31,100</td><td>24,50,238</td><td class="l warn"><span>only by selling parking</span></td></tr>
+<tr><td class="l">akul</td><td>3,48,154</td><td>18,974</td><td>2,818 units &asymp; 3,29,480</td><td>2,12,072</td><td class="l warn"><span>only by selling parking</span></td></tr>
+<tr><td class="l">t-ramprasad</td><td>5,18,507</td><td>66,002</td><td>&mdash; none</td><td>4,27,130</td><td class="l fail"><span>NO &mdash; short 3,61,128</span></td></tr>
+</tbody></table></div>
+<p class="note">The reactive rule was run live for the first time on Monday and it worked: GLAND was
+refused for cash in all three accounts, the broker named its own shortfall, parking was sold to
+<em>that</em> figure plus 5% and the stock was bought back inside the chase ceiling.
+<strong>t-ramprasad is still the one that cannot be fixed that way</strong> &mdash; it holds no
+parking and is never swept. It funded itself on Monday only because its legacy holdings were sold
+by hand.</p>
+
+<h3 class="sub" id="pre-diary">The diary</h3>
+<div class="scroll"><table><thead><tr><th class="l">when</th><th class="l">event</th><th class="l">why it matters</th></tr></thead><tbody>
+<tr><td class="l">Tue 17 Nov</td><td class="l">Crystal Crop Protection &mdash; anchor bidding</td><td class="l">The book opens to anchors a day before retail. Anchor demand is the first honest read on a deal whose grey-market premium has halved since Thursday.</td></tr>
+<tr><td class="l">Tue 17 Nov</td><td class="l">LALITHAA &mdash; second anchor lock-in expires</td><td class="l">Releases the remaining anchor tranche. Our trigger rests at 375.25 in both accounts; supply arrives whether or not it fires.</td></tr>
+<tr><td class="l">Tue 17 Nov</td><td class="l">SANSERA investor meet</td><td class="l">Third of three this week.</td></tr>
+<tr><td class="l">Wed 18 Nov</td><td class="l">KRISHANA earnings call, 12:00</td><td class="l">A call, not a results date &mdash; results were filed 14 Nov with PAT up ~135%. But it is an event on a position now held in all three accounts and sitting under its pivot.</td></tr>
+<tr><td class="l">Wed 18 Nov</td><td class="l">SHYAMMETL analyst meet</td><td class="l">Resting at 1,356.01 in all three.</td></tr>
+<tr><td class="l">18&ndash;20 Nov</td><td class="l">Crystal Crop Protection IPO</td><td class="l">₹259&ndash;272, ~₹455 Cr. <b>AVOID</b> &mdash; see the IPO review.</td></tr>
+<tr><td class="l">19&ndash;23 Nov</td><td class="l">Mahanadi Coalfields IPO</td><td class="l">₹129&ndash;136, ₹8,981 Cr, 100% offer-for-sale by Coal India. <b>SKIP</b> as a trade.</td></tr>
+</tbody></table></div>
+
+<h3 class="sub" id="pre-decisions">Waiting on a decision</h3>
+<ul>
+<li><strong>GLAND rests at two different stops.</strong> 3,233.10 in t-default and akul, 3,268.50 in
+t-ramprasad, because Ram&rsquo;s was re-derived on a later scan. Tonight the scanner moved it again,
+to 3,307.20. Three accounts, one name, three levels &mdash; this breaks the rule that all three hold
+the same position and it needs one number.</li>
+<li><strong>RUBICON.</strong> Absent from our scan two nights running; named a leader by
+MarketSmith. Resting at 1,777.45 in t-default and akul.</li>
+<li><strong>Fund t-ramprasad or stand its orders down.</strong> ₹4,27,130 resting against ₹66,002.</li>
+<li><strong>The report pipeline is broken at both ends.</strong>
+<code>build-daily-report-morning</code> has failed three days running &mdash; last success 13
+November, 37 hours silent against a 26-hour budget. <code>evening-scan</code> has not succeeded
+since 30 October. Both are being stood in for by hand every night.</li>
+<li><strong><code>show_ipos</code> can no longer read its source</strong> &mdash; the IPO board was
+rebuilt by hand tonight. The parser needs fixing before it is trusted again.</li>
+</ul>
+<p class="note">Built Monday 16 November 2026 from the service&rsquo;s records, a live read of all
+three brokers, tonight&rsquo;s hand-run scan (SWING run 458) and NSE filings. Closes are
+Monday&rsquo;s. Nothing here places an order.</p>
+"""
+
+
 BY_DAY: dict[str, str] = {
     "2026-11-12": PREMARKET_2026_11_12,
     "2026-11-16": PREMARKET_2026_11_16,
+    "2026-11-17": PREMARKET_2026_11_17,
 }
 
 
