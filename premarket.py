@@ -425,8 +425,8 @@ PREMARKET_2026_11_17 = """
 <strong>65.11% of the universe above its own 20-day average against a prior-five mean of
 69.42%</strong> — falling, so the breadth gate is shut — and the computed status reads
 <strong>DOWNTREND</strong> on six distribution days with no follow-through since. A buy needs both
-open. <strong>None of tonight&rsquo;s twenty-six actionable names may be placed tomorrow, however
-good they look.</strong></p>
+open. <strong>None of tonight&rsquo;s twenty-six actionable names may be placed on Tuesday,
+however good they look.</strong></p>
 <p class="sub"><strong>Nothing here is an instruction and nothing here was placed.</strong> Closes
 are Monday 16 November&rsquo;s. The scan was run by hand tonight against them — SWING run 458.</p>
 
