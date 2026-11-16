@@ -502,6 +502,36 @@ evidence behind it &mdash; tonight&rsquo;s entry is 4,328.24 on the same 4,105.0
 leaders to watch and carries it on the buy watchlist. That disagreement is unresolved and the
 position rests at 1,777.45 in both accounts.</p>
 
+<h3 class="sub" id="pre-flows">Who is actually buying &mdash; FII and DII</h3>
+<p class="sub">Net cash-market flows in &#8377; crore, to Monday 16 November. The two are
+trading against each other, and have been all week.</p>
+<div class="scroll"><table><thead><tr><th class="l">day</th><th>FII net</th><th>DII net</th><th>FII 5-session</th><th>FII buy</th><th>FII sell</th></tr></thead><tbody>
+<tr><td class="l"><b>Mon 16 Nov</b></td><td class="pass">+4,865</td><td class="bad">&minus;3,519</td><td class="pass">+38,207</td><td>15,637</td><td>10,772</td></tr>
+<tr><td class="l">Fri 13 Nov</td><td class="pass">+5,737</td><td class="bad">&minus;2,254</td><td class="pass">+33,342</td><td>18,340</td><td>12,603</td></tr>
+<tr><td class="l">Thu 12 Nov</td><td class="pass">+7,831</td><td class="bad">&minus;6,331</td><td class="pass">+41,356</td><td>20,273</td><td>12,443</td></tr>
+<tr><td class="l">Wed 11 Nov</td><td class="pass">+12,563</td><td class="bad">&minus;8,435</td><td class="pass">+48,500</td><td>30,087</td><td>17,524</td></tr>
+<tr><td class="l">Mon 9 Nov</td><td class="pass">+7,212</td><td class="bad">&minus;7,173</td><td class="pass">+43,220</td><td>20,311</td><td>13,099</td></tr>
+</tbody></table></div>
+<p class="note"><strong>Foreign money has bought every session this week and domestic money has
+sold every session.</strong> FIIs are +&#8377;38,207 Cr over five sessions. That is the mechanism
+behind &ldquo;few leaders, one flying index&rdquo;: foreign flows go into the large, liquid names
+that carry the Nifty, while domestic institutions take profits across the broader market &mdash;
+which is where every one of our setups lives. <strong>A rising index on falling breadth is not a
+contradiction when you can see who is on each side of it.</strong></p>
+
+<h3 class="sub" id="pre-breadth">Breadth, and the day the gate shut</h3>
+<div class="scroll"><table><thead><tr><th class="l">day</th><th>above their 20MA</th><th>prior-5 mean</th><th class="l">breadth gate</th></tr></thead><tbody>
+<tr><td class="l"><b>Mon 16 Nov</b></td><td class="bad">65.11%</td><td>69.42%</td><td class="l fail"><span>SHUT</span></td></tr>
+<tr><td class="l">Fri 13 Nov</td><td>74.94%</td><td>65.42%</td><td class="l pass"><span>open</span></td></tr>
+<tr><td class="l">Thu 12 Nov</td><td>75.95%</td><td>62.65%</td><td class="l pass"><span>open</span></td></tr>
+<tr><td class="l">Wed 11 Nov</td><td>70.31%</td><td>59.22%</td><td class="l pass"><span>open</span></td></tr>
+<tr><td class="l">Tue 10 Nov</td><td>62.60%</td><td>54.22%</td><td class="l pass"><span>open</span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>The gate was open every session last week and shut on Monday.</strong>
+Breadth did not drift down &mdash; it fell from 74.94% to 65.11% in a single session while the
+prior-five mean kept rising to 69.42%, so the two crossed. This is the first shut reading of the
+move, not the continuation of a decline.</p>
+
 <h3 class="sub" id="pre-funding">Can the book pay for what it has already ordered?</h3>
 <div class="scroll"><table><thead><tr><th class="l">account</th><th>held</th><th>free cash</th><th>parking it can sell</th><th>resting orders</th><th class="l">covered?</th></tr></thead><tbody>
 <tr><td class="l">t-default</td><td>59,34,806</td><td>1,87,863</td><td>26,785 units &asymp; 31,31,100</td><td>24,50,238</td><td class="l warn"><span>only by selling parking</span></td></tr>
