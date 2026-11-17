@@ -6394,6 +6394,106 @@ FOOTNOTE_NOV_17 = (
 )
 
 
+
+def _for_nov_18() -> list[IPO]:
+    """Crystal opens today; Mahanadi tomorrow. Derived from 17 Nov so the static
+    facts stay in one place. Two things moved overnight and one was wrong before:
+    both premiums ticked at the 18:00 print, and the 13 November Crystal peak is
+    45, not the 40 this board has been carrying."""
+    mahanadi_17, crystal_17 = _for_nov_17()
+    crystal = replace(
+        crystal_17,
+        call="AVOID — it opens today and the anchor book is still unread",
+        dates="anchor 17 Nov (unfiled at 18:25) · OPEN TODAY 18 Nov · close 20 Nov · allotment 23 Nov · listing 26 Nov",
+        gmp="₹14 (ipoguru 17-Nov 18:00; ipomarket 17-Nov 18:02; held ₹13 from 11:02 to 16:30)",
+        gmp_pct=5.1,
+        expected="~+2.5%",
+        flags=(("anchor book NOT FILED publicly as of 17-Nov 18:25 — the demand read is missing", "fail"),
+               ("GMP ₹45 (13 Nov) → ₹13 → ₹14: the slide stopped, it did not reverse", "warn"),
+               ("8.2x headline P/E is a seasonal quarter ×4; ~30.6x on FY26", "fail"),
+               ("litigation ₹341.95 Cr = 16.8% of net worth", "fail")),
+        note=(
+            "<strong>The issue opens this morning and the one fact worth waiting for is still "
+            "missing.</strong> The anchor book was built on 17 November and had not surfaced on any "
+            "reachable source by 18:25 that evening: the BSE public-issue page refuses automated "
+            "readers, Chittorgarh's 2026 anchor-allotment report carries zero records, and ipowatch's "
+            "anchor page for this issue does not exist yet. So the question that actually matters — "
+            "whether domestic mutual funds took this book or it went to FPIs and AIFs — cannot be "
+            "answered, and nothing here should be read as if it had been. <strong>Check before "
+            "applying, not after.</strong> On everything else the 15 November case is unchanged: "
+            "priced above the listed-peer median on real full-year earnings while marketed at 8x, "
+            "litigation large against net worth, and ₹270 Cr of the fresh money repaying borrowings "
+            "that rose from ₹820 Cr to ₹952 Cr in a quarter. The premium ticked up a rupee into the "
+            "17 November close, to ₹14 — the first up-move since the 13th, and far too small to call "
+            "a recovery. Odds, said as odds: retail is at least 35% of the issue, so a one-lot "
+            "application still has fair allotment odds; at an expected +2.5% after the haircut a "
+            "one-lot win is worth about ₹375, and the error band on that is wider than the figure."
+        ),
+    )
+    mahanadi = replace(
+        mahanadi_17,
+        call="SKIP as a trade — the dividend case is the only case left",
+        dates="anchor 18 Nov (UNCONFIRMED — no announcement) · open 19 Nov · close 23 Nov · allotment 25 Nov · listing 27 Nov",
+        gmp="₹4.00 (ipoguru 17-Nov 18:00 and ipomarket 17-Nov 18:02; investorgain ₹4.00 at 15:02)",
+        gmp_pct=2.9,
+        expected="~+0.3%",
+        flags=(("GMP ₹25 (13 Nov) → ₹4: down 84%, now flat two sessions", "fail"),
+               ("anchor date 18 Nov is INFERRED, not announced", "warn"),
+               ("PAT down three years running", "fail"),
+               ("debt-free: borrowings ₹2.76 Cr", "pass")),
+        note=(
+            "The premium has stopped moving: ₹4.00 on three sources through 17 November, against a "
+            "spread of ₹3.70–₹5.00 earlier the same day that is wider than any move in it. Call it "
+            "unchanged at ~3% and note the sources disagree on the 16 November base — our own record "
+            "says ₹4.60, ipoguru's says ₹3.50. <strong>At 2.9% quoted, less our measured 2.6-point "
+            "overstatement, the expected listing is about +0.3% — roughly ₹45 on a lot, which is "
+            "zero.</strong> <strong>The 18 November anchor date is not announced anywhere.</strong> "
+            "Only ipocentral asserts it, while that same page lists the anchor portion as 'not "
+            "announced' and carries a lock-in date that back-solves to a late-November allotment; "
+            "ipomarket and ipoguru state no anchor date at all. The business case is unchanged and "
+            "was never the trade: India's largest coal producer by volume, debt-free, EBITDA margin "
+            "43.6%, PAT drifting ₹11,842 Cr → ₹10,825 Cr → ₹10,698 Cr with H1 FY27 annualising ~9% "
+            "lower again, sold 100% by a government seller that wants the book to clear. If he wants "
+            "it, he wants the dividend, not the listing."
+        ),
+    )
+    return [crystal, mahanadi]
+
+
+IPOS_2026_11_18 = _for_nov_18()
+
+LEAD_NOV_18 = (
+    "Wednesday 18 November, written the evening before from the 17 November close. "
+    "<strong>Crystal Crop Protection opens today</strong> (18&ndash;20 Nov) and Mahanadi "
+    "Coalfields opens tomorrow. Nothing is in allotment or listing. "
+    "<strong>The anchor book for Crystal was built on 17 November and had still not been filed "
+    "publicly at 18:25 that evening</strong> &mdash; so the single most useful number on this "
+    "page, who bought the anchor tranche and how much, is missing, and is marked as missing "
+    "rather than guessed. Both premiums printed again at ~18:00 and both are flat to marginally "
+    "up: Crystal &#8377;13 &rarr; &#8377;14, Mahanadi steady at &#8377;4. The collapse that ran "
+    "13&ndash;16 November has stopped; neither has recovered. Applied by this service: nothing. "
+    "<strong>One tooling note, repeated:</strong> <code>show_ipos</code> still cannot read its "
+    "source, so this board was rebuilt by hand from the web again."
+)
+
+FOOTNOTE_NOV_18 = (
+    "<strong>A correction to this board&rsquo;s own record.</strong> The 13 November Crystal peak "
+    "was <b>&#8377;45, not the &#8377;40</b> carried on the 16 and 17 November cards. Three sources "
+    "put it at &#8377;45 &mdash; ipoji&rsquo;s page text stamped 13-Nov 13:15, ipoguru&rsquo;s "
+    "history, and ipogyani, which records &#8377;45 as the series high. The &#8377;40 traces to an "
+    "undated ipomarket news page and to ipoji&rsquo;s own history table, which contradicts its page "
+    "text: it was an earlier tick of the same day, not a competing close. The fall is therefore "
+    "&#8377;45 &rarr; &#8377;14, 69%, not the 65% previously stated. "
+    "<strong>Haircut applied, and said:</strong> both expected-listing figures are the quoted GMP% "
+    "less the 2.6-point overstatement our backtest measured &mdash; Crystal 5.1% &rarr; ~+2.5%, "
+    "Mahanadi 2.9% &rarr; ~+0.3%. <strong>The spread of that error is wider than either figure</strong>, "
+    "so neither is evidence of a listing gain. <strong>Every quote carries the date and time it was "
+    "read</strong> &mdash; both from the 17 November 18:00&ndash;18:02 prints &mdash; because a premium "
+    "without its timestamp is not a number. Static facts are carried from the 17 November cards rather "
+    "than re-entered, so a correction to one corrects both."
+)
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -6451,6 +6551,7 @@ BY_DAY = {
     # Two issues open this week. Mahanadi was missed by the 15 Nov checklist note.
     "2026-11-16": (IPOS_2026_11_16, LEAD_NOV_16, FOOTNOTE_NOV_16),
     "2026-11-17": (IPOS_2026_11_17, LEAD_NOV_17, FOOTNOTE_NOV_17),
+    "2026-11-18": (IPOS_2026_11_18, LEAD_NOV_18, FOOTNOTE_NOV_18),
 }
 
 
