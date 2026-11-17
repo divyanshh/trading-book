@@ -723,13 +723,22 @@ trigger. Where nothing was found it says nothing was found.</p>
 <tr><td class="l"><b>SBC</b></td><td class="l">Nothing in the window. Standing, not new: <b>41.55% of the promoter holding is pledged</b>, up 1.57 points in the September quarter.</td><td class="l warn"><span>held in all three</span></td></tr>
 <tr><td class="l"><b>CUPID</b></td><td class="l">All-time high 13 Nov then &minus;4.5% on the 16th; brokers call it profit-booking with no company trigger. Q2 PAT +133%, FY27 guidance raised.</td><td class="l"><span>held</span></td></tr>
 <tr><td class="l"><b>SGMART</b></td><td class="l">Six-session run to all-time highs with <b>no announcement behind it</b>.</td><td class="l warn"><span>held &mdash; an unexplained vertical move</span></td></tr>
+<tr><td class="l"><b>ISFT</b> &amp; <b>GLOBAL</b></td><td class="l"><b>Both are on ESM Stage 1 and both trade in series BE &mdash; trade-for-trade.</b> Every trade settles by delivery: <b>no intraday, no BTST</b>, and tight price bands. Neither was on any watch list; this was found by pulling NSE&rsquo;s own surveillance file.</td><td class="l fail"><span>ISFT is the second-closest name to a trigger, on a 2.6% stop &mdash; T2T plus circuits makes that stop theoretical</span></td></tr>
+<tr><td class="l"><b>TFCILTD</b></td><td class="l">On <b>long-term ASM Stage I since 3 November</b>, series EQ &mdash; nine days <em>before</em> the volume clarification, so the two are separate events and the ASM came first. The exchange query was on <b>volume</b>, not price; the company replied the move is market-driven with nothing undisclosed.</td><td class="l warn"><span>resting in all three &mdash; ASM I is the mild tier, so still placeable, but it is a flag on a name the whole book is sized into</span></td></tr>
+<tr><td class="l"><b>CUPID</b>, <b>GCSL</b>, <b>SSWL</b></td><td class="l">All three on <b>long-term ASM Stage I</b>, series EQ.</td><td class="l warn"><span>held in all three accounts</span></td></tr>
+<tr><td class="l">TAMBOLIIN</td><td class="l"><b>Clear</b>, against expectation &mdash; its last measure expired in May. A 7.8% daily range on a 299 Cr company is not, by itself, a surveillance flag.</td><td class="l pass"><span>&mdash;</span></td></tr>
 <tr><td class="l">SONACOMS &middot; MCX &middot; LENSKART &middot; GCSL &middot; SSWL &middot; BMWVENTLTD &middot; GRAPHITE &middot; DIVISLAB &middot; KARURVYSYA &middot; TIMEX</td><td class="l">Nothing material in the last five sessions. LENSKART&rsquo;s FII holding rose to 18.26% from 12.76% in the September quarter; BMWVENTLTD went ex-dividend 13 Nov.</td><td class="l pass"><span>&mdash;</span></td></tr>
 </tbody></table></div>
-<p class="note"><strong>Surveillance status could not be verified for any name.</strong> NSE refused the
-request from here and every aggregator is stale &mdash; NSE&rsquo;s own ASM page was last updated 6
-November. <strong>Silence on ASM, ESM and GSM here is a gap, not a clean bill</strong>, and it should be
-pulled on the dyno before the open. The 17 November bulk and block tape was also not published anywhere
-at the time of searching.</p>
+<p class="note"><strong>Surveillance was pulled in the end, from NSE&rsquo;s own daily indicator file
+&mdash; 570 flagged symbols, dated 16 November.</strong> All twenty-four names were checked, and the
+seventeen not named above are clear as of that file: GLAND, KRISHANA, SONACOMS, SBC, SHUKRAPHAR,
+AARTIPHARM, LENSKART, MCX, PAYTM, PVRINOX, ROSSTECH, SGMART, BMWVENTLTD, RATNAVEER, SHYAMMETL, LTTS and
+PTCIL. <strong>Two caveats that matter.</strong> The file is <b>Monday&rsquo;s</b>, so a measure imposed
+effective Tuesday would not appear in it. And while the ASM rows are double-sourced, <b>the ESM and
+trade-for-trade columns come from that one file</b> &mdash; Trendlyne does not track ESM at all and
+reported ISFT as clear, which is true of ASM and would have read as a clean bill. <strong>Confirm ISFT
+and GLOBAL on a second source before acting on them.</strong> The 17 November bulk and block tape was
+still not published anywhere.</p>
 <p class="note"><strong>What Tuesday&rsquo;s index closes say, and it is the same thing this page&rsquo;s
 index table says.</strong> Nifty closed <b>25,387.40, +0.38%</b>, the Sensex +427 points, <b>Nifty Bank
 at a record high</b> &mdash; while <b>Smallcap 100 fell 0.22%</b> and IT fell 0.90%. Monday was the same
@@ -797,7 +806,7 @@ because its owner sold two legacy holdings by hand.</p>
 <tr><td class="l"><b>Wed 18 Nov, pre-open</b></td><td class="l"><b>Nvidia&rsquo;s quarter</b>, due after Tuesday&rsquo;s US close &mdash; not yet reported when this was written</td><td class="l">It lands near 02:50 IST, before our open, with options implying a move near 8% &mdash; and it is the first Nvidia report without Jensen Huang, who resigned on 12 November. The stock fell 4.1% on Monday to its lowest close since July 2025, and Monday&rsquo;s Nasdaq was &minus;2.49%. IT already carries eight distribution days, the most of any index we track.</td></tr>
 <tr><td class="l">Wed 18 Nov, 12:00</td><td class="l">KRISHANA earnings call</td><td class="l">A call, not a results date &mdash; results were filed 14 Nov with PAT up ~135%. But it is held in all three accounts, sitting under its pivot at &minus;4.36%, and the scanner can no longer find a base in it.</td></tr>
 <tr><td class="l">Wed 18 Nov</td><td class="l">SHYAMMETL analyst meet</td><td class="l">Resting at 1,356.01 in all three; tonight&rsquo;s entry is 1,356.71.</td></tr>
-<tr><td class="l">18&ndash;20 Nov</td><td class="l"><b>Crystal Crop Protection IPO opens</b></td><td class="l">&#8377;259&ndash;272, ~&#8377;455 Cr. <b>AVOID</b> &mdash; see the IPO review. The anchor book was built today and had not been filed publicly by 18:25.</td></tr>
+<tr><td class="l">18&ndash;20 Nov</td><td class="l"><b>Crystal Crop Protection IPO opens</b></td><td class="l">&#8377;259&ndash;272, ~&#8377;455 Cr. <b>AVOID on the case</b> &mdash; but the anchor book filed at 18:55 is better than the premium implied: &#8377;135.96 Cr, 17 investors at the top of the band, 44.28% domestic mutual funds. See the IPO review.</td></tr>
 <tr><td class="l">19&ndash;23 Nov</td><td class="l">Mahanadi Coalfields IPO</td><td class="l">&#8377;129&ndash;136, &#8377;8,981 Cr, 100% offer-for-sale by Coal India. <b>SKIP</b> as a trade.</td></tr>
 </tbody></table></div>
 

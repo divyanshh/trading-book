@@ -6268,8 +6268,8 @@ def _for_nov_16() -> list[IPO]:
         size="₹8,981.12 Cr at the top",
         split="100% OFS — Coal India sells 66,18,36,300 shares; the company raises nothing",
         gmp="₹7 (investorgain 16-Nov 08:37; range ₹7–9.25)",
-        gmp_pct=5.1,
-        expected="~+2.5%",
+        gmp_pct=6.6,
+        expected="~+4.0%",
         apply_as="Retail one lot (110 sh, ₹14,960) at cut-off if anything. Coal India shareholders on the RHP date also have a ₹2L shareholder quota. Not sHNI, not bHNI.",
         horizon="Listing-day exit for a trade; there is no growth case, only a dividend case",
         book="not open",
@@ -6403,42 +6403,43 @@ def _for_nov_18() -> list[IPO]:
     mahanadi_17, crystal_17 = _for_nov_17()
     crystal = replace(
         crystal_17,
-        call="AVOID — it opens today and the anchor book is still unread",
-        dates="anchor 17 Nov (unfiled at 18:25) · OPEN TODAY 18 Nov · close 20 Nov · allotment 23 Nov · listing 26 Nov",
-        gmp="₹14 (ipoguru 17-Nov 18:00; ipomarket 17-Nov 18:02; held ₹13 from 11:02 to 16:30)",
-        gmp_pct=5.1,
-        expected="~+2.5%",
-        flags=(("anchor book NOT FILED publicly as of 17-Nov 18:25 — the demand read is missing", "fail"),
-               ("GMP ₹45 (13 Nov) → ₹13 → ₹14: the slide stopped, it did not reverse", "warn"),
+        call="AVOID on the case — but the anchor book is better than the premium said",
+        dates="anchor 17 Nov FILED 18:55 · OPEN TODAY 18 Nov · close 20 Nov · allotment 23 Nov · listing 26 Nov",
+        gmp="₹18 after the anchor filing (17-Nov ~20:00); ₹13 held 11:02–16:30, ₹14 at 18:02, re-rated within the hour",
+        gmp_pct=6.6,
+        expected="~+4.0%",
+        flags=(("anchor ₹135.96 Cr from 17 investors at ₹272, top of band — 44.28% domestic MF", "pass"),
+               ("no insurer and no pension fund took it — the stickiest money stayed out", "warn"),
                ("8.2x headline P/E is a seasonal quarter ×4; ~30.6x on FY26", "fail"),
                ("litigation ₹341.95 Cr = 16.8% of net worth", "fail")),
         note=(
-            "<strong>The issue opens this morning and the one fact worth waiting for is still "
-            "missing.</strong> The anchor book was built on 17 November and had not surfaced on any "
-            "reachable source by 18:25 that evening: the BSE public-issue page refuses automated "
-            "readers, Chittorgarh's 2026 anchor-allotment report carries zero records, and ipowatch's "
-            "anchor page for this issue does not exist yet. So the question that actually matters — "
-            "whether domestic mutual funds took this book or it went to FPIs and AIFs — cannot be "
-            "answered, and nothing here should be read as if it had been. <strong>Check before "
-            "applying, not after.</strong> On everything else the 15 November case is unchanged: "
-            "priced above the listed-peer median on real full-year earnings while marketed at 8x, "
-            "litigation large against net worth, and ₹270 Cr of the fresh money repaying borrowings "
-            "that rose from ₹820 Cr to ₹952 Cr in a quarter. The premium ticked up a rupee into the "
-            "17 November close, to ₹14 — the first up-move since the 13th, and far too small to call "
-            "a recovery. Odds, said as odds: retail is at least 35% of the issue, so a one-lot "
-            "application still has fair allotment odds; at an expected +2.5% after the haircut a "
-            "one-lot win is worth about ₹375, and the error band on that is wider than the figure."
+            "<strong>The anchor book was filed at 18:55 on 17 November, and it argues against the grey "
+            "market rather than with it.</strong> ₹135.96 Cr from <b>17 investors at ₹272, the top of "
+            "the band</b>, with <b>44.28% taken by domestic mutual funds</b> — Tata, WhiteOak and Groww "
+            "— and <b>IFC in for ₹20 Cr</b>. Domestic funds putting up nearly half of an anchor book at "
+            "the top of the band is not what a deal in trouble looks like, and the premium agreed: "
+            "<strong>it re-rated from ₹14 to ₹18 within an hour of the filing</strong>. Two things keep "
+            "the call where it is. <b>No insurer and no pension fund took any of it</b> — the stickiest "
+            "money stayed out, and a book carried by mutual funds and one development lender is a "
+            "narrower endorsement than the headline number. And nothing in the filing touches the case "
+            "itself: priced above the listed-peer median on real full-year earnings while marketed at "
+            "8x, litigation of ₹341.95 Cr against net worth, and ₹270 Cr of the fresh money repaying "
+            "borrowings that rose from ₹820 Cr to ₹952 Cr in a quarter. <strong>So: a better book than "
+            "the ₹45 → ₹13 collapse implied, on a company still priced for more than it has "
+            "shown.</strong> Odds, said as odds: retail is at least 35% of the issue, so a one-lot "
+            "application has fair allotment odds; at an expected +4.0% after the haircut a one-lot win "
+            "is worth about ₹600, and the error band is still wider than the figure."
         ),
     )
     mahanadi = replace(
         mahanadi_17,
         call="SKIP as a trade — the dividend case is the only case left",
-        dates="anchor 18 Nov (UNCONFIRMED — no announcement) · open 19 Nov · close 23 Nov · allotment 25 Nov · listing 27 Nov",
+        dates="anchor 18 Nov (confirmed in NSE's document set) · open 19 Nov · close 23 Nov · allotment 25 Nov · listing 27 Nov",
         gmp="₹4.00 (ipoguru 17-Nov 18:00 and ipomarket 17-Nov 18:02; investorgain ₹4.00 at 15:02)",
         gmp_pct=2.9,
         expected="~+0.3%",
         flags=(("GMP ₹25 (13 Nov) → ₹4: down 84%, now flat two sessions", "fail"),
-               ("anchor date 18 Nov is INFERRED, not announced", "warn"),
+               ("anchor 18 Nov — confirmed by NSE's documents, not by an aggregator", "pass"),
                ("PAT down three years running", "fail"),
                ("debt-free: borrowings ₹2.76 Cr", "pass")),
         note=(
@@ -6447,10 +6448,9 @@ def _for_nov_18() -> list[IPO]:
             "unchanged at ~3% and note the sources disagree on the 16 November base — our own record "
             "says ₹4.60, ipoguru's says ₹3.50. <strong>At 2.9% quoted, less our measured 2.6-point "
             "overstatement, the expected listing is about +0.3% — roughly ₹45 on a lot, which is "
-            "zero.</strong> <strong>The 18 November anchor date is not announced anywhere.</strong> "
-            "Only ipocentral asserts it, while that same page lists the anchor portion as 'not "
-            "announced' and carries a lock-in date that back-solves to a late-November allotment; "
-            "ipomarket and ipoguru state no anchor date at all. The business case is unchanged and "
+            "zero.</strong> <strong>The 18 November anchor date is now confirmed</strong> &mdash; not by the "
+            "aggregators, which still contradict each other and list the anchor portion as 'not "
+            "announced', but by NSE's own document set for the issue. The business case is unchanged and "
             "was never the trade: India's largest coal producer by volume, debt-free, EBITDA margin "
             "43.6%, PAT drifting ₹11,842 Cr → ₹10,825 Cr → ₹10,698 Cr with H1 FY27 annualising ~9% "
             "lower again, sold 100% by a government seller that wants the book to clear. If he wants "
@@ -6463,17 +6463,19 @@ def _for_nov_18() -> list[IPO]:
 IPOS_2026_11_18 = _for_nov_18()
 
 LEAD_NOV_18 = (
-    "Wednesday 18 November, written the evening before from the 17 November close. "
-    "<strong>Crystal Crop Protection opens today</strong> (18&ndash;20 Nov) and Mahanadi "
-    "Coalfields opens tomorrow. Nothing is in allotment or listing. "
-    "<strong>The anchor book for Crystal was built on 17 November and had still not been filed "
-    "publicly at 18:25 that evening</strong> &mdash; so the single most useful number on this "
-    "page, who bought the anchor tranche and how much, is missing, and is marked as missing "
-    "rather than guessed. Both premiums printed again at ~18:00 and both are flat to marginally "
-    "up: Crystal &#8377;13 &rarr; &#8377;14, Mahanadi steady at &#8377;4. The collapse that ran "
-    "13&ndash;16 November has stopped; neither has recovered. Applied by this service: nothing. "
+    "Wednesday 18 November, written the evening before from the 17 November close and "
+    "updated at 20:30 that night. <strong>Crystal Crop Protection opens today</strong> "
+    "(18&ndash;20 Nov) and Mahanadi Coalfields opens tomorrow, anchoring today. "
+    "<strong>The fact this board was missing all evening arrived at 18:55: Crystal&rsquo;s "
+    "anchor book.</strong> &#8377;135.96 Cr from 17 investors at &#8377;272, the top of the "
+    "band, with 44.28% going to domestic mutual funds and IFC in for &#8377;20 Cr &mdash; and "
+    "the grey market re-rated from &#8377;14 to &#8377;18 inside the hour. That argues against "
+    "the four-session premium collapse rather than with it, and it is the one genuinely new "
+    "thing on this page. It does not change the company&rsquo;s own numbers, so the call "
+    "stands. Mahanadi&rsquo;s premium is inert at &#8377;4. Applied by this service: nothing. "
     "<strong>One tooling note, repeated:</strong> <code>show_ipos</code> still cannot read its "
-    "source, so this board was rebuilt by hand from the web again."
+    "source, so this board was rebuilt by hand from the web again &mdash; and the "
+    "machine-built IPO section higher up the report still claims no mainboard issue is open."
 )
 
 FOOTNOTE_NOV_18 = (
