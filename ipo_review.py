@@ -6555,6 +6555,85 @@ FOOTNOTE_NOV_18_0930 = (
 )
 
 
+
+def _for_nov_19() -> list[IPO]:
+    """Mahanadi opens today; Crystal is in day two of three. Derived from 18 Nov
+    so the static facts stay in one place. What moved: Mahanadi is finally live
+    and its anchor book is no longer hypothetical, and Crystal has a day of real
+    subscription behind it instead of a grey-market rumour."""
+    crystal_18, mahanadi_18 = _for_nov_18_0930()
+    mahanadi = replace(
+        mahanadi_18,
+        call="SKIP as a trade — it opens today and the case has not changed",
+        dates="anchor 18 Nov · OPEN TODAY 19 Nov · close 23 Nov · allotment 25 Nov · listing 27 Nov",
+        flags=(("GMP ₹25 (13 Nov) → ~₹4: down ~84%, flat for three sessions", "fail"),
+               ("100% OFS — a government seller that wants the book to clear", "warn"),
+               ("PAT down three years running", "fail"),
+               ("debt-free: borrowings ₹2.76 Cr; EBITDA margin 43.6%", "pass")),
+        note=(
+            "<strong>It opens today and nothing in the case has moved.</strong> The premium has been "
+            "inert near ₹4 for three sessions — about 3% on a ₹136 band, and less than 1% once our "
+            "measured 2.6-point overstatement comes off, which is indistinguishable from zero. "
+            "India's largest coal producer by volume, debt-free, EBITDA margin 43.6%, and PAT drifting "
+            "₹11,842 Cr → ₹10,825 Cr → ₹10,698 Cr with H1 FY27 annualising ~9% lower again. A cash "
+            "machine with shrinking earnings, sold entirely by a government seller. <strong>If he wants "
+            "it, he wants the dividend, not the listing</strong> — and that is a portfolio decision "
+            "rather than an IPO one. The Coal India shareholder quota of up to 10% of the issue is the "
+            "one genuine edge here for anyone already holding the parent."
+        ),
+    )
+    crystal = replace(
+        crystal_18,
+        call="AVOID on the case — day two of three, and the anchor book remains the only good news",
+        dates="anchor 17 Nov filed 18:55 · open 18 Nov · CLOSES TOMORROW 20 Nov · allotment 23 Nov · listing 26 Nov",
+        note=(
+            "<strong>Day two of three.</strong> The anchor book filed on the 17th is still the only "
+            "thing arguing for this deal and it argues well: ₹135.96 Cr from <b>17 investors at ₹272, "
+            "the top of the band</b>, with <b>44.28% to domestic mutual funds</b> — Tata, WhiteOak and "
+            "Groww — and IFC in for ₹20 Cr. Domestic funds taking nearly half a book at the top of the "
+            "band is not what a failing deal looks like, and the premium re-rated ₹14 → ₹18 within the "
+            "hour of that filing. <strong>Two things still keep the call where it is.</strong> No "
+            "insurer and no pension fund took any of it, so the stickiest money stayed out and the "
+            "endorsement is narrower than the headline. And nothing in the filing touches the company: "
+            "priced above the listed-peer median on real full-year earnings while marketed at 8x, "
+            "litigation of ₹341.95 Cr against net worth, and ₹270 Cr of the fresh money repaying "
+            "borrowings that grew ₹820 Cr to ₹952 Cr in a quarter. <strong>A better book than the "
+            "₹45 → ₹13 collapse implied, on a company still priced for more than it has shown.</strong>"
+        ),
+    )
+    return [mahanadi, crystal]
+
+
+IPOS_2026_11_19 = _for_nov_19()
+
+LEAD_NOV_19 = (
+    "Thursday 19 November, written the evening before from the 18 November close. "
+    "<strong>Mahanadi Coalfields opens today</strong> (19&ndash;23 Nov) and "
+    "<strong>Crystal Crop Protection is in day two of three</strong>, closing tomorrow. "
+    "Nothing is in allotment or listing. Both premiums are inert &mdash; Crystal at "
+    "&#8377;19 on the 18-Nov 08:37 print, barely moved since its anchor filing, and Mahanadi "
+    "flat near &#8377;4 for three sessions "
+    "&mdash; so neither is pricing a listing gain worth the application risk. "
+    "<strong>Crystal&rsquo;s anchor book remains the one genuinely good fact on this "
+    "board</strong>: &#8377;135.96 Cr from 17 investors at the top of the band with 44.28% "
+    "to domestic mutual funds. Applied by this service: nothing. "
+    "<strong>One tooling note, repeated for the fourth night:</strong> <code>show_ipos</code> "
+    "still cannot read its source, so this board was rebuilt by hand from the web, and the "
+    "machine-built IPO section higher up the report still claims no mainboard issue is open."
+)
+
+FOOTNOTE_NOV_19 = (
+    "<strong>Haircut applied, and said:</strong> both expected-listing figures are the quoted GMP% "
+    "less the 2.6-point overstatement our backtest measured. On Mahanadi that takes ~3% to under 1%, "
+    "which is not a trade. <strong>Every quote carries the date and time it was read</strong>, because "
+    "a premium without its timestamp is not a number. <strong>Static facts &mdash; bands, dates, "
+    "splits, P/E, litigation &mdash; are carried from the 18 November cards rather than re-entered</strong>, "
+    "so a correction to one corrects both. The 13 November Crystal peak is &#8377;45, corrected on the "
+    "18th from the &#8377;40 this board carried on the 16th and 17th; three sources agree on &#8377;45 "
+    "and our &#8377;40 was an earlier tick of the same day."
+)
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -6614,6 +6693,7 @@ BY_DAY = {
     "2026-11-17": (IPOS_2026_11_17, LEAD_NOV_17, FOOTNOTE_NOV_17),
     # 09:30 open-slot pass supersedes the 20:30 page; IPOS_2026_11_18 / LEAD_NOV_18 stay above.
     "2026-11-18": (IPOS_2026_11_18_0930, LEAD_NOV_18_0930, FOOTNOTE_NOV_18_0930),
+    "2026-11-19": (IPOS_2026_11_19, LEAD_NOV_19, FOOTNOTE_NOV_19),
 }
 
 
