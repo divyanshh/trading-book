@@ -604,6 +604,38 @@ against a 25,291.10 previous close, quoted 17 Nov 09:09 IST. Wednesday&rsquo;s g
 cannot be &mdash; it is written the evening before. Both are listed as open faults at the foot of this
 section.</p>
 
+<h3 class="sub" id="pre-morning">Morning update &mdash; written 13:30, Wednesday 18 November</h3>
+<p class="note"><strong>Two things on this page were written before the facts arrived, and both are
+corrected here rather than quietly edited.</strong></p>
+<div class="scroll"><table><thead><tr><th class="l">what the page said</th><th class="l">what actually happened</th></tr></thead><tbody>
+<tr><td class="l">Nvidia was &ldquo;the real risk on this page&rdquo; &mdash; its quarter was unknown when this was written.</td><td class="l pass"><b>It beat.</b> Revenue <b>$115.84bn, +103%</b> against ~$109bn expected; adjusted EPS $2.68 against ~$2.47; Q4 guided near <b>$130bn</b>; a <b>$150bn</b> buyback increase; shares +3&ndash;5% after hours. The board will not reinstate Jensen Huang. One blemish: gross margin guided down to <b>71&ndash;72%</b> from 74.9%.</td></tr>
+<tr><td class="l">I said to expect <b>a firmer open</b> on the back of that beat.</td><td class="l fail"><b>Wrong.</b> GIFT Nifty was <b>25,243 at 08:15 against a 25,387.40 close &mdash; down 155 points</b>, and MarketSmith&rsquo;s own headline read <em>&ldquo;GIFT Nifty Signals Caution.&rdquo;</em> Wall Street fell on Tuesday <b>before</b> Nvidia reported &mdash; Dow &minus;848.75 (&minus;1.64%), S&amp;P &minus;1.03%, Nasdaq &minus;0.74% on semiconductor selling. The beat lifted <b>Asia</b> afterwards (Kospi +3.08%, Taiex +1.13%, Nikkei +1.03%); it did not lift India&rsquo;s open.</td></tr>
+</tbody></table></div>
+<p class="sub">MarketSmith&rsquo;s status is unchanged &mdash; <b>Confirmed Uptrend, 2 distribution days, no
+downgrade</b> &mdash; with a stated conditional: they cut to &ldquo;Uptrend Under Pressure&rdquo; if the
+count rises or the Nifty breaches key support. Gold fell to its lowest since September 2025 as Fed
+officials argued for <b>further rate hikes</b>; Brent $92.98.</p>
+
+<h3 class="sub" id="pre-today-actual">What the session actually did</h3>
+<div class="scroll"><table><thead><tr><th class="l">name</th><th class="l">what happened</th><th class="l">result</th></tr></thead><tbody>
+<tr><td class="l"><b>GLAND</b></td><td class="l">The weak open took it straight through the 3,233.10 stop at <b>09:15:58</b>. t-default sold 69 at an average of <b>3,221.86</b>, akul 7 at <b>3,224.34</b> &mdash; both roughly eleven rupees <em>below</em> the stop.</td><td class="l fail"><span>&minus;&#8377;11,739.66 and &minus;&#8377;1,173.62</span></td></tr>
+<tr><td class="l"><b>GLAND</b>, the whole position</td><td class="l">With Ram&rsquo;s 25 shares stopped on the 17th at &minus;&#8377;2,923.60, the name is now closed in all three accounts.</td><td class="l fail"><span><b>&minus;&#8377;15,836.88 across the book</b></span></td></tr>
+<tr><td class="l"><b>SHYAMMETL</b></td><td class="l">Fired at 09:15:49 and <b>filled in t-ramprasad</b> &mdash; 38 at 1,359.92, adopted and stopped at 1,292.90. Rejected for funds in the other two; <b>both refusals were phantom</b>, &#8377;214,250 and &#8377;23,052 of dead reservations left by the rejected orders themselves.</td><td class="l warn"><span>held in Ram only</span></td></tr>
+<tr><td class="l"><b>SHYAMMETL</b>, the decision</td><td class="l">It fell straight back to ~1,320, <b>below its own 1,356.01 trigger</b> &mdash; a failed breakout on the day it broke out, on a name failing two gates (G5 sector LAGGING, <b>G7 RS 87</b> against a 90 floor). The triggers were re-rested, then <b>cancelled on his call</b>.</td><td class="l"><span>not bought in t-default or akul</span></td></tr>
+<tr><td class="l">Parking</td><td class="l">Free cash parked across all three at 116.98 &mdash; 3,380, 342 and <b>1,794 units</b>.</td><td class="l pass"><span>&#8377;645,262 &middot; <b>t-ramprasad&rsquo;s first parking ever</b></span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>The stop that matters, and an open question.</strong> He observed that GLAND&rsquo;s
+stop should have been <b>3,169</b> &mdash; the swing low <em>less</em> the 2% buffer (3,233.10 &times;
+0.98 = 3,168.44). Our stop rested <b>at</b> 3,233.10, the structural level with no buffer, which is the
+rule as written since close-based stops were disarmed on 6 November. <strong>On today&rsquo;s evidence he
+is right and this was a shakeout:</strong> our own fills bottomed at <b>3,221.1</b> and the stock was back
+at <b>&#8377;3,249</b> by 11:32, above its previous close. A 3,169 stop would have needed another 1.6%
+below our fills to trigger. <em>The exact intraday low could not be verified &mdash; every quote source
+refused or timed out &mdash; so this is an inference from our own fills, not a confirmed low.</em>
+<strong>The rule has NOT been changed on the strength of one name over two days.</strong> The proposal is
+to measure <code>structural &times; 0.98</code> against <code>structural</code> across the whole closed
+book, count how many exits flip and what it does to total R, and ship the buffer only if it wins.</p>
+
 <h3 class="sub" id="pre-gates">The two gates</h3>
 <div class="scroll"><table><thead><tr><th class="l">reading</th><th class="l">value</th><th class="l">verdict</th></tr></thead><tbody>
 <tr><td class="l">Breadth vs its prior-5 mean</td><td class="l">65.79% against 69.65%, on 877 names</td><td class="l fail"><span>SHUT</span></td></tr>
