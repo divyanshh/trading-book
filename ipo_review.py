@@ -6496,6 +6496,65 @@ FOOTNOTE_NOV_18 = (
 )
 
 
+def _for_nov_18_0930() -> list[IPO]:
+    """The 09:30 open-slot pass over the 20:30 page. Only the premiums moved:
+    the 18-Nov 08:37 investorgain print. Static facts and the anchor read stay
+    on the 20:30 cards, which this derives from."""
+    crystal_18, mahanadi_18 = _for_nov_18()
+    crystal = replace(
+        crystal_18,
+        gmp="₹19 (investorgain 18-Nov 08:37; ₹18 after the anchor filing 17-Nov ~20:00; ₹13 held 11:02–16:30 on 17 Nov)",
+        gmp_pct=7.0,
+        expected="~+4.4%",
+        note=(
+            crystal_18.note
+            + " 09:30 update: the premium firmed again overnight, ₹18 → ₹19 (7.0% on ₹272) at "
+            "investorgain’s 18-Nov 08:37 print, so the expected listing after the 2.6-point haircut "
+            "is ~+4.4% — about ₹660 on a one-lot win. The call does not move on ₹1. No subscription "
+            "figure exists yet: bidding opens at 10:00 today, and the first number the day produces "
+            "will be a mid-session number and must be called that."
+        ),
+    )
+    mahanadi = replace(
+        mahanadi_18,
+        gmp="₹3.75 (investorgain 18-Nov 08:37; ₹4.00 on three sources 17-Nov 15:02–18:02)",
+        gmp_pct=2.8,
+        expected="~+0.2%",
+        note=(
+            mahanadi_18.note
+            + " 09:30 update: ₹4.00 → ₹3.75 at investorgain’s 18-Nov 08:37 print, 2.8% on ₹136; "
+            "after the haircut ~+0.2%, which is zero. Today is its anchor day; no allocation had "
+            "been filed at the time of reading, so none is quoted."
+        ),
+    )
+    return [crystal, mahanadi]
+
+
+IPOS_2026_11_18_0930 = _for_nov_18_0930()
+
+LEAD_NOV_18_0930 = (
+    LEAD_NOV_18
+    + " <strong>Re-written at 09:30 on 18 November</strong> with the overnight premiums: "
+    "Crystal &#8377;18 &rarr; &#8377;19, Mahanadi &#8377;4.00 &rarr; &#8377;3.75 (investorgain, "
+    "18-Nov 08:37). Neither call moves. Crystal&rsquo;s bidding opens at 10:00, so this page "
+    "carries no subscription figure at all."
+)
+
+FOOTNOTE_NOV_18_0930 = (
+    "<strong>A correction to this page&rsquo;s own 20:30 version.</strong> Its footnote still read "
+    "&ldquo;Crystal 5.1% &rarr; ~+2.5%&rdquo; &mdash; the 18:02 &#8377;14 figure &mdash; while the "
+    "Crystal card above it already said &#8377;18, 6.6% &rarr; ~+4.0%. The card was right and the "
+    "footnote was stale; the two contradicted each other on the published page. "
+    "<strong>Haircut applied, and said:</strong> both expected-listing figures are the quoted GMP% "
+    "less the 2.6-point overstatement our backtest measured &mdash; Crystal 7.0% &rarr; ~+4.4%, "
+    "Mahanadi 2.8% &rarr; ~+0.2%. <strong>The spread of that error is wider than either figure</strong>, "
+    "so neither is evidence of a listing gain. <strong>Every quote carries the date and time it was "
+    "read</strong> &mdash; both from investorgain&rsquo;s 18-Nov 08:37 print, a single source this "
+    "morning. The 13 November Crystal peak is &#8377;45, not &#8377;40, as corrected at 20:30; the "
+    "fall to today&rsquo;s &#8377;19 is 58%. Static facts are carried from the 17 November cards."
+)
+
+
 ADDENDA = {
     "2026-10-29": ADDENDUM_OCT_29_BLS,
     "2026-10-30": ADDENDUM_OCT_30,
@@ -6553,7 +6612,8 @@ BY_DAY = {
     # Two issues open this week. Mahanadi was missed by the 15 Nov checklist note.
     "2026-11-16": (IPOS_2026_11_16, LEAD_NOV_16, FOOTNOTE_NOV_16),
     "2026-11-17": (IPOS_2026_11_17, LEAD_NOV_17, FOOTNOTE_NOV_17),
-    "2026-11-18": (IPOS_2026_11_18, LEAD_NOV_18, FOOTNOTE_NOV_18),
+    # 09:30 open-slot pass supersedes the 20:30 page; IPOS_2026_11_18 / LEAD_NOV_18 stay above.
+    "2026-11-18": (IPOS_2026_11_18_0930, LEAD_NOV_18_0930, FOOTNOTE_NOV_18_0930),
 }
 
 
