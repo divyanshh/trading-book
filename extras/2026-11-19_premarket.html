@@ -226,26 +226,35 @@ body::before{display:none}.dark body{background-image:radial-gradient(560px circ
 /* Institutional presentation: information hierarchy over decoration. */
 html.dark{--canvas:#0d0d0c;--card:#171715;--head:#1d1c19;--line:#35332d;--line-strong:#514b3c;--ink:#f4f0e7;--ink-2:#d0c7b8;--muted:#9f9686;--faint:#70695e;--blue:#d7a84e;--blue-ink:#f1ca7a;--blue-50:#272114;--blue-100:#46371d;--green:#72c98c;--green-50:#142419;--green-100:#1c3825;--green-line:#31553a;--red:#ec7d70;--red-50:#321816;--red-100:#51231f;--red-line:#74342c;--amber:#e4b759;--amber-50:#302713;--amber-100:#4b3c1c;--amber-line:#70571f;--series-1:#d7a84e;--series-2:#8fb8e8;--series-neutral:#d0c7b8}.dark body{background-color:#0d0d0c;background-image:linear-gradient(rgba(216,168,78,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,168,78,.035) 1px,transparent 1px),radial-gradient(700px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(216,168,78,.12),transparent 66%)}.dark .mb-nav{border-bottom-color:#35332d}.dark .mb-nav b{border-radius:6px;background:#f4f0e7;color:#171715}.dark .mb-theme{border-color:#514b3c}.dark header.top{border-color:#514b3c;background:linear-gradient(135deg,#1b1a17,#151512 68%,#241e14)}.dark .glance>div,.dark .card,.dark figure,.dark .tbl-scroll,.dark .stat,.dark .act,.dark .mrow,.dark .scroll{border-color:#35332d;background:#171715}.dark nav.toc a{border-radius:5px;box-shadow:none}.dark h1,.dark h2,.dark h3{letter-spacing:-.035em}.dark .plate{border-radius:8px}.dark .plate,.dark .plate.open{box-shadow:none}.dark .wrap>.eyebrow{border-radius:4px}.dark td,.dark .prose p,.dark p{color:#d0c7b8}.dark .stamp,.dark .lede{color:#9f9686}
 @media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}body>.mb-nav{min-height:58px;padding:10px 16px 11px}h1{font-size:30px}}
-</style></head><body><nav class="mb-nav" aria-label="Trading Book"><a href="../../"><b aria-hidden="true">↗</b><span>Trading Book</span></a><button class="mb-theme" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button></nav><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',function(e){document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px')},{passive:true});var b=document.querySelector('.mb-theme');if(!b)return;function s(){var d=document.documentElement.classList.contains('dark');b.textContent=d?'☀':'◐';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')}s();b.addEventListener('click',function(){document.documentElement.classList.toggle('dark');try{localStorage.setItem('trading-book-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}s()})})();</script><div class="wrap"><p class="eyebrow">equity-service · cortex · 2026-11-19</p><h2 id="pre-session-read">Pre-session read</h2>
+</style></head><body><div class="wrap"><p class="eyebrow">equity-service · cortex · 2026-11-19</p><h2 id="pre-session-read">Pre-session read</h2>
 <p class="lead">Thursday opens with <strong>one gate open and the other at its worst reading of the
 move</strong>. Our follow-through gate flipped to <strong>CONFIRMED_UPTREND</strong> and now agrees with
 MarketSmith for the first time in six sessions &mdash; but it did so on a <strong>follow-through dated 2
 November, sixteen days old</strong>. Meanwhile breadth fell to <strong>59.52% against a prior-five mean of
-70.35%</strong>, a gap of 10.83 points against yesterday&rsquo;s 3.86. <strong>Entries remain blocked, on
+70.35%</strong>, a gap of 10.83 points against Tuesday&rsquo;s 3.86. <strong>Entries remain blocked, on
 breadth, and none of tonight&rsquo;s thirty-three actionable names may be placed.</strong></p>
 <p class="sub"><strong>Nothing here is an instruction and nothing here was placed.</strong> Closes are
 Wednesday 18 November&rsquo;s. All six scanners were run by hand tonight against them &mdash; SWING run 479.</p>
 <p class="note"><strong>Read the open gate carefully.</strong> A gate that turns green on a sixteen-day-old
 event while the breadth it is meant to confirm collapses is not a buy signal, it is a lag. The two readings
 are measuring different things: the follow-through looks backwards at one day in early November, breadth
-looks at what 877 names did today. <strong>On this evidence the breadth gate is the one carrying
+looks at what 877 names did on Wednesday. <strong>On this evidence the breadth gate is the one carrying
 information.</strong></p>
 
 <h3 class="sub" id="pre-corrections">Two things this book got wrong, corrected</h3>
 <div class="scroll"><table><thead><tr><th class="l">what was said</th><th class="l">what is true</th></tr></thead><tbody>
-<tr><td class="l">Yesterday&rsquo;s page said the <b>&ldquo;foreign buying against domestic selling&rdquo; mechanic had BROKEN</b>, because the DIIs printed +&#8377;197 Cr on the 17th &mdash; their first positive session of the week.</td><td class="l fail"><b>It had not broken. I over-read a single session.</b> On the 18th domestic selling resumed harder: <b>DII &minus;&#8377;3,159.90 Cr</b> against <b>FII +&#8377;5,866.78 Cr</b>, a twelfth straight session of foreign buying. One print is not a turn, and it was called one.</td></tr>
-<tr><td class="l">Tonight&rsquo;s first scan ran at 16:16 and reported <b>24 actionable</b>.</td><td class="l fail"><b>It was priced off the 17th.</b> The bhavcopy had not been ingested, so a run stamped 18 November carried 17 November prices &mdash; TFCILTD&rsquo;s &ldquo;last&rdquo; read 166.16 when the close was <b>169.69</b>. Caught before publishing, all six re-run, and the real count is <b>33</b>. The tell was twenty-four <em>identical</em> distance-to-trigger figures against the previous page.</td></tr>
+<tr><td class="l">The 18th&rsquo;s page said the <b>&ldquo;foreign buying against domestic selling&rdquo; mechanic had BROKEN</b>, because the DIIs printed +&#8377;197 Cr on the 17th &mdash; their first positive session of the week.</td><td class="l fail"><b>It had not broken. I over-read a single session.</b> On the 18th domestic selling resumed harder: <b>DII &minus;&#8377;3,159.90 Cr</b> against <b>FII +&#8377;5,866.78 Cr</b>, with foreign buying unbroken across every session in the table below. One print is not a turn, and it was called one.</td></tr>
+<tr><td class="l">Wednesday evening&rsquo;s first scan ran at 16:16 and reported <b>24 actionable</b>.</td><td class="l fail"><b>It was priced off the 17th.</b> The bhavcopy had not been ingested, so a run stamped 18 November carried 17 November prices &mdash; TFCILTD&rsquo;s &ldquo;last&rdquo; read 166.16 when the close was <b>169.69</b>. Caught before publishing, all six re-run, and the real count is <b>33</b>. The tell was twenty-four <em>identical</em> distance-to-trigger figures against the previous page.</td></tr>
 </tbody></table></div>
+<p class="note"><strong>Three things further down this page are wrong, and all three are machine-built,
+not written here.</strong> <b>&ldquo;IPOs &mdash; mainboard&rdquo; says no mainboard issue is open or
+upcoming</b> &mdash; false, Mahanadi opens today and Crystal is mid-subscription; that is the broken
+<code>show_ipos</code> parser, and the hand-written IPO review lower down is the one to read. <b>&ldquo;How
+the market opened&rdquo; carries Wednesday&rsquo;s pre-open</b>, quoted 18 Nov 08:57 with GIFT Nifty at
+25,243 &mdash; it cannot carry Thursday&rsquo;s, because this page is written the evening before. And the
+<b>breadth history repeats 9 and 10 November identically</b> at 62.60% / 54.22%, which looks like a carried
+row rather than two sessions; since that history feeds the prior-five mean the gate is judged against,
+<strong>it is on the decisions list below</strong>.</p>
 <p class="note">The second one is worth keeping. <strong>A scan stamped with today&rsquo;s date can still be
 priced off yesterday</strong>, and the only reliable check is to compare one known name&rsquo;s last price
 against that day&rsquo;s close. Had it shipped, TFCILTD would have carried a stop of 160.76 instead of
@@ -254,32 +263,32 @@ against that day&rsquo;s close. Had it shipped, TFCILTD would have carried a sto
 
 <h3 class="sub" id="pre-gates">The two gates</h3>
 <div class="scroll"><table><thead><tr><th class="l">reading</th><th class="l">value</th><th class="l">verdict</th></tr></thead><tbody>
-<tr><td class="l">Breadth vs its prior-5 mean</td><td class="l"><b>59.52% against 70.35%</b> on 877 names &mdash; a 10.83-point gap, against 3.86 yesterday</td><td class="l fail"><span>SHUT</span></td></tr>
+<tr><td class="l">Breadth vs its prior-5 mean</td><td class="l"><b>59.52% against 70.35%</b> on 877 names &mdash; a 10.83-point gap, against 3.86 on Tuesday</td><td class="l fail"><span>SHUT</span></td></tr>
 <tr><td class="l">Our computed status</td><td class="l">CONFIRMED_UPTREND &mdash; follow-through on the Nifty at <b>2 November</b>, despite 8 distribution days on smallcap</td><td class="l pass"><span>OPEN</span></td></tr>
 <tr><td class="l">MarketSmith&rsquo;s status</td><td class="l">CONFIRMED_UPTREND, 2 distribution days &mdash; <b>agreeing with ours for the first time in six sessions</b></td><td class="l pass"><span>open</span></td></tr>
-<tr><td class="l">Nifty vs its 20MA</td><td class="l">+4.92%, down from +6.08% &mdash; the index gave ground today</td><td class="l"><span>less extended</span></td></tr>
+<tr><td class="l">Nifty vs its 20MA</td><td class="l">+4.92%, down from +6.08% &mdash; the index gave ground on Wednesday</td><td class="l"><span>less extended</span></td></tr>
 </tbody></table></div>
 
-<h3 class="sub" id="pre-indices">What deteriorated today &mdash; three sectors downgraded</h3>
+<h3 class="sub" id="pre-indices">What deteriorated on Wednesday &mdash; three sectors downgraded</h3>
 <div class="scroll"><table><thead><tr><th class="l">index</th><th>dist. days</th><th class="l">status</th><th class="l">change today</th></tr></thead><tbody>
 <tr><td class="l"><b>METAL</b></td><td class="bad">6</td><td class="l fail"><span>RALLY ATTEMPT</span></td><td class="l fail">was UNDER PRESSURE on 3 &mdash; <b>downgraded twice in two sessions</b></td></tr>
 <tr><td class="l"><b>ENERGY</b></td><td class="bad">4</td><td class="l warn"><span>UNDER PRESSURE</span></td><td class="l warn">was CONFIRMED UPTREND on 2</td></tr>
 <tr><td class="l"><b>CONSUMER DURABLES</b></td><td>3</td><td class="l warn"><span>UNDER PRESSURE</span></td><td class="l warn">was CONFIRMED UPTREND on <b>zero</b></td></tr>
 <tr><td class="l">NEXT 50</td><td class="bad">4</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l warn">was 1 &mdash; picked up three in a session</td></tr>
 <tr><td class="l"><b>SMALLCAP</b></td><td class="bad">8</td><td class="l fail"><span>RALLY ATTEMPT</span></td><td class="l fail">was 7 &mdash; still the only broad index not confirmed</td></tr>
-<tr><td class="l">IT</td><td class="bad">8</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l">unchanged &mdash; still the most distributed index we track</td></tr>
+<tr><td class="l">IT</td><td class="bad">8</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l">unchanged &mdash; joint-most distributed with smallcap, both on 8</td></tr>
 <tr><td class="l">NIFTY &middot; BANK &middot; PSU BANK</td><td class="pass">0</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l pass">unchanged &mdash; clean</td></tr>
 </tbody></table></div>
 <p class="note"><strong>This is the part the open follow-through gate does not see.</strong> Three sectors
 were downgraded in a single session and the Next 50 took three distribution days. The Nifty, the banks and
 the PSU banks remain spotless. <strong>The index is not the market, and the gap between them widened
-again today.</strong></p>
+again on Wednesday.</strong></p>
 
 <h3 class="sub" id="pre-today">What Wednesday did</h3>
 <div class="scroll"><table><thead><tr><th class="l">name</th><th class="l">what happened</th><th class="l">result</th></tr></thead><tbody>
 <tr><td class="l"><b>GLAND</b></td><td class="l">The 3,233.10 stop fired at 09:15:58 on a weak open. t-default sold 69 at an average of <b>3,221.86</b>, akul 7 at <b>3,224.34</b> &mdash; both about eleven rupees <em>below</em> the stop. It then recovered to &#8377;3,249 by 11:32.</td><td class="l fail"><span>&minus;&#8377;11,739.66 and &minus;&#8377;1,173.62</span></td></tr>
 <tr><td class="l"><b>GLAND</b>, all three</td><td class="l">With Ram&rsquo;s 25 stopped on the 17th at &minus;&#8377;2,923.60, the name is closed everywhere. <b>And it is back on tonight&rsquo;s list at 8/8</b>, entry 3,402.69, stop 3,208.70.</td><td class="l fail"><span><b>&minus;&#8377;15,836.88 across the book</b></span></td></tr>
-<tr><td class="l"><b>SHYAMMETL</b></td><td class="l">Fired at 09:15:49 and filled in <b>t-ramprasad only</b> &mdash; 38 at 1,359.92, adopted and stopped at 1,292.90. It ran to a high of <b>1,381.9</b>, well through its 1,356.01 trigger, then closed <b>1,317.1</b>. Rejected for funds in the other two.</td><td class="l warn"><span>&minus;&#8377;1,612 unrealised; low of 1,305.2 came within <b>0.9%</b> of the stop</span></td></tr>
+<tr><td class="l"><b>SHYAMMETL</b></td><td class="l">Fired at 09:15:49 and filled in <b>t-ramprasad only</b> &mdash; 38 at 1,359.92, adopted and stopped at 1,292.90. It ran to a high of <b>1,381.9</b>, well through its 1,356.01 trigger, then closed <b>1,317.1</b>. Rejected for funds in the other two.</td><td class="l warn"><span>&minus;&#8377;1,627 unrealised on the close; the 1,305.2 low came within <b>0.9%</b> of the stop</span></td></tr>
 <tr><td class="l"><b>SHYAMMETL</b>, the decision</td><td class="l">A genuine breakout that failed inside the hour, on a name failing two gates. The other two legs were re-rested, then <b>cancelled on his call</b>.</td><td class="l"><span>held in Ram only &mdash; the accounts diverge by decision</span></td></tr>
 <tr><td class="l">Both rejections</td><td class="l"><b>Phantom.</b> Dead reservations left by the very orders the broker had refused. <code>retire_intents</code> released <b>&#8377;214,250</b> in t-default and <b>&#8377;23,052</b> in akul, and the re-placement went through with <b>no parking sold at all</b>.</td><td class="l pass"><span>a cash problem that was not a cash problem</span></td></tr>
 <tr><td class="l">Parking</td><td class="l">Free cash parked across all three at 116.98 &mdash; 3,380, 342 and <b>1,794</b> units.</td><td class="l pass"><span>&#8377;645,262 &middot; <b>t-ramprasad&rsquo;s first parking ever</b></span></td></tr>
@@ -290,7 +299,7 @@ entry there could only be funded by selling a legacy holding by hand. It now has
 parking, so the reactive rule works in <strong>all three accounts</strong> for the first time.</p>
 <p class="note"><strong>The stop that fired, and the question it raises.</strong> He observed that
 GLAND&rsquo;s stop should have been <b>3,169</b> &mdash; the structural level less a 2% buffer
-(3,233.10 &times; 0.98). Today argues he is right: our fills bottomed at <b>3,221.1</b> and the stock was
+(3,233.10 &times; 0.98 = 3,168.44, which is where his figure comes from). Wednesday argues he is right: our fills bottomed at <b>3,221.1</b> and the stock was
 back above its previous close within two hours, so a 3,169 stop would not have been touched. <em>The exact
 intraday low could not be verified &mdash; every quote source refused &mdash; so that is an inference from
 our own fills.</em> <strong>But LAURUSLABS argues the other way.</strong> Its stop was 2,252.40, a 2%
@@ -335,15 +344,25 @@ report</a>, with the sector pass, RRG quadrant and volume columns this table lea
 <tr><td class="l"><b>ALGOQUANT</b></td><td>7/8</td><td>83</td><td>B</td><td>70%</td><td>87.56</td><td>83.64</td><td>4.5%</td><td>+4.1%</td><td class="l">&mdash;</td></tr>
 <tr><td class="l"><b>MCX</b></td><td class="pass">8/8</td><td>90</td><td>B+</td><td>51%</td><td>3,781.55</td><td>3,586.00</td><td>5.2%</td><td>+4.5%</td><td class="l">held in two, resting 7 in Ram &middot; chop 51% is the weakest 8/8 here</td></tr>
 <tr><td class="l"><b>DIVISLAB</b></td><td class="pass">8/8</td><td>90</td><td>A</td><td>83%</td><td>11,567.59</td><td>10,954.00</td><td>5.3%</td><td>+4.7%</td><td class="l">resting, all three</td></tr>
-<tr><td class="l"><b>GLAND</b></td><td class="pass">8/8</td><td>92</td><td>B+</td><td>83%</td><td>3,402.69</td><td>3,208.70</td><td>5.7%</td><td>+5.3%</td><td class="l"><b>stopped out this morning at 3,221.86 &mdash; and back on the list tonight</b></td></tr>
+<tr><td class="l"><b>GLAND</b></td><td class="pass">8/8</td><td>92</td><td>B+</td><td>83%</td><td>3,402.69</td><td>3,208.70</td><td>5.7%</td><td>+5.3%</td><td class="l"><b>stopped out on Wednesday morning at 3,221.86 &mdash; and back on the list that same evening</b></td></tr>
 <tr><td class="l"><b>SONACOMS</b></td><td class="pass">8/8</td><td>92</td><td>A</td><td>75%</td><td>936.77</td><td>882.55</td><td>5.8%</td><td>+5.4%</td><td class="l">held, all three</td></tr>
 </tbody></table></div>
-<p class="note">Eight further names are actionable but carry stops <b>13.6% to 18.6%</b> wide &mdash;
-KINGFA, CHENNPETRO, MARKSANS, IRISDOREME, SYRMA and a second RUBICON reading among them. Those have no
-usable base, fail the 5% stop cap outright, and are listed here only so the count reconciles.
-<strong>RUBICON appears twice on the scan with two different bases</strong> &mdash; 1,710.81 on a 4.1% stop
-and 1,777.90 on a 15.2% one. That is a data fault worth a look, not two setups.</p>
-<p class="note"><strong>GLAND is the uncomfortable one.</strong> It stopped us out this morning for
+<p class="note"><strong>Where the rest went, corrected.</strong> This table lists the twenty-five SWING
+names whose stops sit inside the 6% band. The rows further down the report carrying stops of <b>13.6% to
+18.6%</b> &mdash; KINGFA, CHENNPETRO, MARKSANS, IRISDOREME, SYRMA and a second RUBICON &mdash; are
+<b>WEEKLY rows, not SWING ones</b>, and the WEEKLY scan returned <b>zero</b> actionable: every one of them
+is blocked on G4, the stop-width gate. <strong>So the second RUBICON at 1,777.90 is a different scanner
+reading the same name on a weekly base, not the data fault an earlier draft of this page called it.</strong>
+And note that eight of the twenty-five below carry stops of <b>5.2% to 5.8%</b> &mdash; MCX, DIVISLAB,
+DIACABS, RATNAVEER, SHADOWFAX, CUPID, GLAND and SONACOMS. Those are over the 5% cap this book applies to
+stocks: actionable to the scanner, but the cap still has to be applied before anything is sized.</p>
+<p class="note"><strong>On the gate counts, because the tables disagree.</strong> Eleven names score 8/8
+here while the report&rsquo;s own TIS table marks nine of them &ldquo;blocked by G5&rdquo;. <b>G5 is the
+sector-rotation note. It records where money is going and refuses nothing</b>, which is why a name can be
+8/8 and carry a G5 mark at once. The header figure of &ldquo;66 actionable&rdquo; is SWING&rsquo;s 33 plus
+STRIKE&rsquo;s identical 33 counted twice; STRIKE is not a traded strategy, so the number to read is
+<b>33</b>.</p>
+<p class="note"><strong>GLAND is the uncomfortable one.</strong> It stopped us out on Wednesday morning for
 &minus;&#8377;12,913 across two accounts, recovered by lunchtime, and closed the day as a clean 8/8 setup
 with a <em>higher</em> entry and a <em>higher</em> stop than the one that just failed. Nothing about that
 is a reason to buy it back &mdash; breadth is shut and it would be a fresh position at a worse price
@@ -358,13 +377,14 @@ is a reason to buy it back &mdash; breadth is shut and it would be a fresh posit
 <tr><td class="l">Fri 13 Nov</td><td class="pass">+5,737</td><td class="bad">&minus;2,254</td><td>18,340</td><td>12,603</td></tr>
 <tr><td class="l">Thu 12 Nov</td><td class="pass">+7,831</td><td class="bad">&minus;6,331</td><td>20,273</td><td>12,443</td></tr>
 </tbody></table></div>
-<p class="note"><strong>Yesterday&rsquo;s page called the single positive DII print a break in the pattern.
+<p class="note"><strong>The 18th&rsquo;s page called the single positive DII print a break in the pattern.
 That was wrong and is corrected here.</strong> The 17th&rsquo;s +&#8377;197 Cr was a blip inside an
-otherwise unbroken run of domestic selling, and on the 18th it resumed at &minus;&#8377;3,160 Cr against a
-twelfth consecutive session of foreign buying. <strong>Foreign money goes into the large, liquid names that
+otherwise unbroken run of domestic selling, and on the 18th it resumed at &minus;&#8377;3,160 Cr while foreign
+buying continued, as it has every session shown here. <strong>Foreign money goes into the large, liquid names that
 carry the index; domestic institutions sell into it across the broader market &mdash; which is where every
-one of tonight&rsquo;s thirty-three setups lives.</strong> That is the mechanism behind a Nifty at
-nine-month highs with breadth at 59.52%.</p>
+one of tonight&rsquo;s thirty-three setups lives.</strong> That is the mechanism behind an index that
+printed nine-month highs on Tuesday, gave ground on Wednesday, and still sits above its 20MA while
+breadth reads 59.52%.</p>
 
 <h3 class="sub" id="pre-breadth">Breadth, three sessions into the shut gate</h3>
 <div class="scroll"><table><thead><tr><th class="l">day</th><th>above their 20MA</th><th>prior-5 mean</th><th>gap</th><th class="l">breadth gate</th></tr></thead><tbody>
@@ -374,8 +394,8 @@ nine-month highs with breadth at 59.52%.</p>
 <tr><td class="l">Fri 13 Nov</td><td>74.94%</td><td>65.42%</td><td class="pass">+9.52</td><td class="l pass"><span>open</span></td></tr>
 <tr><td class="l">Thu 12 Nov</td><td>75.95%</td><td>62.65%</td><td class="pass">+13.30</td><td class="l pass"><span>open</span></td></tr>
 </tbody></table></div>
-<p class="note"><strong>Yesterday the reading rose and the gate still shut, because the mean rose faster.
-Today both moved the wrong way.</strong> Breadth fell 6.27 points to 59.52% while the mean kept climbing to
+<p class="note"><strong>On Tuesday the reading rose and the gate still shut, because the mean rose faster.
+On Wednesday both moved the wrong way.</strong> Breadth fell 6.27 points to 59.52% while the mean kept climbing to
 70.35%, so the gap widened from 3.86 to 10.83 &mdash; the worst of the move. <strong>Roughly eleven points
 now separate the gate from opening</strong>, against four a day ago. On the 13th three-quarters of the
 universe was above its own 20-day line; tonight it is three-fifths.</p>
@@ -386,23 +406,28 @@ universe was above its own 20-day line; tonight it is three-fifths.</p>
 <tr><td class="l">akul</td><td>3,24,410</td><td>1,434</td><td>3,160 units &asymp; 3,69,657</td><td>2,13,447</td><td class="l warn"><span>only by selling parking</span></td></tr>
 <tr><td class="l">t-ramprasad</td><td>4,85,559</td><td>7,523</td><td><b>1,794 units &asymp; 2,09,862</b></td><td>4,52,431</td><td class="l warn"><span>only by selling parking &mdash; <b>possible for the first time</b></span></td></tr>
 </tbody></table></div>
-<p class="note"><strong>Cash is deliberately thin in all three</strong>, because his instruction today was
+<p class="note"><strong>Cash is deliberately thin in all three</strong>, because his instruction on Wednesday was
 to park the free cash rather than hold it. The consequence is that anything firing tomorrow will likely be
 refused for funds. <strong>That is now a manageable refusal rather than a dead end</strong>: every account
-holds parking, Ram included, and today proved the refusals are usually phantom anyway &mdash; retiring dead
+holds parking, Ram included, and Wednesday proved the refusals are usually phantom anyway &mdash; retiring dead
 intents freed &#8377;237,302 across two accounts without selling a single unit. <strong>Ram&rsquo;s
 &#8377;5L has still not landed.</strong></p>
 
 <h3 class="sub" id="pre-diary">The diary</h3>
 <div class="scroll"><table><thead><tr><th class="l">when</th><th class="l">event</th><th class="l">why it matters</th></tr></thead><tbody>
-<tr><td class="l"><b>Fri 20 Nov</b></td><td class="l"><b>SHUKRAPHAR becomes SHUKRAMED</b></td><td class="l">NSE approved the name and symbol change on 16 Nov. It is <b>held in all three accounts</b> with a stop resting at 79.25 under the old symbol, and whether that GTT migrates is <b>unverified</b>. This needs checking before Friday, not on it.</td></tr>
+
 <tr><td class="l">Thu 19 Nov</td><td class="l">Mahanadi Coalfields IPO opens</td><td class="l">&#8377;129&ndash;136, &#8377;8,981 Cr, 100% offer-for-sale by Coal India. <b>SKIP</b> as a trade &mdash; see the IPO review.</td></tr>
 <tr><td class="l">Thu 19 Nov</td><td class="l">Crystal Crop Protection, day 2 of 3</td><td class="l">Closes Friday. <b>AVOID on the case</b>, though the anchor book was better than the premium implied.</td></tr>
 <tr><td class="l">Thu 19 Nov, 00:30 IST</td><td class="l">US FOMC minutes</td><td class="l">Released 14:00 ET Wednesday, so they land overnight. The December hike is priced near certain and gold is at its lowest since September 2025 on it.</td></tr>
+<tr><td class="l"><b>Fri 20 Nov</b></td><td class="l"><b>SHUKRAPHAR becomes SHUKRAMED</b></td><td class="l">NSE approved the name and symbol change on 16 Nov. It is <b>held in all three accounts</b> with a stop resting at 79.25 under the old symbol, and whether that GTT migrates is <b>unverified</b>. This needs checking before Friday, not on it.</td></tr>
 </tbody></table></div>
 
 <h3 class="sub" id="pre-decisions">Waiting on a decision</h3>
 <ul>
+<li>🔴 <strong>The breadth history repeats a row.</strong> 9 and 10 November both read 62.60% against
+a 54.22% mean. That series feeds the prior-five mean the gate is measured against, so a duplicated row
+moves the number that decides whether anything may be bought. <b>Worth verifying the gate input before
+the next session that comes close to opening it.</b></li>
 <li>🔴 <strong>The stop buffer.</strong> GLAND says a 2% buffer would have saved today&rsquo;s
 &minus;&#8377;12,913; LAURUSLABS says it would have been hit anyway at a worse price. <strong>One for, one
 against.</strong> The measurement &mdash; <code>structural &times; 0.98</code> against
