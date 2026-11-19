@@ -80,7 +80,7 @@ def card(ipo: IPO) -> str:
         f'<span class="badge {ipo.tone}">{e(ipo.call)}</span></header>'
         f'<p class="meta">{e(ipo.dates)} · band {e(ipo.band)} · {e(ipo.size)} · {e(ipo.split)}</p>'
         f"{flags}{bar}{stats}"
-        f'<p class="cardnote">{e(ipo.note)}</p></article>'
+        f'<p class="cardnote">{ipo.note}</p></article>'
     )
 
 
@@ -6648,6 +6648,9 @@ def _for_nov_20() -> list[IPO]:
     crystal = replace(
         crystal_19,
         call="AVOID on the case — but the book, not the premium, is what closed day two",
+        gmp="~₹17–18 (19 Nov close) · ₹19 on the 18th · ₹45 peak 13 Nov",
+        gmp_pct=6.4,
+        expected="~+3.8%",
         dates="anchor 17 Nov · open 18 Nov · CLOSES TODAY 20 Nov · allotment 23 Nov · listing 26 Nov",
         flags=(("subscribed 3.07x at the close of day two — retail 3.29x, NII 3.57x, QIB 2.23x", "pass"),
                ("GMP ~₹17–18 (19 Nov) vs ₹19 on the 18th and a ₹45 peak on 13 Nov", "warn"),
@@ -6672,6 +6675,9 @@ def _for_nov_20() -> list[IPO]:
     mahanadi = replace(
         mahanadi_19,
         call="SKIP as a trade — day one was the weakest open on this board in a month",
+        gmp="~₹2–3 (19 Nov) · ₹9.25 tracker peak 14 Nov · ₹25 on this board 13 Nov",
+        gmp_pct=1.8,
+        expected="~−0.8%",
         dates="anchor 18 Nov · open 19 Nov · close 23 Nov · allotment 25 Nov · listing 27 Nov",
         flags=(("day one: ~0.37x overall — QIB 1.26x, retail 0.13x", "fail"),
                ("GMP ~₹2–3 (19 Nov), down from a ₹9.25 peak on 14 Nov", "fail"),
@@ -6681,7 +6687,7 @@ def _for_nov_20() -> list[IPO]:
         note=(
             "<strong>Day one answered the question.</strong> The issue took about <b>0.37x</b> "
             "across the day — institutions 1.26x, <b>retail 0.13x</b> — on a ₹8,981 Cr book with "
-            "four days to run. The premium sits at ₹2–3 against ₹136, under 2.5%, which is below "
+            "two sessions left to run. The premium sits at ₹2–3 against ₹136, under 2%, which is below "
             "our 2.6-point haircut and therefore <b>not a listing gain at all</b>. Note the "
             "premium history is contested: our board has carried ₹25 on 13 November, and the GMP "
             "trackers put the peak at ₹9.25 on the 14th. <strong>Either way the direction is the "
@@ -6720,7 +6726,7 @@ FOOTNOTE_NOV_20 = (
     "trackers disagreed badly on Thursday &mdash; Crystal read 1.94x at 11:22, 1.27x at 13:32 and "
     "3.07x at 17:04 &mdash; so only the closing figure is quoted. "
     "<strong>Haircut applied, and said:</strong> expected-listing figures are the quoted GMP% less "
-    "the 2.6-point overstatement our backtest measured. On Mahanadi that takes ~2.2% below zero, "
+    "the 2.6-point overstatement our backtest measured. On Mahanadi that takes ~0.8% below zero, "
     "which is not a trade; on Crystal it takes ~6.4% to under 4%. "
     "<strong>Every quote carries the date it was read</strong>, because a premium without its date "
     "is not a number. <strong>Static facts &mdash; bands, dates, splits, P/E, litigation &mdash; are "
