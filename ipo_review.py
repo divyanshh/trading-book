@@ -6640,6 +6640,97 @@ ADDENDA = {
 }
 
 
+def _for_nov_20() -> list[IPO]:
+    """Crystal's final day; Mahanadi day two of three. Derived from 19 Nov so the
+    static facts stay in one place. What moved: both now have real subscription
+    numbers instead of grey-market rumour, and they say opposite things."""
+    mahanadi_19, crystal_19 = _for_nov_19()
+    crystal = replace(
+        crystal_19,
+        call="AVOID on the case — but the book, not the premium, is what closed day two",
+        dates="anchor 17 Nov · open 18 Nov · CLOSES TODAY 20 Nov · allotment 23 Nov · listing 26 Nov",
+        flags=(("subscribed 3.07x at the close of day two — retail 3.29x, NII 3.57x, QIB 2.23x", "pass"),
+               ("GMP ~₹17–18 (19 Nov) vs ₹19 on the 18th and a ₹45 peak on 13 Nov", "warn"),
+               ("priced above the listed-peer median on full-year earnings while marketed at 8x", "fail"),
+               ("litigation ₹341.95 Cr against net worth", "fail")),
+        note=(
+            "<strong>Final day, and the demand is real.</strong> The issue closed day two at "
+            "<b>3.07x</b> — retail 3.29x, NII 3.57x, QIB 2.23x — which is a genuinely subscribed "
+            "book rather than a deal being walked over the line. Sources disagree on the intraday "
+            "path (1.27x at 13:32, 1.94x at 11:22, 3.07x at 17:04), so the only figure worth "
+            "quoting is the end-of-day one. <strong>The premium did not follow it up.</strong> "
+            "₹17–18 against ₹19 on the 18th: a subscribed book that the grey market will not "
+            "re-rate. On a ₹272 band that is about 6.4%, and under 4% once our measured "
+            "2.6-point overstatement comes off. <strong>The call does not move, because the "
+            "subscription was never the objection.</strong> The objection is the company — priced "
+            "above the listed-peer median on real full-year earnings while marketed at 8x, "
+            "₹341.95 Cr of litigation against net worth, and ₹270 Cr of the fresh money repaying "
+            "borrowings that grew ₹820 Cr to ₹952 Cr in a quarter. <b>A well-sold book on a "
+            "fully-priced company is still a fully-priced company.</b>"
+        ),
+    )
+    mahanadi = replace(
+        mahanadi_19,
+        call="SKIP as a trade — day one was the weakest open on this board in a month",
+        dates="anchor 18 Nov · open 19 Nov · close 23 Nov · allotment 25 Nov · listing 27 Nov",
+        flags=(("day one: ~0.37x overall — QIB 1.26x, retail 0.13x", "fail"),
+               ("GMP ~₹2–3 (19 Nov), down from a ₹9.25 peak on 14 Nov", "fail"),
+               ("100% OFS — a government seller that wants the book to clear", "warn"),
+               ("PAT down three years running", "fail"),
+               ("debt-free: borrowings ₹2.76 Cr; EBITDA margin 43.6%", "pass")),
+        note=(
+            "<strong>Day one answered the question.</strong> The issue took about <b>0.37x</b> "
+            "across the day — institutions 1.26x, <b>retail 0.13x</b> — on a ₹8,981 Cr book with "
+            "four days to run. The premium sits at ₹2–3 against ₹136, under 2.5%, which is below "
+            "our 2.6-point haircut and therefore <b>not a listing gain at all</b>. Note the "
+            "premium history is contested: our board has carried ₹25 on 13 November, and the GMP "
+            "trackers put the peak at ₹9.25 on the 14th. <strong>Either way the direction is the "
+            "same and the level is now immaterial.</strong> India's largest coal producer by "
+            "volume, debt-free, 43.6% EBITDA margin, PAT drifting ₹11,842 Cr → ₹10,825 Cr → "
+            "₹10,698 Cr with H1 FY27 annualising ~9% lower. <strong>A cash machine with shrinking "
+            "earnings, sold entirely by a government seller into retail indifference.</strong> "
+            "If he wants it he wants the dividend, and the Coal India shareholder quota of up to "
+            "10% is the only real edge — a portfolio decision, not an IPO one."
+        ),
+    )
+    return [mahanadi, crystal]
+
+
+IPOS_2026_11_20 = _for_nov_20()
+
+LEAD_NOV_20 = (
+    "Friday 20 November, written after the 19 November close. "
+    "<strong>Crystal Crop Protection closes today</strong> and <strong>Mahanadi Coalfields is in "
+    "day two of three</strong>. Nothing is in allotment or listing. "
+    "<strong>The two books have now said opposite things.</strong> Crystal closed day two at "
+    "<b>3.07x</b> &mdash; retail 3.29x, NII 3.57x, QIB 2.23x &mdash; a properly subscribed issue; "
+    "Mahanadi took about <b>0.37x</b> on its first day with retail at <b>0.13x</b>. "
+    "<strong>Neither premium followed its book.</strong> Crystal slipped to &#8377;17&ndash;18 from "
+    "&#8377;19 despite being three times covered, and Mahanadi sits at &#8377;2&ndash;3 on a "
+    "&#8377;136 band &mdash; below the 2.6-point haircut our own backtest says to apply, so it is "
+    "not a listing gain in any form. <strong>Both calls are unchanged: AVOID Crystal on the "
+    "company, SKIP Mahanadi as a trade.</strong> Applied by this service: nothing. "
+    "<strong>One tooling note, repeated for the fifth night:</strong> <code>show_ipos</code> still "
+    "cannot read its source, so this board was rebuilt by hand from the web, and the machine-built "
+    "IPO section higher up the report still falsely claims no mainboard issue is open."
+)
+
+FOOTNOTE_NOV_20 = (
+    "<strong>Subscription figures are end-of-day, and said:</strong> intraday prints from different "
+    "trackers disagreed badly on Thursday &mdash; Crystal read 1.94x at 11:22, 1.27x at 13:32 and "
+    "3.07x at 17:04 &mdash; so only the closing figure is quoted. "
+    "<strong>Haircut applied, and said:</strong> expected-listing figures are the quoted GMP% less "
+    "the 2.6-point overstatement our backtest measured. On Mahanadi that takes ~2.2% below zero, "
+    "which is not a trade; on Crystal it takes ~6.4% to under 4%. "
+    "<strong>Every quote carries the date it was read</strong>, because a premium without its date "
+    "is not a number. <strong>Static facts &mdash; bands, dates, splits, P/E, litigation &mdash; are "
+    "carried from the 19 November cards rather than re-entered</strong>, so a correction to one "
+    "corrects both. <strong>One premium history is contested and left contested:</strong> this board "
+    "has carried a &#8377;25 Mahanadi GMP on 13 November; the public trackers put the peak at "
+    "&#8377;9.25 on the 14th. Both are reported rather than one quietly dropped."
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -6694,6 +6785,7 @@ BY_DAY = {
     # 09:30 open-slot pass supersedes the 20:30 page; IPOS_2026_11_18 / LEAD_NOV_18 stay above.
     "2026-11-18": (IPOS_2026_11_18_0930, LEAD_NOV_18_0930, FOOTNOTE_NOV_18_0930),
     "2026-11-19": (IPOS_2026_11_19, LEAD_NOV_19, FOOTNOTE_NOV_19),
+    "2026-11-20": (IPOS_2026_11_20, LEAD_NOV_20, FOOTNOTE_NOV_20),
 }
 
 
