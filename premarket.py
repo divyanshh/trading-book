@@ -1306,7 +1306,8 @@ higher. Breadth fell from 60.25% to <strong>53.59%</strong> while its prior-five
 68.29% to <strong>65.13%</strong>. <strong>The gap widened from 8.04 points to 11.54</strong>, which
 is wider than it was on Wednesday, before Thursday&rsquo;s repair. Entries stay blocked, on breadth,
 for a <strong>sixth consecutive session</strong>, and <strong>none of the thirty-seven actionable
-names may be placed.</strong></p>
+SWING names may be placed.</strong> (The glance bar above counts 74 across all six scanners; 37 is
+the SWING list alone.)</p>
 <p class="sub"><strong>Nothing here is an instruction and nothing here was placed.</strong> Closes are
 Friday 20 November&rsquo;s. All six scanners were re-run by hand against them in the small hours of
 Saturday &mdash; SWING 01:38, WEEKLY 01:49, ETF 02:14, ETF_WEEKLY 02:15, STRIKE 02:16, REVERSAL 02:27
@@ -1391,8 +1392,10 @@ not something to be done quietly overnight.</p>
 <p class="note"><strong>Two names are inside two percent of their stops and both are losers.</strong>
 BMWVENTLTD and MCX carry about 1.5R of open loss between them and would be gone on a bad Monday in the
 small caps &mdash; which is the half of the market that has now been flat or falling for three straight
-weeks. <strong>Against that, four positions can no longer lose:</strong> CUPID and SGMART in all three
-accounts have their stops at the entry price, and SGMART alone is carrying <b>+4R</b>. The book is not
+weeks. <strong>Against that, two names can no longer lose:</strong> CUPID in all three accounts and
+SGMART in the two that hold it have their stops at the entry price &mdash; five legs in all, with
+SGMART alone carrying <b>+4R</b>. SBC is not one of them: its stop has been raised but still sits
+below entry, locking &minus;0.50R rather than nothing. The book is not
 in trouble; it is simply not being added to, and has not been for six sessions.</p>
 """
 

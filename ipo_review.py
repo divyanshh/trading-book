@@ -6839,73 +6839,73 @@ def _for_nov_23() -> list[IPO]:
     mahanadi_20, crystal_20, foodlink_20 = _for_nov_20_0930()
     crystal = replace(
         crystal_20,
-        call="AVOID on the company &mdash; and the final book is 17.68x, not the 3.07x this page carried on Friday",
+        call="AVOID on the company — and the final book is 17.68x, not the 3.07x this page carried on Friday",
         tone="warn",
-        dates="opened 18 Nov &middot; CLOSED 20 Nov &middot; <b>allotment TODAY 23 Nov</b> &middot; listing 26 Nov",
-        gmp="&#8377;14.5 &mdash; 5.33% on &#8377;272 (investorgain, 20-Nov 23:37) &middot; &#8377;17 that morning &middot; &#8377;18 on the 18th &middot; &#8377;45 peak 13 Nov",
+        dates="opened 18 Nov · CLOSED 20 Nov · allotment TODAY 23 Nov · listing 26 Nov",
+        gmp="₹14.5 — 5.33% on ₹272 (investorgain, 20-Nov 23:37) · ₹17 that morning · ₹18 on the 18th · ₹45 peak 13 Nov",
         gmp_pct=5.33,
         expected="~+2.7%",
-        apply_as="closed &mdash; nothing was applied for by this service",
+        apply_as="closed — nothing was applied for by this service",
         horizon="allotment today, listing Thursday 26 Nov",
-        book="FINAL 17.68x &mdash; QIB 15.81x, NII 39.16x (BHNI 45.19x, SHNI 27.11x), retail 9.71x",
-        flags=(("final book <b>17.68x</b> &mdash; BHNI 45.19x, NII 39.16x, retail 9.71x", "pass"),
-               ("premium fell to &#8377;14.5 while the book went from 3.07x to 17.68x", "warn"),
-               ("retail 9.71x &rarr; roughly a 1-in-10 chance of a single lot", "warn"),
+        book="FINAL 17.68x — QIB 15.81x, NII 39.16x (BHNI 45.19x, SHNI 27.11x), retail 9.71x",
+        flags=(("final book 17.68x — BHNI 45.19x, NII 39.16x, retail 9.71x", "pass"),
+               ("premium fell to ₹14.5 while the book went from 3.07x to 17.68x", "warn"),
+               ("retail 9.71x → roughly a 1-in-10 chance of a single lot", "warn"),
                ("priced above the listed-peer median on full-year earnings while marketed at 8x", "fail"),
-               ("litigation &#8377;341.95 Cr against net worth", "fail")),
+               ("litigation ₹341.95 Cr against net worth", "fail")),
         note=(
             "<strong>The last day did almost all of it.</strong> This page carried <b>3.07x</b> on "
             "Friday morning, because that was the close of day two. The final book, stamped "
-            "20-Nov 17:55, is <b>17.68x</b> &mdash; QIB 15.81x, NII 39.16x with big non-institutional "
+            "20-Nov 17:55, is <b>17.68x</b> — QIB 15.81x, NII 39.16x with big non-institutional "
             "money at <b>45.19x</b>, retail 9.71x. <strong>That is a different issue from the one "
             "described here twenty-four hours ago</strong>, and it is worth saying plainly rather "
             "than quietly updating a number: a book that goes from three times to nearly eighteen "
             "on its closing day was carried by institutional and HNI money arriving at the bell, "
-            "which is the normal shape and not a scandal &mdash; but it does mean <b>no reading taken "
+            "which is the normal shape and not a scandal — but it does mean <b>no reading taken "
             "before the close was worth acting on.</b> "
-            "<strong>The premium went the other way.</strong> &#8377;14.5 at investorgain&rsquo;s "
-            "20-Nov 23:37 print, against &#8377;17 that morning, &#8377;18 on the 18th and &#8377;45 "
-            "on the 13th &mdash; <b>falling on the day the book quadrupled</b>. On the &#8377;272 band "
+            "<strong>The premium went the other way.</strong> ₹14.5 at investorgain’s "
+            "20-Nov 23:37 print, against ₹17 that morning, ₹18 on the 18th and ₹45 "
+            "on the 13th — <b>falling on the day the book quadrupled</b>. On the ₹272 band "
             "that is 5.33%, and ~+2.7% once our measured 2.6-point overstatement comes off: about "
-            "&#8377;400 on a one-lot win, inside the error of the haircut itself. "
+            "₹400 on a one-lot win, inside the error of the haircut itself. "
             "<strong>The call does not move, because the subscription was never the objection</strong> "
-            "&mdash; the company is: priced above the listed-peer median on real full-year earnings "
-            "while marketed at 8x, &#8377;341.95 Cr of litigation against net worth, and &#8377;270 Cr "
-            "of fresh money repaying borrowings that grew &#8377;820 Cr to &#8377;952 Cr in a quarter. "
+            "— the company is: priced above the listed-peer median on real full-year earnings "
+            "while marketed at 8x, ₹341.95 Cr of litigation against net worth, and ₹270 Cr "
+            "of fresh money repaying borrowings that grew ₹820 Cr to ₹952 Cr in a quarter. "
             "<b>Allotment is today and nothing was applied for, so this is a record, not a decision.</b>"
         ),
     )
     mahanadi = replace(
         mahanadi_20,
-        call="SKIP as a trade &mdash; final day, and the premium is now 0.55%",
-        dates="opened 19 Nov &middot; <b>CLOSES TODAY 23 Nov</b> &middot; allotment 25 Nov &middot; listing 27 Nov",
-        gmp="&#8377;0.75 &mdash; 0.55% on &#8377;136 (investorgain, 20-Nov 23:37) &middot; &#8377;1.8 that morning &middot; range 0.75 low / 9.25 high &middot; &#8377;25 on this board 13 Nov",
+        call="SKIP as a trade — final day, and the premium is now 0.55%",
+        dates="opened 19 Nov · CLOSES TODAY 23 Nov · allotment 25 Nov · listing 27 Nov",
+        gmp="₹0.75 — 0.55% on ₹136 (investorgain, 20-Nov 23:37) · ₹1.8 that morning · range 0.75 low / 9.25 high · ₹25 on this board 13 Nov",
         gmp_pct=0.55,
-        expected="~&minus;2.1%",
-        apply_as="retail one lot &#8377;14,960 &mdash; or the Coal India shareholder quota, if he holds CIL",
+        expected="~−2.1%",
+        apply_as="retail one lot ₹14,960 — or the Coal India shareholder quota, if he holds CIL",
         horizon="closes today, allotment 25 Nov, listing 27 Nov",
-        book="0.49x at 20-Nov 17:07 &mdash; QIB 1.37x, NII 0.18x, retail 0.25x, with one day left",
-        flags=(("<b>0.49x overall</b> after two days &mdash; retail 0.25x, NII 0.18x", "fail"),
+        book="0.49x at 20-Nov 17:07 — QIB 1.37x, NII 0.18x, retail 0.25x, with one day left",
+        flags=(("0.49x overall after two days — retail 0.25x, NII 0.18x", "fail"),
                ("QIB 1.37x is the only leg covered, and it is the leg that always turns up", "warn"),
-               ("GMP &#8377;0.75 &mdash; the low of its own range, and <b>below the haircut</b>", "fail"),
-               ("100% OFS &mdash; a government seller that wants the book to clear", "warn"),
+               ("GMP ₹0.75 — the low of its own range, and below the haircut", "fail"),
+               ("100% OFS — a government seller that wants the book to clear", "warn"),
                ("PAT down three years running", "fail"),
-               ("debt-free: borrowings &#8377;2.76 Cr; EBITDA margin 43.6%", "pass")),
+               ("debt-free: borrowings ₹2.76 Cr; EBITDA margin 43.6%", "pass")),
         note=(
             "<strong>Two days gone, one to go, and the book is still under half covered.</strong> "
-            "<b>0.49x</b> at the 20-Nov 17:07 print &mdash; up from 0.38x, so it moved, but retail is "
+            "<b>0.49x</b> at the 20-Nov 17:07 print — up from 0.38x, so it moved, but retail is "
             "<b>0.25x</b> and the non-institutional book <b>0.18x</b>. <b>QIB 1.37x is the only "
-            "subscribed leg</b>, and on a &#8377;8,981 Cr government OFS institutional cover on the "
+            "subscribed leg</b>, and on a ₹8,981 Cr government OFS institutional cover on the "
             "last two days is how the deal gets done, not a vote of confidence. "
-            "<strong>The premium has now fallen to the bottom of its own range.</strong> &#8377;0.75 "
-            "on a &#8377;136 band is <b>0.55%</b> &mdash; a sixth of our 2.6-point haircut &mdash; so "
-            "expected listing is <b>about 2% below the issue price</b>. It was &#8377;1.8 on Friday "
-            "morning and &#8377;25 on this board on the 13th. There is no reading of that series that "
+            "<strong>The premium has now fallen to the bottom of its own range.</strong> ₹0.75 "
+            "on a ₹136 band is <b>0.55%</b> — a fifth of our 2.6-point haircut — so "
+            "expected listing is <b>about 2% below the issue price</b>. It was ₹1.8 on Friday "
+            "morning and ₹25 on this board on the 13th. There is no reading of that series that "
             "makes this a listing trade. "
-            "<strong>What it still is:</strong> India&rsquo;s largest coal producer by volume, "
-            "debt-free, 43.6% EBITDA margin, and PAT drifting &#8377;11,842 Cr &rarr; &#8377;10,825 Cr "
-            "&rarr; &#8377;10,698 Cr with H1 FY27 annualising ~9% lower. <b>A cash machine with "
-            "shrinking earnings.</b> If he wants it he wants the dividend and he holds it for years &mdash; "
+            "<strong>What it still is:</strong> India’s largest coal producer by volume, "
+            "debt-free, 43.6% EBITDA margin, and PAT drifting ₹11,842 Cr → ₹10,825 Cr "
+            "→ ₹10,698 Cr with H1 FY27 annualising ~9% lower. <b>A cash machine with "
+            "shrinking earnings.</b> If he wants it he wants the dividend and he holds it for years — "
             "and the Coal India shareholder quota of up to 10% is the only real edge in applying. "
             "<strong>That is a portfolio decision and it has to be made today, because the book shuts "
             "this evening.</strong>"
@@ -6913,35 +6913,43 @@ def _for_nov_23() -> list[IPO]:
     )
     foodlink = replace(
         foodlink_20,
-        dates="open 26 Nov &middot; close 30 Nov &middot; allotment 1 Dec &middot; listing 3 Dec (tentative)",
-        gmp="&#8377;12 (investorgain, 20-Nov 23:37) against no price band &mdash; unchanged in three prints",
+        dates="open 26 Nov · close 30 Nov · allotment 1 Dec · listing 3 Dec (tentative)",
+        gmp="₹12 (investorgain, 20-Nov 23:37) against no price band — unchanged in three prints",
         note=(
-            foodlink_20.note
-            + " <strong>23 November:</strong> nothing has been filed over the weekend. The band is "
-            "still unannounced with the issue opening on Thursday, and the &#8377;12 quote has not "
-            "moved across three prints &mdash; which is what a stale grey-market number looks like, "
-            "not a stable one. <b>Re-read when the band and the anchor book are filed</b>, which on "
-            "a 26 Nov open means Tuesday or Wednesday."
+            "<strong>Still not a decision, and the clock is now short.</strong> A Mumbai "
+            "luxury-catering and casual-dining operator (China Bistro, India Bistro, Art of Dum) "
+            "with a UAE arm, raising ₹192 Cr fresh plus an 88.35 lakh-share OFS and opening "
+            "<b>this Thursday</b>. <strong>The price band is still not set</strong>, three days "
+            "out, so the ₹12 grey-market quote remains a number with no denominator — it "
+            "cannot be expressed as a percentage and the haircut cannot be applied to it. It has "
+            "also not moved across three prints, which is what a stale quote looks like rather "
+            "than a stable one. <strong>The case has not changed either.</strong> FY26 was a good "
+            "year (PAT ₹14.26 Cr → ₹29.11 Cr, RoNW 17.35%, D/E 0.43), but <b>the six "
+            "months to September lost ₹16.15 Cr</b> on ₹222.18 Cr of income, with EBITDA "
+            "margin down from 13.82% to 7.35%. Wedding catering is seasonal and H1 may simply be "
+            "the off-season — that is the question the RHP has to answer before anything else, "
+            "and SEBI approval has been in hand since November 2025. <b>Re-read when the band and "
+            "the anchor book are filed</b>, which on a 26 Nov open means Tuesday or Wednesday."
         ),
     )
     integris = IPO(
         name="Integris Medtech",
-        call="NO CALL &mdash; nothing is filed yet beyond the dates",
+        call="NO CALL — nothing is filed yet beyond the dates",
         tone="warn",
-        dates="open 27 Nov &middot; close 1 Dec &middot; allotment 2 Dec &middot; listing 4 Dec (tentative)",
+        dates="open 27 Nov · close 1 Dec · allotment 2 Dec · listing 4 Dec (tentative)",
         band="not announced",
         size="not announced",
         split="not disclosed",
         gmp="none quoted (board stamp 20-Nov 14:10)",
         gmp_pct=0.0,
-        expected="n/a &mdash; no band",
+        expected="n/a — no band",
         apply_as="none yet",
-        horizon="not yet a decision &mdash; re-read when the RHP lands",
+        horizon="not yet a decision — re-read when the RHP lands",
         book="not open",
         stats=(("price band", "not announced"),
                ("issue size", "not announced"),
                ("grey market", "nothing quoted")),
-        flags=(("new to the board this weekend &mdash; mainboard, 27 Nov to 1 Dec", "warn"),
+        flags=(("new to the board this weekend — mainboard, 27 Nov to 1 Dec", "warn"),
                ("no band, no size, no GMP: there is nothing here to judge", "warn")),
         note=(
             "<strong>New on the board, and listed here only so it is not missed.</strong> A mainboard "
@@ -6950,7 +6958,7 @@ def _for_nov_23() -> list[IPO]:
             "opinion about yet</b>, and an opinion offered on a name and a date would be worth "
             "exactly as much as the data behind it. It appears on this page so that the next review "
             "starts from a board that already knows about it, and it will be judged when the RHP "
-            "and the band are out &mdash; which has to be this week for a 27 November open."
+            "and the band are out — which has to be this week for a 27 November open."
         ),
     )
     return [mahanadi, crystal, foodlink, integris]
