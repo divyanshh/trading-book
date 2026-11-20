@@ -6737,6 +6737,100 @@ FOOTNOTE_NOV_20 = (
 )
 
 
+def _for_nov_20_0930() -> list[IPO]:
+    """The 09:30 open-slot pass over the evening page. Two things moved: the
+    overnight premiums (investorgain 20-Nov 06:37) and the board itself, which
+    gained Foodlink F&B as an upcoming mainboard issue (26-30 Nov). Static facts
+    for Mahanadi and Crystal stay on the evening cards this derives from."""
+    mahanadi_20, crystal_20 = _for_nov_20()
+    crystal = replace(
+        crystal_20,
+        gmp="₹17 (investorgain 20-Nov 06:37) · ₹18 on the 18th close · ₹45 peak 13 Nov",
+        gmp_pct=6.25,
+        expected="~+3.7%",
+        note=(
+            crystal_20.note
+            + " <strong>09:30 update:</strong> investorgain’s 20-Nov 06:37 print has the premium at "
+            "₹17 (6.25% on ₹272), so after the 2.6-point haircut ~+3.7% — about ₹550 on a one-lot "
+            "win, and the haircut’s own spread is wider than that. The same page carries <b>3.08x</b> "
+            "overall: that is the end-of-day-two figure, <b>not final</b>. Today is the last day and "
+            "the closing book is the midday pass’s number, not this one."
+        ),
+    )
+    mahanadi = replace(
+        mahanadi_20,
+        gmp="₹1.8 (investorgain 20-Nov 06:37; range 1.80 low / 9.25 high) · ₹25 on this board 13 Nov",
+        gmp_pct=1.32,
+        expected="~−1.3%",
+        note=(
+            mahanadi_20.note
+            + " <strong>09:30 update:</strong> ₹1.8 at investorgain’s 20-Nov 06:37 print — 1.32% on "
+            "₹136, the low of its own range — so ~−1.3% after the haircut. Overall <b>0.38x</b> on "
+            "that page, which is the <b>end-of-day-one</b> figure: day two opens at 10:00 and the "
+            "number will move. Not final."
+        ),
+    )
+    foodlink = IPO(
+        name="Foodlink F&B Holdings (India)",
+        call="NO CALL until the band is set — leaning AVOID on H1 FY27",
+        tone="warn",
+        dates="open 26 Nov · close 30 Nov · allotment 1 Dec · listing 3 Dec (tentative)",
+        band="not announced",
+        size="fresh ₹192 Cr + OFS 88.35 lakh shares",
+        split="fresh + OFS",
+        gmp="₹12 (investorgain 20-Nov 06:37) against no price band",
+        gmp_pct=0.0,
+        expected="n/a — no band",
+        apply_as="none yet — re-read when the band and anchor book are filed",
+        horizon="listing only, if at all",
+        book="no subscription yet",
+        stats=(("H1 FY27 (Sep-26) income / PAT", "₹222.18 Cr / −₹16.15 Cr"),
+               ("FY26 income / PAT", "₹572.26 Cr / ₹29.11 Cr"),
+               ("FY25 income / PAT", "₹455.40 Cr / ₹14.26 Cr"),
+               ("FY26 RoNW · D/E", "17.35% · 0.43"),
+               ("promoter pre-IPO", "63.40%")),
+        flags=(("H1 FY27 loss of ₹16.15 Cr on ₹222 Cr income", "fail"),
+               ("FY26 PAT doubled to ₹29.11 Cr on revenue +26%", "pass"),
+               ("no price band, so the ₹12 GMP is not a percentage", "warn"),
+               ("SEBI approval dates to Nov 2025 — a year on the shelf", "warn")),
+        note=(
+            "<strong>New on the board this morning, and not yet a decision.</strong> A Mumbai "
+            "luxury-catering and casual-dining operator (China Bistro, India Bistro, Art of Dum) "
+            "with a UAE arm. The issue is ₹192 Cr fresh plus an 88.35 lakh-share OFS, opening "
+            "26 Nov, and <b>the price band is not set</b>, so the ₹12 grey-market quote is a number "
+            "with no denominator — it is not reported as a percentage and no haircut can be applied "
+            "to it. FY26 was a good year (PAT ₹14.26 Cr → ₹29.11 Cr, RoNW 17.35%), but "
+            "<b>the six months to September lost ₹16.15 Cr</b> with EBITDA margin down from 13.82% "
+            "to 7.35%. Wedding catering is seasonal and H1 may simply be the off-season — that is "
+            "the question the RHP has to answer before anything else. Re-read when the band and "
+            "anchor book are filed."
+        ),
+    )
+    return [mahanadi, crystal, foodlink]
+
+
+IPOS_2026_11_20_0930 = _for_nov_20_0930()
+
+LEAD_NOV_20_0930 = (
+    LEAD_NOV_20
+    + " <strong>Re-written at 09:30 on 20 November</strong> with the overnight premiums from "
+    "investorgain&rsquo;s 20-Nov 06:37 print: Crystal &#8377;17 (6.25%, ~+3.7% after the haircut), "
+    "Mahanadi &#8377;1.8 (1.32%, ~&minus;1.3%). Neither call moves. "
+    "<strong>One issue added:</strong> Foodlink F&amp;B Holdings, mainboard, 26&ndash;30 Nov, no "
+    "price band yet &mdash; carried as NO CALL rather than given one on a premium with no price "
+    "under it."
+)
+
+FOOTNOTE_NOV_20_0930 = (
+    FOOTNOTE_NOV_20
+    + " <strong>09:30 figures are a single source</strong> (investorgain, 20-Nov 06:37). Its "
+    "subscription column &mdash; Crystal 3.08x, Mahanadi 0.38x &mdash; is the <b>previous "
+    "session&rsquo;s close, not a final book</b>: Crystal closes today and Mahanadi on the 23rd. "
+    "Haircut applied: Crystal 6.25% &rarr; ~+3.7%, Mahanadi 1.32% &rarr; ~&minus;1.3%. Foodlink has "
+    "no band, so no percentage and no haircut are quoted for it."
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -6791,7 +6885,8 @@ BY_DAY = {
     # 09:30 open-slot pass supersedes the 20:30 page; IPOS_2026_11_18 / LEAD_NOV_18 stay above.
     "2026-11-18": (IPOS_2026_11_18_0930, LEAD_NOV_18_0930, FOOTNOTE_NOV_18_0930),
     "2026-11-19": (IPOS_2026_11_19, LEAD_NOV_19, FOOTNOTE_NOV_19),
-    "2026-11-20": (IPOS_2026_11_20, LEAD_NOV_20, FOOTNOTE_NOV_20),
+    # 09:30 open-slot pass supersedes the evening page; IPOS_2026_11_20 / LEAD_NOV_20 stay above.
+    "2026-11-20": (IPOS_2026_11_20_0930, LEAD_NOV_20_0930, FOOTNOTE_NOV_20_0930),
 }
 
 
