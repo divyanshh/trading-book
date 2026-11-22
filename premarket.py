@@ -1397,6 +1397,31 @@ SGMART in the two that hold it have their stops at the entry price &mdash; five 
 SGMART alone carrying <b>+4R</b>. SBC is not one of them: its stop has been raised but still sits
 below entry, locking &minus;0.50R rather than nothing. The book is not
 in trouble; it is simply not being added to, and has not been for six sessions.</p>
+
+<h3>The weekend mail, read in full</h3>
+<p><strong>One MarketSmith email arrived over the weekend</strong> &mdash; the Weekly Report, at
+<b>09:31 on Saturday 21 November</b>. Nothing came on Sunday. It carries <strong>no new Big Picture
+status and no new distribution-day count</strong>, so the status this page is built on is still
+Friday&rsquo;s, unchanged.</p>
+<p>What it does is <strong>repeat Friday&rsquo;s reading in its own words</strong>. Its headline is
+<em>Nifty&rsquo;s Bank-Powered Climb Continues</em>: Bank Nifty through <b>64,000 for the first time</b>,
+pulling the Nifty to a ten-month high and a fourth straight weekly gain, <em>&ldquo;even as a global AI
+selloff tested nerves&rdquo;</em> &mdash; the same narrow tape this page describes above, from the same
+close. Its sector line is that <strong>IT and Metal have slipped to Under Pressure</strong>, which is
+<strong>exactly what the regime table below already carries</strong> for both: it confirms Friday, it
+does not move it. On IT our own status is a step worse than theirs and stays so.</p>
+<p>Its idea list names five &mdash; <b>Rubicon Research</b>, <b>Raghav Productivity Enhancers</b>,
+Engineers India, Apollo Micro Systems and <b>Acutaas Chemicals</b>. <strong>Three of those five are
+Friday&rsquo;s buy watchlist again</strong> (Raghav, Rubicon and Acutaas, at ranks 1, 2 and 3), and
+<strong>Rubicon is already one of our ten resting entries</strong>. Engineers India and Apollo Micro
+Systems are the only two names in the weekend mail that were not in front of us on Friday, and
+neither is in the book or on a trigger.</p>
+<p class="note">The rest of the mail is a table of contents pointing at the web report &mdash; a market
+outlook, a featured article on a subsidiary trading above its parent, and a learning piece on selling
+discipline. <strong>There is nothing in it that changes a stop, a trigger or the gate.</strong>
+It is on this page because it was read, and because a weekend that adds nothing is itself worth
+recording: the page you are reading was built on Friday&rsquo;s close and the weekend did not
+overtake it.</p>
 """
 
 
