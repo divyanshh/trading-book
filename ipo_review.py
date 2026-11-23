@@ -7009,6 +7009,122 @@ FOOTNOTE_NOV_23 = (
 )
 
 
+def _for_nov_23_0930() -> list[IPO]:
+    """The 09:30 open-slot pass over the overnight page. What moved: the
+    overnight premiums (investorgain 23-Nov 07:37), Mahanadi's book cross-checked
+    against Chittorgarh, and Monomark Engineering, which now has dates and a
+    premium and gets a card. Static facts stay on the cards this derives from."""
+    mahanadi_23, crystal_23, foodlink_23, integris_23 = _for_nov_23()
+    mahanadi = replace(
+        mahanadi_23,
+        gmp="₹0.7 — 0.51% on ₹136 (investorgain, 23-Nov 07:37; range 0.70 low / 9.25 high) · ₹0.75 on the 20th close · ₹25 on this board 13 Nov",
+        gmp_pct=0.51,
+        expected="~−2.1%",
+        book="0.49x at 20-Nov 17:06 (Chittorgarh and investorgain agree) — END OF DAY TWO, not final; day three is bidding now",
+        note=(
+            mahanadi_23.note
+            + " <strong>09:30 update:</strong> the premium slipped again, to ₹0.7 at investorgain’s "
+            "23-Nov 07:37 print — 0.51% on ₹136, the floor of its own range — so ~−2.1% after the "
+            "2.6-point haircut, unchanged in substance. The book figure is now <b>cross-checked</b>: "
+            "Chittorgarh’s subscription page also reads <b>0.49x as of 20-Nov 17:06</b>, retail 0.25x. "
+            "<b>That is the end-of-day-two number and it is not final</b> — today is the closing session "
+            "and the closing book is the midday pass’s number. Crystal went from 3.07x to 17.68x on its "
+            "last day, so do not read 0.49x as the answer either way. The call does not move: "
+            "<b>SKIP as a trade</b>; the only case for applying is a years-long dividend holding via the "
+            "Coal India shareholder quota, and that decision has to be his before the book shuts tonight."
+        ),
+    )
+    crystal = replace(
+        crystal_23,
+        gmp="₹14.5 — 5.33% on ₹272 (investorgain, 23-Nov 07:37, unchanged from the 20-Nov 23:37 print) · ₹45 peak 13 Nov",
+        note=(
+            crystal_23.note
+            + " <strong>09:30 update:</strong> the premium held at ₹14.5 on the 23-Nov 07:37 print, so "
+            "~+2.7% after the haircut. Allotment is today, listing Thursday 26 Nov. Nothing changes."
+        ),
+    )
+    foodlink = replace(
+        foodlink_23,
+        gmp="₹12 (investorgain, 23-Nov 07:37) against no confirmed band — unchanged in four prints",
+        note=(
+            foodlink_23.note
+            + " <strong>09:30 update:</strong> the band is <b>still not confirmed</b>. One aggregator "
+            "(ipomarket, reviewed 19 Nov) reports a <i>tentative</i> ₹180–191 band and gives dates of "
+            "25–27 Nov, against investorgain’s and Zerodha’s 26–30 Nov. Two sources disagree on the dates "
+            "and only one, unofficial, gives a band, so <b>no percentage is computed</b>: if ₹191 were "
+            "right, ₹12 would be about 6.3%, ~+3.7% after the haircut — written here only so the order "
+            "of magnitude is on record, not as a figure to act on. Still NO CALL."
+        ),
+    )
+    integris = replace(
+        integris_23,
+        gmp="none quoted (investorgain stamp 23-Nov 05:55)",
+        note=(
+            integris_23.note
+            + " <strong>09:30 update:</strong> still no band, size or premium at the 23-Nov 05:55 stamp."
+        ),
+    )
+    monomark = IPO(
+        name="Monomark Engineering (India)",
+        call="NO CALL — dates and a premium, but no price band",
+        tone="warn",
+        dates="open 2 Dec · close 4 Dec · allotment 7 Dec · listing 9 Dec (investorgain, tentative)",
+        band="not announced",
+        size="fresh issue of up to 2.70 crore shares (no OFS), ₹10 face value",
+        split="fresh only",
+        gmp="₹23 (investorgain, 23-Nov 07:37) against no price band",
+        gmp_pct=0.0,
+        expected="n/a — no band",
+        apply_as="none yet — re-read when the RHP and band are filed",
+        horizon="not yet a decision",
+        book="not open",
+        stats=(("issue", "fresh, up to 2.70 crore shares"),
+               ("lead manager · registrar", "Holani Consultants · Bigshare Services"),
+               ("price band", "not announced")),
+        flags=(("now dated 2–4 Dec on investorgain; first seen undated on the 20th", "warn"),
+               ("₹23 premium quoted with no band — no denominator", "warn"),
+               ("lead manager is a small-issue house; check the RHP before anything", "warn")),
+        note=(
+            "<strong>Promoted from a footnote to a card</strong> because it now has dates and a "
+            "grey-market quote. Investorgain’s 23-Nov 07:37 board shows a mainboard issue opening "
+            "<b>2 December</b>, closing 4 December, listing 9 December, with a <b>₹23 premium</b> — and "
+            "<b>no price band</b>, so ₹23 is not a percentage and no haircut can be applied. Brokers’ IPO "
+            "pages (Kotak Neo, Bajaj Broking, Angel One, Chittorgarh) still show the band and dates as "
+            "TBA and describe a fresh issue of up to 2.70 crore shares managed by Holani Consultants. "
+            "<b>There is nothing here to have a view on yet</b>; it is carried so the next review starts "
+            "from a board that already knows it is coming."
+        ),
+    )
+    return [mahanadi, crystal, foodlink, integris, monomark]
+
+
+IPOS_2026_11_23_0930 = _for_nov_23_0930()
+
+LEAD_NOV_23_0930 = (
+    LEAD_NOV_23
+    + " <strong>Re-written at 09:30 on 23 November</strong> with investorgain&rsquo;s 23-Nov 07:37 "
+    "print: Mahanadi &#8377;0.7 (0.51%, ~&minus;2.1% after the haircut), Crystal &#8377;14.5 "
+    "(5.33%, ~+2.7%, unchanged), Foodlink &#8377;12 against no confirmed band. <strong>No call "
+    "moves.</strong> Mahanadi&rsquo;s 0.49x is now confirmed by Chittorgarh as well, and it is "
+    "<b>the end-of-day-two figure &mdash; today&rsquo;s closing book is not in yet</b>. "
+    "<strong>One issue gets a card:</strong> Monomark Engineering, now dated 2&ndash;4 Dec with a "
+    "&#8377;23 premium and still no band &mdash; NO CALL."
+)
+
+FOOTNOTE_NOV_23_0930 = (
+    FOOTNOTE_NOV_23
+    + " <strong>09:30 figures:</strong> premiums are investorgain&rsquo;s <b>23-Nov 07:37</b> print. "
+    "Mahanadi&rsquo;s book, <b>0.49x at 20-Nov 17:06</b>, is now read on two boards (investorgain and "
+    "Chittorgarh) and is <b>mid-issue, not final</b> &mdash; the closing figure belongs to the 15:40 "
+    "pass. Haircut applied: Mahanadi 0.51% &rarr; ~&minus;2.1%, Crystal 5.33% &rarr; ~+2.7%. "
+    "Foodlink, Integris and Monomark have no confirmed band, so no percentage and no haircut are "
+    "quoted for any of them; a tentative Foodlink band of &#8377;180&ndash;191 from one aggregator is "
+    "noted on its card and not used. <strong>The machine-built IPO section above still says no "
+    "mainboard issue is open or upcoming. It is wrong:</strong> Mahanadi closes today and three are "
+    "dated."
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -7065,7 +7181,8 @@ BY_DAY = {
     "2026-11-19": (IPOS_2026_11_19, LEAD_NOV_19, FOOTNOTE_NOV_19),
     # 09:30 open-slot pass supersedes the evening page; IPOS_2026_11_20 / LEAD_NOV_20 stay above.
     "2026-11-20": (IPOS_2026_11_20_0930, LEAD_NOV_20_0930, FOOTNOTE_NOV_20_0930),
-    "2026-11-23": (IPOS_2026_11_23, LEAD_NOV_23, FOOTNOTE_NOV_23),
+    # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_23 / LEAD_NOV_23 stay above.
+    "2026-11-23": (IPOS_2026_11_23_0930, LEAD_NOV_23_0930, FOOTNOTE_NOV_23_0930),
 }
 
 
