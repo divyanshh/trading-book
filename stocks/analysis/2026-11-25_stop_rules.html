@@ -1,0 +1,499 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Eleven names stopped out since October for eleven losses, and the names recovered. Holding every entry fixed and varying only the exit, across four separate windows, the stop we run is the worst cell in the grid — and the one rule that was ever backtested has never been switched on."><title>What the stop cost</title><style>/* Trading Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  /* Chart series. Categorical slots, deliberately separate from the semantic
+     accents: a chart that paints its series with --blue and --amber inherits
+     whatever those two mean in the current theme, and the public book's own
+     theme maps --blue onto its gold -- which put two near-identical golds on a
+     two-series chart (dE 4.4, against a floor of 15). A series colour's only
+     job is to be told apart from the next one, so it gets its own token.
+     Validated on this canvas: dE 33.0 normal, 29.9 protan. */
+  --series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#b9c4d6;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* folded sections: reference material, open on demand */
+/* The heading's margin moves onto the <details> so the summary is a single
+   flex line: left on the h2 it pushes the row down and the count pill floats
+   above the title it belongs to. */
+details.folded{scroll-margin-top:64px;margin:34px 0 6px}
+details.folded>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded>summary::-webkit-details-marker{display:none}
+details.folded>summary h2{margin:0}
+details.folded>summary h2::after{content:"\25B8";display:inline-block;margin-left:10px;font-size:14px;
+  color:var(--muted);transition:transform .15s ease;transform-origin:center}
+details.folded[open]>summary h2::after{transform:rotate(90deg)}
+.folded-hint{color:var(--muted);font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+details.folded>summary:hover h2{color:var(--blue-ink)}
+details.folded>summary:hover h2::after{color:var(--blue)}
+details.folded>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+/* Printing and find-on-page must not depend on somebody having clicked. An
+   archived page that hides rows the reader cannot reach is a page that lost
+   them. */
+@media print{details.folded>summary h2::after{display:none}
+  details.folded:not([open])>*{display:block}}
+/* a folded table inside an open section: the caption is the control */
+details.folded-table{margin:16px 0 8px}
+details.folded-table>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded-table>summary::-webkit-details-marker{display:none}
+details.folded-table>summary .sub{margin:0}
+details.folded-table>summary .sub::after{content:"\25B8";display:inline-block;margin-left:8px;
+  font-size:12px;color:var(--muted);transition:transform .15s ease}
+details.folded-table[open]>summary .sub::after{transform:rotate(90deg)}
+details.folded-table>summary:hover .sub{color:var(--blue-ink)}
+details.folded-table>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+details.folded-table>.scroll,details.folded-table>.cards{margin-top:8px}
+@media print{details.folded-table>summary .sub::after{display:none}
+  details.folded-table:not([open])>*{display:block}}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+/* Breadth charts carry their own aspect ratio in the viewBox: the market one
+   spans the grid, the sector multiples fill one cell, and both are drawn from
+   a viewBox matching that width so their text renders at the same size. */
+.fig svg.breadth{display:block;width:100%;height:auto}
+.fig--wide{grid-column:1/-1}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--series-1:#2563eb;--series-2:#b45309;--series-neutral:#334155;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html.dark{color-scheme:dark;--canvas:#0f172a;--card:#111827;--head:#172033;--line:#293548;--line-strong:#475569;--ink:#f8fafc;--ink-2:#cbd5e1;--muted:#94a3b8;--faint:#64748b;--blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#172554;--blue-100:#1e3a8a;--green:#34d399;--green-50:#052e2b;--green-100:#064e3b;--green-line:#065f46;--red:#fb7185;--red-50:#450a0a;--red-100:#7f1d1d;--red-line:#991b1b;--amber:#fbbf24;--amber-50:#422006;--amber-100:#713f12;--amber-line:#92400e;--series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#cbd5e1;--canvas-fade:rgba(15,23,42,0);--shadow:none}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(520px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(37,99,235,.10),transparent 68%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%);transition:background .45s ease-out}
+body::before{display:none}.dark body{background-image:radial-gradient(560px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(96,165,250,.15),transparent 68%),radial-gradient(circle at 85% 22%,rgba(167,139,250,.07),transparent 22%)}.wrap{max-width:none;width:100%;padding:22px 32px 80px}.mb-nav{box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:9px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}.mb-theme{margin-left:auto;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:17px;cursor:pointer}.mb-theme:hover{background:var(--blue-50);color:var(--blue)}body>.mb-nav{min-height:64px;margin-bottom:28px;padding:13px 38px 14px}header.top{position:relative;overflow:hidden;margin:0 0 28px;padding:30px 32px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--blue-50) 88%,var(--card)),var(--card) 62%,color-mix(in srgb,var(--blue) 8%,var(--card)));box-shadow:var(--shadow)}header.top::after{content:"";position:absolute;width:310px;height:310px;right:-100px;top:-180px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 18%,transparent),transparent 68%);pointer-events:none}header.top>*{position:relative;z-index:1}.wrap>.eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--blue-50);border:1px solid var(--blue-100)}.wrap>.eyebrow+h1{margin-top:12px}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+/* Institutional presentation: information hierarchy over decoration. */
+html.dark{--canvas:#0d0d0c;--card:#171715;--head:#1d1c19;--line:#35332d;--line-strong:#514b3c;--ink:#f4f0e7;--ink-2:#d0c7b8;--muted:#9f9686;--faint:#70695e;--blue:#d7a84e;--blue-ink:#f1ca7a;--blue-50:#272114;--blue-100:#46371d;--green:#72c98c;--green-50:#142419;--green-100:#1c3825;--green-line:#31553a;--red:#ec7d70;--red-50:#321816;--red-100:#51231f;--red-line:#74342c;--amber:#e4b759;--amber-50:#302713;--amber-100:#4b3c1c;--amber-line:#70571f;--series-1:#d7a84e;--series-2:#8fb8e8;--series-neutral:#d0c7b8}.dark body{background-color:#0d0d0c;background-image:linear-gradient(rgba(216,168,78,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,168,78,.035) 1px,transparent 1px),radial-gradient(700px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(216,168,78,.12),transparent 66%)}.dark .mb-nav{border-bottom-color:#35332d}.dark .mb-nav b{border-radius:6px;background:#f4f0e7;color:#171715}.dark .mb-theme{border-color:#514b3c}.dark header.top{border-color:#514b3c;background:linear-gradient(135deg,#1b1a17,#151512 68%,#241e14)}.dark .glance>div,.dark .card,.dark figure,.dark .tbl-scroll,.dark .stat,.dark .act,.dark .mrow,.dark .scroll{border-color:#35332d;background:#171715}.dark nav.toc a{border-radius:5px;box-shadow:none}.dark h1,.dark h2,.dark h3{letter-spacing:-.035em}.dark .plate{border-radius:8px}.dark .plate,.dark .plate.open{box-shadow:none}.dark .wrap>.eyebrow{border-radius:4px}.dark td,.dark .prose p,.dark p{color:#d0c7b8}.dark .stamp,.dark .lede{color:#9f9686}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}body>.mb-nav{min-height:58px;padding:10px 16px 11px}h1{font-size:30px}}
+/* Bridges the standing analyses onto the renderer's theme.
+   Every colour is a reference into theme.css so these pages follow a palette
+   swap with the rest. The four literals that were here until 2026-09-26 - two
+   table backgrounds and the tinted gain/loss fills - are why the first dark
+   build had white table heads on the six-month review. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:var(--green-100);
+  --loss:var(--red);--loss-fill:var(--red-100);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:var(--head);border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+</style></head><body><nav class="mb-nav" aria-label="Trading Book"><a href="../../"><b aria-hidden="true">↗</b><span>Trading Book</span></a><button class="mb-theme" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button></nav><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',function(e){document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px')},{passive:true});var b=document.querySelector('.mb-theme');if(!b)return;function s(){var d=document.documentElement.classList.contains('dark');b.textContent=d?'☀':'◐';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')}s();b.addEventListener('click',function(){document.documentElement.classList.toggle('dark');try{localStorage.setItem('trading-book-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}s()})})();</script><main class="wrap"><header class="top"><div class="rule-top"></div>
+<h1>What the stop cost</h1>
+<p class="lede">Since the restart in October, eleven names were stopped out and every single one was a loss &mdash; &#8377;1.35 lakh across three accounts, with no winner to set against it. The names themselves were mostly fine: most of them trade higher now than where we sold. So the question is not whether we picked badly. It is whether we held badly. This re-runs every entry we actually took, on the real bars, changing nothing but where the stop sat.</p>
+<div class="meta"><span>25 November 2026</span><span>Apr &ndash; Nov 2026</span><span>127 entry decisions</span><span>4 windows</span><span>24 stop rules</span></div></header>
+
+<div class="stats">
+<div class="stat"><div class="k">Realised since October</div><div class="v loss">&minus;&#8377;1,35,508</div><div class="s">30 positions, 13 names, zero winners among the stop-outs</div></div>
+<div class="stat"><div class="k">Where our stop sits</div><div class="v">5.2%</div><div class="s">median distance below the fill; two thirds are inside 6%</div></div>
+<div class="stat"><div class="k">Stopped, then ran further up than the stop had risked</div><div class="v loss">56 of 127</div><div class="s">the leash, not the pick</div></div>
+<div class="stat"><div class="k">The rule we backtested</div><div class="v">never on</div><div class="s">the switch reads 0 and no live position has ever used it</div></div>
+</div>
+
+<section><div class="sec-head"><div class="eyebrow">the method</div><h2>One thing varies, and it is the exit</h2></div>
+<div class="prose">
+<p>Every row below starts at the price we really filled at, on the day we really filled, and walks the real daily bars forward. The names, the sizes and the timing are exactly what we did. The only thing that changes between columns is where the stop sat. So a difference between two columns is a difference between two stop rules and nothing else &mdash; it cannot be a difference in selection, because the selection is held fixed.</p>
+<p>That is also the limit of it. A rule that wins here wins on <em>our</em> names in <em>this</em> tape. It says nothing about whether the entries were worth taking; that question is answered further down, against the whole market rather than our book.</p>
+<p>All three accounts buy the same names on the same days, so each decision is counted <strong>once</strong>, at the size the largest account carried. Counting them separately would make twenty-five observations look like sixty-one without adding a single independent one.</p>
+</div></section>
+
+<section><div class="sec-head"><div class="eyebrow">the diagnostic</div><h2>How far each name went against us, and how far it went for us</h2></div>
+<div class="prose"><p>This is the table that decides it. <strong>MAE</strong> is the worst the position traded below our fill; <strong>MFE</strong> is the best it traded above. If a name dipped just past the stop and then rose further than the stop had risked, the stop was short &mdash; the name was right and we were shaken out of it.</p></div>
+<div class="tbl-scroll"><table>
+<thead><tr><th class="l">Symbol</th><th>Entry</th><th>Stop at</th><th>Worst (MAE)</th><th>Best (MFE)</th><th class="l">Verdict</th></tr></thead>
+<tbody>
+<tr><td class="l"><b>NIFTYBEES</b></td><td>258.46</td><td class="dim">-7.14%</td><td class="loss">-1.07%</td><td class="good">14.72%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>RELIANCE</b></td><td>1192.10</td><td class="dim">-7.73%</td><td class="loss">-3.32%</td><td class="good">16.60%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SBC</b></td><td>66.74</td><td class="dim">-3.27%</td><td class="loss">-0.70%</td><td class="good">6.82%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>ACMESOLAR</b></td><td>427.15</td><td class="dim">-6.17%</td><td class="loss">-8.35%</td><td class="loss">-0.64%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SHIVAUM</b></td><td>564.64</td><td class="dim">-5.79%</td><td class="loss">-7.02%</td><td class="good">1.83%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>LAURUSLABS</b></td><td>2381.18</td><td class="dim">-5.41%</td><td class="loss">-8.03%</td><td class="good">4.49%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SHUKRAPHAR</b></td><td>82.64</td><td class="dim">-4.10%</td><td class="loss">-0.70%</td><td class="good">2.61%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SONACOMS</b></td><td>918.90</td><td class="dim">-5.62%</td><td class="loss">-4.25%</td><td class="good">1.74%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>CUPID</b></td><td>345.93</td><td class="dim">-4.72%</td><td class="loss">1.71%</td><td class="good">13.61%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SONACOMS</b></td><td>922.69</td><td class="dim">-6.00%</td><td class="loss">-4.64%</td><td class="good">1.32%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>AARTIPHARM</b></td><td>983.76</td><td class="dim">-6.93%</td><td class="loss">-0.42%</td><td class="good">6.45%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>BMWVENTLTD</b></td><td>66.50</td><td class="dim">-4.51%</td><td class="loss">-7.34%</td><td class="good">0.78%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>LENSKART</b></td><td>734.79</td><td class="dim">-4.53%</td><td class="loss">-3.19%</td><td class="good">2.44%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>PAYTM</b></td><td>1841.60</td><td class="dim">-5.95%</td><td class="loss">-9.63%</td><td class="good">6.43%</td><td class="l loss">clipped, then ran</td></tr>
+<tr><td class="l"><b>PVRINOX</b></td><td>1629.00</td><td class="dim">-4.79%</td><td class="loss">-0.54%</td><td class="good">7.24%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>ROSSTECH</b></td><td>1483.00</td><td class="dim">-7.28%</td><td class="loss">-1.19%</td><td class="good">8.13%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SSWL</b></td><td>560.12</td><td class="dim">-4.65%</td><td class="loss">-15.81%</td><td class="good">5.12%</td><td class="l loss">clipped, then ran</td></tr>
+<tr><td class="l"><b>GCSL</b></td><td>822.27</td><td class="dim">-6.72%</td><td class="loss">-0.69%</td><td class="good">4.27%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>MCX</b></td><td>3720.82</td><td class="dim">-6.44%</td><td class="loss">-7.14%</td><td class="good">1.43%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SGMART</b></td><td>937.76</td><td class="dim">-4.23%</td><td class="loss">1.75%</td><td class="good">33.77%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>GCSL</b></td><td>833.90</td><td class="dim">-6.93%</td><td class="loss">-1.07%</td><td class="good">2.82%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>GLAND</b></td><td>3392.00</td><td class="dim">-4.68%</td><td class="loss">-5.40%</td><td class="good">0.11%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>KRISHANA</b></td><td>253.98</td><td class="dim">-6.34%</td><td class="loss">-6.49%</td><td class="loss">-0.87%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SHYAMMETL</b></td><td>1359.92</td><td class="dim">-4.93%</td><td class="loss">-7.02%</td><td class="loss">-1.91%</td><td class="l dim">&mdash;</td></tr>
+<tr><td class="l"><b>SHUKRAMED</b></td><td>82.64</td><td class="dim">-4.10%</td><td class="loss">2.35%</td><td class="good">9.51%</td><td class="l dim">&mdash;</td></tr>
+</tbody></table></div>
+<p class="note">Entries from 22 October to 21 November, measured over the forty sessions after the fill or to the last close, whichever came first. SHUKRAPHAR and SHUKRAMED are the same position either side of a ticker change, so the first of the two carries stale forward bars; read the second. NIFTYBEES and RELIANCE are parking and a legacy holding, not scanner entries.</p>
+</section>
+
+<section><div class="sec-head"><div class="eyebrow">the grid &mdash; October onward</div><h2>Same entries, same sizes, a different stop</h2></div>
+<div class="tbl-scroll"><table>
+<thead><tr><th class="l">where the stop sat</th><th>mean %</th><th>median %</th><th>win %</th><th>avg win</th><th>avg loss</th><th>rupees</th><th>still open</th></tr></thead>
+<tbody>
+<tr style="font-weight:600"><td class="l">structural intraday</td><td class="loss">-0.23</td><td class="loss">-2.76</td><td>44%</td><td class="good">+5.93</td><td class="loss">-5.06</td><td class="loss">-43,284</td><td class="dim">15</td></tr>
+<tr><td class="l">structural on close</td><td class="loss">-0.01</td><td class="loss">-0.94</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.68</td><td class="loss">-35,092</td><td class="dim">20</td></tr>
+<tr><td class="l">structural x0.95 intraday</td><td class="good">+0.44</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-3.87</td><td class="loss">-6,834</td><td class="dim">24</td></tr>
+<tr style="font-weight:600"><td class="l">shipped (close + 0.95 floor) <span class="dim">&middot; our live rule</span></td><td class="loss">-0.01</td><td class="loss">-0.94</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.68</td><td class="loss">-35,092</td><td class="dim">20</td></tr>
+<tr><td class="l">fixed 5% intraday</td><td class="loss">-0.01</td><td class="loss">-2.76</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.68</td><td class="loss">-32,592</td><td class="dim">15</td></tr>
+<tr><td class="l">fixed 5% on close</td><td class="good">+0.09</td><td class="loss">-0.94</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.50</td><td class="loss">-29,361</td><td class="dim">21</td></tr>
+<tr><td class="l">fixed 6% intraday</td><td class="loss">-0.27</td><td class="loss">-2.76</td><td>44%</td><td class="good">+5.93</td><td class="loss">-5.13</td><td class="loss">-40,744</td><td class="dim">16</td></tr>
+<tr><td class="l">fixed 6% on close</td><td class="good">+0.09</td><td class="loss">-0.94</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.50</td><td class="loss">-29,361</td><td class="dim">21</td></tr>
+<tr><td class="l">fixed 7% intraday</td><td class="loss">-0.53</td><td class="loss">-2.76</td><td>44%</td><td class="good">+5.93</td><td class="loss">-5.60</td><td class="loss">-50,537</td><td class="dim">17</td></tr>
+<tr><td class="l">fixed 7% on close</td><td class="good">+0.19</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.33</td><td class="loss">-24,320</td><td class="dim">24</td></tr>
+<tr><td class="l">fixed 8% intraday</td><td class="loss">-0.12</td><td class="loss">-0.94</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.86</td><td class="loss">-39,388</td><td class="dim">21</td></tr>
+<tr><td class="l">fixed 8% on close</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+<tr><td class="l">fixed 10% intraday</td><td class="good">+0.42</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-3.92</td><td class="loss">-7,838</td><td class="dim">24</td></tr>
+<tr><td class="l">fixed 10% on close</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+<tr><td class="l">fixed 12% intraday</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,260</td><td class="dim">24</td></tr>
+<tr><td class="l">fixed 12% on close</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+<tr><td class="l">ATR14 x2 on close</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+<tr><td class="l">ATR14 x2.5 on close</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+<tr><td class="l">ATR14 x3 on close</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+<tr><td class="l">time stop 10 sessions</td><td class="good">+0.09</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.50</td><td class="loss">-4.16</td><td class="loss">-8,903</td><td class="dim">25</td></tr>
+<tr><td class="l">time stop 20 sessions</td><td class="good">+0.35</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.97</td><td class="loss">-4.06</td><td class="loss">-11,254</td><td class="dim">25</td></tr>
+<tr style="font-weight:600"><td class="l">book_v3 (8% + MA20 trail) <span class="dim">&middot; backtested, never on</span></td><td class="good">+0.31</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.10</td><td class="loss">-12,287</td><td class="dim">24</td></tr>
+<tr><td class="l">MA20 trail, no hard stop</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+<tr><td class="l">no stop, held to horizon</td><td class="good">+0.34</td><td class="loss">-0.51</td><td>44%</td><td class="good">+5.93</td><td class="loss">-4.06</td><td class="loss">-11,257</td><td class="dim">25</td></tr>
+</tbody></table></div>
+<p class="note">Rupees are at the quantity actually bought in the largest account, so they understate the whole-book figure by roughly a quarter. &ldquo;Still open&rdquo; counts positions the rule had not exited by the last close &mdash; most of October&rsquo;s entries are too recent to have run the full forty sessions, so the looser rules are carrying live mark-to-market rather than a settled result.</p>
+<div class="prose">
+<p><strong>The win rate does not move.</strong> It is 44% in every single row, because a stop cannot turn a loser into a winner. What moves is the size of the average loss: &minus;5.06% under the tightest rule, &minus;3.87% under the loosest. Our stops were being hit on noise and the names were then recovering, so the tighter stop produced the <em>bigger</em> realised loss. That is the opposite of how a stop is supposed to behave, and it is the whole finding.</p>
+<p>Our live rule &mdash; judged on a close, with the broker&rsquo;s trigger resting beneath it &mdash; comes out at &minus;&#8377;35,092 against &minus;&#8377;11,257 for a plain 8% stop on a close. On twenty-five decisions in one account.</p>
+</div></section>
+
+<section><div class="sec-head"><div class="eyebrow">the grid &mdash; April to September</div><h2>And again, on the book that worked</h2></div>
+<div class="prose"><p>One month in one regime proves nothing. Here is the same grid over the prior book &mdash; 102 decisions, every one of them with the full forty sessions available.</p></div>
+<div class="tbl-scroll"><table>
+<thead><tr><th class="l">where the stop sat</th><th>mean %</th><th>median %</th><th>win %</th><th>avg win</th><th>avg loss</th><th>rupees</th><th>still open</th></tr></thead>
+<tbody>
+<tr style="font-weight:600"><td class="l">structural intraday</td><td class="good">+3.88</td><td class="loss">-3.52</td><td>30%</td><td class="good">+24.17</td><td class="loss">-4.98</td><td class="good">751,043</td><td class="dim">29</td></tr>
+<tr><td class="l">structural on close</td><td class="good">+4.76</td><td class="loss">-3.15</td><td>40%</td><td class="good">+20.99</td><td class="loss">-6.14</td><td class="good">956,931</td><td class="dim">40</td></tr>
+<tr><td class="l">structural x0.95 intraday</td><td class="good">+4.89</td><td class="loss">-1.40</td><td>47%</td><td class="good">+20.10</td><td class="loss">-8.63</td><td class="good">992,196</td><td class="dim">51</td></tr>
+<tr style="font-weight:600"><td class="l">shipped (close + 0.95 floor) <span class="dim">&middot; our live rule</span></td><td class="good">+4.44</td><td class="loss">-3.41</td><td>39%</td><td class="good">+21.15</td><td class="loss">-6.35</td><td class="good">895,254</td><td class="dim">39</td></tr>
+<tr><td class="l">fixed 5% intraday</td><td class="good">+5.05</td><td class="loss">-5.47</td><td>34%</td><td class="good">+25.28</td><td class="loss">-5.52</td><td class="good">968,944</td><td class="dim">37</td></tr>
+<tr><td class="l">fixed 5% on close</td><td class="good">+5.46</td><td class="loss">-5.45</td><td>40%</td><td class="good">+23.84</td><td class="loss">-6.89</td><td class="good">1,079,858</td><td class="dim">46</td></tr>
+<tr><td class="l">fixed 6% intraday</td><td class="good">+4.90</td><td class="loss">-6.47</td><td>36%</td><td class="good">+24.55</td><td class="loss">-6.28</td><td class="good">934,129</td><td class="dim">42</td></tr>
+<tr><td class="l">fixed 6% on close</td><td class="good">+5.87</td><td class="loss">-2.02</td><td>47%</td><td class="good">+21.37</td><td class="loss">-7.90</td><td class="good">1,208,503</td><td class="dim">53</td></tr>
+<tr><td class="l">fixed 7% intraday</td><td class="good">+5.17</td><td class="loss">-7.46</td><td>39%</td><td class="good">+24.25</td><td class="loss">-7.15</td><td class="good">954,812</td><td class="dim">45</td></tr>
+<tr><td class="l">fixed 7% on close</td><td class="good">+6.12</td><td class="good">+0.21</td><td>50%</td><td class="good">+20.50</td><td class="loss">-8.26</td><td class="good">1,257,578</td><td class="dim">58</td></tr>
+<tr><td class="l">fixed 8% intraday</td><td class="good">+6.17</td><td class="loss">-0.52</td><td>49%</td><td class="good">+20.71</td><td class="loss">-7.81</td><td class="good">1,274,579</td><td class="dim">56</td></tr>
+<tr><td class="l">fixed 8% on close</td><td class="good">+7.15</td><td class="good">+2.97</td><td>55%</td><td class="good">+20.72</td><td class="loss">-9.37</td><td class="good">1,470,917</td><td class="dim">63</td></tr>
+<tr><td class="l">fixed 10% intraday</td><td class="good">+7.03</td><td class="good">+2.74</td><td>54%</td><td class="good">+20.93</td><td class="loss">-9.23</td><td class="good">1,431,687</td><td class="dim">62</td></tr>
+<tr><td class="l">fixed 10% on close</td><td class="good">+6.85</td><td class="good">+3.08</td><td>56%</td><td class="good">+20.75</td><td class="loss">-10.76</td><td class="good">1,394,904</td><td class="dim">65</td></tr>
+<tr><td class="l">fixed 12% intraday</td><td class="good">+7.50</td><td class="good">+3.08</td><td>58%</td><td class="good">+20.30</td><td class="loss">-10.07</td><td class="good">1,517,418</td><td class="dim">71</td></tr>
+<tr><td class="l">fixed 12% on close</td><td class="good">+7.70</td><td class="good">+3.85</td><td>60%</td><td class="good">+19.84</td><td class="loss">-10.38</td><td class="good">1,590,573</td><td class="dim">78</td></tr>
+<tr><td class="l">ATR14 x2 on close</td><td class="good">+7.36</td><td class="good">+2.97</td><td>54%</td><td class="good">+21.39</td><td class="loss">-9.06</td><td class="good">1,499,002</td><td class="dim">63</td></tr>
+<tr><td class="l">ATR14 x2.5 on close</td><td class="good">+7.15</td><td class="good">+3.08</td><td>57%</td><td class="good">+20.72</td><td class="loss">-10.74</td><td class="good">1,493,278</td><td class="dim">68</td></tr>
+<tr><td class="l">ATR14 x3 on close</td><td class="good">+6.90</td><td class="good">+3.21</td><td>58%</td><td class="good">+20.43</td><td class="loss">-11.66</td><td class="good">1,472,579</td><td class="dim">71</td></tr>
+<tr><td class="l">time stop 10 sessions</td><td class="good">+2.38</td><td class="good">+0.75</td><td>52%</td><td class="good">+10.02</td><td class="loss">-5.89</td><td class="good">439,452</td><td class="dim">102</td></tr>
+<tr><td class="l">time stop 20 sessions</td><td class="good">+5.89</td><td class="good">+4.19</td><td>64%</td><td class="good">+14.38</td><td class="loss">-9.02</td><td class="good">1,362,944</td><td class="dim">102</td></tr>
+<tr style="font-weight:600"><td class="l">book_v3 (8% + MA20 trail) <span class="dim">&middot; backtested, never on</span></td><td class="good">+5.88</td><td class="good">+1.08</td><td>54%</td><td class="good">+18.11</td><td class="loss">-8.44</td><td class="good">1,233,559</td><td class="dim">24</td></tr>
+<tr><td class="l">MA20 trail, no hard stop</td><td class="good">+5.60</td><td class="good">+3.22</td><td>58%</td><td class="good">+18.56</td><td class="loss">-12.20</td><td class="good">1,246,075</td><td class="dim">29</td></tr>
+<tr><td class="l">no stop, held to horizon</td><td class="good">+7.61</td><td class="good">+4.94</td><td>64%</td><td class="good">+19.99</td><td class="loss">-14.16</td><td class="good">1,631,676</td><td class="dim">102</td></tr>
+</tbody></table></div>
+<p class="note">Fifty-four of the 102 were stopped out and then ran further in our favour than the stop had risked. This window includes the parked ETFs, where a stop is meaningless; they are a minority and removing them does not reverse the ranking.</p>
+<div class="prose">
+<p>Split in half &mdash; April to June (68 decisions) and July to September (34) &mdash; the ranking survives both times. Tightest is worst in all four windows; looser is better in all four. A result that holds across four separate periods is a property of the rule, not of a regime.</p>
+</div>
+<div class="tbl-scroll"><table>
+<thead><tr><th class="l">Window</th><th>Decisions</th><th>Our structural stop, intraday</th><th>A plain 8% stop on a close</th><th>No stop at all</th></tr></thead>
+<tbody>
+<tr><td class="l">Apr &ndash; Jun</td><td>68</td><td class="good">+&#8377;5,38,733</td><td class="good">+&#8377;9,15,924</td><td class="good">+&#8377;10,53,398</td></tr>
+<tr><td class="l">Jul &ndash; Sep</td><td>34</td><td class="good">+&#8377;2,12,310</td><td class="good">+&#8377;5,54,993</td><td class="good">+&#8377;5,78,278</td></tr>
+<tr><td class="l">Apr &ndash; Sep</td><td>102</td><td class="good">+&#8377;7,51,043</td><td class="good">+&#8377;14,70,917</td><td class="good">+&#8377;16,31,676</td></tr>
+<tr><td class="l">Oct &ndash; Nov</td><td>25</td><td class="loss">&minus;&#8377;43,284</td><td class="loss">&minus;&#8377;11,257</td><td class="loss">&minus;&#8377;11,257</td></tr>
+</tbody></table></div>
+</section>
+
+<section><div class="sec-head"><div class="eyebrow">the thing that stings</div><h2>We tested a rule, and then ran a different one</h2></div>
+<div class="prose">
+<p>There is a committed, versioned exit policy in the service: an 8% initial stop that trails up to just under the 20-day moving average once there are enough closes to compute one. It has a backtest, a profile and three scheduled jobs wired to it. In both grids above it beats what we actually run, in every window.</p>
+<p><strong>Its switch reads 0.</strong> The migration that introduced it is called &ldquo;execution policy disabled&rdquo;, the model&rsquo;s own comment notes that no live position has ever used it, and the live parameter dump confirms the value today. Everything we have placed since has used hand-chosen structural stops at a median of 5.2% instead.</p>
+<p class="note warn">So the honest statement of the problem is not &ldquo;our stop is wrong&rdquo;. It is: <strong>the stop we measured is not the stop we ship.</strong> The 8% rule was tested and left off; the 5% rule was shipped and never tested. Four windows now say the untested one is the worse of the two.</p>
+</div></section>
+
+<section><div class="sec-head"><div class="eyebrow">the cost of fixing it</div><h2>A wider stop is a smaller position</h2></div>
+<div class="prose">
+<p>The grid holds quantity constant, which is the right way to isolate the stop but not the way the book is actually sized. Position size comes from the risk budget divided by the distance to the stop, so moving from 5.2% to 8% buys roughly <strong>a third fewer shares</strong> of the same name for the same rupees at risk.</p>
+<p>Of the twenty-one October entries in the main account, twenty were limited by the risk budget and only one by the deployment cap &mdash; so there is no cushion there. The size reduction is real and it is most of the way to a third.</p>
+<p>That does not undo the finding, because what improves is the <em>percentage</em> per trade, and percentages survive the rescaling: October&rsquo;s mean per decision goes from &minus;0.23% to +0.34% on a third less capital at work. But it does mean the rupee columns above are the upper bound of the benefit, not the expected one, and it is a real decision rather than a free win.</p>
+</div></section>
+
+<section><div class="sec-head"><div class="eyebrow">the other half of the question</div><h2>What breadth is and is not worth</h2></div>
+<div class="prose">
+<p>The entry rule &mdash; only buy while the share of names above their 20-day average is rising against its own recent mean, and the index is above its own 20-day average &mdash; was replayed against the whole market, 268 sessions and about a thousand names, so that the answer does not depend on our twenty-five trades.</p>
+<ul>
+<li><strong>The rule as a whole is not measurable here.</strong> Days it permits returned +0.23 percentage points more over the next twenty sessions than days it refuses; shuffling which days it permitted beat that spread 71 times in 200. That is noise.</li>
+<li><strong>The breadth leg is the half that carries what little signal there is</strong> &mdash; about +1.0pp on disjoint windows &mdash; but it points one way in the first half of the year and the other way in the second, which is a description of a regime rather than a rule.</li>
+<li><strong>The index-above-its-average leg measures as actively harmful</strong>: &minus;5.3pp on disjoint windows, and not marginally so. Buying while the index sits below its own average caught the rebounds; waiting for it to climb back above meant paying up for them. This is the leg that has kept us out of the market for most of November.</li>
+<li><strong>Sized into a real book, the direction is friendlier</strong> &mdash; replaying entries through the same slots and capital, days the full rule permitted returned about 9.8pp more per session than days it refused &mdash; but the confidence interval runs from &minus;7.5 to +26 and the permutation test puts it at p = 0.065. Suggestive, not established.</li>
+<li><strong>Do not exit on breadth.</strong> Holding a working position through a falling-breadth session still returned +0.45% on average and was positive 58% of the time. Booking returns zero by construction, so booking on that signal loses money even though the spread itself is real.</li>
+</ul>
+<p>Put plainly: <strong>the gate is not what went wrong, and it is not what will fix it.</strong> It is, at best, worth what it costs; the index leg of it may be worth less than nothing. The stop is where the money actually went.</p>
+</div></section>
+
+<section><div class="sec-head"><div class="eyebrow">what I would change</div><h2>Three things, in order of how well they are evidenced</h2></div>
+<div class="prose">
+<p><strong>1. Turn on the rule we already tested.</strong> The 8%-plus-trail policy is written, versioned, scheduled and off. It beats the current stop in all four windows. It is not the best cell in the grid, and that is the point &mdash; the best cells are &ldquo;12%&rdquo; and &ldquo;no stop&rdquo;, which win because this sample contains no crash. The 8% rule is where the curve flattens while a real stop still exists. Switching it on costs about a third of position size at the same risk, which is the trade.</p>
+<p><strong>2. Stop judging the stop on an intraday wick where we still do.</strong> Close-based beats intraday in every window, by &#8377;8,000 on twenty-five October decisions and by &#8377;2.1 lakh across April to September. This one is already partly done &mdash; the close-based rule was re-armed on 23 November &mdash; and the grid says that was the right call.</p>
+<p><strong>3. Re-examine the index leg of the entry gate, and do not touch the breadth leg.</strong> The index leg measures negative and strongly so; the breadth leg measures positive but unstably. Neither finding is strong enough to justify trading on its inverse, but the index leg is costing us sessions on the strength of something that has never been measured as working.</p>
+<p class="note">What this does <em>not</em> support: removing the stop, widening past 8%, or sizing up. Those win in this sample because this sample has no crash in it. The average loss grows from &minus;5.0% to &minus;14.2% as the stop loosens, and the one thing a 2026 Indian sample cannot tell you is what that tail does in a year that has one.</p>
+</div></section>
+
+<section><div class="sec-head"><div class="eyebrow">what would make this wrong</div><h2>The honest limits</h2></div>
+<div class="prose">
+<ul>
+<li><strong>Twenty-five decisions since October.</strong> Nothing can be fitted to that, which is why the same grid is shown on 102 earlier ones and split in half again. The October number is an illustration; the April&ndash;September numbers are the evidence.</li>
+<li><strong>Most October entries have not run the full forty sessions.</strong> The looser rules are still holding them, so part of their advantage is unrealised and could still reverse.</li>
+<li><strong>No crash in the sample.</strong> Every window here is 2026. A rule that wins by holding through drawdowns is flattered by a period that had no serious one.</li>
+<li><strong>The entry-gate replay cannot reproduce the full market-status machinery</strong> &mdash; it uses price proxies for it and says so. The breadth half is exact; the index half is an approximation of a richer state.</li>
+<li><strong>Survivorship.</strong> The breadth series is computed from today&rsquo;s active list of names, not the list as it stood on each past day.</li>
+</ul>
+<p class="muted" style="font-size:12.5px">Bars from the NSE bhavcopy. Fills, stops and realised P&amp;L from the broker record across the three accounts. The grid, the excursion table and the population backtests are all committed, re-runnable commands; nothing on this page was computed by hand.</p>
+</div></section>
+</main></body></html>
