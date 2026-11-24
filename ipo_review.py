@@ -7125,6 +7125,238 @@ FOOTNOTE_NOV_23_0930 = (
 )
 
 
+def _for_nov_25() -> list[IPO]:
+    """Wednesday 25 November, written overnight after the 23 November close —
+    Tuesday the 24th was a market holiday, so nothing on the Indian tape moved,
+    but the IPO board did. What changed: Mahanadi's FINAL book and a premium that
+    has gone to zero, Crystal's premium turning back up the day before it lists,
+    and Foodlink finally getting a confirmed price band. Derived from the 23 Nov
+    09:30 cards so the static facts stay in one place."""
+    mahanadi_23, crystal_23, foodlink_23, integris_23, monomark_23 = _for_nov_23_0930()
+    mahanadi = replace(
+        mahanadi_23,
+        call="SKIP as a trade — the book closed at 1.52x and the premium is now zero",
+        dates="opened 19 Nov · closed 23 Nov · allotment TODAY 25 Nov · listing 27 Nov",
+        gmp="₹0 — 0.00% on ₹136 (investorgain, 24-Nov 20:02; range 0 low / 9.25 high) · ₹0.7 on the 23rd · ₹25 on this board 13 Nov",
+        gmp_pct=0.0,
+        expected="~−2.6%",
+        apply_as="closed — nothing was applied for by this service",
+        horizon="allotment today, listing Friday 27 Nov",
+        book="FINAL 1.52x (investorgain, post-close) — against 0.49x at the end of day two",
+        flags=(("final book 1.52x — it cleared, and only just", "warn"),
+               ("GMP ₹0 at the 24-Nov 20:02 print — the floor of its own range", "fail"),
+               ("100% OFS — a government seller that wanted the book to clear", "warn"),
+               ("PAT down three years running", "fail"),
+               ("debt-free: borrowings ₹2.76 Cr; EBITDA margin 43.6%", "pass")),
+        note=(
+            "<strong>It got done, and barely.</strong> The book finished at <b>1.52x</b> — from "
+            "0.49x at the end of day two, so the last day did the work here too, exactly as it did "
+            "for Crystal. On a ₹8,981 Cr government offer-for-sale, 1.52x is the arithmetic of a "
+            "deal clearing rather than a deal wanted. "
+            "<strong>The premium is now zero.</strong> ₹0 at investorgain's 24-Nov 20:02 print, "
+            "against ₹0.7 on Monday morning, ₹0.75 on Friday and ₹25 on this board on the 13th. "
+            "Zero is the bottom of its own quoted range, and after our measured 2.6-point haircut "
+            "the expected listing is <b>about 2.6% below the issue price</b>. "
+            "<strong>Allotment is today and listing is Friday.</strong> Nothing was applied for by "
+            "this service, so this is a record and not a decision — but it is the right record to "
+            "keep: a 0.49x mid-issue reading would have been read as a failure, and it was not one; "
+            "a ₹25 premium on the 13th would have been read as a listing pop, and that was not one "
+            "either. <b>Neither number predicted the other.</b> What has not changed is the company: "
+            "India's largest coal producer by volume, debt-free, 43.6% EBITDA margin, and PAT "
+            "drifting ₹11,842 Cr → ₹10,825 Cr → ₹10,698 Cr. A cash machine with shrinking earnings, "
+            "which is a dividend holding or nothing."
+        ),
+    )
+    crystal = replace(
+        crystal_23,
+        call="AVOID on the company — it lists TOMORROW and the premium has turned back up",
+        dates="opened 18 Nov · closed 20 Nov · allotted 23 Nov · LISTS TOMORROW 26 Nov",
+        gmp="₹18 — 6.62% on ₹272 (investorgain, 24-Nov 20:02; ipowatch agrees at +₹18) · ₹14.5 on the 23rd · ₹45 peak 13 Nov",
+        gmp_pct=6.62,
+        expected="~+4.0%",
+        horizon="lists tomorrow, Thursday 26 Nov",
+        flags=(("final book 17.68x — BHNI 45.19x, NII 39.16x, retail 9.71x", "pass"),
+               ("premium recovered from ₹14.5 to ₹18 across the holiday — two boards agree", "warn"),
+               ("priced above the listed-peer median on full-year earnings while marketed at 8x", "fail"),
+               ("litigation ₹341.95 Cr against net worth", "fail")),
+        note=(
+            crystal_23.note
+            + " <strong>25 November:</strong> the premium went <b>up</b> over the holiday — ₹18 at "
+            "investorgain's 24-Nov 20:02 print, with ipowatch independently showing +₹18, against "
+            "₹14.5 on Monday morning. On the ₹272 band that is <b>6.62%</b>, so ~<b>+4.0%</b> once "
+            "the 2.6-point haircut comes off. <b>This is the first cross-checked figure this board "
+            "has carried on Crystal</b>, and it is the last reading before the fact: it lists "
+            "tomorrow. <strong>The call does not move and cannot</strong> — nothing was applied for, "
+            "so there is no position to have a view about, and the objection was always the company "
+            "and not the book. What tomorrow's open will be worth is a <b>measurement</b> we should "
+            "take: a 6.62% premium that we haircut to +4.0% is a live test of the haircut itself, "
+            "and the listing print is the answer. <b>It goes on the board on Thursday evening.</b>"
+        ),
+    )
+    foodlink = replace(
+        foodlink_23,
+        call="LISTING-ONLY at most, one lot — NOT a holding, and HIS call",
+        tone="warn",
+        dates="opens TOMORROW 26 Nov · closes 30 Nov · allotment 1 Dec · listing 3 Dec",
+        band="₹181 – ₹191 (CONFIRMED — the band this board has been waiting three sessions for)",
+        size="₹360.76 Cr — ₹192 Cr fresh issue plus an offer-for-sale of 88,35,382 shares (~₹168.76 Cr)",
+        split="fresh ₹192 Cr · OFS ₹168.76 Cr",
+        gmp="₹17 — 8.90% on ₹191 (investorgain, 24-Nov 20:02; range 12 low / 17 high) · ipowatch reads +₹16 (8.38%)",
+        gmp_pct=8.90,
+        expected="~+6.3%",
+        apply_as="retail one lot = 78 shares ≈ ₹14,898 at the ₹191 cap",
+        horizon="anchor book today, opens tomorrow, lists 3 Dec",
+        book="not open — anchor allocation is today, 25 Nov",
+        stats=(("price band", "₹181 – ₹191"),
+               ("lot size", "78 shares ≈ ₹14,898 at the cap"),
+               ("issue size", "₹360.76 Cr (fresh ₹192 Cr + OFS ₹168.76 Cr)"),
+               ("grey market", "₹17 — 8.90% (investorgain 24-Nov 20:02)")),
+        flags=(("band confirmed at ₹181–191 — the denominator finally exists", "pass"),
+               ("premium ₹17, the HIGH of its own range, and rising on both boards", "pass"),
+               ("H1 FY27 lost ₹16.15 Cr on ₹222.18 Cr of income", "fail"),
+               ("EBITDA margin fell 13.82% → 7.35% in those six months", "fail"),
+               ("nearly half the raise is an exit for existing holders, not money for the business", "warn")),
+        note=(
+            "<strong>The band is confirmed, so for the first time this issue can be judged.</strong> "
+            "₹181–191, ₹360.76 Cr in total, a lot of 78 shares — about <b>₹14,898</b> at the cap. "
+            "The anchor book is allocated today and it opens tomorrow. The grey-market quote is "
+            "₹17 at investorgain's 24-Nov 20:02 print, which on ₹191 is <b>8.90%</b>, or ~<b>+6.3%</b> "
+            "after our 2.6-point haircut; ipowatch reads ₹16 (8.38%) — close enough that the two "
+            "boards agree, and <b>it is the high end of its own range, not a stale quote</b>, which "
+            "is the opposite of what this card said three times last week. "
+            "<strong>The objection has not been answered and it is a real one.</strong> FY26 was a "
+            "good year — PAT ₹14.26 Cr → ₹29.11 Cr, RoNW 17.35%, D/E 0.43 — but <b>the six months to "
+            "September lost ₹16.15 Cr</b> on ₹222.18 Cr of income, with the EBITDA margin halving "
+            "from 13.82% to 7.35%. Wedding and banquet catering is genuinely seasonal and the "
+            "December-to-February half is where the money is made, so that loss may be the off-season "
+            "rather than the business. <b>It may equally not be</b>, and nothing published so far "
+            "settles it. On top of that, ₹168.76 Cr of the ₹360.76 Cr is selling shareholders taking "
+            "money out. "
+            "<strong>So: a listing trade, if he wants one, and explicitly not a holding.</strong> "
+            "One lot, ₹14,898, against an expected ~+6.3% that is itself a haircut estimate — call it "
+            "roughly ₹900 if the premium holds and a real loss if it does not, because there is no "
+            "current-year profit underneath to catch it. <b>That is a judgement about ₹15,000, and it "
+            "is his to make, not this page's.</b> The book runs to 30 November, so the decision is not "
+            "due tonight — but the anchor allocation lands today and will tell us more than any "
+            "grey-market quote will."
+        ),
+    )
+    integris = replace(
+        integris_23,
+        call="NO CALL — it opens on Friday and the band is still not out",
+        dates="opens 27 Nov · closes 1 Dec · allotment 2 Dec · listing 4 Dec",
+        gmp="none quoted (investorgain stamp 24-Nov 05:55 — the oldest stamp on this board)",
+        note=(
+            integris_23.note
+            + " <strong>25 November:</strong> still <b>no band, no size and no premium</b>, and the "
+            "investorgain row carries a <b>24-Nov 05:55</b> stamp — older than every other row on the "
+            "board, which usually means nothing has been filed rather than that the board is stale. "
+            "<b>It opens in two days.</b> If the RHP and the band are not out by tomorrow evening this "
+            "becomes a judgement made on nothing, and the honest answer in that case is to let it go: "
+            "an issue that will not show its price until the eve of its own open is not one that has to "
+            "be taken."
+        ),
+    )
+    monomark = replace(
+        monomark_23,
+        gmp="₹23 (investorgain and ipowatch, 24-Nov) against no price band — unchanged for three prints",
+        note=(
+            monomark_23.note
+            + " <strong>25 November:</strong> unchanged — ₹23 on both boards, <b>still no band</b>, "
+            "so still no denominator and still nothing to have a view on. Dates hold at 2–4 December, "
+            "allotment 7 December, listing 9 December."
+        ),
+    )
+    siddhivinayak = IPO(
+        name="Shree Siddhivinayak Greentech Industries",
+        call="NO CALL — an SME issue, and this service does not trade SME listings",
+        tone="warn",
+        dates="opens TODAY 25 Nov · closes 27 Nov · allotment 30 Nov · listing 2 Dec (NSE Emerge)",
+        band="₹130 – ₹142",
+        size="₹93.66 Cr",
+        split="not disclosed on the boards read",
+        gmp="the two boards disagree: ipowatch +₹10 (7.04%), investorgain ₹20 (14.08% on ₹142)",
+        gmp_pct=0.0,
+        expected="not computed — the two sources differ by a factor of two",
+        apply_as="SME lot of 1,000 shares ≈ ₹1,42,000 at the cap — an order of magnitude above a mainboard lot",
+        horizon="not a decision for this book",
+        book="opens today",
+        stats=(("exchange", "NSE Emerge (SME)"),
+               ("price band", "₹130 – ₹142"),
+               ("lot size", "1,000 shares ≈ ₹1,42,000 at the cap"),
+               ("issue size", "₹93.66 Cr")),
+        flags=(("SME board — outside what this service reviews or applies for", "warn"),
+               ("minimum application ≈ ₹1.42 L, against ~₹15,000 on a mainboard lot", "fail"),
+               ("GMP quoted at ₹10 on one board and ₹20 on the other — no reliable figure", "fail")),
+        note=(
+            "<strong>Carried so the board is complete, not because it is a candidate.</strong> It opens "
+            "today on <b>NSE Emerge</b>, which is the SME platform, and the mandate this page works to "
+            "is mainboard issues. The reason is not snobbery about small companies: an SME lot is "
+            "<b>1,000 shares, about ₹1.42 lakh</b> at the ₹142 cap, so a single application is roughly "
+            "ten times a mainboard one and sits in the same size bracket as a real equity position — "
+            "with a fraction of the disclosure and none of the liquidity. "
+            "<strong>And the premium is not even agreed.</strong> ipowatch prints +₹10 (7.04%); "
+            "investorgain prints ₹20 (14.08%). <b>When two boards differ by a factor of two the figure "
+            "is not usable</b>, and no haircut applied to it would mean anything. "
+            "<b>No call, and it will not be applied for.</b>"
+        ),
+    )
+    return [foodlink, crystal, mahanadi, integris, monomark, siddhivinayak]
+
+
+IPOS_2026_11_25 = _for_nov_25()
+
+LEAD_NOV_25 = (
+    "Wednesday 25 November, written overnight. <strong>Tuesday was a market holiday "
+    "(Prakash Gurpurb Sri Guru Nanak Dev), so the Indian tape has not moved since Monday&rsquo;s "
+    "close &mdash; but this board has.</strong> Three things changed over the holiday. "
+    "<strong>Foodlink F&amp;B finally has a price band: &#8377;181&ndash;191</strong>, &#8377;360.76 Cr, "
+    "lot of 78 (&asymp;&#8377;14,898), anchor book today and the issue opens <b>tomorrow</b>. Its "
+    "premium is &#8377;17 &mdash; <b>8.90%, the high of its own range, and rising on both boards</b> "
+    "&mdash; which is ~+6.3% after our 2.6-point haircut. The objection is unchanged and still "
+    "unanswered: <b>the six months to September lost &#8377;16.15 Cr</b>. So the call is "
+    "<strong>LISTING-ONLY at most, one lot, and explicitly not a holding &mdash; and it is his "
+    "decision, not this page&rsquo;s.</strong> "
+    "<strong>Crystal Crop Protection lists tomorrow</strong> and its premium turned back <b>up</b> "
+    "across the holiday, &#8377;14.5 &rarr; &#8377;18 (6.62%, ~+4.0%), with ipowatch and investorgain "
+    "agreeing for the first time. Nothing was applied for; the listing print is a free test of our "
+    "own haircut and will be recorded. "
+    "<strong>Mahanadi Coalfields closed at 1.52x</strong> &mdash; it cleared, from 0.49x at the end of "
+    "day two &mdash; and its premium is now <b>&#8377;0</b>, so ~&minus;2.6% expected. Allotment is "
+    "today, listing Friday. SKIP stands. "
+    "<strong>Integris Medtech opens on Friday with no band filed</strong> &mdash; NO CALL, and if the "
+    "band is not out by tomorrow evening it should simply be let go. <b>Monomark</b> (2&ndash;4 Dec, "
+    "&#8377;23, no band) is unchanged, and <b>Shree Siddhivinayak Greentech</b> opens today on NSE "
+    "Emerge &mdash; an SME issue with a &#8377;1.42 L lot and two boards quoting premiums that differ "
+    "by a factor of two. NO CALL on either."
+)
+
+FOOTNOTE_NOV_25 = (
+    "<strong>Every premium on this page is the 24 November evening print, and none of them is live.</strong> "
+    "The stamps: investorgain <b>24-Nov 20:02</b> for Mahanadi, Crystal, Foodlink, Monomark and "
+    "Siddhivinayak, and <b>24-Nov 05:55</b> for Integris, which is the oldest row on the board. "
+    "ipowatch&rsquo;s board carries a 24 November date without a time. <b>Markets were shut on the "
+    "24th</b>, so these are the freshest figures that exist &mdash; but the grey market itself does "
+    "trade through a holiday, which is exactly why Crystal&rsquo;s premium could move from "
+    "&#8377;14.5 to &#8377;18 with no session in between. "
+    "<strong>Cross-checked where it was possible, and said where it was not:</strong> Crystal "
+    "(&#8377;18 on both boards), Foodlink (&#8377;17 against &#8377;16 &mdash; close enough to agree) "
+    "and Monomark (&#8377;23 on both) are read on two boards. Mahanadi&rsquo;s final 1.52x is "
+    "investorgain only. Siddhivinayak is read on two boards and <b>they disagree by a factor of two</b>, "
+    "so no figure is used for it at all. "
+    "<strong>Haircut applied, and said:</strong> expected-listing figures are the quoted GMP% less the "
+    "<b>2.6-point</b> overstatement our own backtest measured &mdash; Foodlink 8.90% &rarr; ~+6.3%, "
+    "Crystal 6.62% &rarr; ~+4.0%, Mahanadi 0.00% &rarr; ~&minus;2.6%. Integris and Monomark have no "
+    "band, so no percentage and no haircut are quoted for either. "
+    "<strong>Static facts &mdash; splits, P/E, litigation, the H1 numbers &mdash; are carried forward "
+    "from the 23 November cards rather than re-entered</strong>, so a correction to one corrects every "
+    "day after it. <strong>One tooling note, repeated:</strong> <code>show_ipos</code> still cannot "
+    "read its source, so this board was rebuilt by hand from the web, and <b>the machine-built IPO "
+    "section higher up the report still falsely claims no mainboard issue is open or upcoming</b> "
+    "&mdash; two open this week."
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -7183,6 +7415,8 @@ BY_DAY = {
     "2026-11-20": (IPOS_2026_11_20_0930, LEAD_NOV_20_0930, FOOTNOTE_NOV_20_0930),
     # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_23 / LEAD_NOV_23 stay above.
     "2026-11-23": (IPOS_2026_11_23_0930, LEAD_NOV_23_0930, FOOTNOTE_NOV_23_0930),
+    # 24 Nov was an NSE holiday, so there is no page for it; the board moved anyway.
+    "2026-11-25": (IPOS_2026_11_25, LEAD_NOV_25, FOOTNOTE_NOV_25),
 }
 
 

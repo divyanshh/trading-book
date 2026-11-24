@@ -1,0 +1,385 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pre-session read — 2026-11-25</title><style>/* Morning Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  /* Chart series. Categorical slots, deliberately separate from the semantic
+     accents: a chart that paints its series with --blue and --amber inherits
+     whatever those two mean in the current theme, and the public book's own
+     theme maps --blue onto its gold -- which put two near-identical golds on a
+     two-series chart (dE 4.4, against a floor of 15). A series colour's only
+     job is to be told apart from the next one, so it gets its own token.
+     Validated on this canvas: dE 33.0 normal, 29.9 protan. */
+  --series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#b9c4d6;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* folded sections: reference material, open on demand */
+/* The heading's margin moves onto the <details> so the summary is a single
+   flex line: left on the h2 it pushes the row down and the count pill floats
+   above the title it belongs to. */
+details.folded{scroll-margin-top:64px;margin:34px 0 6px}
+details.folded>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded>summary::-webkit-details-marker{display:none}
+details.folded>summary h2{margin:0}
+details.folded>summary h2::after{content:"\25B8";display:inline-block;margin-left:10px;font-size:14px;
+  color:var(--muted);transition:transform .15s ease;transform-origin:center}
+details.folded[open]>summary h2::after{transform:rotate(90deg)}
+.folded-hint{color:var(--muted);font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+details.folded>summary:hover h2{color:var(--blue-ink)}
+details.folded>summary:hover h2::after{color:var(--blue)}
+details.folded>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+/* Printing and find-on-page must not depend on somebody having clicked. An
+   archived page that hides rows the reader cannot reach is a page that lost
+   them. */
+@media print{details.folded>summary h2::after{display:none}
+  details.folded:not([open])>*{display:block}}
+/* a folded table inside an open section: the caption is the control */
+details.folded-table{margin:16px 0 8px}
+details.folded-table>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded-table>summary::-webkit-details-marker{display:none}
+details.folded-table>summary .sub{margin:0}
+details.folded-table>summary .sub::after{content:"\25B8";display:inline-block;margin-left:8px;
+  font-size:12px;color:var(--muted);transition:transform .15s ease}
+details.folded-table[open]>summary .sub::after{transform:rotate(90deg)}
+details.folded-table>summary:hover .sub{color:var(--blue-ink)}
+details.folded-table>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+details.folded-table>.scroll,details.folded-table>.cards{margin-top:8px}
+@media print{details.folded-table>summary .sub::after{display:none}
+  details.folded-table:not([open])>*{display:block}}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+/* Breadth charts carry their own aspect ratio in the viewBox: the market one
+   spans the grid, the sector multiples fill one cell, and both are drawn from
+   a viewBox matching that width so their text renders at the same size. */
+.fig svg.breadth{display:block;width:100%;height:auto}
+.fig--wide{grid-column:1/-1}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+</style></head><body><div class="wrap"><p class="eyebrow">equity-service · cortex · 2026-11-25</p><h2 id="pre-session-read">Pre-session read</h2>
+<p class="lead"><strong>There has been no session since Monday.</strong> Tuesday 24 November was an
+NSE holiday (Prakash Gurpurb Sri Guru Nanak Dev), so every price on this page is
+<strong>Monday 23 November&rsquo;s close</strong> and nothing about the tape has changed in
+forty-eight hours. What Monday did was make the gate worse. Breadth fell to
+<strong>46.15%</strong> against a prior-five mean of <strong>60.66%</strong> &mdash; a
+<strong>14.51-point gap</strong>, against 11.54 on Friday and 8.04 on Thursday. It is
+<strong>the lowest breadth reading in the thirty sessions on record here</strong>, and the widest
+gap. Entries stay blocked, on breadth, for a <strong>seventh consecutive session</strong>, and
+<strong>none of the thirty actionable SWING names may be placed.</strong></p>
+<p class="sub"><strong>Nothing here is an instruction and nothing here was placed.</strong> Closes
+are Monday 23 November&rsquo;s. The six scanners were run against those closes on Monday evening
+&mdash; SWING 20:31, WEEKLY 20:43, ETF 21:11, ETF_WEEKLY 21:11, STRIKE 21:12, REVERSAL 21:24 IST
+&mdash; and <strong>they were deliberately not re-run for this page</strong>: with no new close there
+is no new input, and a second run would reproduce Monday&rsquo;s list exactly while costing an hour
+of compute. <strong>MarketSmith&rsquo;s pre-market mail for Wednesday had not arrived when this was
+written</strong> (it lands between 08:39 and 09:03), so this page carries their
+<b>23 November evening</b> read and must be refreshed after 09:05.</p>
+<p class="note"><strong>The index fell 1.75% and the banks did it.</strong> Nifty
+<b>25,349.65</b>, down 1.75%, opening at 25,929.15 and closing a whisker above its own low of
+25,343.85 &mdash; <b>eleven advances against thirty-nine declines</b> on volume
+<b>21.17% higher at 518.92m</b>, which is the definition of a distribution day and took
+MarketSmith&rsquo;s count from two to <b>three</b>. <b>Bank Nifty fell 3.17% from a record high</b>
+set days earlier; Metal <b>&minus;3.68%</b>, PSU Bank <b>&minus;3.25%</b>, Private Bank
+<b>&minus;3.19%</b>. <b>IT was the only real gainer, +1.69%</b> &mdash; the sector this service&rsquo;s
+own regime map has been refusing to buy for a week.</p>
+
+<h3 class="sub" id="pre-gates">The two gates</h3>
+<div class="scroll"><table><thead><tr><th class="l">reading</th><th class="l">value</th><th class="l">verdict</th></tr></thead><tbody>
+<tr><td class="l">Breadth vs its prior-5 mean</td><td class="l"><b>46.15% against 60.66%</b> &mdash; a <b>14.51-point gap</b>, against 11.54 on Friday. <b>The lowest breadth and the widest gap in the thirty sessions recorded here</b></td><td class="l fail"><span>SHUT</span></td></tr>
+<tr><td class="l">Our computed status</td><td class="l">CONFIRMED_UPTREND on the Nifty, <b>1 distribution day</b> (from 0), attempt day 22, follow-through still dated <b>2 November</b></td><td class="l pass"><span>OPEN</span></td></tr>
+<tr><td class="l">MarketSmith&rsquo;s status</td><td class="l">CONFIRMED UPTREND, <b>3 distribution days</b> &mdash; up from 2, because Monday itself qualified. Fourth session agreeing on the verdict, disagreeing on the count</td><td class="l pass"><span>open</span></td></tr>
+<tr><td class="l">The follow-through date, theirs against ours</td><td class="l">MarketSmith dates it <b>15 October</b>; our record says <b>2 November</b>. Unchanged, unsettled, carried for a sixth session</td><td class="l warn"><span>unresolved</span></td></tr>
+<tr><td class="l">Their own warning</td><td class="l">The 23 Nov mail says in terms that <b>a higher distribution count or a breach of key support would take them to UPTREND UNDER PRESSURE</b>. They are one bad session from downgrading</td><td class="l warn"><span>on notice</span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>The two gates have now disagreed for seven sessions, and the disagreement is
+getting wider rather than resolving.</strong> The market-status gate reads OPEN because the Nifty is
+in a confirmed uptrend near its highs; the breadth gate reads SHUT because the number of stocks
+participating has collapsed to 46%. <strong>Monday is the cleanest example yet of why the second
+gate exists:</strong> the index fell 1.75% on 11 advances against 39 declines, which is a narrow tape
+going down for the same reason it had been going narrowly up &mdash; the money is in five or six
+names and it moved. <b>A gate built on the index alone would not have seen a thing until Monday.</b></p>
+
+<h3 class="sub" id="pre-indices">Where Monday&rsquo;s damage landed</h3>
+<p class="sub">MarketSmith&rsquo;s sector moves for the <strong>23 November</strong> session, as their
+evening Big Picture prints them. The banks and metals paid for the whole fall; only three indices
+closed green.</p>
+<div class="scroll"><table><thead><tr><th class="l">index</th><th>23 Nov move</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>Nifty IT</b></td><td class="pass">+1.69%</td><td class="l">the best sector of the day &mdash; and the one <b>our own regime map rates RALLY ATTEMPT on 9 distribution days</b>, which bars buying there</td></tr>
+<tr><td class="l">Consumer Durables</td><td class="pass">+0.59%</td><td class="l">one of only three green closes</td></tr>
+<tr><td class="l">Realty</td><td class="pass">+0.31%</td><td class="l">the third</td></tr>
+<tr><td class="l">Auto</td><td class="bad">&minus;1.03%</td><td class="l">the mildest of the fallers</td></tr>
+<tr><td class="l">Energy</td><td class="bad">&minus;1.78%</td><td class="l">our status on Energy is a step worse than theirs and has been for a week</td></tr>
+<tr><td class="l">PSE &middot; Oil &amp; Gas</td><td class="bad">&minus;1.98% &middot; &minus;2.01%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l">Financial Services</td><td class="bad">&minus;2.49%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l"><b>Private Bank &middot; PSU Bank &middot; Bank</b></td><td class="bad">&minus;3.19% &middot; &minus;3.25% &middot; &minus;3.17%</td><td class="l"><b>Bank Nifty fell 3.17% from a record high.</b> The index that carried the whole of November gave back a chunk of it in one session</td></tr>
+<tr><td class="l"><b>Nifty Metal</b></td><td class="bad">&minus;3.68%</td><td class="l">the worst sector of the day, with <b>Tata Steel &minus;8.43%</b> inside it</td></tr>
+<tr><td class="l">Midcaps &middot; Smallcaps</td><td class="bad">&minus;1.01% &middot; &minus;0.66%</td><td class="l"><b>both fell less than the Nifty</b> &mdash; for the first time in weeks the broad market was not the thing being sold</td></tr>
+</tbody></table></div>
+<p class="note"><strong>The last row is the one worth keeping.</strong> For three weeks this page has
+recorded a large-cap index making highs while midcaps and smallcaps went nowhere. On Monday that
+reversed: the Nifty fell <b>1.75%</b> while midcaps fell <b>1.01%</b> and smallcaps <b>0.66%</b>.
+<strong>That is not yet good news</strong> &mdash; everything fell &mdash; but it is the first session in
+which the half of the market our setups live in outperformed, and if it repeats it is what the
+breadth gate re-opening would look like from the inside. <b>One session is not a signal.</b>
+Biggest fallers: Tata Steel &minus;8.43%, Axis &minus;3.97%, HDFC Bank &minus;3.33%, ICICI
+&minus;3.32%, Hindalco &minus;3.13%, SBI &minus;2.79%, L&amp;T &minus;2.59%, Kotak &minus;2.51%.
+Biggest gainers: TCS +3.53%, Shriram Finance +2.46%, Tech Mahindra +1.79%, HCL Tech +1.48%,
+Titan +1.30%.</p>
+
+<h3 class="sub" id="pre-regime">Regime, on Monday&rsquo;s close</h3>
+<div class="scroll"><table><thead><tr><th class="l">index</th><th>dist. days</th><th class="l">our status</th><th class="l">what changed since Friday</th></tr></thead><tbody>
+<tr><td class="l"><b>NIFTY</b></td><td>1</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l warn"><b>took its first distribution day</b> &mdash; 0 to 1, on day 22 of the attempt. MarketSmith counts 3</td></tr>
+<tr><td class="l"><b>METAL</b></td><td class="bad">9</td><td class="l fail"><span>RALLY ATTEMPT</span></td><td class="l fail"><b>7 to 9 in one session</b> &mdash; the worst-rated sector, and &minus;3.68% on Monday</td></tr>
+<tr><td class="l"><b>IT</b></td><td class="bad">9</td><td class="l fail"><span>RALLY ATTEMPT</span></td><td class="l warn"><b>back up from DOWNTREND</b> &mdash; the attempt is on day 3 after Monday&rsquo;s +1.69%. Still 9 distribution days, still no buys</td></tr>
+<tr><td class="l"><b>ENERGY</b></td><td class="bad">6</td><td class="l fail"><span>RALLY ATTEMPT</span></td><td class="l fail"><b>downgraded from UNDER PRESSURE</b>, 3 distribution days to 6. <b>MarketSmith still reads it CONFIRMED UPTREND</b></td></tr>
+<tr><td class="l"><b>SMALLCAP</b></td><td class="bad">7</td><td class="l fail"><span>RALLY ATTEMPT</span></td><td class="l warn">5 to 7, on day 21 &mdash; <b>still the only broad index never confirmed</b></td></tr>
+<tr><td class="l">NEXT 50 &middot; MIDCAP 150</td><td>2 &middot; 2</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l pass">both unchanged</td></tr>
+<tr><td class="l">BANK &middot; PSU BANK &middot; REALTY &middot; CONS DURABLES</td><td class="pass">0</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l pass">clean counts &mdash; <b>including Bank, on the day it fell 3.17%</b>: one heavy down day is not a distribution day unless the volume test is met too</td></tr>
+<tr><td class="l">AUTO &middot; FIN SERVICES &middot; FMCG &middot; PHARMA &middot; HEALTHCARE</td><td>1</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l pass">unchanged</td></tr>
+<tr><td class="l">MEDIA</td><td>2</td><td class="l pass"><span>CONFIRMED UPTREND</span></td><td class="l pass">unchanged</td></tr>
+</tbody></table></div>
+<p class="note"><strong>Four sectors took distribution days on Monday and two of them took two.</strong>
+Metal went 7 to 9, Smallcap 5 to 7, Energy 3 to 6, and the Nifty itself took its first. <strong>This
+is the opposite of last Friday</strong>, when five counts fell because distribution days expire with
+time rather than because anything improved. <b>MarketSmith&rsquo;s own sector block disagrees with
+ours in two places</b> and has done for a week: they read Energy as a Confirmed Uptrend where we read
+a rally attempt on six distribution days, and they have IT and Metal at Uptrend Under Pressure where
+we rate both rally attempts on nine. <strong>Where they and we disagree, the stricter reading is the
+one the gate uses</strong>, and on both names that is ours.</p>
+
+<h3 class="sub" id="pre-today">What changed in two days: nothing on the tape, a great deal in the book</h3>
+<div class="scroll"><table><thead><tr><th class="l">what</th><th class="l">what happened</th><th class="l">result</th></tr></thead><tbody>
+<tr><td class="l"><b>Close-based stops &mdash; RE-ARMED</b></td><td class="l">On his instruction on <b>23 November</b> the close-based stop rule was switched back on, reversing the 6 November disarming. A stop is now judged on <b>the close</b>; the trigger that rests at the broker is a disaster floor <b>5% beneath the structural level</b>, not the decision itself. <b>All 34 legs across the three accounts were re-rested the same evening</b> &mdash; each new trigger placed before the old one was cancelled, so nothing was ever uncovered.</td><td class="l pass"><span>34 legs moved</span></td></tr>
+<tr><td class="l">Sizing, deliberately unchanged</td><td class="l">Position sizes were <b>not</b> re-cut to the new, wider floor. He was told plainly that this widens the worst case from roughly 8% to roughly 12% on a gap-through, and chose to leave sizing alone.</td><td class="l warn"><span>his call, on the record</span></td></tr>
+<tr><td class="l">The exit review, published</td><td class="l">Every position closed in the last month was measured after the fact: <b>30 closes, 13 names, &minus;&#8377;1,35,508 realised</b>, and of the nine names with sessions since the sale <b>all nine printed back above the exit price</b>, six still trade above it, median drift <b>+4.3%</b>. That measurement is what the re-arming above answers.</td><td class="l pass"><span>on the site</span></td></tr>
+<tr><td class="l">Monday&rsquo;s three stop-outs, as evidence</td><td class="l"><b>MCX</b> level 3,481.30, low 3,455.00, <b>close 3,581.60</b> &mdash; it would have held. <b>KRISHANA</b> level 237.89, low 237.50 &mdash; <b>sold by thirty-nine paise</b> &mdash; <b>close 241.26</b>. <b>BMWVENTLTD</b> level 63.50, low 61.62, <b>close 63.31</b> &mdash; a genuine break. Two of the three were wicks.</td><td class="l warn"><span>two of three</span></td></tr>
+<tr><td class="l">The book</td><td class="l"><b>32 open rows, 12 names</b>, across the three accounts, read at the broker at 00:37 this morning. Nothing has moved since Monday because nothing could.</td><td class="l"><span>unchanged</span></td></tr>
+<tr><td class="l"><b>Open item &mdash; the resting entries</b></td><td class="l">The broker order book <b>showed no pending orders in any of the three accounts</b> when it was read at 00:37 IST. Monday&rsquo;s eight resting entries were at-the-open orders, which lapse with the session, and overnight reads do not list standing triggers alongside day orders &mdash; so this is <b>not</b> evidence that the stops are gone. <b>It is also not proof they are there.</b> Both have to be verified against the broker at the open, before anything else is done.</td><td class="l warn"><span>verify at 09:00</span></td></tr>
+<tr><td class="l"><b>Open item &mdash; MCX in Ram</b></td><td class="l">A live BUY add still rests at <b>3,780.15</b> in t-ramprasad &mdash; roughly 8.8% above the level the same name was stopped out at on Monday. It was <b>not</b> cancelled, because cancelling an entry silently is not something this service does. <b>MarketSmith has MCX on its buy watchlist</b> in the same mail.</td><td class="l warn"><span>his call</span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>The re-arming is the most consequential change this book has made in a month,
+and it is worth stating what it does and does not fix.</strong> It stops the service being sold by a
+wick: a position now has to <em>close</em> below its level to be exited, and Monday&rsquo;s MCX and
+KRISHANA are two examples from a single session of trades that would have survived. <strong>It also
+roughly doubles the bad tail.</strong> A name that gaps straight through and keeps falling is now
+held to a floor 5% lower, on unchanged size, so the loss on that trade is about half as large again
+as it would have been. <b>That trade-off was put to him explicitly and he took it.</b> Post-exit
+drift is not a backtest of holding on, and this page will not pretend otherwise &mdash; the honest
+claim is narrow: the old rule was firing on the wrong event.</p>
+
+<h3 class="sub" id="pre-risk">What is closest to being stopped out next</h3>
+<p class="sub">Distance from Monday&rsquo;s close to <strong>two</strong> levels now, which is the
+point of the re-arming: the <strong>structural stop</strong>, judged on a close, and the
+<strong>resting trigger</strong> 5% beneath it, which only a disaster reaches intraday.</p>
+<div class="scroll"><table><thead><tr><th class="l">symbol</th><th>move</th><th>to stop (close)</th><th>to trigger</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>SONACOMS</b></td><td class="bad">&minus;3.6%</td><td class="bad"><b>1.6%</b></td><td>6.5%</td><td class="l">held in all three &mdash; <b>the tightest thing in the book</b>, and on MarketSmith&rsquo;s model portfolio, where it fell 0.73% on Monday</td></tr>
+<tr><td class="l"><b>LENSKART</b></td><td class="bad">&minus;2.8%</td><td class="bad"><b>1.8%</b></td><td>6.7%</td><td class="l">held in all three, as an add. <b>Also on MarketSmith&rsquo;s buy watchlist</b> in the same mail that has it two percent above our stop</td></tr>
+<tr><td class="l">SBC</td><td class="pass">+1.6%</td><td>3.2%</td><td>8.1%</td><td class="l">two legs in every account, base and add, with separate levels at 65.87 and 64.56</td></tr>
+<tr><td class="l">CUPID</td><td class="pass">+4.7%</td><td>4.5%</td><td>9.3%</td><td class="l">stop sits <b>at the entry price</b> &mdash; it can no longer lose</td></tr>
+<tr><td class="l">SHUKRAMED</td><td class="pass">+6.4%</td><td>6.0%</td><td>10.7%</td><td class="l">the renamed position, protected in all three since 21 November</td></tr>
+<tr><td class="l">TFCILTD</td><td>+0.2%</td><td>6.6%</td><td>11.3%</td><td class="l">Ram only &mdash; he bought it himself on Monday and it was adopted and protected the same hour</td></tr>
+<tr><td class="l"><b>SGMART</b></td><td class="pass">+10.6%</td><td>9.6%</td><td>14.1%</td><td class="l">stopped at entry, and the best position in the book</td></tr>
+<tr><td class="l">AARTIPHARM &middot; RATNAVEER &middot; ROSSTECH</td><td class="pass">+3.8% &middot; +5.4% &middot; +3.1%</td><td>10.3% &middot; 10.2% &middot; 10.0%</td><td>14.8% &middot; 14.7% &middot; 14.5%</td><td class="l">the three furthest from trouble</td></tr>
+</tbody></table></div>
+<p class="note"><strong>Two names sit inside two percent of their stops and both are losers</strong>
+&mdash; SONACOMS at &minus;3.6% and LENSKART at &minus;2.8%, each held in all three accounts.
+<strong>Under the old rule either could have been taken out by a single bad morning;</strong> under
+the re-armed one they have to close below 872.10 and 701.50 respectively, and the broker&rsquo;s own
+triggers sit a further five percent down at 828.50 and 666.43. <b>That is the change doing its work,
+and it is also the change costing money if either keeps falling.</b> Against them, <b>CUPID and
+SGMART cannot lose</b> &mdash; both stopped at entry, SGMART at +10.6%.</p>
+
+<h3>MarketSmith, 23 November 17:17 &mdash; read in full</h3>
+<p><strong>One mail, and it is the only one that exists.</strong> Nothing came on Tuesday because the
+market was shut, and <strong>Wednesday&rsquo;s pre-market mail had not arrived when this page was
+written</strong> &mdash; measured over eight sessions it lands between <b>08:39 and 09:03</b>, so this
+section is Monday evening&rsquo;s and the page has to be refreshed after 09:05.</p>
+<p><strong>Their Market Pulse is CONFIRMED UPTREND with the distribution count up from two to
+three</strong>, because Monday itself qualified: the Nifty fell <b>1.75% to 25,349.65</b> on volume
+<b>21.17% higher at 518.92m</b>, with <b>11 advances against 39 declines</b>. It opened at 25,929.15
+and closed barely above its own low. It remains <b>4.27% above its 21-day average</b>, <b>7.85% above
+the 50-day</b> and <b>3.82% below the 52-week high</b> &mdash; which is the shape of a pullback inside
+an uptrend rather than a break of one. <strong>They say in terms that a higher count, or a breach of
+key support, takes them to Uptrend Under Pressure.</strong></p>
+<p>Their sector block reads <strong>Confirmed Uptrend</strong> for Bank, Pharma, Financial Services,
+FMCG, Realty, Energy, Auto, Media and Consumer Durables, and <strong>Uptrend Under Pressure</strong>
+for <b>Metal and IT</b>. <b>We are stricter on three of those</b> &mdash; Energy, Metal and IT &mdash;
+and the gate uses ours.</p>
+<p><strong>The Buy Watchlist is eight names</strong>, read off the mail body rather than any parser:
+<b>Raghav Productivity Enhancers</b>, <b>Rubicon Research</b>, <b>Acutaas Chemicals</b>,
+<b>Sudeep Pharma</b>, <b>Lenskart Solutions</b>, <b>MCX</b>, <b>Nykaa</b> and
+<b>Union Bank of India</b>. <strong>Two of those eight are already our problem rather than our
+opportunity:</strong> we hold LENSKART in all three accounts, 1.8% above its stop, and MCX is the
+name we were stopped out of on Monday with an add still resting 8.8% higher in Ram.</p>
+<p><strong>No change to the model portfolio</strong>, which closed <b>+0.24%</b>: COFORGE +2.66,
+CORONA +2.36, ATHERENERG +2.26, KARURVYSYA +1.88, TITAN +1.30, SHRIPISTON +0.96, NAVINFLUOR +0.76,
+TIPSMUSIC &minus;0.35, RADICO &minus;0.61, INDHOTEL &minus;0.66, <b>SONACOMS &minus;0.73</b>,
+TVSMOTOR &minus;1.35, WELCORP &minus;1.47, GROWW &minus;3.61.</p>
+<p class="note">Their improving industry groups, ranks under 40, with the names they attach:
+Security/Safety <b>rank 3</b> (CPPLUS &mdash; which is one of our resting entries), Retail-Specialty
+<b>6</b> (LENSKART), Medical-Ethical Drugs 7, Food-Dairy 10, Computer-Hardware 11 (REDINGTON),
+Medical-Supplies 12 (EMCURE), Machinery-Materials Handling 13 (CRAFTSMAN), Retail-Internet 15,
+Airline 17 (INDIGO), Media-Radio/TV 19, Leisure-Lodging 20, Leisure-Movies 21 (PVRINOX &mdash; which
+we hold &mdash; SAREGAMA, TIPSMUSIC), Banks-Money Center 24, Consumer Products-Electronic 25,
+Jewelry 26. <strong>Two of our twelve open names and one of our resting entries sit in groups
+MarketSmith calls improving</strong>, which is worth exactly as much as the gate allows: nothing can
+be bought while breadth is shut.</p><footer>Written by hand the evening before, against that evening's build and a live read of the brokers. Also a section of <a href="2026-11-25.html#pre-session-read">the day's report</a>.</footer></div></body></html>
