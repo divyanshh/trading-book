@@ -7357,6 +7357,195 @@ FOOTNOTE_NOV_25 = (
 )
 
 
+def _for_nov_25_0930() -> list[IPO]:
+    """25 November, 09:30 open-slot pass over the overnight page. Re-read on
+    investorgain's 25-Nov morning stamps and cross-checked on ipowatch. What
+    moved: Foodlink's premium went ₹17 → ₹21 the evening before it opens,
+    Monomark got a band (₹60–65) and the two boards split on its premium, and
+    Matangi Rubber — a dated mainboard issue the overnight page left off — gets
+    its first card. Derived from the overnight cards so the static facts stay
+    in one place."""
+    foodlink_o, crystal_o, mahanadi_o, integris_o, monomark_o, siddhivinayak_o = _for_nov_25()
+    foodlink = replace(
+        foodlink_o,
+        gmp="₹21 — 10.99% on ₹191 (investorgain, 24-Nov 22:02; ipowatch +₹21 agrees) · ₹17 at 20:02 · range 12 low / 21 high",
+        gmp_pct=10.99,
+        expected="~+8.4%",
+        stats=(("price band", "₹181 – ₹191"),
+               ("lot size", "78 shares ≈ ₹14,898 at the cap"),
+               ("issue size", "₹360.76 Cr (fresh ₹192 Cr + OFS ₹168.76 Cr)"),
+               ("grey market", "₹21 — 10.99% (two boards agree)"),
+               ("odds above issue", "about 3 in 4 — a judgement, not a measured rate")),
+        flags=(("band confirmed at ₹181–191", "pass"),
+               ("premium ₹21 — up ₹4 in two hours, the top of its range, two boards agree", "pass"),
+               ("H1 FY27 lost ₹16.15 Cr on ₹222.18 Cr of income", "fail"),
+               ("EBITDA margin fell 13.82% → 7.35% in those six months", "fail"),
+               ("nearly half the raise is an exit for existing holders", "warn")),
+        note=(
+            foodlink_o.note
+            + " <strong>09:30, 25 November:</strong> the premium moved again after the overnight page "
+            "was written — <b>₹21</b> at investorgain's 24-Nov 22:02 print, and ipowatch shows the same "
+            "+₹21 this morning. On ₹191 that is <b>10.99%</b>, ~<b>+8.4%</b> after the 2.6-point haircut. "
+            "<strong>Odds, said as odds: about 3 in 4 that it lists above ₹191</strong> — a judgement from "
+            "an ~8% haircut-adjusted premium, not a measured rate, and the spread around it is wider "
+            "than the haircut. One retail lot is worth roughly <b>₹1,250</b> if the premium holds. "
+            "<strong>Why retail and not sHNI:</strong> an sHNI bid starts near ₹2 L — about fourteen "
+            "lots of exposure to a company whose latest half-year lost money, on a grey-market quote. "
+            "<b>The call does not move</b>: a rising premium is the crowd's view of the listing, not an "
+            "answer to the H1 loss. Still listing-only at most, still his decision, and the book runs "
+            "to 30 November."
+        ),
+    )
+    crystal = replace(
+        crystal_o,
+        gmp="₹19 — 6.99% on ₹272 (investorgain, 24-Nov 22:02; ipowatch +₹19 agrees) · ₹18 at 20:02",
+        gmp_pct=6.99,
+        expected="~+4.4%",
+        note=(
+            crystal_o.note
+            + " <strong>09:30:</strong> one more rupee overnight — ₹19 on both boards, 6.99%, ~+4.4% "
+            "after the haircut. It lists tomorrow; the call stands and the print gets recorded."
+        ),
+    )
+    mahanadi = replace(
+        mahanadi_o,
+        gmp="₹0 — 0.00% on ₹136 (investorgain 25-Nov morning; ipowatch ₹0 agrees) · range 0 / 9.25",
+        note=(
+            mahanadi_o.note
+            + " <strong>09:30:</strong> unchanged at ₹0 on both boards. Allotment today, listing Friday."
+        ),
+    )
+    monomark = replace(
+        monomark_o,
+        call="NO CALL — the band is out (₹60–65) but the two boards now disagree on the premium",
+        band="₹60 – ₹65 (ipowatch and investorgain; Chittorgarh still blank)",
+        size="2,70,00,000 fresh shares ≈ ₹175.5 Cr at ₹65 (our arithmetic, not a published figure)",
+        split="fresh issue only, no OFS",
+        gmp="the boards split: investorgain ₹17 (25-Nov 08:37, down from ₹23) · ipowatch +₹23",
+        gmp_pct=0.0,
+        expected="not computed — ₹17 vs ₹23 is 26.2% vs 35.4% on ₹65",
+        stats=(("price band", "₹60 – ₹65"),
+               ("issue", "2.70 Cr fresh shares, no OFS"),
+               ("FY26", "PAT ₹25.90 Cr on ₹564.74 Cr income"),
+               ("Q1 FY27", "PAT ₹3.02 Cr on ₹142.82 Cr — a 2.1% margin")),
+        flags=(("band finally out, on two boards", "pass"),
+               ("premium ₹17 on one board, ₹23 on the other", "fail"),
+               ("investorgain cut it ₹23 → ₹17 on the first print after the band", "warn"),
+               ("Q1 net margin 2.1%", "warn")),
+        note=(
+            monomark_o.note
+            + " <strong>09:30, 25 November: it has a band now — ₹60–65</strong> on ipowatch, with "
+            "investorgain using the same ₹65 cap. Chittorgarh's page still shows it blank. The first "
+            "print after the band came out <b>cut the premium from ₹23 to ₹17</b> on investorgain, "
+            "while ipowatch still shows +₹23. On ₹65 those are 26.2% and 35.4%, so <b>the haircut "
+            "would be applied to a number nobody agrees on</b>, and none is quoted. The business "
+            "underneath is thin: FY26 PAT ₹25.90 Cr on ₹564.74 Cr of income, and Q1 FY27 ₹3.02 Cr on "
+            "₹142.82 Cr, a 2.1% margin. It opens 2 December. <b>NO CALL until the two boards agree "
+            "on the premium</b>; the next pass looks again."
+        ),
+    )
+    matangi = IPO(
+        name="Matangi Rubber",
+        call="PROVISIONAL — one retail lot for the listing, decided on day 3 against the book",
+        tone="warn",
+        dates="opens 1 Dec · closes 3 Dec · allotment 4 Dec · listing 8 Dec (BSE, NSE)",
+        band="₹163 – ₹172",
+        size="₹125.16 Cr — 57,61,831 fresh shares (≈ ₹99.1 Cr) plus OFS of 15,15,150 (≈ ₹26.1 Cr)",
+        split="fresh ≈ ₹99.1 Cr · OFS ≈ ₹26.1 Cr",
+        gmp="₹21.5 — 12.50% on ₹172 (investorgain, 25-Nov 08:37; ipowatch +₹21 agrees) · flat since 23-Nov 18:37",
+        gmp_pct=12.50,
+        expected="~+9.9%",
+        apply_as="retail one lot = 87 shares ≈ ₹14,964 at the cap",
+        horizon="listing only — 8 Dec",
+        book="not open — opens 1 Dec",
+        stats=(("price band", "₹163 – ₹172"),
+               ("lot size", "87 shares ≈ ₹14,964"),
+               ("P/E", "17.6 pre · 19.2 post (FY26 / annualised Q1)"),
+               ("post-issue m-cap", "≈ ₹492 Cr"),
+               ("borrowings", "₹106.98 Cr against net worth ₹134.12 Cr"),
+               ("odds above issue", "about 3 in 4 — a judgement, not a measured rate")),
+        flags=(("premium 12.50%, two boards agree", "pass"),
+               ("FY26 PAT ₹22.33 Cr, +11%, on income +24%; EBITDA margin 27%", "pass"),
+               ("PAT jumped ₹4.81 Cr → ₹20.03 Cr in one year (FY24 → FY25)", "warn"),
+               ("₹45 Cr of ₹72.49 Cr net proceeds repays debt", "warn"),
+               ("debt/equity 0.80; promoters 81.11% pre-issue", "warn")),
+        note=(
+            "<strong>First card for this issue, and it should have been on the overnight page.</strong> "
+            "It has been on investorgain as a dated mainboard issue since the 23rd and was left off. "
+            "Matangi makes tyres, tyre flaps, tubes and rubber compounds for two- and three-wheelers "
+            "(incorporated 2004). The band is <b>₹163–172</b> and a lot is <b>87 shares, about "
+            "₹14,964</b>. The premium is <b>₹21.5 = 12.50%</b> on investorgain and +₹21 on ipowatch, "
+            "flat for three prints, so ~<b>+9.9%</b> once our 2.6-point haircut comes off. "
+            "<strong>The numbers are reasonable and one of them is odd.</strong> FY26 income ₹132.22 Cr "
+            "(+24%), PAT ₹22.33 Cr (+11%), EBITDA margin 27%, and P/E 17.6 pre-issue and 19.2 post — not "
+            "rich for that. But PAT went from <b>₹4.81 Cr to ₹20.03 Cr in a single year</b> (FY24 to "
+            "FY25), and FY24 is standalone while later years are consolidated, so part of that jump may "
+            "be the basis changing rather than the business. Borrowings are ₹106.98 Cr against ₹134.12 Cr "
+            "of net worth, and ₹45 Cr of the ₹72.49 Cr net proceeds goes to repay loans. "
+            "<strong>Odds, said as odds: about 3 in 4 that it lists above ₹172</strong>. That is a "
+            "judgement from a ~10% haircut-adjusted premium, not a measured rate. One lot is worth "
+            "roughly ₹1,480 if the premium holds. "
+            "<strong>Retail, not sHNI:</strong> a ₹125 Cr issue with a ₹99 Cr fresh slice is small, and "
+            "an sHNI bid of about ₹2 L is a real position in a ₹492 Cr tyre-flap maker on a grey-market "
+            "quote. <b>Provisional, and decided on day 3</b> (3 Dec) against the closing book: QIB "
+            "comfortably subscribed and the premium still at or above 10%, or it is skipped. His call "
+            "either way."
+        ),
+    )
+    integris = replace(
+        integris_o,
+        note=(
+            integris_o.note
+            + " <strong>09:30:</strong> still nothing — ipowatch lists the band as ₹0 / TBA and "
+            "investorgain quotes no premium. Two days to open."
+        ),
+    )
+    siddhivinayak = replace(
+        siddhivinayak_o,
+        gmp="₹20 — 14.08% on ₹142 on both boards this morning (ipowatch was +₹10 overnight)",
+        note=(
+            siddhivinayak_o.note
+            + " <strong>09:30:</strong> ipowatch now prints +₹20 too, so the two boards agree this "
+            "morning. That does not change anything: it is an SME issue and it is not applied for."
+        ),
+    )
+    return [foodlink, matangi, crystal, mahanadi, monomark, integris, siddhivinayak]
+
+
+IPOS_2026_11_25_0930 = _for_nov_25_0930()
+
+LEAD_NOV_25_0930 = (
+    LEAD_NOV_25
+    + " <strong>Re-written at 09:30 on 25 November</strong> on investorgain&rsquo;s morning stamps, "
+    "cross-checked on ipowatch. <strong>Foodlink&rsquo;s premium rose again, &#8377;17 &rarr; "
+    "&#8377;21</strong> (10.99%, ~+8.4%), with both boards agreeing. The call does not move. "
+    "<strong>Matangi Rubber gets its first card.</strong> It is a dated mainboard issue (1&ndash;3 Dec, "
+    "&#8377;163&ndash;172, &#8377;21.5 = 12.50%, ~+9.9%) that the overnight page missed. The call is "
+    "PROVISIONAL, one retail lot, decided on day 3. "
+    "<strong>Monomark has a band, &#8377;60&ndash;65, and the boards now split on its premium</strong> "
+    "(&#8377;17 against &#8377;23), so it stays NO CALL. Crystal is &#8377;19 the day before it lists. "
+    "Mahanadi is still &#8377;0."
+)
+
+FOOTNOTE_NOV_25_0930 = (
+    FOOTNOTE_NOV_25
+    + " <strong>09:30 figures:</strong> investorgain&rsquo;s detail pages carry <b>25-Nov 09:02</b> "
+    "page stamps. The underlying prints are <b>24-Nov 22:02</b> for Foodlink and Crystal and "
+    "<b>25-Nov 08:37</b> for Matangi and Monomark. ipowatch is dated 25 November without a time. "
+    "<b>No subscription figure on this page is live</b>: nothing open here is a mainboard issue, and "
+    "the only book figures are Mahanadi&rsquo;s and Crystal&rsquo;s, which are final. "
+    "<strong>Haircut applied, and said:</strong> Foodlink 10.99% &rarr; ~+8.4%, Matangi 12.50% "
+    "&rarr; ~+9.9%, Crystal 6.99% &rarr; ~+4.4%, Mahanadi 0% &rarr; ~&minus;2.6%. None is applied "
+    "to Monomark, where the boards disagree, or to Integris, which has no band. "
+    "Matangi&rsquo;s band, lot, split and financials are from Chittorgarh&rsquo;s detail page "
+    "(restated consolidated; FY24 standalone). "
+    "<strong>The &ldquo;about 3 in 4&rdquo; odds are judgements, not measurements</strong>: the "
+    "backtest gives the bias (2.6 pts) and the fit (r = 0.87), not a hit rate at a given premium. "
+    "The machine-built IPO section above still says no mainboard issue is open or upcoming. "
+    "<b>Five are dated.</b>"
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -7416,7 +7605,8 @@ BY_DAY = {
     # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_23 / LEAD_NOV_23 stay above.
     "2026-11-23": (IPOS_2026_11_23_0930, LEAD_NOV_23_0930, FOOTNOTE_NOV_23_0930),
     # 24 Nov was an NSE holiday, so there is no page for it; the board moved anyway.
-    "2026-11-25": (IPOS_2026_11_25, LEAD_NOV_25, FOOTNOTE_NOV_25),
+    # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_25 / LEAD_NOV_25 stay above.
+    "2026-11-25": (IPOS_2026_11_25_0930, LEAD_NOV_25_0930, FOOTNOTE_NOV_25_0930),
 }
 
 
