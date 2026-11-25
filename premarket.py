@@ -1441,9 +1441,9 @@ are Monday 23 November&rsquo;s. The six scanners were run against those closes o
 &mdash; SWING 20:31, WEEKLY 20:43, ETF 21:11, ETF_WEEKLY 21:11, STRIKE 21:12, REVERSAL 21:24 IST
 &mdash; and <strong>they were deliberately not re-run for this page</strong>: with no new close there
 is no new input, and a second run would reproduce Monday&rsquo;s list exactly while costing an hour
-of compute. <strong>MarketSmith&rsquo;s pre-market mail for Wednesday had not arrived when this was
-written</strong> (it lands between 08:39 and 09:03), so this page carries their
-<b>23 November evening</b> read and must be refreshed after 09:05.</p>
+of compute. <strong>MarketSmith&rsquo;s pre-market mail for Wednesday arrived at 09:00 and this page has
+been refreshed with it</strong> &mdash; both mails are read in full below. Nothing in it changes the
+breadth reading, which is computed from closes and there has been no close since Monday.</p>
 <p class="note"><strong>The index fell 1.75% and the banks did it.</strong> Nifty
 <b>25,349.65</b>, down 1.75%, opening at 25,929.15 and closing a whisker above its own low of
 25,343.85 &mdash; <b>eleven advances against thirty-nine declines</b> on volume
@@ -1457,7 +1457,7 @@ own regime map has been refusing to buy for a week.</p>
 <div class="scroll"><table><thead><tr><th class="l">reading</th><th class="l">value</th><th class="l">verdict</th></tr></thead><tbody>
 <tr><td class="l">Breadth vs its prior-5 mean</td><td class="l"><b>46.15% against 60.66%</b> &mdash; a <b>14.51-point gap</b>, against 11.54 on Friday. <b>The lowest breadth and the widest gap in the thirty sessions recorded here</b></td><td class="l fail"><span>SHUT</span></td></tr>
 <tr><td class="l">Our computed status</td><td class="l">CONFIRMED_UPTREND on the Nifty, <b>1 distribution day</b> (from 0), attempt day 22, follow-through still dated <b>2 November</b></td><td class="l pass"><span>OPEN</span></td></tr>
-<tr><td class="l">MarketSmith&rsquo;s status</td><td class="l">CONFIRMED UPTREND, <b>3 distribution days</b> &mdash; up from 2, because Monday itself qualified. Fourth session agreeing on the verdict, disagreeing on the count</td><td class="l pass"><span>open</span></td></tr>
+<tr><td class="l">MarketSmith&rsquo;s status</td><td class="l">CONFIRMED UPTREND. Their Monday evening mail counted <b>3 distribution days</b>; <b>Wednesday&rsquo;s pre-market mail counts 2</b> &mdash; one aged out across the holiday, so the session that took them to three has already been partly undone. Fifth session agreeing on the verdict, disagreeing on the count</td><td class="l pass"><span>open</span></td></tr>
 <tr><td class="l">The follow-through date, theirs against ours</td><td class="l">MarketSmith dates it <b>15 October</b>; our record says <b>2 November</b>. Unchanged, unsettled, carried for a sixth session</td><td class="l warn"><span>unresolved</span></td></tr>
 <tr><td class="l">Their own warning</td><td class="l">The 23 Nov mail says in terms that <b>a higher distribution count or a breach of key support would take them to UPTREND UNDER PRESSURE</b>. They are one bad session from downgrading</td><td class="l warn"><span>on notice</span></td></tr>
 </tbody></table></div>
@@ -1559,11 +1559,55 @@ triggers sit a further five percent down at 828.50 and 666.43. <b>That is the ch
 and it is also the change costing money if either keeps falling.</b> Against them, <b>CUPID and
 SGMART cannot lose</b> &mdash; both stopped at entry, SGMART at +10.6%.</p>
 
+<h3>MarketSmith, 25 November 09:00 &mdash; the Wednesday pre-market mail, read in full</h3>
+<p><strong>It arrived at 09:00 and it is a gap-up note against a falling world.</strong> At 08:15 IST
+GIFT Nifty futures were <b>25,754</b> against Monday&rsquo;s close of <b>25,349.65</b> &mdash; about
+<b>404 points, 1.6%</b> &mdash; which would open the index back above where it broke on Monday. <b>Their
+own body quotes two different figures for the same thing</b>, 25,754 in the header and &ldquo;25,728,
+up 204 points&rdquo; in the text; neither is a price anything can be placed against, and both are
+pre-open futures rather than the index.</p>
+<p><strong>Market Pulse CONFIRMED UPTREND, and the distribution count has come down from three to
+<b>two</b></strong> &mdash; one of the three aged out across the holiday. That is the first easing in
+their count in a week, and it moves them a step further from the Uptrend Under Pressure downgrade
+their Monday mail warned about.</p>
+<p class="note"><strong>The global block is the part of this mail that actually changed, and it
+changed violently.</strong> On Monday morning they had <b>14</b> markets in Confirmed Uptrend,
+13 under pressure, 11 in downtrend and 11 in rally attempt. This morning it reads <b>6 &middot; 12
+&middot; 26 &middot; 5</b>. <strong>Twenty-six of the forty-nine markets they track are now in
+Downtrend</strong> &mdash; the United States, the United Kingdom, Japan, Germany, Canada, Australia,
+Hong Kong, Singapore, South Korea, Taiwan. <strong>India is one of six left in Confirmed
+Uptrend</strong>, alongside Mexico, Pakistan, Peru, Qatar and the UAE. A tape that is the last one
+standing is not the same thing as a strong one.</p>
+<p>What they report from overnight: <b>Dow +423.39 to 50,018.70</b>, but <b>S&amp;P 500 &minus;0.5%
+to 7,201.09</b> and <b>Nasdaq &minus;1.5% to 23,733.54</b> as AI names retreated again.
+<b>Asia-Pacific ex-Japan fell 2.3%</b> on Wednesday with <b>South Korea down as much as 5.3%</b>, as
+Washington prepared findings from an excess-capacity trade probe covering sixteen partners.
+<b>US consumer confidence jumped to 103.3 from 91.9</b>, the highest since January 2025 against a
+92.5 forecast, which is feeding December rate-hike bets. <b>Brent $90.97</b> (&minus;43 cents),
+<b>spot gold $3,544.54</b> (&minus;0.3%).</p>
+<p><strong>Their stated driver for India is flow, not earnings:</strong> foreign investors have bought
+<b>a record $14.28bn of Indian shares in November</b>, rotating out of global AI names, with US tariff
+risk the standing caveat. <b>That is the same flow this service measured over 166 months and found no
+predictive edge in</b>, which is why it is recorded here and not acted on.</p>
+<p><strong>The Buy Watchlist is ten names this morning</strong>, read off the mail body rather than any
+parser &mdash; Monday&rsquo;s eight, plus <b>ITD Cementation India</b> and <b>PNB Housing Finance</b>:
+Raghav Productivity Enhancers, Rubicon Research, Acutaas Chemicals, Sudeep Pharma,
+<b>Lenskart Solutions</b>, <b>MCX</b>, Nykaa, Union Bank of India, ITD Cementation, PNB Housing.
+<strong>Lenskart and MCX are still ours rather than theirs</strong> &mdash; one held in all three
+accounts near its stop, one stopped out on Monday.</p>
+<p class="note"><strong>Their advice is unchanged and we are still not taking it.</strong> The mail
+repeats Monday&rsquo;s line in the same words &mdash; focus on leadership, <b>add exposure
+progressively</b>, stay disciplined. <strong>The disagreement is now in its seventh session and it is
+worth stating plainly:</strong> MarketSmith reads the index and tells you to add; this page reads how
+many stocks are participating and refuses. On Monday the index fell 1.75% on eleven advances against
+thirty-nine declines, which is what the second reading had been warning about for a week.
+<b>A gap-up open changes neither reading</b> &mdash; breadth is computed from closes, and there has not
+been one since Monday. <strong>Entries stay blocked and nothing on this page may be placed.</strong></p>
+
 <h3>MarketSmith, 23 November 17:17 &mdash; read in full</h3>
-<p><strong>One mail, and it is the only one that exists.</strong> Nothing came on Tuesday because the
-market was shut, and <strong>Wednesday&rsquo;s pre-market mail had not arrived when this page was
-written</strong> &mdash; measured over eight sessions it lands between <b>08:39 and 09:03</b>, so this
-section is Monday evening&rsquo;s and the page has to be refreshed after 09:05.</p>
+<p><strong>Monday evening&rsquo;s Big Picture &mdash; the last one written against a real
+session.</strong> Nothing came on Tuesday because the market was shut, and Wednesday&rsquo;s
+pre-market mail is the section above.</p>
 <p><strong>Their Market Pulse is CONFIRMED UPTREND with the distribution count up from two to
 three</strong>, because Monday itself qualified: the Nifty fell <b>1.75% to 25,349.65</b> on volume
 <b>21.17% higher at 518.92m</b>, with <b>11 advances against 39 declines</b>. It opened at 25,929.15
