@@ -1641,6 +1641,136 @@ be bought while breadth is shut.</p>
 """
 
 
+
+PREMARKET_2026_11_26 = """
+<h2 id="pre-session-read">Pre-session read</h2>
+<p class="lead">Thursday 26 November, written before the open on Wednesday&rsquo;s close. <strong>The Nifty rose 1.85% to 25,819.25 &mdash; its best session in weeks &mdash; and the market got narrower, not broader.</strong> The share of the scanned universe holding above its own 20-day average fell again, to <b>42.52%</b> against a five-session mean of <b>56.90%</b>. That is the <strong>lowest breadth reading this page has ever recorded</strong>, lower than Monday&rsquo;s 46.15%, and it is the <strong>eighth consecutive session</strong> on which the market half our setups live in has failed its own breadth test.</p>
+<p class="sub">Against that: <strong>78.0% of the Nifty 50 closed above its own 20-day average</strong>, and <strong>43 of the 50 are above their 50-day average</strong>. Forty-two of the fifty rose on Wednesday against eight that fell. On the same day, <b>the Smallcap 100 fell 0.44%</b>.</p>
+<p class="note"><strong>Both of those numbers are now on this page, side by side, for the first time.</strong> Until today the report carried one breadth line, computed across everything scanned, and it has been saying &ldquo;no&rdquo; for eight sessions while the index printed green days. The second line, computed over the Nifty 50 alone, is what the index has actually been doing. <b>A 35-point gap between the two is not a market with one story in it.</b> Nothing was bought on this reading and nothing is wired to it &mdash; it is being recorded first and judged later, which is the rule here for any new measurement.</p>
+
+<h3 class="sub" id="pre-gates">The two gates</h3>
+<div class="scroll"><table><thead><tr><th class="l">reading</th><th class="l">value</th><th class="l">verdict</th></tr></thead><tbody>
+<tr><td class="l"><b>Market breadth</b>, whole scanned universe</td><td class="l"><b>42.52%</b> above their 20-day average, against a five-session mean of <b>56.90%</b> &mdash; a <b>14.4-point</b> shortfall, the widest yet</td><td class="l fail"><span>SHUT</span></td></tr>
+<tr><td class="l"><b>The index trend</b></td><td class="l">Nifty 50 in a <b>Confirmed Uptrend</b>, one distribution day, day 23 of the advance from the 2 November follow-through. MarketSmith agrees &mdash; their count is three</td><td class="l pass"><span>OPEN</span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>One gate open, one shut, so nothing is bought.</strong> This is the eighth session in a row in that state. It is worth being precise about what is being refused: not a bad index, not a downtrend &mdash; the index gate has been open throughout &mdash; but a market in which <b>fewer than half the names we would choose from are holding their own short-term average</b>. Entries also remain <strong>halted by hand</strong>, separately from either gate, from Monday&rsquo;s review. Trailing stops, exits and reconciliation continue to run; stopping entries is not stopping protection.</p>
+<p class="note">The ten readings behind that first row, newest first: <b>42.52%</b> (vs 56.90) &middot; 46.15 (60.66) &middot; 46.15 (60.66) &middot; 53.59 (65.13) &middot; 60.25 (68.29) &middot; 59.52 (70.35) &middot; 65.79 (69.65) &middot; 65.11 (69.42) &middot; <span class="pass">74.94 (65.42)</span> &middot; <span class="pass">75.95 (62.65)</span>. <b>The last two green readings are 12 and 13 November.</b> The deterioration has been continuous since, and Wednesday&rsquo;s 1.85% index day did not interrupt it.</p>
+<h3 class="sub" id="pre-indices">What Wednesday actually did</h3>
+<p class="sub">MarketSmith&rsquo;s sector moves for the <strong>25 November</strong> session, as their
+evening Big Picture prints them. <strong>Twelve of fifteen sectors closed green</strong> &mdash; the
+mirror image of Monday, when only three did.</p>
+<div class="scroll"><table><thead><tr><th class="l">index</th><th>25 Nov move</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>Nifty FMCG</b></td><td class="pass">+3.79%</td><td class="l">the best sector of the day, with <b>HINDUNILVR +6.08%</b> and <b>NESTLEIND +4.03%</b> inside it</td></tr>
+<tr><td class="l">Pharma &middot; Healthcare</td><td class="pass">+2.38% &middot; +2.13%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l"><b>Private Bank &middot; Financial Services &middot; Bank</b></td><td class="pass">+2.21% &middot; +2.17% &middot; +1.79%</td><td class="l"><b>the banks took back most of Monday&rsquo;s 3.17% fall in one session</b></td></tr>
+<tr><td class="l">Auto &middot; IT &middot; PSE</td><td class="pass">+1.16% &middot; +1.12% &middot; +1.03%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l">PSU Bank &middot; Energy &middot; Realty</td><td class="pass">+0.37% &middot; +0.04% &middot; +0.02%</td><td class="l">green, but barely</td></tr>
+<tr><td class="l">Consumer Durables</td><td class="bad">&minus;0.13%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l"><b>Nifty Metal</b></td><td class="bad">&minus;2.04%</td><td class="l">down again &mdash; <b>TATASTEEL &minus;2.27%</b>, <b>HINDALCO &minus;1.17%</b>, <b>JSWSTEEL &minus;0.72%</b>. Two heavy down sessions in a row for the worst-rated sector on our own map</td></tr>
+<tr><td class="l"><b>Nifty Media</b></td><td class="bad">&minus;4.44%</td><td class="l">the worst sector of the day by a distance</td></tr>
+<tr><td class="l"><b>Midcaps &middot; Smallcaps</b></td><td class="l"><span class="pass">+0.30%</span> &middot; <span class="bad">&minus;0.44%</span></td><td class="l"><b>This is the row that matters.</b> The Nifty rose 1.85%; midcaps managed +0.30% and <b>smallcaps fell</b>. Monday&rsquo;s one session of broad-market outperformance did not repeat</td></tr>
+</tbody></table></div>
+<p class="note"><strong>Read the last row against the first line of this page.</strong> Wednesday was
+a <b>42-advance, 8-decline session inside the Nifty 50</b> &mdash; about as broad as a large-cap day
+gets &mdash; and on the same day the <b>smallcap index fell</b>. That is not a contradiction, it is
+the whole story of this market in one line: <strong>the breadth that exists is large-cap breadth,
+and the half of the market this service&rsquo;s setups live in did not take part.</strong>
+<b>That is exactly why there are two breadth readings on this page from today</b> &mdash; see below.
+Biggest Nifty gainers: HINDUNILVR +6.08%, TATACONSUM +4.66%, HDFCLIFE +4.58%, NESTLEIND +4.03%,
+INDIGO +3.57%, TRENT +3.48%, HDFC Bank +3.47%, ICICI +3.44%, Bajaj Finance +3.27%. Biggest fallers:
+Tata Steel &minus;2.27%, Max Health &minus;1.22%, Hindalco &minus;1.17%, JSW Steel &minus;0.72%,
+Shriram Finance &minus;0.60%.</p>
+
+<h3 class="sub" id="pre-largecap">New on this page: a second breadth reading, and a large-cap board</h3>
+<p class="note"><strong>Three things were added to this report overnight, and this is the first
+morning they appear.</strong> The first is a <b>second market-breadth line computed over the Nifty 50
+alone</b>, drawn beside the existing one, which is computed over the whole scanned universe. The two
+have been telling different stories for three weeks and until today the page only carried one of
+them. The second is a <b>large-cap board</b>: every Nifty-50 name trading above its own 50-day
+average, with how far it sits from its 20-day and 10-day averages, how far it is below its own
+52-week high, its sector and its latest headline, <b>ranked nearest its own high first</b>. The
+third is a <b>candle chart for each of those names</b>, drawn the same way the TIS setups are drawn.
+<strong>None of it is a buy list and none of it is wired to the gate.</strong> It is there to be
+measured first: the rule here is that a reading earns a gate only after it has been recorded long
+enough to be tested, and this one has one day of history. The index membership is NSE&rsquo;s own
+<b>ind_nifty50list.csv</b>, read on 26 November, and the page says so rather than guessing at
+&ldquo;the fifty largest&rdquo;.</p>
+<h3 class="sub" id="pre-regime">Where each index and sector stands, on our own count</h3>
+<div class="scroll"><table><thead><tr><th class="l">index</th><th>dist. days</th><th class="l">our status</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>Nifty 50</b></td><td>1</td><td class="l pass"><span>Confirmed Uptrend</span></td><td class="l">day 23, from the 2 November follow-through. MarketSmith also Confirmed Uptrend, their count 3</td></tr>
+<tr><td class="l">Nifty Next 50</td><td>2</td><td class="l pass"><span>Confirmed Uptrend</span></td><td class="l">day 22, same follow-through date</td></tr>
+<tr><td class="l">Midcap 150</td><td>2</td><td class="l pass"><span>Confirmed Uptrend</span></td><td class="l">day 22</td></tr>
+<tr><td class="l"><b>Smallcap 100</b></td><td><b>8</b></td><td class="l warn"><span>Rally Attempt</span></td><td class="l"><b>Eight distribution days, up from seven, and it has never confirmed.</b> Day 22 of an attempt that has not produced a follow-through. This is the index our setups actually come from</td></tr>
+</tbody></table></div>
+<p class="note"><strong>The four rows disagree, and the disagreement is the point.</strong> Three large-cap indices are in confirmed uptrends; the small-cap index has been attempting a rally for twenty-two sessions without confirming it, and is accumulating distribution while it does. Sector-by-sector on our own count: <b>banks, PSU banks, consumer durables and FMCG are clean</b> at zero distribution days; auto, healthcare, pharma and realty carry one each. <b>IT and metal carry nine each</b> and <b>energy and media six each</b> &mdash; all four on Rally Attempt rather than confirmed.</p>
+<p class="note"><strong>Four open disagreements with MarketSmith, unchanged from Monday and still unresolved.</strong> They read <b>energy</b> and <b>media</b> as Confirmed Uptrends where we read Rally Attempts; they read <b>IT</b> and <b>metal</b> as Uptrend Under Pressure where we read Rally Attempt on nine distribution days each. Our reading is the stricter one in all four and ours is what the service obeys. <b>Which reading should bind when the two disagree is a decision that has been put to Divyansh and not yet taken</b>, and it is recorded here each morning until it is.</p>
+
+<h3 class="sub" id="pre-today">What the overnight scans found</h3>
+<div class="scroll"><table><thead><tr><th class="l">scan</th><th class="l">what came back</th><th class="l">result</th></tr></thead><tbody>
+<tr><td class="l"><b>Daily</b></td><td class="l"><b>1,063 names scanned</b>, 604 with a stop that could be derived, 34 clearing seven of the eight checks, <b>28 cleared all of them</b></td><td class="l warn"><span>28, none placeable</span></td></tr>
+<tr><td class="l">Weekly</td><td class="l">578 candidates</td><td class="l"><span>0</span></td></tr>
+<tr><td class="l">ETF &middot; ETF weekly</td><td class="l">18 and 19 funds</td><td class="l"><span>0 &middot; 0</span></td></tr>
+<tr><td class="l">The other two</td><td class="l">Both ran overnight; neither is on the list of strategies this service places from</td><td class="l faint"><span>reporting only</span></td></tr>
+</tbody></table></div>
+<p class="note">The 28 that cleared every check, which is the longest such list in a fortnight: CUPID, TFCILTD, FREDUN, RPEL, KRISHANA, SHADOWFAX, TIMEX, SHIVAUM, GLAND, DIVISLAB, SHUKRAPHAR, KPL, RAYMOND, SBC, GCSL, MBAPL, GLOBAL, UNITEDPOLY, SAILIFE, PVRINOX, LENSKART, PTCIL, LUMAXTECH, NAVINFLUOR, ISFT, ASKAUTOLTD, LTTS, PDSL. <strong>None of them will be bought today.</strong> Six are names already held. The market-wide reading above refuses the lot of them, and entries are halted by hand on top of that. <b>Twenty-eight clean setups on the day breadth printed its lowest reading on record is itself the thing to notice</b> &mdash; individual charts keep setting up while the market underneath them keeps thinning, which is the configuration that produced the losses this halt followed.</p>
+<p class="note">Separately, the running record of what the refusals cost now holds <b>325 setups</b> that were refused and then tracked: <b>169 never traded through their trigger at all</b>, 30 would have been stopped out, 126 would still be open, 22 have no bars yet. That record is kept so the refusal rule can eventually be judged on measurement rather than on how it feels during a week like this one.</p>
+
+<h3 class="sub" id="pre-risk">The open book, and what is closest to being stopped out</h3>
+<div class="scroll"><table><thead><tr><th class="l">symbol</th><th>position</th><th>to its stop</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>SONACOMS</b></td><td class="bad">&minus;3.9%</td><td class="bad"><b>1.3%</b></td><td class="l"><b>The tightest in the book.</b> One ordinary down session takes it out. MarketSmith holds it too, and marked it &minus;0.32% on Wednesday</td></tr>
+<tr><td class="l">ROSSTECH</td><td class="bad">&minus;5.1%</td><td class="warn">2.3%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l">LENSKART</td><td class="bad">&minus;1.9%</td><td class="warn">2.6%</td><td class="l">On MarketSmith&rsquo;s buy watchlist this morning, and in their rank-8 industry group, while sitting 2.6% above our stop</td></tr>
+<tr><td class="l">CUPID</td><td class="pass">+5.9%</td><td class="l">stop at cost</td><td class="l">The stop has been trailed to the entry price &mdash; the position can no longer lose money</td></tr>
+<tr><td class="l">AARTIPHARM &middot; PVRINOX</td><td class="pass">+4.9% &middot; +4.9%</td><td class="l">&mdash;</td><td class="l">The two best open positions</td></tr>
+<tr><td class="l">RATNAVEER &middot; SBC</td><td class="pass">+5.8% &middot; +2.3%</td><td class="l">&mdash;</td><td class="l">&mdash;</td></tr>
+</tbody></table></div>
+<p class="note"><strong>33 positions are open across the three accounts, 14 of them on stops that have already been trailed up.</strong> Two rows carry no stop at all and <b>both are LIQUIDCASE</b> &mdash; the parking fund, which never carries one and is not a trade. That is worth stating plainly rather than leaving a &ldquo;no stop&rdquo; count on the page to read as an alarm: <b>there is no unprotected equity position in the book.</b></p>
+<p class="note"><strong>Two things on the book are open and waiting on Divyansh, not on the market.</strong> First, <b>PTCIL filled on 25 November in the akul account alone</b> &mdash; a single share at 24,675, against 24,453 when the book was read this morning. Every other name in the book is held in all three accounts at each account&rsquo;s own size, so a one-account fill is a break in that rule and is being flagged rather than quietly corrected. It is not unprotected: a stop is resting against it, structurally placed at 23,461. Second, <b>SHUKRAMED has no usable price series</b> this morning, so its rows show no last price, no move and no chart anywhere on this page; the position itself is unaffected, the display is not.</p>
+<h3>MarketSmith, 25 November &mdash; both mails read in full</h3>
+<p><strong>The evening Big Picture, 16:52.</strong> Their Market Pulse is
+<strong>CONFIRMED UPTREND</strong> with the distribution count at <b>three</b>, unchanged from
+Monday evening &mdash; Wednesday was an up day on higher volume, which adds nothing to a
+distribution count. The Nifty rose <b>1.85% to 25,819.25</b>, opening at 25,658.35 against Monday&rsquo;s
+25,349.65 close, high 25,951.65, low 25,619.00, on volume <b>2.74% higher at 533.14m</b>, with
+<b>42 advances against 8 declines</b>. The Sensex rose 1.82% to 83,938.28. It closed
+<b>5.47% above its 21-day average</b>, <b>9.55% above the 50-day</b> and
+<b>2.10% below its 52-week high</b> &mdash; against 4.27%, 7.85% and 3.82% on Monday, so one session
+undid most of the pullback and then some. <b>Midcap 100 +0.30%, Smallcap 100 &minus;0.44%.</b></p>
+<p>Their sector block for the session: FMCG <b>+3.79%</b>, Pharma +2.38%, Private Bank +2.21%,
+Financial Services +2.17%, Healthcare +2.13%, Bank +1.79%, Auto +1.16%, IT +1.12%, PSE +1.03%,
+PSU Bank +0.37%, Energy +0.04%, Realty +0.02%; against Media <b>&minus;4.44%</b>, Metal
+<b>&minus;2.04%</b> and Consumer Durables &minus;0.13%.</p>
+<p><strong>No change to the model portfolio, which closed &minus;0.93%</strong> on a day the index
+rose 1.85% &mdash; worth noticing on its own: CORONA +3.37, TVSMOTOR +1.81, RADICO +1.35,
+GROWW +0.47, TITAN +0.14, INDHOTEL &minus;0.24, SHRIPISTON &minus;0.31, SONACOMS &minus;0.32,
+KARURVYSYA &minus;1.39, WELCORP &minus;1.64, NAVINFLUOR &minus;1.95, COFORGE &minus;3.84,
+TIPSMUSIC &minus;5.00, ATHERENERG &minus;5.42. <b>Eleven of fourteen names fell on a day the Nifty
+gained 1.85%.</b> Their own book is positioned where the money was not.</p>
+<p class="note">Their improving industry groups, ranks under 40, with the names they attach:
+Medical-Ethical Drugs <b>rank 5</b> (CORONA, ALIVUS), Retail-Specialty <b>8</b> (LENSKART &mdash;
+which we hold), Food-Dairy 9, Medical-Supplies 11 (EMCURE), Computer-Hardware 12 (REDINGTON),
+Leisure-Lodging 15 (INDHOTEL, THELEELA, LEMONTREE), Airline 16 (INDIGO), Retail-Internet 20
+(ETERNAL, ZETWERK, CARTRADE), Leisure-Movies 21 (PVRINOX &mdash; which we hold &mdash; SAREGAMA,
+TIPSMUSIC), Consumer Products-Electronic 22 (LGEINDIA), Media-Radio/TV 23, Jewelry 24,
+Medical-Products 26, Banks-Money Center 27, Consumer Services-Education 28. <b>Security/Safety has
+dropped out of the under-40 list</b>, which it led at rank 3 on Monday &mdash; that is the group
+CPPLUS sits in.</p>
+<p><strong>The 09:00 pre-market mail, same day.</strong> GIFT Nifty was <b>25,754 at 08:15</b> before
+the open. The line worth keeping from it: <strong>FIIs bought a record $14.28 bn of Indian shares in
+November</strong>. Their <strong>Buy Watchlist ran to ten names</strong>, read off the mail body
+rather than any parser &mdash; Raghav Productivity Enhancers, Rubicon Research, Acutaas Chemicals,
+Sudeep Pharma, Lenskart Solutions, Multi Commodity Exchange of India, FSN E-Commerce (Nykaa),
+Union Bank of India, ITD Cementation India and PNB Housing Finance. <b>Two of those are already our
+problem rather than our opportunity</b>: we hold LENSKART, and MCX is the name we were stopped out
+of on Monday. Their global board has <strong>India in a Confirmed Uptrend with only five other
+countries</strong>, against <b>26 in a Downtrend, the United States among them</b>.</p>
+<p class="note"><strong>A note on the evening mail&rsquo;s own digest.</strong> The parser-written
+summary line at the top of that message reads &ldquo;BUY WATCHLIST (23)&rdquo;, which is wrong &mdash;
+the body lists ten. <b>This is the reason every one of these mails is read as prose and never from a
+parser</b>, including parsers written here. A quiet field or a wrong count in a digest is not
+evidence of anything; the body is.</p>
+"""
+
 BY_DAY: dict[str, str] = {
     "2026-11-12": PREMARKET_2026_11_12,
     "2026-11-16": PREMARKET_2026_11_16,
@@ -1651,6 +1781,7 @@ BY_DAY: dict[str, str] = {
     "2026-11-23": PREMARKET_2026_11_23,
     # 24 Nov was an NSE holiday; the 25th is built on the 23rd's close.
     "2026-11-25": PREMARKET_2026_11_25,
+    "2026-11-26": PREMARKET_2026_11_26,
 }
 
 
