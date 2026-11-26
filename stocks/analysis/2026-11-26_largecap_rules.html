@@ -1,0 +1,820 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Seven entry points, five stops, seven exits and two preconditions, replayed over 715 sessions of Nifty-50 bars against a buy-and-hold benchmark — set beside what the published literature on large-cap entry and exit actually claims, and what sample size it claims it on."><title>Where to buy a large cap</title><style>/* Trading Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  /* Chart series. Categorical slots, deliberately separate from the semantic
+     accents: a chart that paints its series with --blue and --amber inherits
+     whatever those two mean in the current theme, and the public book's own
+     theme maps --blue onto its gold -- which put two near-identical golds on a
+     two-series chart (dE 4.4, against a floor of 15). A series colour's only
+     job is to be told apart from the next one, so it gets its own token.
+     Validated on this canvas: dE 33.0 normal, 29.9 protan. */
+  --series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#b9c4d6;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* folded sections: reference material, open on demand */
+/* The heading's margin moves onto the <details> so the summary is a single
+   flex line: left on the h2 it pushes the row down and the count pill floats
+   above the title it belongs to. */
+details.folded{scroll-margin-top:64px;margin:34px 0 6px}
+details.folded>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded>summary::-webkit-details-marker{display:none}
+details.folded>summary h2{margin:0}
+details.folded>summary h2::after{content:"\25B8";display:inline-block;margin-left:10px;font-size:14px;
+  color:var(--muted);transition:transform .15s ease;transform-origin:center}
+details.folded[open]>summary h2::after{transform:rotate(90deg)}
+.folded-hint{color:var(--muted);font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+details.folded>summary:hover h2{color:var(--blue-ink)}
+details.folded>summary:hover h2::after{color:var(--blue)}
+details.folded>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+/* Printing and find-on-page must not depend on somebody having clicked. An
+   archived page that hides rows the reader cannot reach is a page that lost
+   them. */
+@media print{details.folded>summary h2::after{display:none}
+  details.folded:not([open])>*{display:block}}
+/* a folded table inside an open section: the caption is the control */
+details.folded-table{margin:16px 0 8px}
+details.folded-table>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded-table>summary::-webkit-details-marker{display:none}
+details.folded-table>summary .sub{margin:0}
+details.folded-table>summary .sub::after{content:"\25B8";display:inline-block;margin-left:8px;
+  font-size:12px;color:var(--muted);transition:transform .15s ease}
+details.folded-table[open]>summary .sub::after{transform:rotate(90deg)}
+details.folded-table>summary:hover .sub{color:var(--blue-ink)}
+details.folded-table>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+details.folded-table>.scroll,details.folded-table>.cards{margin-top:8px}
+@media print{details.folded-table>summary .sub::after{display:none}
+  details.folded-table:not([open])>*{display:block}}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+/* Breadth charts carry their own aspect ratio in the viewBox: the market one
+   spans the grid, the sector multiples fill one cell, and both are drawn from
+   a viewBox matching that width so their text renders at the same size. */
+.fig svg.breadth{display:block;width:100%;height:auto}
+.fig--wide{grid-column:1/-1}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--series-1:#2563eb;--series-2:#b45309;--series-neutral:#334155;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html.dark{color-scheme:dark;--canvas:#0f172a;--card:#111827;--head:#172033;--line:#293548;--line-strong:#475569;--ink:#f8fafc;--ink-2:#cbd5e1;--muted:#94a3b8;--faint:#64748b;--blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#172554;--blue-100:#1e3a8a;--green:#34d399;--green-50:#052e2b;--green-100:#064e3b;--green-line:#065f46;--red:#fb7185;--red-50:#450a0a;--red-100:#7f1d1d;--red-line:#991b1b;--amber:#fbbf24;--amber-50:#422006;--amber-100:#713f12;--amber-line:#92400e;--series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#cbd5e1;--canvas-fade:rgba(15,23,42,0);--shadow:none}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(520px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(37,99,235,.10),transparent 68%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%);transition:background .45s ease-out}
+body::before{display:none}.dark body{background-image:radial-gradient(560px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(96,165,250,.15),transparent 68%),radial-gradient(circle at 85% 22%,rgba(167,139,250,.07),transparent 22%)}.wrap{max-width:none;width:100%;padding:22px 32px 80px}.mb-nav{box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:9px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}.mb-theme{margin-left:auto;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:17px;cursor:pointer}.mb-theme:hover{background:var(--blue-50);color:var(--blue)}body>.mb-nav{min-height:64px;margin-bottom:28px;padding:13px 38px 14px}header.top{position:relative;overflow:hidden;margin:0 0 28px;padding:30px 32px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--blue-50) 88%,var(--card)),var(--card) 62%,color-mix(in srgb,var(--blue) 8%,var(--card)));box-shadow:var(--shadow)}header.top::after{content:"";position:absolute;width:310px;height:310px;right:-100px;top:-180px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 18%,transparent),transparent 68%);pointer-events:none}header.top>*{position:relative;z-index:1}.wrap>.eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--blue-50);border:1px solid var(--blue-100)}.wrap>.eyebrow+h1{margin-top:12px}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+/* Institutional presentation: information hierarchy over decoration. */
+html.dark{--canvas:#0d0d0c;--card:#171715;--head:#1d1c19;--line:#35332d;--line-strong:#514b3c;--ink:#f4f0e7;--ink-2:#d0c7b8;--muted:#9f9686;--faint:#70695e;--blue:#d7a84e;--blue-ink:#f1ca7a;--blue-50:#272114;--blue-100:#46371d;--green:#72c98c;--green-50:#142419;--green-100:#1c3825;--green-line:#31553a;--red:#ec7d70;--red-50:#321816;--red-100:#51231f;--red-line:#74342c;--amber:#e4b759;--amber-50:#302713;--amber-100:#4b3c1c;--amber-line:#70571f;--series-1:#d7a84e;--series-2:#8fb8e8;--series-neutral:#d0c7b8}.dark body{background-color:#0d0d0c;background-image:linear-gradient(rgba(216,168,78,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,168,78,.035) 1px,transparent 1px),radial-gradient(700px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(216,168,78,.12),transparent 66%)}.dark .mb-nav{border-bottom-color:#35332d}.dark .mb-nav b{border-radius:6px;background:#f4f0e7;color:#171715}.dark .mb-theme{border-color:#514b3c}.dark header.top{border-color:#514b3c;background:linear-gradient(135deg,#1b1a17,#151512 68%,#241e14)}.dark .glance>div,.dark .card,.dark figure,.dark .tbl-scroll,.dark .stat,.dark .act,.dark .mrow,.dark .scroll{border-color:#35332d;background:#171715}.dark nav.toc a{border-radius:5px;box-shadow:none}.dark h1,.dark h2,.dark h3{letter-spacing:-.035em}.dark .plate{border-radius:8px}.dark .plate,.dark .plate.open{box-shadow:none}.dark .wrap>.eyebrow{border-radius:4px}.dark td,.dark .prose p,.dark p{color:#d0c7b8}.dark .stamp,.dark .lede{color:#9f9686}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}body>.mb-nav{min-height:58px;padding:10px 16px 11px}h1{font-size:30px}}
+/* Bridges the standing analyses onto the renderer's theme.
+   Every colour is a reference into theme.css so these pages follow a palette
+   swap with the rest. The four literals that were here until 2026-09-26 - two
+   table backgrounds and the tinted gain/loss fills - are why the first dark
+   build had white table heads on the six-month review. */
+:root{
+  --paper:var(--canvas);--ink-soft:var(--ink-2);--ink-faint:var(--faint);
+  --rule:var(--line-strong);--rule-soft:var(--line);
+  --gain:var(--green);--gain-fill:var(--green-100);
+  --loss:var(--red);--loss-fill:var(--red-100);
+  --accent:var(--blue);--accent-soft:var(--blue-50);
+  --maxw:1180px;--prose:78ch;
+}
+body{font-family:var(--sans);font-size:15px}
+.wrap{max-width:var(--maxw)}
+header.top{margin:0 0 22px}
+.rule-top{height:3px;background:var(--blue);border-radius:2px;width:52px;margin:0 0 14px}
+h1{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 8px}
+h1 br{display:none}
+.lede{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:var(--prose);margin:0 0 12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
+.meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;box-shadow:var(--shadow)}
+section{margin:34px 0 0}
+.sec-head{margin:0 0 8px}
+.sec-head .eyebrow{color:var(--blue);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sec-head h2,h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;padding-left:12px;
+  border-left:4px solid var(--blue);line-height:1.25}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:22px 0 6px;color:var(--ink)}
+.prose{max-width:var(--prose)}
+.prose p,p{font-size:14.5px;line-height:1.68;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:650}
+.muted{color:var(--muted)}
+.mono,.num,td.sym{font-family:var(--mono)}
+.gain{color:var(--green);font-weight:650}
+.loss{color:var(--red);font-weight:650}
+/* the headline band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0 26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 12px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.stat .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat .v{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:5px}
+.stat .s{font-size:11.5px;color:var(--faint);margin-top:3px}
+/* figures and charts */
+figure{margin:16px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px}
+.chart-scroll{overflow-x:auto}
+figure .cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:var(--prose)}
+figure .cap b{color:var(--ink);font-weight:650}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{font-family:var(--sans)}
+/* tables */
+.tbl-scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:14px 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;
+  border-bottom:1px solid var(--line-strong);color:var(--muted);font-weight:600;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+th:first-child,td:first-child{text-align:left}
+td.sym{font-weight:700;color:var(--ink)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{font-weight:700;color:var(--ink);background:var(--head);border-top:1px solid var(--line-strong)}
+/* callouts */
+.note{background:var(--blue-50);border:1px solid var(--blue-100);border-left:5px solid var(--blue);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.note .eyebrow{color:var(--blue-ink);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.note p{margin:6px 0 0;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note.bad{background:var(--red-50);border-color:var(--red-100);border-left-color:var(--red)}
+.note.bad .eyebrow{color:var(--red)}
+.note.good{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.note.good .eyebrow{color:var(--green)}
+/* the recommendations */
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px}
+.act h3{margin:0 0 6px;font-size:15px}
+.act p{font-size:13px;margin:6px 0 0}
+.act .val{font-size:20px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.act .val.n{color:var(--red)}
+/* month rows */
+.months{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 15px}
+.mrow .mk{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.mrow .mk .mn{font-weight:700;color:var(--ink)}
+.mrow .mk .mo{color:var(--muted);font-size:12.5px}
+.mrow .mk .mp{font-weight:700;font-variant-numeric:tabular-nums}
+.mrow p{margin:6px 0 0;font-size:13px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:var(--prose)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr}}
+</style></head><body><nav class="mb-nav" aria-label="Trading Book"><a href="../../"><b aria-hidden="true">↗</b><span>Trading Book</span></a><button class="mb-theme" type="button" aria-label="Switch to dark theme" title="Change theme">◐</button></nav><script>(function(){try{if(localStorage.getItem('trading-book-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',function(e){document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px')},{passive:true});var b=document.querySelector('.mb-theme');if(!b)return;function s(){var d=document.documentElement.classList.contains('dark');b.textContent=d?'☀':'◐';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')}s();b.addEventListener('click',function(){document.documentElement.classList.toggle('dark');try{localStorage.setItem('trading-book-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}s()})})();</script>
+<main class="wrap"><header class="top"><div class="rule-top"></div>
+<h1>Where to buy a large cap</h1>
+<p class="lede">The daily report has listed every Nifty&nbsp;50 member above its 50-day average, with its distance to the 20, the 10 and its own 52-week high. It reports. It gates nothing, and nothing in this service had ever measured whether any of those readings is a better moment to buy than any other. This is that measurement &mdash; seven entry points, five stops, seven ways of selling and the two preconditions you asked for, replayed together over every index member we can price &mdash; set beside what the published literature actually claims, and what sample size it claims it on.</p>
+<div class="meta"><span>26 November 2026</span><span>Nifty 50 &middot; 715 sessions</span><span>980 combinations</span><span>one committed command, re-runnable</span></div></header>
+
+<div class="plate"><div class="state">The verdict, before the detail</div>
+<p><b>Nothing here earns a gate, and I am proposing none.</b> Over 715 sessions from January 2024 to yesterday, every one of the 980 combinations lost money, while simply buying all 48 priceable index members and holding them returned <b>+0.4%</b>. Worse than that: the control &mdash; <em>buy on any session at all</em> &mdash; had the best return per trade of any entry rule tested. Not one of the six chart conditions picked a better moment than entering at random.</p>
+<p><b>Your two preconditions do move the book, and not for a reason worth owning.</b> Requiring positive market breadth and a positive sector cuts the signals by 90%, and a book that takes a tenth as many trades loses a tenth as much: mean book return improves from &minus;14.8% ungated to &minus;6.6% with both conditions on. Per trade it gets <em>worse</em> &mdash; &minus;0.47R against &minus;0.31R. And a permutation that keeps the gate's run lengths and its share of positive days but destroys its alignment with what happened next beat the real gate <b>294 times in 300 (p&nbsp;=&nbsp;0.980)</b>. The gate's content here is that it trades less, not that it trades better.</p>
+<p><b>And the reason given for wanting large caps does not hold.</b> You said small caps are not running while large caps are. On our own closes, on the same sessions, non-index names returned <b>+15.4%</b> in calendar 2026 against the index members' <b>+7.1%</b>, with a similar share of each cohort up. Small and mid caps are running; large caps are the laggard. If our small-cap book has not kept up, that is a selection problem, and it does not get fixed by rotating into the cohort that returned less.</p>
+<p>Two effects did survive everything: <b>wider stops lose less, monotonically</b>, and <b>moving-average trails are the worst exits on book return</b> &mdash; they cut the loser and the winner alike. Both run against rules we currently use.</p></div>
+
+<nav class="toc" aria-label="Sections">
+<a href="#published">1 &middot; What the internet publishes</a>
+<a href="#books">2 &middot; What the books claim</a>
+<a href="#method">3 &middot; How this was measured</a>
+<a href="#population">4 &middot; What each rule fires on</a>
+<a href="#grid">5 &middot; The grid</a>
+<a href="#effects">6 &middot; Main effects</a>
+<a href="#split">7 &middot; Period split &amp; permutation</a>
+<a href="#size">8 &middot; Large plus small</a>
+<a href="#verdict">9 &middot; What I would do</a>
+</nav>
+
+<h2 id="published">1 &middot; What is actually published, and how thin it is</h2>
+
+<p>The brief was to read the literature before measuring anything, so this section is what the web actually carries on where a large cap should be bought, stopped and sold &mdash; with the sample size each source reports, where it reports one. The short version is that almost nothing here is strong enough to act on, and the two results closest to our own question point the <em>opposite</em> way to the premise.</p>
+
+<h3 id="pub-entry">Where to buy</h3>
+
+<p>The pullback-to-a-moving-average entry is the most written-about and the worst evidenced. <a href="https://investingpaths.com/pullback-trading-strategy">Investing Paths</a> tested a 50-EMA pullback behind a 200-day trend filter across 22 US large caps and sector ETFs: <strong>173 trades, a 34.1% win rate, and it beat buy-and-hold in zero of the 22 names.</strong> The authors blame the fixed 2R target rather than the entry. <a href="https://journalplus.co/strategies/pullback-to-ma-strategy">Journal Plus</a> describes the 50-day as a secondary buy point inside a 15&ndash;25% pullback band and reports no backtest at all.</p>
+
+<p>The breakout entry comes from O'Neil's school, and what it says is specific: buy the first close above the pivot on volume at least <strong>40% above the 50-day average</strong>, <strong>never chase more than 5% past the pivot</strong>, and <strong>cut every loss at 7&ndash;8%</strong> (<a href="https://therighttrader.com/learn/trading-strategies/canslim">The Right Trader</a>, <a href="https://www.inkl.com/news/how-to-make-alternative-buy-points-your-secret-weapon-for-nailing-big-gains">IBD on alternative buy points</a>). The pocket-pivot variant requires the stock to have been respecting its 50-day throughout the advance (<a href="https://www.oreilly.com/library/view/trade-like-an/9780470616536/9780470616536_definition_of_a_pocket_pivot_buy_point.html">Morales &amp; Kacher</a>). None of these carries a published trade count.</p>
+
+<div class="plate"><div class="state">The premise disagrees with its own source</div>
+<p>CAN SLIM is <em>not</em> a large-cap method. <a href="https://en.wikipedia.org/wiki/CAN_SLIM">Its own description</a> and <a href="https://www.moneycrashers.com/canslim-stock-trading-investment-strategy/">Money Crashers</a> both state it is explicitly not looking for older large-capitalisation companies. There is no large-cap-specific O'Neil buy point to import &mdash; the pivot and the 7&ndash;8% stop are conventions borrowed across, not results measured on index members.</p></div>
+
+<p>The 52-week-high entry has the only genuinely academic backing here, and it does not survive the trip to India. <a href="https://www.bauer.uh.edu/tgeorge/papers/gh4-paper.pdf">George &amp; Hwang (2004)</a> is the original US result; <a href="https://jurf.org/wp-content/uploads/2017/01/ostasheva-wenhao-2016.pdf">a partial replication</a> on the top 1,500 NYSE names 1998&ndash;2007 supports it. But <a href="https://epublications.marquette.edu/cgi/viewcontent.cgi?article=1168&amp;context=fin_fac">Barroso &amp; Wang</a> confine the effect to small stocks, and the one study that covers our actual universe &mdash; <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6951339">Mandhyan, 431 Indian stocks 2015&ndash;2023</a> &mdash; finds <strong>every momentum variant delivers a statistically insignificant winner-minus-loser spread among big caps specifically.</strong> The 52-week-high signal worked in Indian mid-caps (0.987% a month against 0.740% for standard momentum); the full-universe spread was 0.726% at t&nbsp;=&nbsp;1.874, which is marginal.</p>
+
+<h3 id="pub-trend">Moving averages on the Nifty, measured by five separate people</h3>
+
+<p>Every public test of a moving-average rule on Indian index names found the same shape: <strong>lower return than buy-and-hold, with a smaller drawdown.</strong> That is a consistent finding, and it is a finding about a <em>trend filter</em>, not about an entry point.</p>
+
+<table><thead><tr><th class="l">Source</th><th>Rule and window</th><th>Rule</th><th>Buy &amp; hold</th></tr></thead><tbody>
+<tr><td class="l"><a href="https://zenodo.org/records/21308597">Zenodo &mdash; Nifty 50, 2010&ndash;2022</a></td><td>50/200 SMA crossover</td><td>CAGR 4.01%</td><td>CAGR 9.90%</td></tr>
+<tr><td class="l"><a href="https://github.com/the-harshil/nifty-strategy-backtest">the-harshil, 2015&ndash;2025</a></td><td>MA crossover</td><td>109.54%, Sharpe 0.75</td><td>182.21%, Sharpe 0.74</td></tr>
+<tr><td class="l"><a href="https://github.com/Gunjan0628/algo-trading-backtester">Gunjan0628, 5 years</a></td><td>10/50 MA, 0.1% cost</td><td>CAGR 1.52%, DD &minus;13.75%</td><td>CAGR 4.36%, DD &minus;16.47%</td></tr>
+<tr><td class="l"><a href="https://github.com/shlok-shinde/nifty-backtest">shlok-shinde, 2009&ndash;2026</a></td><td>MA rule, 24 trades only</td><td>CAGR 5.2%, Sharpe 0.47</td><td>&mdash;</td></tr>
+<tr><td class="l"><a href="https://marketcalls.in/python/your-first-backtest-with-the-openalgo-python-sdk-ema-crossover.html">Marketcalls, ICICIBANK</a></td><td>EMA 20/50</td><td>42.23%</td><td>84.53%</td></tr>
+</tbody></table>
+
+<p>The largest out-of-sample test of a moving-average rule anywhere is <a href="https://www.philosophicaleconomics.com/2016/01/movingaverage/">Philosophical Economics</a>, which ran it on roughly 120 large caps &mdash; the 100 largest S&amp;P 500 names with 20+ years of history &mdash; across 1963&ndash;2015, and reports a <strong>failed</strong> out-of-sample test. <a href="https://tenachine.com/learn/guides/read-the-spread-not-the-average">Tenachine</a> adds the point that matters most for reading any of the numbers above: on 220 US large caps 2015&ndash;2024, 193 completed crossover trades returned a mean of 9.02% but a <strong>median of 5.51%, with roughly a third losing money.</strong> The average hides the spread.</p>
+
+<h3 id="pub-exit">Stops and profit-booking</h3>
+
+<p>There is no rigorous head-to-head of ATR against fixed percentage stops in the public record &mdash; which is itself the finding. <a href="https://www.mql5.com/en/blogs/post/766735">MQL5</a> asserts ATR superiority citing no studies. <a href="https://www.tradingview.com/chart/ES1!/EshQukmT-Stop-Loss-Strategies-in-Retail-Trading">A TradingView analysis</a> cites Kestner (2003) for a 28% Sharpe improvement across 15 futures markets, which could not be verified. <a href="https://quantifiedtrader.com/backtest/strategies/atr-trailing/">Quantified Trader</a> reports an ATR trailing stop across 20 US indices and ETFs averaging Sharpe 0.57 on a 169.4% return and a &minus;25.7% maximum drawdown &mdash; indices, not single names.</p>
+
+<p>On trailing against targets, <a href="https://articles.stockcharts.com/article/articles-arthurhill-2017-05-systemtrader---trailing-stops-versus-profit-targets-for-a-moving-average-crossover-system/">StockCharts' SystemTrader</a> found that on an S&amp;P 1500 crossover system returning 9.27% a year, a <strong>profit target kept 8.99% while a trailing stop dropped it below 7%</strong> &mdash; but the trailing stop tested was a Chandelier Exit, not a moving average, so it does not settle our question either. <a href="https://www.finermarketpoints.com/post/trailing-stop-overhead-resistance-asx">Finer Market Points</a> is the clearest statement of the practitioner rule we already use &mdash; the 10- or 20-day average as the trail, the 20-day for more volatile names, usually combined with a prior swing low &mdash; and it is entirely anecdotal.</p>
+
+<p>Partial booking is the one place the sources agree. <a href="https://enlightenedstocktrading.com/trend-following-profit-targets-do-they-work">Enlightened Stock Trading</a> tested it on a trend system with MAR 0.52 and found <strong>every partial profit-taking variant lowered both returns and risk-adjusted performance.</strong> <a href="https://www.activtrades.com/en/news/partial-profit-taking-vs-full-take-profit-which-strategy-works-best">ActivTrades</a> and <a href="https://traderssecondbrain.com/guides/take-profit-methods">Traders Second Brain</a> describe the mechanism: partials raise the win rate and lower the average profit per trade. That is a comfort trade, not an edge.</p>
+
+<div class="plate"><div class="state">Two methodological warnings taken into the measurement below</div>
+<p><a href="https://www.fe.training/free-resources/portfolio-management/portfolio-backtest/">Financial Edge</a>: implement every position with a one-day lag or the test reads a price the decision could not have been made at. <strong>Every entry below fills at the next session's open, never the signal close.</strong></p>
+<p><a href="https://setup4alpha.substack.com/p/trailing-stop-vs-fixed-stop-tested">Setup4Alpha</a>: tightening a stop also changes cash drag, turnover, position count and which signals had room, so a plain backtest blends the exit effect with all four. <strong>That is why every cell below is also sequenced through a real book with slots and capital, not counted as free trades.</strong></p>
+<p>On sample size, <a href="https://fortraders.com/blog/backtesting-strategies-that-actually-work">Fortraders</a> calls anything under 100 trades &ldquo;noise dressed up as statistics&rdquo; and asks for 200 across regimes; <a href="https://www.trade-ideas.com/2026/05/13/backtesting-ai-momentum-stock-strategies/">Trade-Ideas</a> agrees a small sample is a pilot, not proof. <strong>Most of the sources quoted on this page fail that bar.</strong></p></div>
+
+<h2 id="books">2 &middot; What the books claim, and what independent tests found</h2>
+
+<p class="lede">He asked for books as well as the internet. Five are worth the
+time for this question; all five are read here for the <em>precondition</em>,
+because that is the part of his instruction with the most published evidence
+behind it, and it is not the part most of these books are famous for.</p>
+
+<h3>The two that are actually about a precondition</h3>
+
+<p><strong>Mebane Faber, <em>A Quantitative Approach to Tactical Asset
+Allocation</em> (2007, updated 2013).</strong> The rule is one line: hold the
+asset while it is above its ten-month average, otherwise hold cash. It is the
+most-tested market-state filter in print, and the honest reading of the tests is
+mixed in a specific, useful way. <a
+href="https://empiricalab.substack.com/p/faber-10-month-average">An independent
+replay on SPY</a> counts <strong>23 completed trades in 33 years</strong> and
+finds the whole advantage resting on three exits across two bear markets — and
+that <em>randomising the entry dates reproduced much of the protection</em>,
+which says the benefit comes from a slow average sitting out long declines
+rather than from timing anything. The same test reports the filter has
+<strong>cost return since 2007: 8.2% a year against SPY's 10.9%</strong>. <a
+href="https://www.cxoadvisory.com/technical-trading/long-term-outperformance-from-trends-defined-by-moving-averages/">CXO
+Advisory</a> adds the data-snooping objection to the ten-month choice; <a
+href="https://mebfaber.com/2017/12/13/episode-86-quantitative-approach-tactical-asset-allocation/">Faber
+concedes it himself</a> and argues every length from six to twelve months
+behaves the same, which is the right answer to that objection and also an
+admission that the parameter carries no information. <a
+href="https://allocatortraining.com/wp-content/uploads/2023/06/A-Quantitative-Approach-to-Tactical-Asset-Allocation.pdf">His
+own ten-year revisit</a> argues it held up out of sample.</p>
+
+<p><strong>Gary Antonacci, <em>Dual Momentum Investing</em> (2014).</strong> Two
+filters: pick the stronger of two assets (relative), and hold neither unless it
+is beating treasury bills (absolute). The absolute leg is a precondition in
+exactly his sense. Independent work since publication is consistently weaker
+than the book: <a
+href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7427878">Petit's SSRN
+replication over 1971–2026</a> finds it <strong>underperformed a passive index
+by 4.8 points a year since 2010</strong>, with its deepest fifty-five-year
+drawdown occurring in 2021–23; <a
+href="https://github.com/FranciscoAC-burst/dual-momentum-oos">an out-of-sample
+replication</a> reproduces the book's own decomposition table and finds the
+absolute-momentum leg <em>failing to reduce drawdown</em>, because a monthly
+signal cannot exit a fast crash; <a
+href="https://quant4free.com/analysis/dual-momentum/">a post-publication test</a>
+reports it lagging a plain 60/40 with the drawdown edge mostly a 2008 story.
+Against that, <a
+href="https://quanterlab.com/research/antonacci-s-dual-momentum-taken-apart-gate-relative-leg-and-blends-across-four-l">a
+2008–2026 decomposition</a> concludes the opposite about <em>which</em> part
+earns its keep: <strong>the absolute-momentum gate did the work and the
+relative leg cost 1.4 to 3.2 points a year at every lookback tested</strong>.
+<a href="https://www.linkedin.com/pulse/momentum-gets-respect-gary-antonacci">Antonacci's
+own reply</a> denies degradation.</p>
+
+<p class="note">Read together these say something narrow and worth having: a
+market-state precondition is the best-supported single idea in this literature,
+its support is for <em>drawdown</em> rather than return, and it reliably costs
+return when the market goes up anyway. None of those tests is on Indian
+equities, on single stocks, or on a daily signal.</p>
+
+<h3>The three that are about where to buy</h3>
+
+<p><strong>Stan Weinstein, <em>Secrets for Profiting in Bull and Bear
+Markets</em> (1988).</strong> Four stages around a 30-week average; buy Stage 2
+breakouts only. It is the most large-cap-applicable rule in print and the
+evidence for it is the thinnest here: searching for a rigorous test returns
+<a href="https://quantstrategy.io/blog/backtesting-stan-weinsteins-stage-analysis-strategy-does-it/">one
+blog claiming it works on a 150- or 200-day average</a> with no universe, no
+trade count and no drawdown, <a
+href="https://www.mql5.com/en/articles/22746">an MQL5 expert advisor</a> coded
+for forex, and otherwise chart walkthroughs. <strong>No published trade count
+exists for it.</strong> Our own grid tests the daily analogue — <code>trend</code>,
+close above the 50-day — on 10,187 signals.</p>
+
+<p><strong>Andreas Clenow, <em>Stocks on the Move</em> (2015).</strong> Rank the
+S&amp;P 500 by 90-day regression slope × R², buy only while the index is above
+its 200-day average, sell on falling out of the ranking or below the 100-day.
+Note that it carries a precondition too. <a
+href="https://quanterlab.com/research/clenow-s-stocks-on-the-move-tested-apart-ten-years-after-the-book">A
+2006–2025 retest</a> finds <strong>every version did worse than SPY over the
+full twenty years</strong>, though the rules beat the market over the book's own
+2006–2014 window — the standard shape of a rule published at the end of the
+period that produced it. <a
+href="https://teddykoker.com/2019/05/momentum-strategy-from-stocks-on-the-move-in-python/">An
+independent implementation</a> got ~9%/yr against SPY's 12%, with an 11% maximum
+drawdown against the index's deeper one. <a
+href="https://www.quantconnect.com/forum/discussion/10493/andreas-clenow-momentum-strategy-using-framework-from-stocks-on-the-move-book/">A
+QuantConnect test</a> over 2009–2024 reports 14.81% against 8.86% but notes
+buy-and-hold beat it over the same period.</p>
+
+<p><strong>Gray &amp; Vogel, <em>Quantitative Momentum</em> (2016), and
+O'Neil.</strong> Gray and Vogel's tests run on a 500-stock universe with a
+six-month lookback, gross of fees, and their own summary notes the gain from
+equal weighting <a
+href="https://tonytvo.github.io/quantitative-momentum-summary/">"benefiting from
+diversification and the small-cap effect"</a> — which is the same caveat the
+academic 52-week-high literature carries, and it points away from large caps
+rather than towards them. O'Neil's often-quoted decomposition — <strong>about
+37% of a stock's move from its industry group and a further 12% from its
+sector</strong> — is the stated reason a sector precondition should exist at
+all. <a
+href="https://www.chartmill.com/documentation/trading-and-investing/methodologies/522-Sector-First-or-Stock-First-Two-Workflows-for-Growth-Investors">Chartmill
+traces it</a> to O'Neil's own IBD research and cautions that the exact share
+varies by method while the direction does not, citing Roll (1992) and Heston
+&amp; Rouwenhorst (1994) behind the industry effect. <strong>There is no primary
+study published with those two numbers</strong>; they come from the book.
+Separately, <a href="https://en.wikipedia.org/wiki/CAN_SLIM">CAN SLIM is
+explicitly not a large-cap method</a>.</p>
+
+<h3>And on breadth specifically</h3>
+
+<p>A direct search for a measured test of <em>breadth as an entry filter</em>
+returns descriptions and dashboards, not results: <a
+href="https://www.marketinout.com/chart/market.php?breadth=above-sma-200">what
+the indicator is</a>, <a
+href="https://www.buildalpha.com/market-regimes/">a regime-signal treatment</a>
+whose finding is about tomorrow's <em>range</em> rather than entry returns, and
+<a href="https://handy.markets/blog/trading/breadth-market/">guides on reading
+it</a>. Nobody appears to have published a like-for-like comparison of the same
+entries with and without a breadth threshold, reporting trade counts. That is
+the gap this page fills on our own data.</p>
+
+<h2 id="method">3 &middot; How this was measured</h2>
+
+<p>The published work above could not answer the question, so the question was put to our own data. The test is a committed management command, <code>backtest_largecap</code>, not a script &mdash; it can be re-run against any window, and it will be re-run before anything here is believed twice.</p>
+
+<div class="glance">
+<div><div class="n">7 &times; 5 &times; 7 &times; 4</div><div class="k">entry &times; stop &times; exit &times; precondition = 980 cells</div></div>
+<div><div class="n">715</div><div class="k">sessions, Jan 2024 to 25 Nov 2026</div></div>
+<div><div class="n">&#8377;60L</div><div class="k">pool, 12 slots, &#8377;20k risk</div></div>
+<div><div class="n">next open</div><div class="k">every fill, never the signal close</div></div>
+</div>
+
+<h3 id="m-rules">The three decisions, and why they are tested together</h3>
+
+<p>A tight stop with a far target is not a strategy, it is two rules that disagree. So the unit here is the whole rule &mdash; when you are allowed to buy at all, where you buy, where you are wrong, where you sell &mdash; and every one of the 980 combinations is replayed over the same sessions, the same fifty names and the same capital.</p>
+
+<table><thead><tr><th class="l">Decision</th><th>Levels tested</th></tr></thead><tbody>
+<tr><td class="l"><b>Whether you may buy at all</b></td><td><code>none</code> &mdash; every signal, which is the only thing measured before you asked &middot; <code>breadth</code> &mdash; the Nifty 50's own share above their 20-day averages is above the mean of the <em>prior</em> five sessions, the gate's published definition restricted to the index whose names are being bought &middot; <code>sector</code> &mdash; the same reading for the name's own sector, taken across all 534 priceable universe names rather than the fifty, because eight priced members is the floor for a sector line and almost no sector has eight inside the Nifty 50 &middot; <code>both</code> &mdash; the rule as you stated it</td></tr>
+<tr><td class="l"><b>Where to buy</b></td><td><code>any-session</code> &mdash; the control: no condition at all, which fires on every symbol-session and exists so that every other entry has something to be better than &middot; <code>trend</code> above the 50-day average, which is what the daily report's large-cap section already lists &middot; <code>pullback20</code> in trend and sitting within 2% above the 20-day &middot; <code>dip-under-fast</code> in trend but below both the 10- and the 20-day &middot; <code>reclaim10</code> closing back above the 10-day after a close beneath it &middot; <code>near-high</code> within 5% of its own 52-week high &middot; <code>breakout52</code> closing at a new 52-week high</td></tr>
+<tr><td class="l"><b>Where you are wrong</b></td><td><code>pct5</code>, <code>pct8</code>, <code>pct12</code> &mdash; a fixed percentage below the fill, with <code>pct8</code> standing in for O'Neil's 7&ndash;8% &middot; <code>atr2</code>, <code>atr3</code> &mdash; two and three average true ranges below it, which widens the stop on a volatile name and tightens it on a quiet one</td></tr>
+<tr><td class="l"><b>Where you sell</b></td><td><code>ma10</code>, <code>ma20</code>, <code>ma50</code> &mdash; out on the next open after a close below that average &middot; <code>r2</code>, <code>r3</code> &mdash; a fixed multiple of the initial risk &middot; <code>half2r</code> &mdash; half the position at 2R and the rest trailed on the 20-day &middot; <code>hold</code> &mdash; nothing but the stop and the horizon</td></tr>
+</tbody></table>
+
+<h3 id="m-honest">The four things that stop a cell meaning nothing</h3>
+
+<ul>
+<li><b>The population.</b> What fraction of available symbol-sessions the entry even fires on. A rule that fires twice a year cannot fill a book; a rule that fires every day is not a rule. This is printed first because it reframes every win rate that follows.</li>
+<li><b>The main effect.</b> Each factor level's marginal mean across every combination of the other two. A single cell can win on noise. A level that wins across thirty-five cells is harder to get by accident.</li>
+<li><b>The within-period split.</b> The same effects on each half of the window measured alone. A cross-section is not evidence until it survives this. A level that only works in one half worked on one market, not on a mechanism.</li>
+<li><b>The permutation.</b> Shuffling which <em>session</em> each signal was read on, holding the symbol and the signal count fixed. That keeps the sample size, the names and the market identical, and destroys only the claim under test &mdash; that the rule picked the moment. The precondition is permuted the same way, by reordering the sessions rather than the flags, so each sector keeps its run lengths, its share of positive days and its correlation with the index, and only the alignment with what the market did next is broken.</li>
+<li><b>The control.</b> <code>any-session</code> is in the grid for the same reason a placebo arm is in a trial. A rule that cannot beat buying on no condition whatsoever is not a buy rule, however good its own numbers look.</li>
+<li><b>The benchmark.</b> Buying all 48 priceable members equally at the first measurable open and holding to the end. Without it, &ldquo;every cell lost money&rdquo; could be a verdict on the window rather than on the rules.</li>
+</ul>
+
+<div class="plate"><div class="state">Sequenced against the book, not counted as free trades</div>
+<p>Every cell is also run through a &#8377;60 lakh pool with twelve slots, rupee-risk sizing and a deploy cap. Without that, a rule firing forty signals a session is credited with forty positions it could never have funded, and the ranking inverts against one that fires twice. When more signals fire than there are slots, the book takes the names nearest their own 52-week high first &mdash; the order the daily report already prints them in, so the replay fills what a reader of that section would actually have reached for.</p>
+<p>Drawdown is marked to market, with open positions valued at every session's close. A realised-only drawdown falls hardest exactly when the strategy is working, which makes it worse than useless.</p></div>
+
+<p class="note">What the replay cannot pay: a stop is filled at the lower of the stop and that session's open, because a broker cannot execute above the whole session's range &mdash; a replay that lets it manufactures its own edge on every gap down. Every exit carries 0.5% slippage. Every fill is at the <em>next</em> session's open, so no decision reads a price it could not have been made at. A position that neither stops nor triggers its exit is closed at the market after 60 sessions.</p>
+
+<h2 id="population">4 &middot; What each rule even fires on</h2>
+
+<p class="lede">This table comes first because it reframes every win rate below it. A rule that fires on three percent of sessions cannot fill a twelve-slot book; a rule that fires on all of them is not a rule. Across 715 sessions and 48 priceable members there are 19,248 symbol-sessions to choose from.</p>
+
+<div class="scroll"><table><thead><tr><th class="l">Entry</th><th>Signals</th><th>% of symbol-sessions</th><th>Per session</th></tr></thead><tbody>
+<tr><td class="l"><code>any-session</code> <i>control</i></td><td>19,248</td><td>100.0</td><td>48.0</td></tr>
+<tr><td class="l"><code>trend</code></td><td>10,187</td><td>52.9</td><td>25.4</td></tr>
+<tr><td class="l"><code>near-high</code></td><td>4,179</td><td>21.7</td><td>10.4</td></tr>
+<tr><td class="l"><code>pullback20</code></td><td>3,025</td><td>15.7</td><td>7.5</td></tr>
+<tr><td class="l"><code>dip-under-fast</code></td><td>1,615</td><td>8.4</td><td>4.0</td></tr>
+<tr><td class="l"><code>reclaim10</code></td><td>959</td><td>5.0</td><td>2.4</td></tr>
+<tr><td class="l"><code>breakout52</code></td><td>649</td><td>3.4</td><td>1.6</td></tr>
+</tbody></table></div>
+
+<p>Half of all Nifty-50 sessions are spent above the 50-day average. That is the single most important number on this page for how the daily report should be read: <em>&ldquo;above the 50&rdquo; is the normal state of a large cap, not a signal.</em> A new 52-week high, at 1.6 names a session across the whole index, is the only condition here rare enough that a reader could act on every instance of it.</p>
+
+<h3 id="p-gates">What the two preconditions leave</h3>
+
+<p>Large-cap breadth &mdash; the share of the 48 above their own 20-day averages, read against the mean of the prior five sessions &mdash; was positive on <b>346 of 715 sessions</b>, almost exactly half, which is what a well-formed condition should look like. The sector reading is drawn over all 534 priceable universe names in 19 gradeable sectors.</p>
+
+<div class="scroll"><table><thead><tr><th class="l">Entry</th><th>none</th><th>breadth</th><th>sector</th><th>both</th></tr></thead><tbody>
+<tr><td class="l"><code>any-session</code></td><td>19,248</td><td>9,504</td><td>2,478</td><td>1,724</td></tr>
+<tr><td class="l"><code>trend</code></td><td>10,187</td><td>5,293</td><td>1,555</td><td>1,082</td></tr>
+<tr><td class="l"><code>near-high</code></td><td>4,179</td><td>2,233</td><td>825</td><td>583</td></tr>
+<tr><td class="l"><code>pullback20</code></td><td>3,025</td><td>1,506</td><td>434</td><td>283</td></tr>
+<tr><td class="l"><code>dip-under-fast</code></td><td>1,615</td><td>528</td><td>114</td><td>61</td></tr>
+<tr><td class="l"><code>reclaim10</code></td><td>959</td><td>573</td><td>156</td><td>109</td></tr>
+<tr><td class="l"><code>breakout52</code></td><td>649</td><td>428</td><td>147</td><td>114</td></tr>
+<tr><td class="l"><b>Share of all signals surviving</b></td><td><b>100.0%</b></td><td><b>50.3%</b></td><td><b>14.3%</b></td><td><b>9.9%</b></td></tr>
+</tbody></table></div>
+
+<p>The breadth condition behaves exactly as designed: it halves the signals, because it is positive half the time. <b>The sector condition does not</b> &mdash; it removes 86% of them, far more than a roughly even condition should, and the reason is the caveat that governs every gated number on this page.</p>
+
+<div class="plate"><div class="state">Read the sector column as a 13-name filter, not as a sector condition</div>
+<p>A sector line needs at least eight priced members before it is drawn at all, and <b>only 13 of the 48 index members belong to a sector that clears that floor</b>. For the other 35 the sector is ungradeable, and ungradeable is treated as a failure, never as a pass &mdash; waving it through would credit the condition with trades it would never have allowed. That is the right default and it has a consequence: the <code>sector</code> and <code>both</code> columns are mostly selecting <em>which names have a measurable sector</em>, not <em>which sectors are strong</em>. Any book return they show is partly a bet on thirteen specific companies. It is the single biggest reason not to act on the gated cells below, and it is fixable &mdash; by grading a Nifty-50 name against a broader sector definition &mdash; but it is not fixed today.</p></div>
+
+<h2 id="grid">5 &middot; The grid</h2>
+
+<p class="lede">980 cells. The benchmark they all have to beat is printed first, because without it &ldquo;everything lost money&rdquo; would be a statement about the window rather than about the rules.</p>
+
+<div class="glance">
+<div><div class="n">+0.4%</div><div class="k">benchmark &mdash; all 48 bought and held</div></div>
+<div><div class="n">&minus;13.1%</div><div class="k">its worst mark-to-market drawdown</div></div>
+<div><div class="n">28 / 48</div><div class="k">names up over the window</div></div>
+<div><div class="n">0</div><div class="k">of 980 cells that beat it on return <em>and</em> risk without the 13-name caveat</div></div>
+</div>
+
+<p>So the window was not a disaster. It was flat, with a mid-size drawdown, and more names up than down. Any rule worth having should have done better than flat.</p>
+
+<h3 id="g-top">The twenty-five best cells, by book return</h3>
+
+<p class="note">Every one of these is <code>any-session</code> &mdash; no chart condition at all. The ranking is reporting something real about the precondition and nothing whatsoever about where to buy.</p>
+
+<div class="scroll"><table><thead><tr><th class="l">Gate</th><th>Entry</th><th>Stop</th><th>Exit</th><th>Signals</th><th>Mean R</th><th>Win %</th><th>Book %</th><th>Worst DD %</th><th>Taken</th></tr></thead><tbody>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>atr2</td><td>half2r</td><td>1,719</td><td>&minus;0.21</td><td>38.4</td><td class="pass">+7.5</td><td>&minus;9.5</td><td>156</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct5</td><td>hold</td><td>1,724</td><td>&minus;0.19</td><td>34.0</td><td class="pass">+7.2</td><td>&minus;13.8</td><td>119</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct8</td><td>hold</td><td>1,724</td><td>&minus;0.10</td><td>46.1</td><td class="pass">+6.9</td><td>&minus;7.7</td><td>100</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct8</td><td>half2r</td><td>1,724</td><td>&minus;0.13</td><td>46.5</td><td class="pass">+6.7</td><td>&minus;7.2</td><td>100</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct5</td><td>hold</td><td>2,478</td><td>&minus;0.16</td><td>34.1</td><td class="pass">+5.5</td><td>&minus;24.6</td><td>125</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct12</td><td>half2r</td><td>2,478</td><td>+0.04</td><td>55.2</td><td class="pass">+4.8</td><td>&minus;11.2</td><td>91</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct12</td><td>hold</td><td>2,478</td><td>+0.05</td><td>55.2</td><td class="pass">+4.6</td><td>&minus;11.2</td><td>89</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct8</td><td>hold</td><td>2,478</td><td>&minus;0.06</td><td>46.2</td><td class="pass">+4.5</td><td>&minus;16.4</td><td>106</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>atr3</td><td>half2r</td><td>1,713</td><td>&minus;0.19</td><td>44.4</td><td class="pass">+4.3</td><td>&minus;9.6</td><td>107</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct12</td><td>r3</td><td>2,478</td><td>+0.05</td><td>55.2</td><td class="pass">+4.2</td><td>&minus;11.2</td><td>89</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct8</td><td>r2</td><td>1,724</td><td>&minus;0.12</td><td>46.5</td><td class="pass">+4.2</td><td>&minus;8.2</td><td>108</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct12</td><td>hold</td><td>1,724</td><td>+0.01</td><td>54.9</td><td class="pass">+4.0</td><td>&minus;5.6</td><td>91</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct12</td><td>r3</td><td>1,724</td><td>+0.01</td><td>54.9</td><td class="pass">+4.0</td><td>&minus;5.7</td><td>92</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct12</td><td>half2r</td><td>1,724</td><td>&minus;0.00</td><td>54.9</td><td class="pass">+3.7</td><td>&minus;5.5</td><td>90</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct8</td><td>r3</td><td>1,724</td><td>&minus;0.11</td><td>46.1</td><td class="pass">+3.6</td><td>&minus;7.7</td><td>102</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>atr3</td><td>hold</td><td>1,713</td><td>&minus;0.16</td><td>42.3</td><td class="pass">+3.6</td><td>&minus;10.5</td><td>103</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct5</td><td>half2r</td><td>2,478</td><td>&minus;0.23</td><td>38.6</td><td class="pass">+3.5</td><td>&minus;26.3</td><td>160</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct8</td><td>half2r</td><td>2,478</td><td>&minus;0.09</td><td>46.9</td><td class="pass">+3.4</td><td>&minus;17.8</td><td>113</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct5</td><td>r3</td><td>1,724</td><td>&minus;0.20</td><td>34.8</td><td class="pass">+3.2</td><td>&minus;13.3</td><td>152</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct8</td><td>r3</td><td>2,478</td><td>&minus;0.08</td><td>46.2</td><td class="pass">+3.2</td><td>&minus;17.5</td><td>110</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>pct12</td><td>r2</td><td>1,724</td><td>+0.00</td><td>54.9</td><td class="pass">+3.1</td><td>&minus;5.6</td><td>91</td></tr>
+<tr><td class="l"><code>both</code></td><td><code>any-session</code></td><td>atr2</td><td>hold</td><td>1,719</td><td>&minus;0.24</td><td>31.5</td><td class="pass">+3.0</td><td>&minus;14.0</td><td>124</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>pct12</td><td>r2</td><td>2,478</td><td>+0.04</td><td>55.2</td><td class="pass">+3.0</td><td>&minus;12.0</td><td>96</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>atr2</td><td>hold</td><td>2,473</td><td>&minus;0.23</td><td>31.4</td><td class="pass">+2.8</td><td>&minus;12.8</td><td>131</td></tr>
+<tr><td class="l"><code>sector</code></td><td><code>any-session</code></td><td>atr3</td><td>half2r</td><td>2,463</td><td>&minus;0.16</td><td>44.8</td><td class="pass">+2.8</td><td>&minus;9.6</td><td>116</td></tr>
+</tbody></table></div>
+
+<p>Taken at face value, the best cell made <b>+7.5%</b> against the benchmark's +0.4%, at a &minus;9.5% drawdown against its &minus;13.1%. That is the result a backtest gets published on. Three things stop it being one here.</p>
+
+<ul class="lead">
+<li><b>It is not a buy rule.</b> Every cell in the top twenty-five is <code>any-session</code>. The thing being measured is &ldquo;buy something when the conditions are on&rdquo;, and the chart conditions you actually asked about &mdash; the pullback, the reclaim, the 52-week high &mdash; are all absent because all of them made it worse.</li>
+<li><b>The book made money while the average trade lost.</b> &minus;0.21R mean on a +7.5% book is sequencing, not edge: with 90% of signals removed, twelve slots and a &#8377;5 lakh deploy cap, very little capital is ever at work, and the few trades that do fill carry the result. 156 trades over 715 sessions is one position opened every four and a half sessions.</li>
+<li><b>Thirteen names.</b> Every <code>sector</code> and <code>both</code> row inherits the gradeability problem above.</li>
+</ul>
+
+<h2 id="effects">6 &middot; Main effects</h2>
+
+<p class="lede">A single cell can win on noise. A factor level averaged over every combination of the other three is harder to get by accident, and it is the only part of a grid worth reading first.</p>
+
+<h3 id="e-gate">The precondition</h3>
+
+<div class="scroll"><table><thead><tr><th class="l">Precondition</th><th>Mean book %</th><th>Mean R</th><th>Median worst DD %</th><th>Cells</th></tr></thead><tbody>
+<tr><td class="l"><code>both</code></td><td>&minus;6.6</td><td>&minus;0.47</td><td>&minus;9.6</td><td>245</td></tr>
+<tr><td class="l"><code>sector</code></td><td>&minus;7.6</td><td>&minus;0.44</td><td>&minus;11.1</td><td>245</td></tr>
+<tr><td class="l"><code>breadth</code></td><td>&minus;12.6</td><td>&minus;0.33</td><td>&minus;14.9</td><td>245</td></tr>
+<tr><td class="l"><code>none</code></td><td>&minus;14.8</td><td>&minus;0.31</td><td>&minus;16.9</td><td>245</td></tr>
+</tbody></table></div>
+
+<p>Both columns move, and <b>they move in opposite directions</b>. The gate is the strongest single factor on book return &mdash; 8.2 points between <code>none</code> and <code>both</code>, bigger than the stop, the exit or the entry &mdash; and it is the <em>worst</em> factor on return per trade, costing 0.16R. One number says the condition works; the other says each trade it admits is worse than the trades it rejected.</p>
+
+<p>Both are true, and the reconciliation is uninteresting: a precondition that removes 90% of signals produces a book that is mostly in cash. Less capital at risk in a flat-to-down window loses less. It is the same result you would get from halving the slot count, and it is not a reason to believe the condition saw anything.</p>
+
+<h3 id="e-entry">Where to buy &mdash; the question you asked</h3>
+
+<figure class="fig"><h3>Return per trade by entry rule &mdash; ungated, at a 20-day trail</h3>
+<svg class="chart" viewBox="0 0 720 260" role="img" aria-label="Mean R per trade for each entry rule. All seven are negative. Buying on any session at all, the control, is second best at minus 0.118 R; the two strongest chart conditions, near a 52-week high and a new 52-week high, are the worst at minus 0.243 and minus 0.386.">
+<line x1="60" y1="36" x2="706" y2="36" stroke="var(--line-strong)" stroke-width="1.5"/>
+<text x="54" y="40" text-anchor="end" font-size="11" fill="var(--muted)" font-family="var(--mono)">0.00</text>
+<line x1="60" y1="119" x2="706" y2="119" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="54" y="123" text-anchor="end" font-size="11" fill="var(--faint)" font-family="var(--mono)">&#8722;0.20</text>
+<line x1="60" y1="202" x2="706" y2="202" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="54" y="206" text-anchor="end" font-size="11" fill="var(--faint)" font-family="var(--mono)">&#8722;0.40</text>
+
+<rect x="72" y="36" width="56" height="41" rx="0" fill="var(--loss-fill)"/>
+<rect x="162" y="36" width="56" height="49" rx="0" fill="var(--blue)"/>
+<rect x="252" y="36" width="56" height="56" rx="0" fill="var(--loss-fill)"/>
+<rect x="342" y="36" width="56" height="65" rx="0" fill="var(--loss-fill)"/>
+<rect x="432" y="36" width="56" height="65" rx="0" fill="var(--loss-fill)"/>
+<rect x="522" y="36" width="56" height="101" rx="0" fill="var(--loss-fill)"/>
+<rect x="612" y="36" width="56" height="160" rx="0" fill="var(--loss-fill)"/>
+
+<text x="100" y="92" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)" font-family="var(--mono)">&#8722;0.099</text>
+<text x="190" y="100" text-anchor="middle" font-size="11.5" fill="var(--blue-ink)" font-family="var(--mono)" font-weight="700">&#8722;0.118</text>
+<text x="280" y="107" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)" font-family="var(--mono)">&#8722;0.134</text>
+<text x="370" y="116" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)" font-family="var(--mono)">&#8722;0.156</text>
+<text x="460" y="116" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)" font-family="var(--mono)">&#8722;0.157</text>
+<text x="550" y="152" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)" font-family="var(--mono)">&#8722;0.243</text>
+<text x="640" y="211" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)" font-family="var(--mono)">&#8722;0.386</text>
+
+<text x="100" y="233" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--mono)">dip-under-fast</text>
+<text x="190" y="233" text-anchor="middle" font-size="11" fill="var(--blue-ink)" font-family="var(--mono)" font-weight="700">any-session</text>
+<text x="190" y="247" text-anchor="middle" font-size="10" fill="var(--blue-ink)" font-family="var(--mono)">the control</text>
+<text x="280" y="233" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--mono)">pullback20</text>
+<text x="370" y="233" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--mono)">trend</text>
+<text x="460" y="233" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--mono)">reclaim10</text>
+<text x="550" y="233" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--mono)">near-high</text>
+<text x="640" y="233" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="var(--mono)">breakout52</text>
+</svg>
+<figcaption>Mean R per trade, pooled over every stop, each entry measured on all 715 sessions with no precondition applied. Lower is worse; every bar is below zero. The control &mdash; buying on no condition at all &mdash; beats five of the six chart conditions.</figcaption></figure>
+
+<p>This is the finding that matters most and it is the one nobody wants. <b>Five of the six chart conditions returned less per trade than entering at random</b>, and the sixth, <code>dip-under-fast</code>, beats the control by 0.019R, which the permutation below cannot distinguish from chance. The two conditions that look most like what we actually trade &mdash; proximity to a 52-week high, and a fresh 52-week high &mdash; are the two worst things on the page, at &minus;0.243R and &minus;0.386R.</p>
+
+<p>On book return rather than per-trade return the order shifts a little, because the rarer entries fill fewer slots: <code>any-session</code> &minus;8.6%, <code>dip-under-fast</code> &minus;8.7%, <code>pullback20</code> &minus;9.3%, <code>reclaim10</code> &minus;9.5%, <code>trend</code> &minus;10.7%, <code>breakout52</code> &minus;11.8%, <code>near-high</code> &minus;14.3%. The control is still first.</p>
+
+<h3 id="e-stop">The stop, and the exit</h3>
+
+<div class="scroll"><table><thead><tr><th class="l">Stop</th><th>Mean book %</th><th>Mean R</th><th>Median worst DD %</th></tr></thead><tbody>
+<tr><td class="l"><code>pct12</code> &mdash; 12% below the fill</td><td>&minus;4.5</td><td>&minus;0.22</td><td>&minus;6.3</td></tr>
+<tr><td class="l"><code>pct8</code> &mdash; 8%, O'Neil's number</td><td>&minus;8.2</td><td>&minus;0.35</td><td>&minus;10.7</td></tr>
+<tr><td class="l"><code>atr3</code> &mdash; three average true ranges</td><td>&minus;11.4</td><td>&minus;0.44</td><td>&minus;13.7</td></tr>
+<tr><td class="l"><code>atr2</code> &mdash; two average true ranges</td><td>&minus;13.1</td><td>&minus;0.46</td><td>&minus;16.3</td></tr>
+<tr><td class="l"><code>pct5</code> &mdash; 5% below the fill</td><td>&minus;14.9</td><td>&minus;0.46</td><td>&minus;18.5</td></tr>
+</tbody></table></div>
+
+<p><b>Wider is better, monotonically, on return and on drawdown at the same time.</b> This is the most stable thing in the whole measurement: it held in the ungated grid, it holds in the gated one, and it holds on both halves of the window. A 12% stop lost a third of what a 5% stop lost and drew down a third as deep &mdash; because a tight stop on a large cap is not protection, it is a tax. The name comes back and you are not in it, and you have paid 0.5% slippage to find that out.</p>
+
+<p class="note">Note what that does <em>not</em> say. It does not say &ldquo;widen our stops&rdquo;. Wider stops on fixed rupee risk mean smaller positions, which is the trade-off the book already makes, and it does not say anything about small caps, where the structural stop is drawn from the chart and not from a percentage. It says that <em>on Nifty-50 names</em>, in this window, a stop tight enough to be hit by ordinary noise cost more than it saved.</p>
+
+<div class="scroll"><table><thead><tr><th class="l">Exit</th><th>Mean book %</th><th>Mean R</th><th>Median worst DD %</th></tr></thead><tbody>
+<tr><td class="l"><code>half2r</code> &mdash; half at 2R, rest trailed on the 20</td><td>&minus;8.4</td><td>&minus;0.50</td><td>&minus;12.0</td></tr>
+<tr><td class="l"><code>hold</code> &mdash; stop and horizon only</td><td>&minus;9.1</td><td>&minus;0.55</td><td>&minus;12.4</td></tr>
+<tr><td class="l"><code>r2</code> &mdash; out at twice the initial risk</td><td>&minus;9.3</td><td>&minus;0.47</td><td>&minus;12.5</td></tr>
+<tr><td class="l"><code>r3</code> &mdash; out at three times</td><td>&minus;9.4</td><td>&minus;0.53</td><td>&minus;12.6</td></tr>
+<tr><td class="l"><code>ma50</code> &mdash; trail on the 50-day</td><td>&minus;10.0</td><td>&minus;0.29</td><td>&minus;12.6</td></tr>
+<tr><td class="l"><code>ma20</code> &mdash; trail on the 20-day</td><td>&minus;12.8</td><td>&minus;0.22</td><td>&minus;13.2</td></tr>
+<tr><td class="l"><code>ma10</code> &mdash; trail on the 10-day</td><td>&minus;13.9</td><td>&minus;0.16</td><td>&minus;13.4</td></tr>
+</tbody></table></div>
+
+<p>You asked specifically about trailing on the 20-day. <b>The moving-average trails are the three worst exits on book return and the three best on return per trade</b>, and the gap between those two facts is the whole answer. A fast trail exits early and often: it keeps each individual loss small, which flatters mean R, and it also exits the winners, which is what the book actually lives on. The faster the average, the stronger the effect &mdash; the 10-day is both the least-bad per trade (&minus;0.16R) and the worst for the book (&minus;13.9%).</p>
+
+<p>On these names, in this window, taking half at 2R and trailing the remainder was the least bad of the seven, and doing nothing at all but holding to the stop was second. Neither made money.</p>
+
+<h2 id="split">7 &middot; The period split, and the permutation</h2>
+
+<p class="lede">A cross-section is not evidence until it survives being cut in time. The window is split at 31 October 2025 and each half is measured alone, on its own trades, with nothing pooled across the break.</p>
+
+<h3 id="sp-entry">By entry</h3>
+
+<div class="scroll"><table><thead><tr><th class="l">Entry</th><th>First half</th><th>Second half</th><th>Both</th></tr></thead><tbody>
+<tr><td class="l"><code>any-session</code> <i>control</i></td><td>&minus;0.132</td><td>&minus;0.103</td><td>&minus;0.118</td></tr>
+<tr><td class="l"><code>dip-under-fast</code></td><td>&minus;0.044</td><td>&minus;0.152</td><td>&minus;0.099</td></tr>
+<tr><td class="l"><code>pullback20</code></td><td>&minus;0.133</td><td>&minus;0.136</td><td>&minus;0.134</td></tr>
+<tr><td class="l"><code>trend</code></td><td>&minus;0.180</td><td>&minus;0.129</td><td>&minus;0.156</td></tr>
+<tr><td class="l"><code>reclaim10</code></td><td>&minus;0.141</td><td>&minus;0.174</td><td>&minus;0.157</td></tr>
+<tr><td class="l"><code>near-high</code></td><td>&minus;0.317</td><td>&minus;0.182</td><td>&minus;0.243</td></tr>
+<tr><td class="l"><code>breakout52</code></td><td>&minus;0.386</td><td>&minus;0.325</td><td>&minus;0.386</td></tr>
+</tbody></table></div>
+
+<p>No sign flips, because nothing is positive anywhere. Every entry rule lost in both halves, and the two breakout-shaped rules lost most in both. The only entry whose advantage over the control is not stable is <code>dip-under-fast</code>, which is best in the first half (&minus;0.044) and worse than the control in the second (&minus;0.152) &mdash; the shape of a result fitted to one market.</p>
+
+<h3 id="sp-gate">By precondition</h3>
+
+<div class="scroll"><table><thead><tr><th class="l">Precondition</th><th>First half</th><th>Second half</th><th>Both</th><th>Trades</th></tr></thead><tbody>
+<tr><td class="l"><code>none</code></td><td>&minus;0.164</td><td>&minus;0.129</td><td>&minus;0.146</td><td>199,258</td></tr>
+<tr><td class="l"><code>breadth</code></td><td>&minus;0.183</td><td>&minus;0.153</td><td>&minus;0.168</td><td>100,301</td></tr>
+<tr><td class="l"><code>sector</code></td><td>&minus;0.285</td><td>&minus;0.097</td><td>&minus;0.189</td><td>28,525</td></tr>
+<tr><td class="l"><code>both</code></td><td>&minus;0.298</td><td>&minus;0.101</td><td>&minus;0.199</td><td>19,764</td></tr>
+</tbody></table></div>
+
+<p>Here the instability is plain. In the first half, requiring both conditions made every trade <b>0.134R worse</b> than taking everything. In the second half it made them <b>0.028R better</b>. The sign of the gate's effect flips between the two halves of a three-year window &mdash; which is exactly what a condition with no information looks like when it is measured twice.</p>
+
+<h3 id="sp-perm">The permutation</h3>
+
+<div class="plate"><div class="state">p = 0.980</div>
+<p>The gate's sessions were reordered 300 times &mdash; the whole session index shuffled, so every sector keeps its run lengths, its share of positive days and its correlation with the market reading intact, and the only thing destroyed is the alignment between a positive reading and what happened next. The real gate admitted 19,764 of 199,258 trades at &minus;0.053R against ungated. <b>A random reordering matched or beat that 294 times in 300.</b></p>
+<p>Read it the right way round. This does not say the gate is harmful; the edge being tested is negative, so a high p-value here means a reshuffled gate is usually <em>less bad</em> than the real one. What it says is that there is no timing information in the real condition that a pattern with the same shape and no knowledge of the future does not also have. Whatever the gate did to the book, it did not do by knowing when to buy.</p></div>
+
+<p class="note">The separate entry permutation, run on the best-looking entry comparison in the grid, says the same thing more quietly: <code>dip-under-fast</code>'s +0.050R edge over <code>trend</code> at an 8% stop and a 20-day trail was matched or beaten by chance 64 times in 300, <b>p = 0.216</b>. Not significant at any threshold worth naming.</p>
+
+<h2 id="size">8 &middot; Large plus small &mdash; and the premise underneath it</h2>
+
+<p class="lede">You want a combined book, large caps alongside small, &ldquo;because small caps are not running while large caps are running&rdquo;. The combination is a reasonable thing to want and I am not arguing with it. The reason given for it is the wrong way round &mdash; on the published indices and on our own closes alike &mdash; and that changes which problem we are actually solving.</p>
+
+<h3 id="sz-reporting">What 2026 actually did</h3>
+
+<p>Indian market reporting for the year says the opposite of the premise. The Nifty 50 is <b>down about 14% year to date</b>, while the Nifty Midcap 150 is down about 2%, the Nifty Smallcap 100 is <b>up about 8%</b> and the Nifty Microcap 250 up about 15% &mdash; a divergence attributed to record foreign selling of roughly &#8377;2.8 lakh crore, which falls hardest on the large, liquid, index-weight names, as reported by <a href="https://www.business-standard.com/amp/markets/news/large-mid-or-small-caps-heres-2026-playbook-post-smids-underperformance-125123100080_1.html">Business Standard</a> and <a href="https://www.multibagg.ai/market-pulse/articles/sensex-nifty-smallcaps-banks-divergence-cmpcq520594tlnq0j91itq3oo">multibagg.ai</a>. The earnings line agrees: <a href="https://www.business-standard.com/opinion/columns/small-cap-firms-performance-in-q3fy26-offer-a-silver-lining-in-equity-mkts-126022200763_1.html">Nifty Smallcap 250 sales rose 11%, operating profit 22% and net profit 38%</a> in the December quarter.</p>
+
+<p>The honest counterpoint is valuation, not performance. <a href="https://medium.com/@finomicsedge/the-indian-market-valuation-puzzle-why-large-caps-look-fair-while-small-caps-still-scream-daf79ba12798">One analysis</a> has the Nifty 50 at or below its ten-year average multiple while the Nifty Smallcap 100 trades at 25&ndash;26 times against a 16.7 historical average, and notes that the Smallcap 250's <em>median</em> constituent is down about 6% since October 2024 while the index itself is up 2% &mdash; a handful of names carrying a broad, weak cohort. That is a real warning about small caps. It is not &ldquo;small caps are not running&rdquo;.</p>
+
+<div class="plate"><div class="state">So the thing that is not running may be ours, not the asset class</div>
+<p>If the broad small-cap indices are up and large caps are down, then &ldquo;small caps are not running&rdquo; is a statement about <b>the small caps we picked</b>, not about small caps. Those are different problems with different fixes. Rotating into large caps fixes the first only if large caps are where the return is &mdash; and on this page's own measurement they returned +0.4% over three years while every trading rule on them lost money. Rotating because our small-cap selection is underperforming its own index is a selection problem, and moving the same selection process onto a worse-performing asset class does not solve it.</p>
+<p>And our own closes say the reporting is right. Measured on the same sessions, equal-weighted, with every name that priced every session: over the whole window the index members returned <b>+15.7%</b> against <b>+26.9%</b> for the rest of the universe, and over calendar 2026 <b>+7.1%</b> against <b>+15.4%</b>. <b>Non-index names beat large caps by roughly two to one in both periods, including this year.</b> Breadth agrees: 335 of 510 non-index names are up in 2026 against 18 of 24 index members &mdash; a similar share, so this is not a handful of outliers dragging an average.</p><p class="note">Read these two figures against <em>each other</em>, not against the +0.4% benchmark higher up the page. That benchmark is 48 index names over all 715 sessions from the large-cap bar history; this cohort is drawn from the universe close series, which keeps only the 534 names that priced every session in its own aligned span &mdash; 24 index members and 510 others. Different universe, different span, so the absolute levels are not comparable. The comparison that is valid is the one being made: index against non-index, same sessions, same method.</p></div>
+
+<h3 id="sz-combine">What a combined book would need, if you want one anyway</h3>
+
+<p>Taking the ask at face value and setting the premise aside, a large-cap sleeve is a reasonable thing to want for a reason this page does support: <b>drawdown</b>. The benchmark basket of 48 index names drew down 13.1% at its worst over three years. Our small-cap book does considerably worse than that in a bad month. A sleeve that moves less is worth having even when it returns little.</p>
+
+<p>But the measurement says the sleeve should not be <em>traded</em>. Nothing on this page found a way to buy large caps on a signal that beat buying them on no signal at all, and the benchmark &mdash; own all of them, hold &mdash; beat all 980 rules. If a large-cap sleeve goes in, the measured form of it is a <b>held basket, rebalanced, not a scanner</b>. That is a different kind of thing from everything else this service does, and whether we want it is your call, not a measurement.</p>
+
+<p class="note">One thing not measured here, and it is the obvious next test: whether a large-cap sleeve and the small-cap book are <em>negatively</em> correlated enough that holding both reduces the drawdown of the whole, rather than just averaging the two returns. That is the only form of this question with a number attached that we do not yet have, and it needs the small-cap book's own series beside the large-cap one, which this command does not currently build.</p>
+
+<h2 id="verdict">9 &middot; What I would do</h2>
+
+<p class="lede">You asked for buy rules. The measurement did not produce one, and the brief said to ship nothing if that happened. So: nothing is being wired to a gate, nothing in the running system has been changed, and the decision on every line below is yours.</p>
+
+<h3 id="v-no">What I am not proposing, and why</h3>
+
+<table><thead><tr><th class="l">Candidate</th><th>Measured</th><th>Verdict</th></tr></thead><tbody>
+<tr><td class="l">Buy the 20-day pullback</td><td>&minus;0.134R, worse than the control in both halves</td><td class="fail">No</td></tr>
+<tr><td class="l">Buy the 10-day reclaim</td><td>&minus;0.157R, worse in both halves</td><td class="fail">No</td></tr>
+<tr><td class="l">Buy near the 52-week high</td><td>&minus;0.243R, second worst on the page</td><td class="fail">No</td></tr>
+<tr><td class="l">Buy the 52-week-high breakout</td><td>&minus;0.386R, worst on the page, in both halves</td><td class="fail">No</td></tr>
+<tr><td class="l">Buy the dip under the 10 and 20</td><td>&minus;0.099R, best of the six, p = 0.216, sign unstable across halves</td><td class="warn">Not on this evidence</td></tr>
+<tr><td class="l">Gate entries on market breadth</td><td>&minus;0.168R against &minus;0.146R ungated; worse per trade in both halves</td><td class="fail">No</td></tr>
+<tr><td class="l">Gate entries on sector breadth</td><td>&minus;0.189R; effect sign flips between halves; only 13 of 48 names gradeable</td><td class="fail">No &mdash; and not measurable yet</td></tr>
+<tr><td class="l">Trail large caps on the 20-day</td><td>Third-worst exit on book return; cuts winners with losers</td><td class="fail">No</td></tr>
+</tbody></table>
+
+<h3 id="v-yes">The three things the measurement does support</h3>
+
+<ul class="lead">
+<li><b>Stop width, not stop placement, is what moved the numbers.</b> 12% beat 8% beat 5%, monotonically, on return and drawdown together, in both halves, gated and ungated. On large caps a stop tight enough to catch ordinary noise cost more than it saved. This does not transfer to small caps, where the stop comes off the chart and the noise is a different size &mdash; but it is worth knowing that our tightest large-cap stops are probably working against us.</li>
+<li><b>Moving-average trails flatter the trade and hurt the book.</b> The faster the average, the stronger both effects. If a large-cap sleeve ever runs, it should not be trailed on the 10 or the 20.</li>
+<li><b>The way to have owned large caps in this window was to own them.</b> +0.4% held, against every one of 980 rules losing money. If the sleeve happens, the measured form is a held basket.</li>
+</ul>
+
+<h3 id="v-open">Open questions &mdash; your call, not mine</h3>
+
+<ul class="lead">
+<li><b>Do you want a large-cap sleeve at all, given this?</b> The honest case for one is lower drawdown, not return. The case against is that it returned 0.4% over three years while our capital was needed elsewhere.</li>
+<li><b>If yes: held basket, or keep looking for a signal?</b> A basket is a different kind of position from anything the service currently runs &mdash; no stop, no R, no scanner.</li>
+<li><b>Should the sector gate be made measurable before it is judged?</b> Today it grades 13 of 48 index members. Widening the sector definition for large caps would let the condition actually be tested rather than dismissed. I would do this before concluding anything final about sector positivity.</li>
+<li><b>The size premise is wrong on our own data.</b> Non-index names returned +15.4% in 2026 against the index members' +7.1%, on the same sessions, with 335 of 510 up. Small and mid caps <em>are</em> running; large caps are the ones that are not. If our small-cap book has not kept up with that, the problem is selection, and moving the same selection onto the worse-performing cohort does not fix it. I would settle this before any rotation &mdash; and I would not rotate on my say-so either way.</li>
+<li><b>Nothing here touches the small-cap rules.</b> This measurement is Nifty-50 only. None of the stop or exit findings should be carried across without being measured there first.</li>
+</ul>
+
+<div class="plate"><div class="state">State of play</div>
+<p>Entries remain halted. Nothing was placed, cancelled or changed to produce this page. <code>largecap.py</code> continues to report on the daily page and continues to gate nothing. The measurement lives in <code>backtest_largecap</code>, a committed management command, and can be re-run over any window with one call &mdash; which is the point, because a level that wins in this sample is a level fitted to this sample until it is measured again on the next one.</p></div>
+
+</main></body></html>
