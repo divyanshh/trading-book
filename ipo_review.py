@@ -7806,6 +7806,119 @@ FOOTNOTE_NOV_26 = (
 
 
 
+def _for_nov_26_0930() -> list[IPO]:
+    """Thursday 26 November, 09:30 open-slot pass, on investorgain's 26-Nov 07:37
+    prints and ipowatch's board dated 26 November. What moved since the
+    overnight page: the two boards came back together on both names they split
+    on overnight — ipowatch fell ₹27 → ₹18 on Foodlink and rose ₹21 → ₹27 on
+    Matangi, so each now agrees with investorgain. Nothing else moved. Derived
+    from the overnight cards; those stay above untouched."""
+    foodlink_n, matangi_n, monomark_n, integris_n, encube_n, crystal_n, mahanadi_n, siddhivinayak_n = (
+        _for_nov_26()
+    )
+    foodlink = replace(
+        foodlink_n,
+        gmp="₹18 — 9.42% on ₹191 (investorgain 26-Nov 07:37; ipowatch +₹18 agrees, down from +₹27 overnight)",
+        expected="~+6.8%",
+        book="opens 10:00 today — no subscription figure existed when this was written",
+        stats=(("price band", "₹181 – ₹191"),
+               ("lot size", "78 shares ≈ ₹14,898 at the cap"),
+               ("issue size", "₹360.76 Cr (fresh ₹192 Cr + OFS ₹168.76 Cr)"),
+               ("anchor book", "₹162.34 Cr from 12 investors at ₹191, allotted 25 Nov"),
+               ("grey market", "₹18 on both boards"),
+               ("odds above issue", "about 2 in 3 — a judgement, not a measured rate")),
+        flags=(("anchor book filled at the cap — ₹162.34 Cr, 12 investors", "pass"),
+               ("premium ₹21 → ₹18 on investorgain, ₹27 → ₹18 on ipowatch", "warn"),
+               ("the boards agree again — but at the lower number", "warn"),
+               ("H1 FY27 lost ₹16.15 Cr on ₹222.18 Cr of income", "fail"),
+               ("nearly half the raise is an exit for existing holders", "warn")),
+        note=(
+            foodlink_n.note
+            + " <strong>09:30 on the opening morning: the boards agree, at ₹18.</strong> "
+            "ipowatch&rsquo;s +₹27 is gone; its board dated 26 November prints <b>+₹18</b> with a "
+            "falling arrow, the same as investorgain&rsquo;s <b>26-Nov 07:37</b> print. That settles "
+            "the overnight disagreement in the bearish direction: the higher quote came down to the "
+            "lower one, not the other way. After the 2.6-point haircut it is ~<b>+6.8%</b>, about "
+            "₹1,050 on one retail lot. <b>Odds stay about 2 in 3</b> that it lists above ₹191 — "
+            "a judgement, not a measured rate. The bidding window opens at 10:00, after this pass, "
+            "so <b>there is no subscription figure on this card</b>; the midday pass carries the "
+            "first one and must say it is mid-session. The call does not move: PROVISIONAL, one "
+            "retail lot, decided on day 3 (30 Nov) against the closing book. His call."
+        ),
+    )
+    matangi = replace(
+        matangi_n,
+        gmp="₹27 — 15.70% on ₹172 (investorgain 26-Nov 07:37; ipowatch +₹27 agrees, up from +₹21 overnight)",
+        expected="~+13.1%",
+        flags=(("premium up ₹21.5 → ₹27; both boards now print ₹27", "pass"),
+               ("FY26 PAT ₹22.33 Cr, +11%, on income +24%; EBITDA margin 27%", "pass"),
+               ("PAT jumped ₹4.81 Cr → ₹20.03 Cr in one year (FY24 → FY25)", "warn"),
+               ("₹45 Cr of ₹72.49 Cr net proceeds repays debt", "warn")),
+        note=(
+            matangi_n.note
+            + " <strong>09:30, 26 November: the boards agree at ₹27.</strong> ipowatch moved "
+            "+₹21 → <b>+₹27</b> with a rising arrow, matching investorgain&rsquo;s 07:37 print of "
+            "15.70% on ₹172, ~<b>+13.1%</b> after the haircut. It still opens on 1 December and "
+            "nothing is committed before then. The call does not move: provisional, one retail "
+            "lot, decided on day 3 (3 Dec)."
+        ),
+    )
+    integris = replace(
+        integris_n,
+        note=(
+            integris_n.note
+            + " <strong>09:30, 26 November: still no band, one day from opening.</strong> ipowatch "
+            "lists it 27 Nov – 1 Dec at <b>₹0</b> with a ₹0 premium; investorgain&rsquo;s row is "
+            "still stamped 26-Nov 05:55 with no price, no dates and no premium. A news search found "
+            "no announced band; one secondary source (IndMoney) says the fresh issue was cut to "
+            "₹600 Cr from the DRHP&rsquo;s ₹925 Cr, which nothing else confirms. <b>NO CALL.</b>"
+        ),
+    )
+    crystal = replace(
+        crystal_n,
+        gmp="₹17 — 6.25% on ₹272 (investorgain 26-Nov 07:37, unchanged overnight)",
+        note=(
+            crystal_n.note
+            + " <strong>09:30:</strong> the last pre-listing print is unchanged at ₹17. The "
+            "listing print comes at 10:00, after this pass; the midday pass records it beside "
+            "the ~+3.7% the haircut pointed to."
+        ),
+    )
+    siddhivinayak = replace(
+        siddhivinayak_n,
+        gmp="₹25 — 17.61% on ₹142 (investorgain 26-Nov 07:37; ipowatch +₹25 now agrees)",
+        book="0.41x after day 1 of 3 — not final",
+    )
+    return [foodlink, matangi, monomark_n, integris, encube_n, crystal, mahanadi_n, siddhivinayak]
+
+
+IPOS_2026_11_26_0930 = _for_nov_26_0930()
+
+LEAD_NOV_26_0930 = (
+    LEAD_NOV_26
+    + " <strong>Re-written at 09:30 on 26 November</strong> on investorgain&rsquo;s "
+    "<b>26-Nov 07:37</b> prints and ipowatch&rsquo;s board dated 26 November. "
+    "<strong>Both overnight disagreements closed.</strong> ipowatch fell &#8377;27 &rarr; "
+    "&#8377;18 on Foodlink and rose &#8377;21 &rarr; &#8377;27 on Matangi, so the boards now agree "
+    "on every mainboard name they both carry. For Foodlink that is agreement at the lower number, "
+    "on the morning it opens. No call moves. Two more mainboard names appeared on ipowatch with no "
+    "dates and no band (Hindustan Coca Cola, Milestone Gears) and get no card until they are dated."
+)
+
+FOOTNOTE_NOV_26_0930 = (
+    FOOTNOTE_NOV_26
+    + " <strong>09:30 figures:</strong> investorgain rows stamped <b>26-Nov 07:37</b> (Integris "
+    "26-Nov 05:55); ipowatch dated 26 November with no time. <strong>Haircut applied, and "
+    "said:</strong> Foodlink 9.42% &rarr; ~+6.8%, Matangi 15.70% &rarr; ~+13.1%, Monomark 32.31% "
+    "&rarr; ~+29.7%, Crystal 6.25% &rarr; ~+3.7%, Mahanadi 0% &rarr; ~&minus;2.6%. "
+    "<b>No subscription figure on this page is live.</b> Foodlink&rsquo;s window opens at 10:00, "
+    "after this pass. Siddhivinayak&rsquo;s 0.41x is its day-1 close, not a final figure, and it is "
+    "SME and not applied for. Crystal&rsquo;s listing print is not on this page; it arrives at "
+    "10:00. The machine-built IPO section of today&rsquo;s report says no mainboard issue is open or "
+    "upcoming. <b>That is wrong: Foodlink is open today and four more are dated.</b>"
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -7867,7 +7980,8 @@ BY_DAY = {
     # 24 Nov was an NSE holiday, so there is no page for it; the board moved anyway.
     # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_25 / LEAD_NOV_25 stay above.
     "2026-11-25": (IPOS_2026_11_25_0930, LEAD_NOV_25_0930, FOOTNOTE_NOV_25_0930),
-    "2026-11-26": (IPOS_2026_11_26, LEAD_NOV_26, FOOTNOTE_NOV_26),
+    # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_26 / LEAD_NOV_26 stay above.
+    "2026-11-26": (IPOS_2026_11_26_0930, LEAD_NOV_26_0930, FOOTNOTE_NOV_26_0930),
 }
 
 
