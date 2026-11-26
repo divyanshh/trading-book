@@ -7135,7 +7135,7 @@ def _for_nov_25() -> list[IPO]:
     mahanadi_23, crystal_23, foodlink_23, integris_23, monomark_23 = _for_nov_23_0930()
     mahanadi = replace(
         mahanadi_23,
-        call="SKIP as a trade — the book closed at 1.52x and the premium is now zero",
+        call="SKIP as a trade — the book closed at 1.52x and the premium has gone to zero",
         dates="opened 19 Nov · closed 23 Nov · allotment TODAY 25 Nov · listing 27 Nov",
         gmp="₹0 — 0.00% on ₹136 (investorgain, 24-Nov 20:02; range 0 low / 9.25 high) · ₹0.7 on the 23rd · ₹25 on this board 13 Nov",
         gmp_pct=0.0,
@@ -7153,7 +7153,7 @@ def _for_nov_25() -> list[IPO]:
             "0.49x at the end of day two, so the last day did the work here too, exactly as it did "
             "for Crystal. On a ₹8,981 Cr government offer-for-sale, 1.52x is the arithmetic of a "
             "deal clearing rather than a deal wanted. "
-            "<strong>The premium is now zero.</strong> ₹0 at investorgain's 24-Nov 20:02 print, "
+            "<strong>The premium has gone to zero.</strong> ₹0 at investorgain's 24-Nov 20:02 print, "
             "against ₹0.7 on Monday morning, ₹0.75 on Friday and ₹25 on this board on the 13th. "
             "Zero is the bottom of its own quoted range, and after our measured 2.6-point haircut "
             "the expected listing is <b>about 2.6% below the issue price</b>. "
