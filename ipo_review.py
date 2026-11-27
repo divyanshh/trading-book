@@ -8576,7 +8576,7 @@ LEAD_NOV_30 = (
     "<strong>Three issues open this week</strong>: <b>Matangi</b> tomorrow on a premium that rose to "
     "&#8377;31, <b>Monomark</b> on Wednesday at &#8377;20 &mdash; the highest on the board &mdash; and "
     "<b>Swara</b> on Wednesday, whose zero premium finally became a &#8377;3 that the haircut takes "
-    "back to nothing. Crystal&rsquo;s card is retired, having listed on Thursday."
+    "back to nothing. Crystal&rsquo;s card is retired, having listed on Thursday. <strong>How to read a card:</strong> the badge and the first line are <b>today&rsquo;s</b> call, and the body below them is a running diary, <b>oldest entry first</b>, kept so a call can be checked against what was said when it was made. <b>A sentence in the middle of a card is not a current statement</b> &mdash; the last bolded paragraph is. <strong>&#9888; The auto-generated IPO board above this section says no mainboard issue is open or upcoming.</strong> That board is reading an empty table in the service; <b>this section is the one that was checked.</b>"
 )
 
 FOOTNOTE_NOV_30 = (
