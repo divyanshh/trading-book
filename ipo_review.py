@@ -8206,6 +8206,129 @@ FOOTNOTE_NOV_27 = (
 )
 
 
+
+def _for_nov_27_0930() -> list[IPO]:
+    """Friday 27 November, 09:30 open-slot pass, on investorgain's 27-Nov 09:02
+    prints (Swara 08:56, Integris 05:55) and ipowatch's board, now dated
+    27 November. What moved since the overnight page: Swara Baby Products got a
+    band (₹105 – ₹111, lot 135) and a smaller size (₹799.88 Cr, from ₹1,000 Cr);
+    ipowatch took Integris's dates off, so it did not open today; and ipowatch,
+    no longer stale, now agrees with investorgain on Foodlink at ₹7. Premiums did
+    not move. Derived from the overnight cards; those stay above untouched."""
+    foodlink_o, matangi_o, monomark_o, integris_o, encube_o, crystal_o, mahanadi_o, siddhivinayak_o, swara_o = (
+        _for_nov_27()
+    )
+    foodlink = replace(
+        foodlink_o,
+        gmp="₹7 — 3.66% on ₹191 (investorgain 27-Nov 09:02; ipowatch +₹7, board dated 27 Nov, now agrees)",
+        book="1.1x after day 1 of 3 — not final; day 2 opens at 10:00, after this pass",
+        stats=(("price band", "₹181 – ₹191"),
+               ("lot size", "78 shares ≈ ₹14,898 at the cap"),
+               ("issue size", "₹360.76 Cr (fresh ₹192 Cr + OFS ₹168.76 Cr)"),
+               ("anchor book", "₹162.34 Cr from 12 investors at ₹191, allotted 25 Nov"),
+               ("day 1 book", "1.1x — investorgain, close of the first of three days"),
+               ("grey market", "₹7 on both boards, both dated 27 Nov"),
+               ("odds above issue", "about even — a judgement, not a measured rate")),
+        note=(
+            foodlink_o.note
+            + " <strong>09:30: the second board caught up, and it caught up downwards.</strong> "
+            "ipowatch&rsquo;s board is now dated <b>27 November</b> and prints <b>+₹7</b> with a "
+            "falling arrow, the same as investorgain&rsquo;s <b>09:02</b> print. The +₹12 the "
+            "overnight card set aside as stale is gone, so both boards now say ~+1.1% after the "
+            "2.6-point haircut. <b>The 1.1x is still day 1&rsquo;s close</b>; day 2 bidding starts at "
+            "10:00, after this pass, and the midday pass carries the first day-2 number and must say it "
+            "is mid-session. The call stays <b>LEAN SKIP</b>, decided on day 3 (Mon 30 Nov). His call."
+        ),
+    )
+    integris = replace(
+        integris_o,
+        call="NO CALL — it did not open today; ipowatch has taken its dates off",
+        dates="TBA on both boards (ipowatch had 27 Nov – 1 Dec overnight; withdrawn by 09:30)",
+        flags=(("ipowatch’s dates of 27 Nov – 1 Dec are gone; both boards now say TBA", "fail"),
+               ("no price band on either board", "fail"),
+               ("premium ₹0 — there is no market in it", "fail")),
+        note=(
+            integris_o.note
+            + " <strong>09:30: the overnight card&rsquo;s &ldquo;opens today&rdquo; was wrong.</strong> "
+            "ipowatch&rsquo;s upcoming list now shows Integris Medtech with <b>TBA</b> dates and a "
+            "TBA band, and its GMP row has the date column blank; investorgain&rsquo;s row is still "
+            "stamped 27-Nov 05:55 with nothing in it. It is not open today. NO CALL, unchanged."
+        ),
+    )
+    swara = replace(
+        swara_o,
+        call="NO CALL YET — it has a band now, but no premium; lean SKIP if it stays at zero",
+        dates="opens 2 Dec · closes 4 Dec · allotment 7 Dec · listing 9 Dec (investorgain 08:56)",
+        band="₹105 – ₹111",
+        size="₹799.88 Cr (investorgain) — down from the ₹1,000 Cr in the DRHP",
+        split="DRHP: ₹500 Cr fresh + ₹500 Cr OFS (Brainbees/FirstCry ₹300 Cr, Anadya ₹200 Cr); the cut is not yet itemised",
+        gmp="₹0 — no quote on investorgain (08:56) · ipowatch ₹0, dated 27 Nov",
+        gmp_pct=0.0,
+        expected="~−2.6% if the premium is still zero at the close (₹0 less the haircut)",
+        apply_as="nothing yet — retail one lot (135 shares ≈ ₹14,985) only if a premium appears",
+        horizon="listing only, if anything",
+        book="not open — opens 2 Dec",
+        stats=(("price band", "₹105 – ₹111"),
+               ("lot size", "135 shares ≈ ₹14,985 at the cap"),
+               ("issue size", "₹799.88 Cr, from ₹1,000 Cr in the DRHP"),
+               ("dates", "2 – 4 Dec · allot 7 Dec · list 9 Dec"),
+               ("grey market", "₹0 on both boards"),
+               ("odds above issue", "below even while the premium is zero — about 3 in 10, the measured rate for a zero premium")),
+        flags=(("a band and a lot are now published", "pass"),
+               ("issue size cut ₹1,000 Cr → ₹799.88 Cr", "warn"),
+               ("half the DRHP issue was an exit — FirstCry’s parent selling ₹300 Cr", "warn"),
+               ("premium ₹0 on both boards with a band now out", "fail")),
+        note=(
+            swara_o.note
+            + " <strong>09:30: it has a band.</strong> investorgain&rsquo;s 08:56 row prints "
+            "<b>₹111</b> at the cap, <b>₹799.88 Cr</b>, lot <b>135</b>, open 2 Dec, close 4 Dec, "
+            "allotment 7 Dec, listing 9 Dec; ipowatch gives the band as <b>₹105 – ₹111</b>. The size "
+            "came down from the ₹1,000 Cr in the DRHP, which also split it ₹500 Cr fresh and ₹500 Cr OFS "
+            "(FirstCry&rsquo;s parent Brainbees ₹300 Cr). Neither board has itemised the cut. "
+            "<strong>The premium is still ₹0, and now that is a reading, not an absence.</strong> With "
+            "a band out, a zero premium is the case the backtest measured: listings averaged about "
+            "<b>6.6% below</b> issue and were positive <b>29%</b> of the time. "
+            "<b>Odds, said as odds: about 3 in 10</b> that it lists above ₹111 while it stays at zero. "
+            "NO CALL until the premium has had the weekend to form; if it is still zero on day 1, the "
+            "card becomes SKIP."
+        ),
+    )
+    # The overnight Mahanadi card put "&minus;" in two escaped fields, so it rendered literally;
+    # this pass shows the same figures with a Unicode minus.
+    mahanadi = replace(
+        mahanadi_o,
+        expected="~−2.1%",
+        stats=tuple((k, v.replace("&minus;", "−")) for k, v in mahanadi_o.stats),
+    )
+    return [foodlink, matangi_o, monomark_o, integris, encube_o, crystal_o, mahanadi, siddhivinayak_o, swara]
+
+
+IPOS_2026_11_27_0930 = _for_nov_27_0930()
+
+LEAD_NOV_27_0930 = (
+    LEAD_NOV_27
+    + " <strong>Re-written at 09:30 on 27 November</strong> on investorgain&rsquo;s <b>27-Nov 09:02</b> "
+    "prints and ipowatch&rsquo;s board, now dated 27 November. <strong>No premium moved.</strong> "
+    "Three facts did: <b>Swara Baby Products has a band</b>, &#8377;105&ndash;&#8377;111, lot 135, "
+    "cut to &#8377;799.88 Cr, with the premium still &#8377;0. <b>Integris did not open today</b>; "
+    "ipowatch took its dates off. And ipowatch, no longer stale, <b>agrees with investorgain on "
+    "Foodlink at &#8377;7</b>, so the LEAN SKIP rests on both boards now, not one. Mahanadi&rsquo;s "
+    "listing print lands at 10:00, after this pass."
+)
+
+FOOTNOTE_NOV_27_0930 = (
+    FOOTNOTE_NOV_27
+    + " <strong>09:30 figures:</strong> investorgain rows stamped <b>27-Nov 09:02</b> (Swara 08:56, "
+    "Integris 05:55); ipowatch dated 27 November with no time. <strong>Haircut applied, and "
+    "said:</strong> unchanged from the overnight figures, because no premium moved; Swara at &#8377;0 "
+    "&rarr; ~&minus;2.6%. <b>No subscription figure on this page is live.</b> Foodlink&rsquo;s 1.1x "
+    "is day 1&rsquo;s close; day 2 opens at 10:00. Swara&rsquo;s band, lot and dates are from "
+    "investorgain and ipowatch only; a news search found pages that still show them as TBA. The "
+    "machine-built IPO section of today&rsquo;s report again says no mainboard issue is open or "
+    "upcoming, and again that is wrong: Foodlink is open and Mahanadi lists today."
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -8269,7 +8392,8 @@ BY_DAY = {
     "2026-11-25": (IPOS_2026_11_25_0930, LEAD_NOV_25_0930, FOOTNOTE_NOV_25_0930),
     # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_26 / LEAD_NOV_26 stay above.
     "2026-11-26": (IPOS_2026_11_26_0930, LEAD_NOV_26_0930, FOOTNOTE_NOV_26_0930),
-    "2026-11-27": (IPOS_2026_11_27, LEAD_NOV_27, FOOTNOTE_NOV_27),
+    # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_27 / LEAD_NOV_27 stay above.
+    "2026-11-27": (IPOS_2026_11_27_0930, LEAD_NOV_27_0930, FOOTNOTE_NOV_27_0930),
 }
 
 
