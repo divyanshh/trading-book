@@ -7919,6 +7919,293 @@ FOOTNOTE_NOV_26_0930 = (
 )
 
 
+
+def _for_nov_27() -> list[IPO]:
+    """Friday 27 November, overnight/pre-open pass, on investorgain's 27-Nov 06:37
+    prints (Integris and Swara 27-Nov 05:55) and ipowatch's board, which is still
+    dated 26 November and is therefore a day stale on every row.
+
+    The page turns on one number. Foodlink's premium went ₹18 → ₹7 overnight and
+    its day-1 book closed at 1.1x, so the provisional call is downgraded. Crystal
+    listed yesterday and the print is recorded against what the haircut said.
+    Mahanadi lists today at a premium of ₹0.70. Monomark rose, Matangi did not
+    move, Integris opens today with no band at all, and Swara Baby Products gets
+    its first card. Derived from the 26 November 09:30 cards; those stay above."""
+    foodlink_p, matangi_p, monomark_p, integris_p, encube_p, crystal_p, mahanadi_p, siddhivinayak_p = (
+        _for_nov_26_0930()
+    )
+    foodlink = replace(
+        foodlink_p,
+        call="LEAN SKIP — still formally decided on day 3, but the premium has gone ₹21 → ₹18 → ₹7",
+        tone="fail",
+        dates="opened 26 Nov · closes 30 Nov · allotment 1 Dec · listing 3 Dec (BSE, NSE)",
+        gmp="₹7 — 3.66% on ₹191 (investorgain 27-Nov 06:37) · ipowatch +₹12 on a board still dated 26 Nov",
+        gmp_pct=3.66,
+        expected="~+1.1%",
+        book="1.1x after day 1 of 3 — not final",
+        stats=(("price band", "₹181 – ₹191"),
+               ("lot size", "78 shares ≈ ₹14,898 at the cap"),
+               ("issue size", "₹360.76 Cr (fresh ₹192 Cr + OFS ₹168.76 Cr)"),
+               ("anchor book", "₹162.34 Cr from 12 investors at ₹191, allotted 25 Nov"),
+               ("day 1 book", "1.1x — investorgain, close of the first of three days"),
+               ("grey market", "₹7 on investorgain · ₹12 on a stale ipowatch board"),
+               ("odds above issue", "about even — a judgement, not a measured rate")),
+        flags=(("premium ₹18 → ₹7 in one print — it has now halved twice", "fail"),
+               ("day 1 closed at 1.1x — the book is barely covered", "fail"),
+               ("after the haircut the expected listing gain is ~+1.1%, inside the error", "fail"),
+               ("anchor book filled at the cap — ₹162.34 Cr, 12 investors", "pass"),
+               ("H1 FY27 lost ₹16.15 Cr on ₹222.18 Cr of income", "fail"),
+               ("nearly half the raise is an exit for existing holders", "warn")),
+        note=(
+            foodlink_p.note
+            + " <strong>Overnight into 27 November: the premium collapsed.</strong> "
+            "investorgain's <b>27-Nov 06:37</b> print is <b>₹7 = 3.66%</b> on the ₹191 cap, down "
+            "from ₹18 at yesterday's open and ₹21 the morning before. ipowatch prints <b>+₹12</b>, "
+            "but its board is still dated <b>26 November</b>, so that is yesterday's number and not "
+            "a second opinion on today's. Taking the lower, as this page always does: after the "
+            "<b>2.6-point</b> haircut the expected listing gain is ~<b>+1.1%</b> — about ₹160 on a "
+            "₹14,898 lot, and inside the error of the haircut itself. "
+            "<strong>The book is the other half of it.</strong> Day 1 of 3 closed at <b>1.1x</b>. "
+            "An issue that is barely covered on its first day, with a premium that has halved twice "
+            "in three prints, is not the issue the anchor book described on the 25th. "
+            "<strong>Odds, said as odds: about even</strong> that it lists above ₹191, cut from "
+            "about 2 in 3 yesterday. A judgement from a ~1% haircut-adjusted premium, not a "
+            "measured rate. "
+            "<b>The call moves to LEAN SKIP.</b> It is still formally decided on <b>day 3, Monday "
+            "30 November</b>, against the closing book — a premium back near 8–10% with QIB "
+            "comfortably covered would put one retail lot back on the table — but on what is on the "
+            "boards this morning the answer is no. <b>His call either way.</b>"
+        ),
+    )
+    matangi = replace(
+        matangi_p,
+        gmp="₹27 — 15.70% on ₹172 (investorgain 27-Nov 06:37, unchanged; ipowatch +₹27 on a board dated 26 Nov)",
+        flags=(("premium ₹21.5 → ₹27; both boards read ₹27 at the stamps above", "pass"),
+               *matangi_p.flags[1:]),
+        note=(
+            matangi_p.note
+            + " <strong>27 November: unchanged.</strong> investorgain's 06:37 print is still "
+            "<b>₹27</b>, 15.70% on ₹172, ~<b>+13.1%</b> after the haircut, and ipowatch's board — "
+            "a day stale — also reads +₹27. Its own quoted range is 21.50 to 27, so this sits at the "
+            "top of it. It opens <b>1 December</b> and nothing is committed before then. The call "
+            "does not move: provisional, one retail lot, decided on day 3 (3 Dec)."
+        ),
+    )
+    monomark = replace(
+        monomark_p,
+        gmp="₹24 — 36.92% on ₹65 (investorgain 27-Nov 06:37, up from ₹21; ipowatch +₹24 on a board dated 26 Nov)",
+        gmp_pct=36.92,
+        expected="~+34.3%",
+        stats=(("price band", "₹60 – ₹65"),
+               ("lot size", "225 shares ≈ ₹14,625 at the cap"),
+               ("issue", "2.70 Cr fresh shares ≈ ₹175.5 Cr, no OFS"),
+               ("FY26", "PAT ₹25.90 Cr on ₹564.74 Cr income"),
+               ("Q1 FY27", "PAT ₹3.02 Cr on ₹142.82 Cr — a 2.1% margin"),
+               ("grey market", "₹24, its own range running 21 to 24"),
+               ("odds above issue", "about 3 in 4 — a judgement, not a measured rate")),
+        flags=(("premium ₹21 → ₹24, the top of its own range", "pass"),
+               ("a 37% premium on a 2.1% net margin is the crowd, not the business", "warn"),
+               ("premium has been ₹23, ₹17, ₹21 and ₹24 across four prints", "warn"),
+               ("Q1 FY27 net margin 2.1%", "warn"),
+               ("fresh issue only — no selling shareholders", "pass")),
+        note=(
+            monomark_p.note
+            + " <strong>27 November: it went the other way from Foodlink.</strong> investorgain's "
+            "06:37 print is <b>₹24</b> — 36.92% on the ₹65 cap, ~<b>+34.3%</b> after the haircut — "
+            "up from ₹21, and at the top of its own 21-to-24 range. That is the fourth different "
+            "premium in four prints (₹23, ₹17, ₹21, ₹24), which is the warning that belongs beside "
+            "the number: a quote this size on a 2.1% net margin is demand for a ₹175 Cr fresh issue, "
+            "and it has already shown it can lose a quarter of itself overnight. It opens "
+            "<b>2 December</b>. The call does not move: provisional, one retail lot, decided on "
+            "day 3 (4 Dec), and <b>skipped outright if QIB is not comfortably covered</b>."
+        ),
+    )
+    integris = replace(
+        integris_p,
+        call="NO CALL — ipowatch says it opens today and there is still no band on either board",
+        tone="fail",
+        dates="ipowatch: opens 27 Nov · closes 1 Dec — investorgain carries no dates at all",
+        flags=(("ipowatch dates it as opening today", "warn"),
+               ("no price band on either board, on the day it is said to open", "fail"),
+               ("investorgain carries no dates, no price and no premium", "fail"),
+               ("premium ₹0 — there is no market in it", "fail")),
+        note=(
+            integris_p.note
+            + " <strong>27 November: the day it is said to open, and still no band.</strong> "
+            "ipowatch's board — dated 26 November — lists Integris Medtech as 27 November to "
+            "1 December with the price at <b>₹0</b> and a ₹0 premium; investorgain's row, stamped "
+            "<b>27-Nov 05:55</b>, still carries no dates, no price and no quote. A mainboard issue "
+            "cannot be applied for on a band that does not exist, and nothing on either board "
+            "suggests one was published overnight. <b>NO CALL, and it stays NO CALL until a band "
+            "appears.</b> If one does during the session it goes on the next pass."
+        ),
+    )
+    crystal = replace(
+        crystal_p,
+        call="LISTED — +2.21%; nothing was applied for, and the print is now on the record",
+        tone="warn",
+        dates="opened 18 Nov · closed 20 Nov · LISTED 26 Nov",
+        gmp="last pre-listing print ₹17 — 6.25% on ₹272 (investorgain 26-Nov 09:37)",
+        expected="~+3.7% was expected · it listed at +2.21%",
+        horizon="closed — listed 26 Nov",
+        book="17.68x, final",
+        stats=(("issue price", "₹272"),
+               ("listing price", "₹278 (ipowatch)"),
+               ("listing gain", "+₹6 = +2.21%"),
+               ("last premium", "₹17 = 6.25%"),
+               ("haircut said", "~+3.7%"),
+               ("overstatement", "4.04 points, against the 2.6 the model applies"),
+               ("final book", "17.68x")),
+        flags=(("it listed above the issue price", "pass"),
+               ("+2.21% against the ~+3.7% the haircut pointed to", "warn"),
+               ("the premium overstated the listing by 4.04 points, not 2.6", "warn"),
+               ("nothing was applied for — no position, no P&L", "pass")),
+        note=(
+            crystal_p.note
+            + " <strong>It listed on 26 November at ₹278 against a ₹272 issue price — "
+            "+₹6, or +2.21%.</strong> This is the record the card existed for. The last "
+            "pre-listing premium was <b>₹17 = 6.25%</b>; the <b>2.6-point</b> haircut this page "
+            "applies pointed to ~<b>+3.7%</b>; the actual print was <b>+2.21%</b>. So the premium "
+            "overstated the listing by <b>4.04 points</b> rather than the 2.6 the model uses — the "
+            "direction was right, the size was understated, and the call it supported (positive but "
+            "inside the error, not worth an application) was the correct one. "
+            "<b>One listing does not move a constant fitted over 295 of them</b>, and this page is "
+            "not going to re-fit it on a sample of one; it is written down so the next re-fit has it. "
+            "<b>Nothing was applied for, so there is no position and no P&L here.</b>"
+        ),
+    )
+    mahanadi = replace(
+        mahanadi_p,
+        call="LISTS TODAY — nothing was applied for; the print gets recorded",
+        dates="opened 19 Nov · closed 23 Nov · allotted 25 Nov · LISTS TODAY 27 Nov",
+        gmp="₹0.70 — 0.51% on ₹136 (investorgain 27-Nov 06:37) · its own range runs 0.70 to 9.25",
+        gmp_pct=0.51,
+        expected="~&minus;2.1%",
+        horizon="listing today",
+        book="1.52x, final",
+        stats=(("issue price", "₹136"),
+               ("issue size", "₹8,981.12 Cr"),
+               ("lot size", "110 shares ≈ ₹14,960"),
+               ("final book", "1.52x"),
+               ("last premium", "₹0.70 = 0.51%"),
+               ("haircut points to", "~&minus;2.1%")),
+        flags=(("it lists today — the print lands during the session", "pass"),
+               ("last premium ₹0.70 on a ₹136 issue — effectively nothing", "fail"),
+               ("the haircut points below the issue price", "fail"),
+               ("a ₹8,981 Cr issue that closed at 1.52x", "warn"),
+               ("nothing was applied for — no position, no P&L", "pass")),
+        note=(
+            mahanadi_p.note
+            + " <strong>27 November: it lists today.</strong> The last print before the open is "
+            "<b>₹0.70 = 0.51%</b> on ₹136 (investorgain, 06:37), its own quoted range having run "
+            "from 0.70 to 9.25 over the issue. After the <b>2.6-point</b> haircut that points to "
+            "~<b>&minus;2.1%</b>, and the measured history of premiums that sit at or near zero into "
+            "the open is worse again — about <b>6.6% below</b> the issue price across 295 listings. "
+            "A ₹8,981 Cr book that closed at <b>1.52x</b> is consistent with that. "
+            "<b>Nothing was applied for</b>, so there is nothing at stake; the print goes on the "
+            "next pass beside Crystal's, because a haircut is only worth keeping if every new "
+            "listing is written down against it."
+        ),
+    )
+    siddhivinayak = replace(
+        siddhivinayak_p,
+        gmp="₹2 — 1.41% on ₹142 (investorgain 27-Nov 06:37, down from ₹25) · ipowatch +₹8 on a board dated 26 Nov",
+        book="1.27x after day 2 of 3 — closes today",
+        note=(
+            siddhivinayak_p.note
+            + " <strong>27 November: it fell out of bed.</strong> investorgain prints <b>₹2</b> "
+            "(1.41% on ₹142), down from <b>₹25</b> yesterday morning — the premium gave up nine "
+            "tenths of itself in a day — while ipowatch's stale board still reads +₹8. The book is "
+            "<b>1.27x</b> after day 2 of 3 and it closes today. <b>It is an SME issue and it is not "
+            "applied for</b>, so this changes nothing; it is on the page because a premium that "
+            "moves like that is worth having seen."
+        ),
+    )
+    swara = IPO(
+        name="Swara Baby Products",
+        call="NO CALL — first card; dated on one board, priced at nothing",
+        tone="warn",
+        dates="opens 2 Dec · closes 4 Dec (ipowatch)",
+        band="TBA — no band on either board",
+        size="₹1,000.00 Cr (investorgain)",
+        split="not published",
+        gmp="₹0 — investorgain row stamped 27-Nov 05:55, no quote · ipowatch ₹0, board dated 26 Nov",
+        gmp_pct=0.0,
+        expected="not computed — there is no band to apply a premium to",
+        apply_as="nothing — no band, no lot",
+        horizon="not decided",
+        book="not open — opens 2 Dec",
+        stats=(("dates", "2 – 4 December (ipowatch)"),
+               ("issue size", "₹1,000.00 Cr"),
+               ("price band", "not published"),
+               ("grey market", "₹0 on both boards")),
+        flags=(("a ₹1,000 Cr mainboard issue five days out", "warn"),
+               ("no band, no lot, no split between fresh and OFS", "fail"),
+               ("premium ₹0 on both boards", "warn")),
+        note=(
+            "<strong>First card, and it is here because it is dated and large, not because it is "
+            "judgeable.</strong> Swara Baby Products appears on investorgain as a mainboard issue of "
+            "<b>₹1,000.00 Cr</b> with no band, no dates and no premium, on a row stamped "
+            "<b>27-Nov 05:55</b>; ipowatch dates it <b>2 to 4 December</b> at ₹0 with a ₹0 premium. "
+            "That puts it in the same week as Monomark (2–4 Dec) and Matangi (1–3 Dec). "
+            "<strong>A zero premium on an unpriced issue is the absence of a market, not a bearish "
+            "signal</strong> — the same thing Encube's card says. What matters is what it means if "
+            "it is <em>still</em> zero once a band is published: across 295 listings a persistent "
+            "zero premium has averaged about <b>6.6% below</b> the issue price, which is a reason to "
+            "skip rather than a reason to wait. "
+            "<b>NO CALL until there is a band.</b> It goes on the page early so it is not discovered "
+            "late. Hindustan Coca Cola and Milestone Gears remain on ipowatch's mainboard list with "
+            "no dates and no band at all, and get no card until they are dated."
+        ),
+    )
+    return [foodlink, matangi, monomark, integris, encube_p, crystal, mahanadi, siddhivinayak, swara]
+
+
+IPOS_2026_11_27 = _for_nov_27()
+
+LEAD_NOV_27 = (
+    "<strong>Pre-open, Friday 27 November</strong>, written on investorgain&rsquo;s "
+    "<b>27-Nov 06:37</b> prints. <strong>ipowatch&rsquo;s board is still dated 26 November</strong>, "
+    "so every number on it is yesterday&rsquo;s and it is not a second opinion this morning. "
+    "<strong>Foodlink is the page.</strong> Its premium went &#8377;18 &rarr; <b>&#8377;7</b> "
+    "overnight &mdash; it has now halved twice in three prints, from &#8377;21 &mdash; and day 1 of "
+    "its book closed at <b>1.1x</b>. After the haircut the expected listing gain is ~+1.1%, inside "
+    "the error of the haircut itself, so <b>the call is downgraded from PROVISIONAL to LEAN SKIP</b>, "
+    "still formally decided on day 3 (Monday 30 Nov) against the closing book. "
+    "<strong>Crystal listed yesterday at &#8377;278 against &#8377;272 &mdash; +2.21%</strong>, "
+    "against the ~+3.7% the haircut pointed to; the print is recorded. "
+    "<strong>Mahanadi lists today</strong> on a &#8377;0.70 premium. <strong>Monomark went the other "
+    "way</strong>, &#8377;21 &rarr; &#8377;24 (36.92%), and Matangi did not move at &#8377;27. "
+    "<strong>Integris is said to open today and still has no published band on either board.</strong> "
+    "<strong>Swara Baby Products gets its first card</strong> &mdash; a &#8377;1,000 Cr mainboard "
+    "issue dated 2&ndash;4 December, priced at nothing."
+)
+
+FOOTNOTE_NOV_27 = (
+    "<strong>Where these figures come from.</strong> investorgain&rsquo;s live GMP board, stamped "
+    "<b>27-Nov 06:37</b> on every row but Integris and Swara (<b>27-Nov 05:55</b>) and Crystal "
+    "(26-Nov 09:37, its last pre-listing print). ipowatch&rsquo;s board was read at the same time "
+    "and is dated <b>26 November</b> with no time &mdash; <b>it is a day stale, and where it is "
+    "quoted here that is said.</b> Chittorgarh is not used. "
+    "<strong>Haircut applied, and said:</strong> every premium on this page is cut by the "
+    "<b>2.6 points</b> measured over 295 listings (r = 0.87 against the actual listing gain). "
+    "Foodlink 3.66% &rarr; ~+1.1%, Matangi 15.70% &rarr; ~+13.1%, Monomark 36.92% &rarr; ~+34.3%, "
+    "Mahanadi 0.51% &rarr; ~&minus;2.1%. No haircut is applied to Integris, Encube or Swara, which "
+    "have no band to apply one to. "
+    "<strong>Crystal&rsquo;s listing is the one measured fact added today:</strong> issue &#8377;272, "
+    "listed &#8377;278, <b>+2.21%</b>, against a last premium of 6.25% &mdash; an overstatement of "
+    "<b>4.04 points</b> rather than the 2.6 the model applies. <b>One listing does not re-fit a "
+    "constant measured over 295</b>; it is written down for the next re-fit. "
+    "<strong>Subscription figures:</strong> Foodlink <b>1.1x</b> is the close of day 1 of 3 and is "
+    "not final. Siddhivinayak <b>1.27x</b> is day 2 of 3 and closes today. Crystal <b>17.68x</b> and "
+    "Mahanadi <b>1.52x</b> are final. Matangi, Monomark, Integris, Encube and Swara are not open. "
+    "<strong>The odds on this page are judgements, not measurements</strong>: the backtest gives the "
+    "bias and the fit, not a hit rate at a given premium. "
+    "<b>Six mainboard issues are dated; one is open, one lists today, and one is said to open today "
+    "with no band.</b>"
+)
+
+
 BY_DAY = {
     "2026-09-23": (IPOS_2026_09_23, LEAD, FOOTNOTE),
     "2026-09-24": (IPOS_2026_09_24, LEAD_24, FOOTNOTE_24),
@@ -7982,6 +8269,7 @@ BY_DAY = {
     "2026-11-25": (IPOS_2026_11_25_0930, LEAD_NOV_25_0930, FOOTNOTE_NOV_25_0930),
     # 09:30 open-slot pass supersedes the overnight page; IPOS_2026_11_26 / LEAD_NOV_26 stay above.
     "2026-11-26": (IPOS_2026_11_26_0930, LEAD_NOV_26_0930, FOOTNOTE_NOV_26_0930),
+    "2026-11-27": (IPOS_2026_11_27, LEAD_NOV_27, FOOTNOTE_NOV_27),
 }
 
 

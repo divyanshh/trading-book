@@ -1,0 +1,290 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pre-session read — 2026-11-27</title><style>/* Trading Book — dark fintech dashboard theme.
+   Palette: Tailwind CSS colour scales (MIT). Type: Inter where installed, system sans otherwise.
+
+   Dark since 2026-09-26, and light before that. The light theme's reasoning was
+   that the pages are read beside Trendlyne, Screener and Kite, all of which are
+   light — a fair argument that the owner has now overruled, which is the end of
+   it.
+
+   Every colour is a variable here and a reference everywhere else, so a future
+   swap is this block again and nothing else. That was already nearly true and
+   is now enforced by `tests/scanning/test_theme.py`: the eleven literals
+   that had leaked into rules below — a hardcoded #f8fafc table head, the light
+   rgba in the sticky nav's fade, the pale badge borders — were the reason the
+   first dark build had white strips across it. */
+:root{
+  /* Surfaces climb: canvas is the page, card sits on it, line divides them. */
+  --canvas:#0b1220;--card:#131c2e;--line:#22304a;--line-strong:#33425e;
+  --ink:#e8edf7;--ink-2:#b9c4d6;--muted:#8695ad;--faint:#64748b;
+  /* Accents are the 400-series rather than the 600s: on a dark ground the
+     darker shades stop reading as colour and start reading as grey. */
+  --blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#16233c;--blue-100:#1d3358;
+  --green:#4ade80;--green-50:#10241a;--green-100:#17351f;
+  --red:#f87171;--red-50:#2a1416;--red-100:#3d1a1d;
+  --amber:#fbbf24;--amber-50:#291d09;--amber-100:#3a2a0c;
+  /* Borders for the tinted chips, which used pale literals on the light theme. */
+  --green-line:#1f5133;--red-line:#6b2b2b;--amber-line:#5c4312;
+  /* Chart series. Categorical slots, deliberately separate from the semantic
+     accents: a chart that paints its series with --blue and --amber inherits
+     whatever those two mean in the current theme, and the public book's own
+     theme maps --blue onto its gold -- which put two near-identical golds on a
+     two-series chart (dE 4.4, against a floor of 15). A series colour's only
+     job is to be told apart from the next one, so it gets its own token.
+     Validated on this canvas: dE 33.0 normal, 29.9 protan. */
+  --series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#b9c4d6;
+  --head:#18233a;          /* table heads, one step off the card */
+  --canvas-fade:rgba(11,18,32,0);   /* must match --canvas, alpha 0 */
+  --pass:var(--green);--pass-bg:var(--green-100);--fail:var(--red);--fail-bg:var(--red-100);--warn:var(--amber);--warn-bg:var(--amber-100);
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);--radius:12px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue-ink)}
+.wrap{max-width:1560px;margin:0 auto;padding:28px 24px 80px}
+/* masthead */
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 2px;color:var(--ink)}
+.stamp{color:var(--muted);font-size:13px;margin:0 0 20px}
+/* verdict */
+.plate{background:var(--red-50);border:1px solid var(--red-100);border-left:5px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+.plate.open{background:var(--green-50);border-color:var(--green-100);border-left-color:var(--green)}
+.plate .state{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--red)}
+.plate.open .state{color:var(--green)}
+.plate p{margin:6px 0 0;color:var(--ink-2);font-size:13px;line-height:1.6;max-width:110ch}
+/* KPI cards */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px}
+.glance > div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;overflow:hidden}
+.glance > div::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--blue)}
+.glance > div:first-child::before{background:var(--green)}
+.glance .n{font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.glance .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+/* section chips */
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;position:sticky;top:0;z-index:5;padding:10px 0;
+  background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}
+nav.toc a{font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;box-shadow:var(--shadow)}
+nav.toc a:hover{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-50)}
+/* sections */
+h2{font-size:19px;font-weight:700;letter-spacing:-.015em;margin:34px 0 6px;padding-left:12px;border-left:4px solid var(--blue);line-height:1.2;scroll-margin-top:64px}
+.lead{color:var(--muted);font-size:13px;margin:6px 0 4px;max-width:110ch;line-height:1.6}
+.sub{color:var(--ink-2);font-size:12.5px;margin:16px 0 8px;font-weight:600}
+/* folded sections: reference material, open on demand */
+/* The heading's margin moves onto the <details> so the summary is a single
+   flex line: left on the h2 it pushes the row down and the count pill floats
+   above the title it belongs to. */
+details.folded{scroll-margin-top:64px;margin:34px 0 6px}
+details.folded>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded>summary::-webkit-details-marker{display:none}
+details.folded>summary h2{margin:0}
+details.folded>summary h2::after{content:"\25B8";display:inline-block;margin-left:10px;font-size:14px;
+  color:var(--muted);transition:transform .15s ease;transform-origin:center}
+details.folded[open]>summary h2::after{transform:rotate(90deg)}
+.folded-hint{color:var(--muted);font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+details.folded>summary:hover h2{color:var(--blue-ink)}
+details.folded>summary:hover h2::after{color:var(--blue)}
+details.folded>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+/* Printing and find-on-page must not depend on somebody having clicked. An
+   archived page that hides rows the reader cannot reach is a page that lost
+   them. */
+@media print{details.folded>summary h2::after{display:none}
+  details.folded:not([open])>*{display:block}}
+/* a folded table inside an open section: the caption is the control */
+details.folded-table{margin:16px 0 8px}
+details.folded-table>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px}
+details.folded-table>summary::-webkit-details-marker{display:none}
+details.folded-table>summary .sub{margin:0}
+details.folded-table>summary .sub::after{content:"\25B8";display:inline-block;margin-left:8px;
+  font-size:12px;color:var(--muted);transition:transform .15s ease}
+details.folded-table[open]>summary .sub::after{transform:rotate(90deg)}
+details.folded-table>summary:hover .sub{color:var(--blue-ink)}
+details.folded-table>summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+details.folded-table>.scroll,details.folded-table>.cards{margin-top:8px}
+@media print{details.folded-table>summary .sub::after{display:none}
+  details.folded-table:not([open])>*{display:block}}
+/* tables */
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 8px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;z-index:1;background:var(--head);text-align:right;padding:10px 12px;border-bottom:1px solid var(--line-strong);
+  color:var(--muted);font-weight:600;white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}
+tbody tr:hover td{background:var(--blue-50)}
+tbody tr:last-child td{border-bottom:none}
+th.l,td.l{text-align:left}
+td.l:first-child{font-weight:700;color:var(--ink);font-family:var(--mono);font-size:12.5px}
+td.l a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+td.l a:hover{text-decoration:underline}
+.pass{color:var(--pass);font-weight:700}.fail{color:var(--fail);font-weight:600}.warn{color:var(--warn);font-weight:600}
+td.pass.l span,td.fail.l span,td.warn.l span{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:.02em;border:1px solid transparent}
+td.pass.l span{background:var(--pass-bg);color:var(--green);border-color:var(--green-line)}
+td.fail.l span{background:var(--fail-bg);color:var(--red);border-color:var(--red-line)}
+td.warn.l span{background:var(--warn-bg);color:var(--amber);border-color:var(--amber-line)}
+.empty{color:var(--muted);font-style:italic;padding:14px 4px;margin:0;font-size:13px;background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px}
+.note{color:var(--ink-2);font-size:13px;margin:10px 0 0;max-width:110ch;line-height:1.65}
+.note strong{color:var(--ink)}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;max-width:110ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--blue-50);color:var(--blue-ink);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){.wrap{padding:16px 12px 48px}h1{font-size:24px}h2{font-size:17px}.glance .n{font-size:22px}}
+@media print{body{background:var(--canvas)}.wrap{max-width:none;padding:0}nav.toc{display:none}.scroll{overflow:visible;box-shadow:none}
+  thead th{position:static}h2{break-after:avoid}tr{break-inside:avoid}.glance{break-inside:avoid}}
+
+/* ── components: the shortlist as panels, not rows ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:14px;margin:12px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px 13px;display:flex;flex-direction:column;gap:9px}
+.card header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{color:var(--blue-ink)}
+.badge{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--blue-50);
+  color:var(--blue-ink);border:1px solid var(--blue-100);white-space:nowrap}
+.badge.pass{background:var(--green-100);color:var(--green);border-color:var(--green-line)}
+.badge.fail{background:var(--red-100);color:var(--red);border-color:var(--red-line)}
+.badge.warn{background:var(--amber-100);color:var(--amber);border-color:var(--amber-line)}
+.card .meta{margin:-2px 0 0;font-size:12px;color:var(--muted);line-height:1.45}
+/* gate lights */
+.dots{display:flex;flex-wrap:wrap;gap:4px}
+.dot{font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:6px;
+  background:var(--head);color:var(--faint);border:1px solid var(--line);cursor:default}
+.dot.pass{background:var(--green-50);color:var(--green);border-color:var(--green-line)}
+.dot.fail{background:var(--red-50);color:var(--red);border-color:var(--red-line)}
+.dot.warn{background:var(--amber-50);color:var(--amber);border-color:var(--amber-line)}
+.signals{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.signals .dot{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card)}
+/* a figure against its limit */
+.bar{display:flex;flex-direction:column;gap:3px}
+.barhead{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.barhead b{font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.barhead b.pass{color:var(--green)}.barhead b.fail{color:var(--red)}.barhead b.warn{color:var(--amber)}
+.track{position:relative;height:7px;background:var(--head);border-radius:999px;overflow:hidden}
+.track .fill{height:100%;border-radius:999px;background:var(--blue)}
+.track .fill.pass{background:var(--green)}.track .fill.fail{background:var(--red)}.track .fill.warn{background:var(--amber)}
+.track i{position:absolute;top:-2px;width:2px;height:11px;background:var(--ink-2);opacity:.55;border-radius:1px}
+.barfoot{font-size:10.5px;color:var(--faint);min-height:1px}
+/* labelled figures */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px 10px;margin:2px 0 0}
+.stats div{display:flex;flex-direction:column;gap:1px}
+.stats dt{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.stats dd{margin:0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.stats dd.pass{color:var(--green)}.stats dd.fail{color:var(--red)}.stats dd.warn{color:var(--amber)}
+.cardnote{margin:4px 0 0;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.cardnote.fail{color:var(--red)}.cardnote.warn{color:var(--amber)}.cardnote.pass{color:var(--green)}
+/* data bars inside a table cell */
+.cellbar{position:relative;display:inline-block;padding:1px 6px;border-radius:4px;z-index:0}
+.cellbar::before{content:"";position:absolute;inset:0;width:var(--w);background:var(--blue-100);
+  border-radius:4px;z-index:-1;opacity:.75}
+td.pass .cellbar::before{background:var(--green-100)}
+td.fail .cellbar::before{background:var(--red-100)}
+td.warn .cellbar::before{background:var(--amber-100)}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+@media print{.cards{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid;box-shadow:none}}
+
+/* ── headlines ───────────────────────────────────────────────────────────── */
+.links{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.links li{font-size:12.5px;line-height:1.45;padding-left:11px;position:relative;color:var(--ink-2)}
+.links li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+.links li.pass::before{background:var(--green)}
+.links li.fail::before{background:var(--red)}
+.links li a{color:var(--ink-2);text-decoration:none}
+.links li a:hover{color:var(--blue-ink);text-decoration:underline}
+.links li.pass a{color:var(--green)}
+.links li.fail a{color:var(--red)}
+.links li span{display:block;font-size:10.5px;color:var(--faint);margin-top:1px}
+td.l a{color:var(--blue-ink);text-decoration:none}
+td.l a:hover{text-decoration:underline}
+/* setup charts — ported from the Telegram chart service, drawn as SVG.
+   In the row, not under the table: a half-screen chart per name is a page
+   nobody scrolls, and the picture belongs beside the numbers it describes. */
+svg.spark{display:block;width:340px;height:124px}
+td:has(> svg.spark){padding:6px 10px;width:360px}
+/* The full-size version, for a page about one name. */
+.figures{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:10px 0 12px}
+.fig{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px 14px 10px;overflow:hidden}
+.fig h3{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  font-family:var(--mono)}
+.fig svg.chart{display:block;width:100%;height:auto;aspect-ratio:720/260}
+/* Breadth charts carry their own aspect ratio in the viewBox: the market one
+   spans the grid, the sector multiples fill one cell, and both are drawn from
+   a viewBox matching that width so their text renders at the same size. */
+.fig svg.breadth{display:block;width:100%;height:auto}
+.fig--wide{grid-column:1/-1}
+.fig figcaption{margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){.figures{grid-template-columns:1fr}}
+@media print{.fig{break-inside:avoid;box-shadow:none}}
+
+/* morning-book-shared-theme */
+:root{color-scheme:light;--canvas:#fff;--card:#fff;--head:#f8fafc;--line:#e5e7eb;--line-strong:#cbd5e1;--ink:#0f172a;--ink-2:#334155;--muted:#64748b;--faint:#94a3b8;--blue:#2563eb;--blue-ink:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--green:#059669;--green-50:#ecfdf5;--green-100:#d1fae5;--green-line:#a7f3d0;--red:#dc2626;--red-50:#fef2f2;--red-100:#fee2e2;--red-line:#fecaca;--amber:#b45309;--amber-50:#fffbeb;--amber-100:#fef3c7;--amber-line:#fde68a;--series-1:#2563eb;--series-2:#b45309;--series-neutral:#334155;--canvas-fade:rgba(255,255,255,0);--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 30px rgba(15,23,42,.06);--radius:14px}
+html.dark{color-scheme:dark;--canvas:#0f172a;--card:#111827;--head:#172033;--line:#293548;--line-strong:#475569;--ink:#f8fafc;--ink-2:#cbd5e1;--muted:#94a3b8;--faint:#64748b;--blue:#60a5fa;--blue-ink:#93c5fd;--blue-50:#172554;--blue-100:#1e3a8a;--green:#34d399;--green-50:#052e2b;--green-100:#064e3b;--green-line:#065f46;--red:#fb7185;--red-50:#450a0a;--red-100:#7f1d1d;--red-line:#991b1b;--amber:#fbbf24;--amber-50:#422006;--amber-100:#713f12;--amber-line:#92400e;--series-1:#60a5fa;--series-2:#fbbf24;--series-neutral:#cbd5e1;--canvas-fade:rgba(15,23,42,0);--shadow:none}
+html{color-scheme:light;background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-size:15px;background-image:radial-gradient(520px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(37,99,235,.10),transparent 68%),radial-gradient(circle at 85% 22%,rgba(124,58,237,.045),transparent 20%);transition:background .45s ease-out}
+body::before{display:none}.dark body{background-image:radial-gradient(560px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(96,165,250,.15),transparent 68%),radial-gradient(circle at 85% 22%,rgba(167,139,250,.07),transparent 22%)}.wrap{max-width:none;width:100%;padding:22px 32px 80px}.mb-nav{box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;margin:0 0 28px;padding:0 0 15px;border-bottom:1px solid var(--line);font-size:13px}.mb-nav a{display:inline-flex;align-items:center;gap:9px;color:var(--ink);font-weight:750;text-decoration:none}.mb-nav a:hover{color:var(--blue)}.mb-nav b{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:var(--blue);color:#fff;font-size:16px}.mb-nav small{color:var(--muted);font-weight:650}.mb-theme{margin-left:auto;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:17px;cursor:pointer}.mb-theme:hover{background:var(--blue-50);color:var(--blue)}body>.mb-nav{min-height:64px;margin-bottom:28px;padding:13px 38px 14px}header.top{position:relative;overflow:hidden;margin:0 0 28px;padding:30px 32px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--blue-50) 88%,var(--card)),var(--card) 62%,color-mix(in srgb,var(--blue) 8%,var(--card)));box-shadow:var(--shadow)}header.top::after{content:"";position:absolute;width:310px;height:310px;right:-100px;top:-180px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 18%,transparent),transparent 68%);pointer-events:none}header.top>*{position:relative;z-index:1}.wrap>.eyebrow{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--blue-50);border:1px solid var(--blue-100)}.wrap>.eyebrow+h1{margin-top:12px}
+.eyebrow{color:var(--blue)}h1{font-size:clamp(30px,4vw,44px);letter-spacing:-.045em;margin-bottom:7px}.stamp{color:var(--muted)}.plate,.plate.open,.scroll,.glance>div,.card,figure,.tbl-scroll,.stat,.act,.mrow{box-shadow:var(--shadow)}nav.toc{background:linear-gradient(var(--canvas) 85%,var(--canvas-fade))}.plate{border-radius:16px}.glance>div::before,.stat::before{background:var(--blue)}.glance>div:first-child::before{background:var(--green)}h2,.sec-head h2{border-left-color:var(--blue)}
+/* Institutional presentation: information hierarchy over decoration. */
+html.dark{--canvas:#0d0d0c;--card:#171715;--head:#1d1c19;--line:#35332d;--line-strong:#514b3c;--ink:#f4f0e7;--ink-2:#d0c7b8;--muted:#9f9686;--faint:#70695e;--blue:#d7a84e;--blue-ink:#f1ca7a;--blue-50:#272114;--blue-100:#46371d;--green:#72c98c;--green-50:#142419;--green-100:#1c3825;--green-line:#31553a;--red:#ec7d70;--red-50:#321816;--red-100:#51231f;--red-line:#74342c;--amber:#e4b759;--amber-50:#302713;--amber-100:#4b3c1c;--amber-line:#70571f;--series-1:#d7a84e;--series-2:#8fb8e8;--series-neutral:#d0c7b8}.dark body{background-color:#0d0d0c;background-image:linear-gradient(rgba(216,168,78,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,168,78,.035) 1px,transparent 1px),radial-gradient(700px circle at var(--pointer-x,50%) var(--pointer-y,0%),rgba(216,168,78,.12),transparent 66%)}.dark .mb-nav{border-bottom-color:#35332d}.dark .mb-nav b{border-radius:6px;background:#f4f0e7;color:#171715}.dark .mb-theme{border-color:#514b3c}.dark header.top{border-color:#514b3c;background:linear-gradient(135deg,#1b1a17,#151512 68%,#241e14)}.dark .glance>div,.dark .card,.dark figure,.dark .tbl-scroll,.dark .stat,.dark .act,.dark .mrow,.dark .scroll{border-color:#35332d;background:#171715}.dark nav.toc a{border-radius:5px;box-shadow:none}.dark h1,.dark h2,.dark h3{letter-spacing:-.035em}.dark .plate{border-radius:8px}.dark .plate,.dark .plate.open{box-shadow:none}.dark .wrap>.eyebrow{border-radius:4px}.dark td,.dark .prose p,.dark p{color:#d0c7b8}.dark .stamp,.dark .lede{color:#9f9686}
+@media(max-width:640px){.wrap{padding:16px 16px 52px}.mb-nav{margin-bottom:22px}.mb-nav small{font-size:11px}body>.mb-nav{min-height:58px;padding:10px 16px 11px}h1{font-size:30px}}
+</style></head><body><div class="wrap"><p class="eyebrow">equity-service · cortex · 2026-11-27</p><h2 id="pre-session-read">Pre-session read</h2>
+<p class="lead">Friday 27 November, written before the open on Thursday&rsquo;s close. <strong>The Nifty added 0.25% to 25,884.50 &mdash; a ten-month high &mdash; on volume 28.90% lower than the day before, and with 28 of its own fifty members falling.</strong> Breadth across the scanned universe came back to <b>43.76%</b> above their own 20-day average, against a five-session mean of <b>52.27%</b>. That is better than Wednesday&rsquo;s record low of 42.52%, and it is still an <b>8.5-point shortfall</b>. It is the <strong>ninth consecutive session</strong> the market half our setups live in has failed its own breadth test.</p>
+<p class="sub">An index at a ten-month high, made on falling volume, with more of its members down than up, is a narrow print rather than a strong one. <b>Midcaps rose 0.32% and smallcaps 0.74%</b> on the same day, which is the first session in a while the broad market has outpaced the index &mdash; one session, and not yet a turn.</p>
+
+<h3 class="sub" id="pre-gates">The two gates</h3>
+<div class="scroll"><table><thead><tr><th class="l">reading</th><th class="l">value</th><th class="l">verdict</th></tr></thead><tbody>
+<tr><td class="l"><b>Market breadth</b>, whole scanned universe</td><td class="l"><b>43.76%</b> of <b>882</b> names above their 20-day average, against a five-session mean of <b>52.27%</b> &mdash; an <b>8.5-point</b> shortfall</td><td class="l fail"><span>SHUT</span></td></tr>
+<tr><td class="l"><b>The index trend</b></td><td class="l">Nifty 50 <b>4.41% above its own 20-day average</b> and 7.14% above the 50-day, in a <b>Confirmed Uptrend</b>, day 24 from the 2 November follow-through. MarketSmith agrees &mdash; their distribution count fell from three to <b>two</b></td><td class="l pass"><span>OPEN</span></td></tr>
+</tbody></table></div>
+<p class="note"><strong>One gate open, one shut, so nothing is bought &mdash; the ninth session in a row in that state.</strong> Entries are also <strong>halted by hand</strong>, separately from either gate, since Monday&rsquo;s review. Trailing stops, exits and reconciliation are meant to keep running regardless; <b>this morning several of them are not, and that is the first thing on this page that needs a decision</b> &mdash; see the last section.</p>
+<p class="note">The ten readings behind the first row, newest first: <b>43.76%</b> (vs 52.27) &middot; 42.52 (56.90) &middot; 46.15 (60.66) &middot; 46.15 (60.66) &middot; 53.59 (65.13) &middot; 60.25 (68.29) &middot; 59.52 (70.35) &middot; 65.79 (69.65) &middot; 65.11 (69.42) &middot; <span class="pass">74.94 (65.42)</span>. <b>The last green reading is 12 November.</b> Thursday stopped the slide without reversing it: the level rose a point and the five-session mean it is measured against fell four, which is what narrows the gap &mdash; <b>the test got easier faster than the market got better.</b></p>
+
+<h3 class="sub" id="pre-indices">What Thursday actually did</h3>
+<p class="sub">MarketSmith&rsquo;s sector moves for the <strong>26 November</strong> session, as their evening Big Picture prints them.</p>
+<div class="scroll"><table><thead><tr><th class="l">index</th><th>26 Nov move</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>Nifty IT</b></td><td class="pass">+3.66%</td><td class="l">the day&rsquo;s whole story &mdash; <b>HCLTECH +6.42%</b>, <b>TCS +4.89%</b>, <b>INFY +4.69%</b>, <b>TECHM +2.97%</b>. Four of the five biggest Nifty gainers were IT</td></tr>
+<tr><td class="l"><b>Nifty Realty</b></td><td class="pass">+3.27%</td><td class="l">second best, after two flat sessions</td></tr>
+<tr><td class="l">Metal &middot; Energy &middot; Pharma</td><td class="pass">+1.17% &middot; +0.58% &middot; +0.45%</td><td class="l">metal green for the first time in three sessions</td></tr>
+<tr><td class="l">Financial Services &middot; Bank</td><td class="bad">&minus;0.16% &middot; &minus;0.26%</td><td class="l">gave back a little of Wednesday&rsquo;s +2.17% and +1.79%</td></tr>
+<tr><td class="l">Media &middot; Auto &middot; FMCG</td><td class="bad">&minus;0.34% &middot; &minus;0.69% &middot; &minus;0.94%</td><td class="l">FMCG down after Wednesday&rsquo;s +3.79% &mdash; the one-day leader became the three-day laggard</td></tr>
+<tr><td class="l"><b>Nifty Consumer Durables</b></td><td class="bad">&minus;1.33%</td><td class="l">the worst sector of the day</td></tr>
+<tr><td class="l"><b>Midcaps &middot; Smallcaps</b></td><td class="l"><span class="pass">+0.32%</span> &middot; <span class="pass">+0.74%</span></td><td class="l"><b>Both beat the index for the first time in a week.</b> One session is not a rotation, and the breadth reading at the top of this page is computed from the same close</td></tr>
+</tbody></table></div>
+<p class="note"><strong>The internals contradict the headline, and that is worth saying plainly.</strong> The Nifty closed at a ten-month high, <b>1.85% below its 52-week high</b>, <b>4.64% above its 21-day average</b> and <b>9.46% above its 50-day</b> &mdash; and it did it with <b>22 advancing against 28 declining</b> and <b>volume 28.90% lower</b>. A handful of IT heavyweights carried the index while most of it drifted. Biggest Nifty fallers: Asian Paints &minus;2.98%, Bajaj Finance &minus;2.96%, Shriram Finance &minus;2.84%, Nestl&eacute; &minus;2.81%, Bajaj Finserv &minus;2.03%.</p>
+
+<h3 class="sub" id="pre-regime">Where the two readings stand against each other</h3>
+<p class="note">On our own count the Nifty 50 remains in a <b>Confirmed Uptrend</b>, and so does MarketSmith&rsquo;s &mdash; the follow-through both are counting from is <b>2 November</b>, and their distribution count fell to two on Thursday. Over the last 48 sessions the two readings have agreed on <b>24 of them, exactly half</b>. The most recent disagreements were <b>17, 16 and 13 November</b>, when we read Downtrend or Uptrend Under Pressure and MarketSmith read Confirmed Uptrend &mdash; ours the stricter reading each time, and ours is what the service obeys. <b>Which should bind when the two disagree is still an open decision for Divyansh.</b></p>
+<p class="note">MarketSmith&rsquo;s own sector board for Thursday has <b>Bank, Pharma, Financial Services, FMCG, Realty, Energy, Auto, Media and Consumer Durables in Confirmed Uptrends</b>, and <b>Metal and IT in Uptrend Under Pressure</b> &mdash; IT marked under pressure on the day it rose 3.66%, which is what a distribution count does to a one-day move.</p>
+
+<h3 class="sub" id="pre-risk">The open book, and what is closest to being stopped out</h3>
+<p class="sub">Read live from all three brokers at <b>07:52</b>. <b>&#8377;74.47 lakh held, nothing resting to be spent, &#8377;17,039 free cash across the three.</b> Thirty-three rows: thirty equity positions and the three parking funds.</p>
+<div class="scroll"><table><thead><tr><th class="l">symbol</th><th>position</th><th>to its stop</th><th class="l">note</th></tr></thead><tbody>
+<tr><td class="l"><b>SONACOMS</b></td><td class="bad">&minus;4.1%</td><td class="bad"><b>5.9%</b></td><td class="l"><b>The tightest in the book, and the worst position in it.</b> It was 1.3% from its stop yesterday morning &mdash; Thursday&rsquo;s session bought it room, it did not fix it</td></tr>
+<tr><td class="l">LENSKART</td><td class="bad">&minus;2.4%</td><td class="warn">7.1%</td><td class="l">Still on MarketSmith&rsquo;s buy watchlist while sitting under water for us</td></tr>
+<tr><td class="l">SBC</td><td class="pass">+2.0%</td><td class="warn">8.3%</td><td class="l">The name with the stop defect below</td></tr>
+<tr><td class="l">PVRINOX &middot; ROSSTECH</td><td class="l"><span class="pass">+0.6%</span> &middot; <span class="bad">&minus;1.9%</span></td><td class="l">10.1% &middot; 10.2%</td><td class="l">&mdash;</td></tr>
+<tr><td class="l"><b>CUPID</b></td><td class="pass">+7.3%</td><td class="l">11.4%</td><td class="l">The best large position in the book</td></tr>
+<tr><td class="l">SHUKRAMED &middot; TFCILTD</td><td class="l"><span class="pass">+8.9%</span> &middot; <span class="pass">+1.1%</span></td><td class="l">12.8% &middot; 12.0%</td><td class="l"><b>SHUKRAMED has a priceable series again this morning</b> &mdash; it had none yesterday, so its rows were blank across the whole page. That display fault is gone</td></tr>
+<tr><td class="l">GCSL &middot; AARTIPHARM &middot; RATNAVEER</td><td class="l"><span class="pass">+3.4%</span> &middot; <span class="pass">+3.9%</span> &middot; <span class="pass">+5.9%</span></td><td class="l">13.2% &middot; 14.9% &middot; 15.1%</td><td class="l">The three furthest from trouble</td></tr>
+</tbody></table></div>
+<p class="note"><strong>Combined, the equity book is up about &#8377;51,400 unrealised</strong> &mdash; &#8377;36,900 in t-default, &#8377;9,900 in t-ramprasad, &#8377;4,600 in akul &mdash; with a further <b>&#8377;32,400 on the parked LIQUIDCASE</b>. <b>Nine of the twelve names are green.</b> The three that are not are SONACOMS, LENSKART and ROSSTECH, and they are also the three closest to their stops, which is how it should look.</p>
+<p class="note"><strong>Three breaks in the rule that every account holds the same names, all of them old and all of them flagged rather than corrected.</strong> <b>PTCIL</b> is held in <b>akul alone</b> (one share, filled 25 November). <b>RATNAVEER</b> and <b>TFCILTD</b> are held in <b>t-ramprasad alone</b> &mdash; both bought there on Divyansh&rsquo;s own instruction. All three carry resting stops. Nothing is being evened up without him saying so.</p>
+
+<h3 class="sub" id="pre-stops-27">The SBC stop defect, re-read &mdash; and yesterday&rsquo;s version of it was wrong</h3>
+<p class="note"><strong>Yesterday this page said SBC&rsquo;s protective stops rested at the broker for roughly 1.44&times; the shares held in each account. Read again this morning against the brokers themselves, that is not what is there.</strong> The <b>orders actually resting at each broker sum exactly to the holding</b>: t-default 3,371 + 3,371 against 6,742 held; akul 489 + 376 against 865; t-ramprasad 698 + 698 against 1,396. <b>What is 1.44&times; too large is this service&rsquo;s own record of those stops</b>, which carries a base leg equal to the full holding <em>plus</em> an add leg on top of it.</p>
+<p class="note"><strong>So the fault is a bookkeeping fault, not a live-order fault</strong> &mdash; the better of the two, and the opposite way round from how it was reported yesterday. It is corrected here in the same place it was got wrong. The reason it was got wrong is the standing one: <b>a stop check that reads our own records is not a check of the broker</b>, and the two tables disagreed. Nothing has been cancelled or amended at any broker.</p>
+<p class="note">Two smaller things from the same read. <b>SHUKRAMED&rsquo;s stop rests 4.3% lower in akul than in the other two accounts</b> &mdash; 75.29 against 78.51 and 78.66 &mdash; because akul&rsquo;s recorded structural level (79.25) is stale against its own average cost (83.46). The position is protected, just later than its siblings. And the <b>LIQUIDCASE record-versus-broker gap persists in all three accounts</b>: 36,920 held against 31,902 recorded, 3,869 against 145, 2,522 against 493. The parking fund is not a trade and carries no stop by design; the mismatch is bookkeeping and stays on the list.</p>
+
+<h3 class="sub" id="pre-crons-27">&#9888; The protection jobs are still not running, and the failure counts grew overnight</h3>
+<p class="note"><strong>This is the most important thing on the page and it is not about the market.</strong> The scheduled jobs that trail stops, book fills, reconcile positions against the brokers and process exits have been failing continuously since <b>25 November 10:31</b>. As of this morning: <b>book-policy-fills has failed 855 consecutive times</b> (585 yesterday), <b>trail-stop-losses 49</b> (35 yesterday), reconcile-positions 28, book-confirmed-fills 28, pyramid-adds 18, with advance-book-policy, exit-book-policy, exit-broken-stops and settle-exits all overdue as well. The overnight scan job has been silent for <b>134 hours</b>.</p>
+<p class="note"><strong>The cause is known and it is ours.</strong> Halting entries was done with a blanket pause across all three accounts, and the jobs that protect the open book read that same pause as &ldquo;no account to work on&rdquo; and refuse to run. <b>Halting entries was never meant to halt protection.</b> The open positions are not unprotected &mdash; every one of them has a stop resting at its broker right now, which is what the section above confirms &mdash; but <b>nothing is moving those stops up as prices rise, and nothing is reconciling the book against the brokers automatically.</b> Both have been done by hand this week instead.</p>
+<p class="note"><strong>The fix is one command and it is Divyansh&rsquo;s to give</strong>, not something to take unilaterally: lift the blanket pause so the protection jobs run again, and leave the separate entry halt in place so nothing is bought. The two are different switches and only one of them was meant to be thrown. This has now been on the page two mornings running.</p>
+
+<h3>MarketSmith, 26 November &mdash; the evening Big Picture, read in full</h3>
+<p><strong>Market Pulse: CONFIRMED UPTREND, distribution days down from three to two.</strong> The Nifty rose <b>0.25% to 25,884.50</b>, a <b>ten-month high</b> &mdash; open 25,841.25, high 25,973.80, low 25,734.60 &mdash; on volume <b>28.90% lower</b>, with <b>22 advances against 28 declines</b>. It closed <b>4.64% above its 21-day average</b>, <b>9.46% above the 50-day</b> and <b>1.85% below its 52-week high</b>. Midcap 100 +0.32%, Smallcap 100 +0.74%.</p>
+<p>Leaders: <b>HCLTECH +6.42</b>, BSE +5.70, <b>TCS +4.89</b>, <b>INFY +4.69</b>, TECHM +2.97. Laggards: Asian Paints &minus;2.98, Bajaj Finance &minus;2.96, Shriram Finance &minus;2.84, Nestl&eacute; &minus;2.81, Bajaj Finserv &minus;2.03. Sectors: IT +3.66, Realty +3.27, Metal +1.17, Energy +0.58, Pharma +0.45; against Consumer Durables &minus;1.33, FMCG &minus;0.94, Auto &minus;0.69, Media &minus;0.34, Bank &minus;0.26, Financial Services &minus;0.16.</p>
+<p class="note"><strong>One change to the model portfolio, and it is an addition.</strong> They added <b>Action Construction Equipment (ACE)</b> at <b>&#8377;1,287</b>, with a buy range of <b>&#8377;1,258&ndash;1,320</b> &mdash; EPS Rank 92, RS 82, Buyer Demand B+, Group Rank 52, breaking out of a stage-one cup-with-handle after nine weeks. <b>It is not on our own list and nothing is being bought from theirs</b>; it is recorded because their adds are worth watching against what our own scans find.</p>
+<p class="note">Their <strong>buy watchlist runs to ten names</strong>, read off the mail body rather than any parser: Raghav Productivity Enhancers, Rubicon Research, Acutaas Chemicals, Sudeep Pharma, <b>Lenskart Solutions</b>, Multi Commodity Exchange of India, FSN E-Commerce (Nykaa), Union Bank of India, Cemindia Projects and PNB Housing Finance. Two remain our problem rather than our opportunity &mdash; <b>we hold LENSKART</b>, which is 7.1% above its stop and under water, and <b>MCX</b> is the name we were stopped out of on Monday. ITD Cementation has dropped off and Cemindia Projects has come on.</p>
+<p class="note"><strong>One news item needs disambiguating before anyone reads it the wrong way.</strong> Their news block carries a US FDA outcome &mdash; a Voluntary Action Indicated classification and an Establishment Inspection Report &mdash; for <b>SHILPAMED</b>. <b>We hold SHUKRAMED, which is a different company.</b> The two tickers are easy to confuse and this page has confused readers with them before, so it is being spelled out rather than left to be inferred.</p>
+
+<h3 class="sub" id="pre-morning-27">09:10, before the open &mdash; the pre-market mail</h3>
+<p class="note">MarketSmith&rsquo;s pre-market note is stamped around 08:30 and has arrived between <b>08:39 and 09:03</b> on every session measured. <strong>It had not yet arrived when this page was built and will be read in full and added here before the open.</strong> Nothing in it can change what is above: the breadth reading is computed from Thursday&rsquo;s close and stands whatever the first print does, and <b>entries are halted by hand regardless.</b></p><footer>Written by hand the evening before, against that evening's build and a live read of the brokers. Also a section of <a href="2026-11-27.html#pre-session-read">the day's report</a>.</footer></div></body></html>
